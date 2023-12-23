@@ -5,7 +5,7 @@ export default class HelloService {
   /**
    * Return a greeting
    */
-  static getHello() {
+  static async getHello() {
     return { greeting: 'Hello world!' };
   }
 }

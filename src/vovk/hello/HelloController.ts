@@ -11,7 +11,7 @@ export default class HelloController {
      * Return a greeting from the HelloService
      */
     @get('greeting')
-    static getHello() {
+    static async getHello() {
         return this.helloService.getHello();
     }
 }
