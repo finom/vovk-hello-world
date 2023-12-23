@@ -13,7 +13,7 @@
     "react": "^18",
     "react-dom": "^18",
     "use-0": "^1.0.2",
-    "vovk": "^0.1.2"
+    "vovk": "^0.1.4"
   },
   "devDependencies": {
     "@types/node": "^20",

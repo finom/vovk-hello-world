@@ -11,11 +11,7 @@ export default class HelloState {
         metadata.workers.HelloWorkerService
     ) : null;
 
-    private static controller = clientizeController<typeof HelloController, DefaultFetcherOptions>(metadata.HelloController, {
-        defaultOptions: {
-            prefix: '/api',
-        }
-    });
+    private static controller = clientizeController<typeof HelloController>(metadata.HelloController);
 
     static use = getUse<typeof HelloState>();
 
