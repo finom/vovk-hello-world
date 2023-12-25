@@ -6,6 +6,10 @@
       "getHello": {
         "path": "greeting",
         "httpMethod": "GET"
+      },
+      "getStreamingHello": {
+        "path": "streaming",
+        "httpMethod": "GET"
       }
     }
   },

@@ -1,8 +1,9 @@
 import HelloController from '../../../vovk/hello/HelloController';
 import HelloWorkerService from '../../../vovk/hello/HelloWorkerService';
-import { activateControllers } from 'vovk';
+import { initVovk } from 'vovk';
 
-export const { GET, POST, PUT, DELETE } = activateControllers([HelloController], {
+export const { GET, POST, PUT, DELETE } = initVovk({
+  controllers: [HelloController],
   workers: [HelloWorkerService],
   async onMetadata(metadata, write) {
     if (process.env.NODE_ENV === 'development') {

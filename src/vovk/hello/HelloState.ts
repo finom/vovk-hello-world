@@ -17,8 +17,16 @@ export default class HelloState {
 
     static pi = 3;
 
+    static streamingHello = '';
+
     static getHello() {
         return this.controller.getHello();
+    }
+
+    static async getStreamingHello() {
+        for await (const { message } of await this.controller.getStreamingHello({ isStream: true })) {
+            this.streamingHello += message;
+        }
     }
 
     static async calculatePi() {
