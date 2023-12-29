@@ -1,23 +1,37 @@
 "use client";
 import Image from 'next/image';
-import HelloState from '../vovk/hello/HelloState';
-import { useEffect, useRef, useState } from 'react';
-
-type HelloStateType = typeof HelloState;
+import { getHello, getStreamingHello, calculatePi } from '../vovk/hello/HelloState';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function Home() {
-  const pi = HelloState.use('pi');
-  const streamingHello = HelloState.use('streamingHello');
-  const [serverResponse, setServerResponse] = useState<Awaited<ReturnType<HelloStateType['getHello']>> | null>(null);
+  const [serverResponse, setServerResponse] = useState<Awaited<ReturnType<typeof getHello>> | null>(null);
+  const [streamingHello, setStreamingHello] = useState('');
+  const [pi, setPi] = useState(3.14);
   const isRun = useRef(false);
+
+  const callGetHello = useCallback(async () => {
+    setServerResponse(await getHello());
+  }, []);
+
+  const callGetStreamingHello = useCallback(async () => {
+    for await (const { message } of getStreamingHello()) {
+      setStreamingHello(v => v + message);
+    }
+  }, []);
+
+  const callCalculatePi = useCallback(async () => {
+    for await (const pi of calculatePi()) {
+      setPi(pi);
+    }
+  }, []);
 
   useEffect(() => {
     if (isRun.current) return;
     isRun.current = true; // avoid double run in dev mode
-    HelloState.calculatePi();
-    HelloState.getStreamingHello();
-    HelloState.getHello().then(setServerResponse);
-  }, []);
+    callGetHello();
+    callGetStreamingHello();
+    callCalculatePi();
+  }, [callCalculatePi, callGetHello, callGetStreamingHello]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -49,7 +63,7 @@ export default function Home() {
           height={100}
           priority
         />
-        <p className="opacity-40 mb-2 mt-6">Powered by</p>
+        <p className="opacity-40 mb-2 mt-6">Framework for</p>
         <Image
           className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
           src="/next.svg"
@@ -70,7 +84,7 @@ export default function Home() {
           </div>
           <div className='flex gap-2 flex-1 flex-col items-center'>
             <div className="w-1/2">Streaming response:</div>
-            <div className="w-1/2 font-bold">{streamingHello}</div>
+            <div className="w-1/2 font-bold min-h-40">{streamingHello}</div>
           </div>
         </div>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
@@ -109,36 +123,36 @@ export default function Home() {
         </a>
 
         <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://vovk.dev"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
+            Vovk Website{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
+            Check the core points of Vovk.ts framework and how it works.
           </p>
         </a>
 
         <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://docs.vovk.dev"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
+            Vovk Docs{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+            Learn Vovk.ts in a step-by-step guide with code samples.
           </p>
         </a>
       </div>

@@ -1,37 +1,24 @@
-import { type DefaultFetcherOptions, clientizeController } from "vovk/client";
+import { clientizeController } from "vovk/client";
 import { promisifyWorker } from "vovk/worker";
-import { getUse } from "use-0";
-import type HelloWorkerService from "./HelloWorkerService";
 import type HelloController from "./HelloController";
+import type HelloWorkerService from "./HelloWorkerService";
 import metadata from "../metadata";
 
-export default class HelloState {
-    private static worker = typeof Worker !== 'undefined' ? promisifyWorker<typeof HelloWorkerService>(
-        new Worker(new URL('./HelloWorkerService.ts', import.meta.url)), 
-        metadata.workers.HelloWorkerService
-    ) : null;
+const controller = clientizeController<typeof HelloController>(metadata.HelloController);
 
-    private static controller = clientizeController<typeof HelloController>(metadata.HelloController);
+const worker = typeof Worker === 'undefined' ? null : promisifyWorker<typeof HelloWorkerService>(
+    new Worker(new URL('./HelloWorkerService.ts', import.meta.url)), 
+    metadata.workers.HelloWorkerService
+);
 
-    static use = getUse<typeof HelloState>();
+export async function *calculatePi() {
+    yield* worker?.calculatePi(100_000_000_000, 10_000_000) ?? [];
+}
 
-    static pi = 3;
+export function getHello() {
+    return controller.getHello();
+}
 
-    static streamingHello = '';
-
-    static getHello() {
-        return this.controller.getHello();
-    }
-
-    static async getStreamingHello() {
-        for await (const { message } of await this.controller.getStreamingHello({ isStream: true })) {
-            this.streamingHello += message;
-        }
-    }
-
-    static async calculatePi() {
-        for await (const pi of this.worker?.calculatePi(100_000_000_000, 10_000_000) ?? []) {
-            this.pi = pi;
-        }
-    }
+export async function *getStreamingHello() {
+    yield* await controller.getStreamingHello({ isStream: true })
 }
