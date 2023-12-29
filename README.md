@@ -2,6 +2,11 @@
 
 This is the hello-world application that includes required wildcard route set up and "hello" module that demonstrates regular HTTP request, streaming HTTP request and usage of Web Worker.
 
+<p align="center">
+<img width="647" alt="image" src="https://github.com/finom/vovk-hello-world/assets/1082083/09f33124-15b4-4ae4-bccb-c85b922493ca">
+</p>
+
+
 ## Getting Started
 
 ```
