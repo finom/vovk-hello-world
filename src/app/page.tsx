@@ -1,6 +1,6 @@
 "use client";
 import Image from 'next/image';
-import { getHello, getStreamingHello, calculatePi } from '../vovk/hello/HelloState';
+import { getHello, getStreamingHello, calculatePi } from '../modules/hello/HelloState';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function Home() {
@@ -63,7 +63,7 @@ export default function Home() {
           height={100}
           priority
         />
-        <p className="opacity-40 mb-2 mt-6">Framework for</p>
+        <p className="opacity-40 mb-2 mt-6">Back-end for</p>
         <Image
           className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
           src="/next.svg"
