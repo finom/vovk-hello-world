@@ -17,7 +17,7 @@
     "HelloWorkerService": {
       "_workerName": "HelloWorkerService",
       "_handlers": {
-        "calculatePi": {
+        "fibonacci": {
           "isGenerator": true
         }
       }

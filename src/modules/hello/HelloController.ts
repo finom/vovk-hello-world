@@ -1,10 +1,11 @@
 import { get, prefix } from "vovk";
-import HelloService from "./HelloService"
+import HelloService from "./HelloService";
 
+/**
+ * Handle requests and invoke service methods here
+ */
 @prefix('hello')
-export default class HelloController {
-    static controllerName = 'HelloController';
-    
+export default class HelloController {    
     private static helloService = HelloService;
 
     /**

@@ -1,19 +1,19 @@
 {
   "name": "vovk-hello-world",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vovk dev",
-    "build": "vovk build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@vovkts/client": "^0.0.0",
+    "@vovkts/client": "^0.0.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "vovk": "^0.2.3-beta.67"
+    "vovk": "^0.2.3-beta.126"
   },
   "devDependencies": {
     "@types/node": "^20",

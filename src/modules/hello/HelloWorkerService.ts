@@ -1,24 +1,24 @@
 import { worker } from 'vovk/worker'
 
+/**
+ * Run heavy calculations here
+ */
 @worker()
 export default class HelloWorkerService {
-  static workerName = 'HelloWorkerService';
-
   /**
-   * Calculate Pi using Leibniz formula
-   * @param preciseness - number of iterations
+   * Calculate fibonacci number and yield result every n iterations
+   * @param num - total number of iterations
    * @param iterationsToYield - number of iterations to yield
   */
-  static *calculatePi(preciseness: number, iterationsToYield: number) {
-    let pi = 0;
-    let multiplier = 1;
-
-    for (let i = 0; i < preciseness; i++) {
-        pi += multiplier / (2 * i + 1);
-        multiplier *= -1;
-        if (i % iterationsToYield === 0) {
-            yield pi * 4;
-        }
+  static *fibonacci(num: bigint, iterationsToYield: bigint) {
+    let a = 1n;
+    let b = 0n;
+    let i = 0n;
+    while (num > i++) {
+      [a, b] = [a + b, a];
+      if(i % iterationsToYield === 0n) {
+        yield { iteration: i, value: a };
+      }
     }
   }
 }

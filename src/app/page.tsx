@@ -1,27 +1,36 @@
 "use client";
 import Image from 'next/image';
-import { getHello, getStreamingHello, calculatePi } from '../modules/hello/HelloState';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { HelloController, HelloWorkerService } from '@vovkts/client';
+import type { VovkClientReturnType, VovkYieldType } from 'vovk';
 
 export default function Home() {
-  const [serverResponse, setServerResponse] = useState<Awaited<ReturnType<typeof getHello>> | null>(null);
+  const [serverResponse, setServerResponse] = useState<VovkClientReturnType<typeof HelloController.getHello>>();
   const [streamingHello, setStreamingHello] = useState('');
-  const [pi, setPi] = useState(3.14);
+  const [workerResult, setWorkerResult] = useState<VovkYieldType<typeof HelloWorkerService.fibonacci>>({
+    iteration: 0n,
+    value: 0n,
+  });
   const isRun = useRef(false);
 
   const callGetHello = useCallback(async () => {
-    setServerResponse(await getHello());
+    setServerResponse(await HelloController.getHello());
   }, []);
 
   const callGetStreamingHello = useCallback(async () => {
-    for await (const { message } of getStreamingHello()) {
+    for await (const { message } of await HelloController.getStreamingHello()) {
       setStreamingHello(v => v + message);
     }
   }, []);
 
   const callCalculatePi = useCallback(async () => {
-    for await (const pi of calculatePi()) {
-      setPi(pi);
+
+    HelloWorkerService.use(
+      new Worker(new URL('../modules/hello/HelloWorkerService.ts', import.meta.url))
+    );
+
+    for await (const result of HelloWorkerService.fibonacci(1000_000_000_000n, 100_000n)) {
+      setWorkerResult(result);
     }
   }, []);
 
@@ -34,57 +43,48 @@ export default function Home() {
   }, [callCalculatePi, callGetHello, callGetStreamingHello]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+    <main className="flex min-h-screen flex-col items-center justify-between lg:p-24 p-6 dark:bg-slate-900 dark:text-white bg-white">
+      <div className="z-10 max-w-2xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 py-4 dark:border-neutral-800 dark:bg-slate-900 lg:static lg:w-auto  lg:rounded-xl lg:border bg-white lg:bg-gray-200 p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.tsx</code>
           &nbsp;and&nbsp;
-          <code className="font-mono font-bold">src/vovk/hello/*.ts</code>
+          <code className="font-mono font-bold">src/modules/hello/*.ts</code>
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0 font-bold"
-            href="https://github.com/finom"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By Andrii Gubanov
-          </a>
-        </div>
       </div>
 
-      <div className="mt-32 relative flex flex-col place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+      <div className="mt-32 relative flex flex-col place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:lg:h-[360px]">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/vovk-text-logo.png"
-          alt="Vovk.ts"
-          width={300}
-          height={100}
-          priority
-        />
-        <p className="opacity-40 mb-2 mt-6">Back-end for</p>
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+          className="relative dark:invert"
           src="/next.svg"
           alt="Next.js Logo"
           width={180}
           height={37}
           priority
         />
+        <p className="opacity-70 mb-2 mt-3 text-xl font-extrabold">+</p>
+        <Image
+          className="relative dark:invert"
+          src="/vovk-text-logo.png"
+          alt="Vovk.ts"
+          width={120}
+          height={40}
+          priority
+        />
+        
       </div>
-      <div className='flex flex-col text-left max-w-full w-[700px] m-auto  mt-12'>
+      <div className='flex flex-col text-left max-w-full lg:w-[700px] m-auto mt-12'>
           <div className='flex gap-2 flex-1 flex-col items-center mb-4'>
-            <div className="w-1/2">Simple response:</div>
-            <div className="w-1/2 font-bold">{serverResponse?.greeting ?? 'Loading...'}</div>
+            <div className="">Simple HTTP response:</div>
+            <div className="font-bold">{serverResponse?.greeting ?? 'Loading...'}</div>
           </div>
           <div className='flex gap-2 flex-1 flex-col items-center mb-4'>
-            <div className="w-1/2">Calculating π by a Worker Service:</div>
-            <div className="w-1/2 font-bold">{pi}</div>
+            <div className="">Heavy calculations by a Worker Service & BigInt:</div>
+            <div className="font-bold">{workerResult?.iteration.toString()}th fibonacci number has {workerResult?.value.toString().length} digits</div>
           </div>
-          <div className='flex gap-2 flex-1 flex-col items-center'>
-            <div className="w-1/2">Streaming response:</div>
-            <div className="w-1/2 font-bold min-h-40">{streamingHello}</div>
+          <div className='flex gap-2 flex-1 flex-col items-center max-w-96 mx-auto'>
+            <div className="">Streaming HTTP response:</div>
+            <div className="font-bold min-h-40">{streamingHello}</div>
           </div>
         </div>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
@@ -135,7 +135,7 @@ export default function Home() {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Check the core points of Vovk.ts framework and how it works.
+            Check the core points of Vovk.ts library and its features.
           </p>
         </a>
 
