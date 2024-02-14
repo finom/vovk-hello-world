@@ -1,6 +1,6 @@
 # vovk-hello-world
 
-This is the Vovk.ts hello-world application that includes required wildcard route set up and "hello" module that demonstrates regular HTTP request, streaming HTTP request and usage of Web Worker Service.
+This is the [Vovk.ts](https://vovk.dev/) hello-world application that includes required wildcard route set up and "hello" module that demonstrates regular HTTP request, streaming HTTP request and usage of Web Worker Service.
 
 ## Getting Started
 
