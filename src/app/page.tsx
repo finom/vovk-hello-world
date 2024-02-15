@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { HelloController, HelloWorkerService } from '@vovkts/client';
+import { HelloController, HelloWorkerService } from 'vovk-client';
 import type { VovkClientReturnType, VovkYieldType } from 'vovk';
 
 export default function Home() {
