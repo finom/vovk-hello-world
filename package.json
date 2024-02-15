@@ -6,7 +6,8 @@
     "dev": "vovk dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "vovk generate && npm run build"
   },
   "dependencies": {
     "vovk-client": "^0.0.2",
