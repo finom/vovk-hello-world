@@ -65,9 +65,9 @@ export default function Home() {
         <p className="opacity-70 mb-2 mt-3 text-xl font-extrabold">+</p>
         <Image
           className="relative dark:invert"
-          src="/vovk-text-logo.png"
+          src="/vovk-logo.svg"
           alt="Vovk.ts"
-          width={120}
+          width={140}
           height={40}
           priority
         />
