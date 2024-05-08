@@ -1,4 +1,6 @@
 /** @type {import('vovk').VovkConfig} */
-const vovkConfig = {};
+const vovkConfig = {
+    watchDir: './src/modules',
+};
 
 module.exports = vovkConfig;

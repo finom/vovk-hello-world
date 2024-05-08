@@ -1,16 +1,12 @@
 "use client";
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { HelloController, HelloWorkerService } from 'vovk-client';
-import type { VovkClientReturnType, VovkYieldType } from 'vovk';
+import { HelloController } from 'vovk-client';
+import type { VovkReturnType } from 'vovk';
 
 export default function Home() {
-  const [serverResponse, setServerResponse] = useState<VovkClientReturnType<typeof HelloController.getHello>>();
+  const [serverResponse, setServerResponse] = useState<VovkReturnType<typeof HelloController.getHello>>();
   const [streamingHello, setStreamingHello] = useState('');
-  const [workerResult, setWorkerResult] = useState<VovkYieldType<typeof HelloWorkerService.fibonacci>>({
-    iteration: 0n,
-    value: 0n,
-  });
   const isRun = useRef(false);
 
   const callGetHello = useCallback(async () => {
@@ -23,24 +19,13 @@ export default function Home() {
     }
   }, []);
 
-  const callCalculatePi = useCallback(async () => {
-
-    HelloWorkerService.use(
-      new Worker(new URL('../modules/hello/HelloWorkerService.ts', import.meta.url))
-    );
-
-    for await (const result of HelloWorkerService.fibonacci(1000_000_000_000n, 100_000n)) {
-      setWorkerResult(result);
-    }
-  }, []);
 
   useEffect(() => {
     if (isRun.current) return;
     isRun.current = true; // avoid double run in dev mode
     callGetHello();
     callGetStreamingHello();
-    callCalculatePi();
-  }, [callCalculatePi, callGetHello, callGetStreamingHello]);
+  }, [callGetHello, callGetStreamingHello]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between lg:p-24 p-6 dark:bg-slate-900 dark:text-white bg-white">
@@ -78,16 +63,12 @@ export default function Home() {
             <div className="">Simple HTTP response:</div>
             <div className="font-bold">{serverResponse?.greeting ?? 'Loading...'}</div>
           </div>
-          <div className='flex gap-2 flex-1 flex-col items-center mb-4'>
-            <div className="">Heavy calculations by a Worker Service & BigInt:</div>
-            <div className="font-bold">{workerResult?.iteration.toString()}th fibonacci number has {workerResult?.value.toString().length} digits</div>
-          </div>
           <div className='flex gap-2 flex-1 flex-col items-center max-w-96 mx-auto'>
             <div className="">Streaming HTTP response:</div>
             <div className="font-bold min-h-40">{streamingHello}</div>
           </div>
         </div>
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -124,23 +105,6 @@ export default function Home() {
 
         <a
           href="https://vovk.dev"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Vovk Website{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Check the core points of Vovk.ts library and its features.
-          </p>
-        </a>
-
-        <a
-          href="https://docs.vovk.dev"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
