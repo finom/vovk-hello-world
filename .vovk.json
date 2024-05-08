@@ -12,15 +12,5 @@
         "httpMethod": "GET"
       }
     }
-  },
-  "workers": {
-    "HelloWorkerService": {
-      "_workerName": "HelloWorkerService",
-      "_handlers": {
-        "fibonacci": {
-          "isGenerator": true
-        }
-      }
-    }
   }
 }

@@ -1,30 +1,31 @@
 {
   "name": "vovk-hello-world",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "vovk dev",
+    "dev": "PORT=3000 concurrently \"next dev\" \"vovk dev\" --kill-others --success first",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "vercel-build": "vovk generate && npm run build"
   },
   "dependencies": {
-    "vovk-client": "^0.0.2",
-    "next": "14.1.1",
+    "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "vovk": "^1.1.4"
+    "vovk": "^2.0.0-beta.19",
+    "vovk-client": "^0.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.4.18",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "eslint": "^8",
-    "eslint-config-next": "14.1.1",
+    "eslint-config-next": "14.2.3",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5"
   }
 }
