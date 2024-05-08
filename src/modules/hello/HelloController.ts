@@ -6,14 +6,12 @@ import HelloService from "./HelloService";
  */
 @prefix('hello')
 export default class HelloController {    
-    private static helloService = HelloService;
-
     /**
      * Return a greeting from the HelloService
      */
     @get('greeting')
     static async getHello() {
-        return this.helloService.getHello();
+        return HelloService.getHello();
     }
 
     /**
@@ -21,6 +19,6 @@ export default class HelloController {
      */
     @get('streaming')
     static async *getStreamingHello() {
-        yield* this.helloService.getStreamingHello();
+        yield* HelloService.getStreamingHello();
     }
 }
