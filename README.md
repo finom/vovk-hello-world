@@ -21,6 +21,5 @@ To learn more about Next.js and Vovk.ts, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Next.js on GitHub](https://github.com/vercel/next.js/) - the Next.js GitHub repository
-- [Vovk.ts Website](https://vovk.dev) - learn about Vovk.ts.
-- [Vovk.ts Documentation](https://docs.vovk.dev) - Vovk.ts tutorial.
+- [Vovk.ts Documentation](https://vovk.dev) - learn Vovk.ts.
 - [Vovk on Github](https://github.com/finom/vovk/) - the Vovk.ts GitHub repository.
