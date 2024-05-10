@@ -13,7 +13,7 @@
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "vovk": "^2.0.0-beta.19",
+    "vovk": "^2.0.1",
     "vovk-client": "^0.0.2"
   },
   "devDependencies": {

@@ -28,7 +28,7 @@ export default function Home() {
   }, [callGetHello, callGetStreamingHello]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between lg:p-24 p-6 dark:bg-slate-900 dark:text-white bg-white">
+    <main className="flex min-h-screen flex-col items-center justify-between lg:p-24 p-6 dark:bg-neutral-900 dark:text-white bg-white">
       <div className="z-10 max-w-2xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 py-4 dark:border-neutral-800 dark:bg-slate-900 lg:static lg:w-auto  lg:rounded-xl lg:border bg-white lg:bg-gray-200 p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
@@ -116,7 +116,7 @@ export default function Home() {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn Vovk.ts in a step-by-step guide with code samples.
+            Learn Vovk.ts.
           </p>
         </a>
       </div>
