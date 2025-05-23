@@ -1,31 +1,40 @@
 {
   "name": "vovk-hello-world",
-  "version": "2.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "PORT=3000 concurrently \"next dev\" \"vovk dev\" --kill-others --success first",
+    "dev": "vovk dev --next-dev -- --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "vovk generate && npm run build"
+    "run:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml -- --show-output",
+    "run:py": "python3 demo_python.py"
   },
+  "license": "MIT",
   "dependencies": {
-    "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18",
-    "vovk": "^2.0.1",
-    "vovk-client": "^0.0.2"
+    "@scalar/api-reference-react": "^0.7.2",
+    "next": "15.1.8",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vovk": "^3.0.0-draft.140",
+    "vovk-ajv": "^0.0.0-draft.56",
+    "vovk-client": "^0.0.4-draft.91",
+    "vovk-openapi": "^0.0.1-draft.77",
+    "vovk-python-client": "^0.0.1-draft.26",
+    "vovk-rust-client": "^0.0.1-draft.13",
+    "vovk-zod": "^1.0.0-draft.99",
+    "zod": "^3.25.23"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.4.19",
-    "concurrently": "^8.2.2",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.8",
     "postcss": "^8",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5",
+    "vovk-cli": "^0.0.1-draft.171"
   }
 }

@@ -1,11 +1,16 @@
-import { initVovk } from 'vovk';
+import { initVovk } from "vovk";
+import UserController from "../../../modules/user/UserController";
 
-import HelloController from '../../../modules/hello/HelloController';
+export const runtime = "edge";
 
-const controllers = { HelloController };
-const workers = { };
+const controllers = {
+  UserRPC: UserController,
+};
 
 export type Controllers = typeof controllers;
-export type Workers = typeof workers;
 
-export const { GET, POST, PUT, DELETE } = initVovk({ controllers, workers });
+export const { GET, POST, PATCH, PUT, HEAD, OPTIONS, DELETE } = initVovk({
+  emitSchema: true,
+  controllers,
+  onError: console.error,
+});

@@ -1,0 +1,163 @@
+
+// auto-generated 2025-05-23T20:23:13.947Z
+mod http_request;
+mod read_full_schema;
+
+
+pub mod open_api_rpc {
+    #[allow(unused_imports)]
+    use crate::http_request::{HttpException, http_request, http_request_stream};
+    use std::collections::HashMap;
+
+    // OpenApiRPC.get_spec GET `http://localhost:3000/api/static/openapi/spec.json`
+
+    /// Summary: OpenAPI spec
+    /// Description: Get the OpenAPI spec for the &#34;Hello World&#34; app API
+    pub fn get_spec( 
+        body: (),
+        query: (),
+        params: (),
+        headers: Option<&HashMap<String, String>>,
+        api_root: Option<&str>,
+        disable_client_validation: bool,
+    ) -> Result<serde_json::Value, HttpException>{
+        let result = http_request::<
+            serde_json::Value,
+            (),
+            (),
+            ()
+        >(
+            "http://localhost:3000/api",
+            "static",
+            "OpenApiRPC",
+            "getSpec",
+            Some(&body),
+            Some(&query),
+            Some(&params),
+            headers,
+            api_root,
+            disable_client_validation,
+        );
+
+        result
+    }
+        
+}
+    
+
+
+pub mod user_rpc {
+    #[allow(unused_imports)]
+    use crate::http_request::{HttpException, http_request, http_request_stream};
+    use std::collections::HashMap;
+
+    // UserRPC.update_user POST `http://localhost:3000/api/users/:id`
+    pub mod update_user_ {
+      use serde::{Serialize, Deserialize};
+      /// User data object
+      #[derive(Debug, Serialize, Deserialize, Clone)]
+      #[allow(non_snake_case, non_camel_case_types)]
+      pub struct body {
+        /// User email
+        pub email: String,
+        /// User profile object
+        pub profile: body_::profile,
+      }
+
+      #[allow(non_snake_case)]
+      pub mod body_ {
+        use serde::{Serialize, Deserialize};
+
+        /// User profile object
+        #[derive(Debug, Serialize, Deserialize, Clone)]
+        #[allow(non_snake_case, non_camel_case_types)]
+        pub struct profile {
+          /// User full name
+          pub name: String,
+          /// User age
+          pub age: u8,
+        }
+
+      }
+      /// Query parameters
+      #[derive(Debug, Serialize, Deserialize, Clone)]
+      #[allow(non_snake_case, non_camel_case_types)]
+      pub struct query {
+        /// Notification type
+        pub notify: query_::notify,
+      }
+
+      #[allow(non_snake_case)]
+      pub mod query_ {
+        use serde::{Serialize, Deserialize};
+
+        /// Notification type
+        #[derive(Debug, Serialize, Deserialize, Clone)]
+        #[allow(non_camel_case_types)]
+        pub enum notify {
+          #[serde(rename = "email")]
+          email,
+          #[serde(rename = "push")]
+          push,
+          #[serde(rename = "none")]
+          none,
+        }
+
+      }
+      /// Path parameters
+      #[derive(Debug, Serialize, Deserialize, Clone)]
+      #[allow(non_snake_case, non_camel_case_types)]
+      pub struct params {
+        /// User ID
+        pub id: String,
+      }
+
+      /// Response object
+      #[derive(Debug, Serialize, Deserialize, Clone)]
+      #[allow(non_snake_case, non_camel_case_types)]
+      pub struct output {
+        /// Success status
+        pub success: bool,
+      }
+
+    }
+
+    /// Summary: Update user
+    /// Description: Update user by ID
+    /// Body: User data object
+    /// Query: Query parameters
+    /// Returns: Response object
+    pub fn update_user( 
+        body: update_user_::body,
+        query: update_user_::query,
+        params: update_user_::params,
+        headers: Option<&HashMap<String, String>>,
+        api_root: Option<&str>,
+        disable_client_validation: bool,
+    ) -> Result<update_user_::output, HttpException>{
+        let result = http_request::<
+            update_user_::output,
+            update_user_::body,
+            update_user_::query,
+            update_user_::params
+        >(
+            "http://localhost:3000/api",
+            "",
+            "UserRPC",
+            "updateUser",
+            Some(&body),
+            Some(&query),
+            Some(&params),
+            headers,
+            api_root,
+            disable_client_validation,
+        );
+
+        result
+    }
+        
+}
+    
+
+
+

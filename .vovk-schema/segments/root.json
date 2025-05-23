@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vovk.dev/api/spec/v3/segment.json",
+  "emitSchema": true,
+  "segmentName": "",
+  "controllers": {
+    "UserRPC": {
+      "rpcModuleName": "UserRPC",
+      "originalControllerName": "UserController",
+      "prefix": "users",
+      "handlers": {
+        "updateUser": {
+          "validation": {
+            "body": {
+              "description": "User data object",
+              "type": "object",
+              "properties": {
+                "email": {
+                  "description": "User email",
+                  "examples": [
+                    "john@example.com",
+                    "jabe@example.com"
+                  ],
+                  "type": "string",
+                  "format": "email",
+                  "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                },
+                "profile": {
+                  "description": "User profile object",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "description": "User full name",
+                      "examples": [
+                        "John Doe",
+                        "Jane Smith"
+                      ],
+                      "type": "string"
+                    },
+                    "age": {
+                      "description": "User age",
+                      "examples": [
+                        25,
+                        30
+                      ],
+                      "type": "integer",
+                      "minimum": 16,
+                      "maximum": 120
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "age"
+                  ]
+                }
+              },
+              "required": [
+                "email",
+                "profile"
+              ],
+              "$schema": "https://json-schema.org/draft/2020-12/schema"
+            },
+            "query": {
+              "description": "Query parameters",
+              "type": "object",
+              "properties": {
+                "notify": {
+                  "description": "Notification type",
+                  "enum": [
+                    "email",
+                    "push",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "notify"
+              ],
+              "$schema": "https://json-schema.org/draft/2020-12/schema"
+            },
+            "params": {
+              "description": "Path parameters",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "User ID",
+                  "examples": [
+                    "123e4567-e89b-12d3-a456-426614174000"
+                  ],
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "$schema": "https://json-schema.org/draft/2020-12/schema"
+            },
+            "output": {
+              "description": "Response object",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Success status",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "success"
+              ],
+              "$schema": "https://json-schema.org/draft/2020-12/schema"
+            }
+          },
+          "path": ":id",
+          "httpMethod": "POST",
+          "openapi": {
+            "summary": "Update user",
+            "description": "Update user by ID"
+          }
+        }
+      }
+    }
+  }
+}

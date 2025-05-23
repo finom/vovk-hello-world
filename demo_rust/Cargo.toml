@@ -1,0 +1,10 @@
+[package]
+name = "vovk_hello_world_demo"
+version = "0.0.0"
+edition = "2021"
+
+# No dependencies needed for basic testing
+[dependencies]
+vovk_hello_world = { path = "../dist_rust" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
