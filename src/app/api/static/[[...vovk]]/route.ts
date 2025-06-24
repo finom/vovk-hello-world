@@ -1,8 +1,6 @@
 import { initVovk, generateStaticAPI } from "vovk";
 import OpenApiController from "../../../../modules/static/openapi/OpenApiController";
 
-export const runtime = "edge";
-
 const controllers = {
   OpenApiRPC: OpenApiController,
 };
