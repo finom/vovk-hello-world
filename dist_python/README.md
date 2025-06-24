@@ -1,9 +1,6 @@
+# vovk_hello_world v0.0.0 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-
-# vovk_hello_world v0.1.0 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-
-
-
+> A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.
 
 License: **MIT**
 
@@ -12,36 +9,15 @@ License: **MIT**
 pip install vovk_hello_world
 ```
 
-
-
-## OpenApiRPC
-        
-### OpenApiRPC.get_spec
-> OpenAPI spec
-
-Get the OpenAPI spec for the "Hello World" app API
-
-Endpoint: `http://localhost:3000/api/static/openapi/spec.json`
-
-```py
-from vovk_hello_world import OpenApiRPC
-
-response = OpenApiRPC.get_spec()
-
-
-```
-        
-    
-
-
 ## UserRPC
-        
+
 ### UserRPC.update_user
+
 > Update user
 
 Update user by ID
 
-Endpoint: `http://localhost:3000/api/users/:id`
+`POST http://localhost:3000/api/users/:id`
 
 ```py
 from vovk_hello_world import UserRPC
@@ -67,6 +43,42 @@ print(response)
 #   "success": true
 # }
 ```
-        
-    
 
+## StreamRPC
+
+### StreamRPC.stream_tokens
+
+> Stream tokens
+
+Stream tokens to the client
+
+`GET http://localhost:3000/api/streams/tokens`
+
+```py
+from vovk_hello_world import StreamRPC
+
+response = StreamRPC.stream_tokens()
+
+for i, item in enumerate(response):
+    print(f"iteration #{i}:\n {item}")
+    # iteration #0:
+    # {
+    #   "message": "string"
+    # }
+```
+
+## OpenApiRPC
+
+### OpenApiRPC.get_spec
+
+> OpenAPI spec
+
+Get the OpenAPI spec for the "Hello World" app API
+
+`GET http://localhost:3000/api/static/openapi/spec.json`
+
+```py
+from vovk_hello_world import OpenApiRPC
+
+response = OpenApiRPC.get_spec()
+```

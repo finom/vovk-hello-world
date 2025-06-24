@@ -12,7 +12,6 @@ function App() {
       `}</style>
       <ApiReferenceReact
         configuration={{
-          theme: "alternate",
           url: "/api/static/openapi/spec.json",
           hideModels: true,
           servers: [

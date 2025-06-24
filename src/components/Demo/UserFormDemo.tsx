@@ -1,27 +1,25 @@
 "use client";
 import React, { useState } from "react";
-import { HttpException, type VovkOutput, type VovkQuery } from "vovk";
-import { UserRPC } from "vovk-client";
+import { type VovkQuery } from "vovk";
+import { UserRPC } from "../../client/root"; // segmented client
 
-const UserForm = () => {
+const UserFormDemo = () => {
   const [disableClientValidation, setDisableClientValidation] = useState(false);
   const [name, setName] = useState("John Doe");
   const [age, setAge] = useState(35);
   const [email, setEmail] = useState("john@example.com");
   const [id, setId] = useState("a937629d-e8f6-4b1e-a819-7669358650a0");
+  const updateUserMutation = UserRPC.updateUser.useMutation();
   const [notify, setNotify] = useState<
     VovkQuery<typeof UserRPC.updateUser>["notify"]
   >(
     "sms" as "email", // set error value by default
   );
-  const [output, setOutput] = useState<
-    VovkOutput<typeof UserRPC.updateUser> | HttpException | null
-  >(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    void UserRPC.updateUser({
+    updateUserMutation.mutate({
       body: {
         email,
         profile: {
@@ -32,9 +30,7 @@ const UserForm = () => {
       query: { notify },
       params: { id },
       disableClientValidation,
-    })
-      .then(setOutput)
-      .catch(setOutput);
+    });
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -64,8 +60,6 @@ const UserForm = () => {
           name="age"
           type="number"
           placeholder="35"
-          min={0}
-          max={120}
           value={age}
           onChange={(e) => setAge(Number(e.target.value))}
         />
@@ -105,16 +99,20 @@ const UserForm = () => {
           onChange={({ target }) => setDisableClientValidation(target.checked)}
           checked={disableClientValidation}
         />{" "}
-        Disable client-side validation
+        Disable client-side input validation
       </label>
       <button type="submit">Submit</button>
-      {output && (
+      {(updateUserMutation.data || updateUserMutation.error) && (
         <output>
           <strong>Response:</strong>{" "}
-          {output instanceof HttpException ? (
-            <div className="text-red-500">{output.message}</div>
+          {updateUserMutation.error ? (
+            <div className="text-red-500">
+              {updateUserMutation.error.message}
+            </div>
           ) : (
-            <div className="text-green-500">Success</div>
+            <div className="text-green-500">
+              {JSON.stringify(updateUserMutation.data)}
+            </div>
           )}
         </output>
       )}
@@ -122,4 +120,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm;
+export default UserFormDemo;

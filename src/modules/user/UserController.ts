@@ -1,6 +1,5 @@
 import { z } from "zod/v4";
-import { prefix, post } from "vovk";
-import { openapi } from "vovk-openapi";
+import { prefix, post, openapi } from "vovk";
 import { withZod } from "vovk-zod";
 import UserService from "./UserService";
 
@@ -16,7 +15,7 @@ export default class UserController {
       .object({
         email: z.email().meta({
           description: "User email",
-          examples: ["john@example.com", "jabe@example.com"],
+          examples: ["john@example.com", "jane@example.com"],
         }),
         profile: z
           .object({

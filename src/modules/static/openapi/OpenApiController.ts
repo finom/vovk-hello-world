@@ -10,16 +10,23 @@ export default class OpenApiController {
   })
   @get("spec.json")
   static getSpec = async () => {
-    return fromSchema("api", schema, {
-      info: {
-        title: '"Hello World" app API',
-        description:
-          'API for "Hello World" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.',
-        license: {
-          name: "MIT",
-          url: "https://opensource.org/licenses/MIT",
+    return fromSchema({
+      rootEntry: "api",
+      schema,
+      openAPIObject: {
+        info: {
+          title: '"Hello World" app API',
+          description:
+            'API for "Hello World" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.',
+          license: {
+            name: "MIT",
+            url: "https://opensource.org/licenses/MIT",
+          },
+          version: "1.0.0",
         },
-        version: "1.0.0",
+      },
+      package: {
+        name: "vovk-showcase",
       },
     });
   };
