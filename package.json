@@ -10,7 +10,7 @@
     "bundle": "vovk bundle",
     "postversion:ts": "npm run bundle && npm publish ./dist",
     "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml",
-    "postversion": "npm run postversion:ts && git push && git push --tags",
+    "postversion": "npm run postversion:ts && npm run postversion:rs && git push && git push --tags",
     "demo": "npm run demo:node && npm run demo:rs && npm run demo:py",
     "demo:ts": "node --experimental-strip-types demo_node/index.mts",
     "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml",
