@@ -16,7 +16,7 @@
     "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml",
     "demo:py": "python3 demo_python.py",
   
-    "patch": "npm t && npm version patch"
+    "patch": "npm version patch"
   },
   "license": "MIT",
   "dependencies": {
