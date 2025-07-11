@@ -1,6 +1,6 @@
 {
   "name": "vovk-hello-world",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
   "scripts": {
     "dev": "vovk dev --next-dev -- --turbopack",
@@ -8,14 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "bundle": "vovk bundle",
-
     "postversion": "npm run bundle && npm publish ./dist && git push && git push --tags",
-
     "demo": "npm run demo:node && npm run demo:rs && npm run demo:py",
     "demo:ts": "node --experimental-strip-types demo_node/index.mts",
     "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml",
     "demo:py": "python3 demo_python.py",
-  
     "patch": "npm version patch"
   },
   "license": "MIT",
