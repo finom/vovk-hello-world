@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "bundle": "vovk bundle",
-    "postversion": "npm run bundle && npm publish ./dist && git push && git push --tags",
+    "postversion:ts": "npm run bundle && npm publish ./dist",
+    "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml",
+    "postversion": "npm run postversion:ts && git push && git push --tags",
     "demo": "npm run demo:node && npm run demo:rs && npm run demo:py",
     "demo:ts": "node --experimental-strip-types demo_node/index.mts",
     "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml",
@@ -22,17 +24,19 @@
     "next": "15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "vovk": "^3.0.0-draft.316",
-    "vovk-ajv": "^0.0.0-draft.76",
+    "vovk": "^3.0.0-draft.318",
+    "vovk-ajv": "^0.0.0-draft.78",
     "vovk-client": "^0.0.4-draft.91",
-    "vovk-python": "^0.0.1-draft.41",
+    "vovk-hello-world": "^0.0.2",
+    "vovk-python": "^0.0.1-draft.43",
     "vovk-react-query": "^0.0.1-draft.78",
-    "vovk-rust": "^0.0.1-draft.32",
-    "vovk-zod": "^1.0.0-draft.114",
+    "vovk-rust": "^0.0.1-draft.34",
+    "vovk-zod": "^1.0.0-draft.117",
     "zod": "^4.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -41,6 +45,6 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.11",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.284"
+    "vovk-cli": "^0.0.1-draft.286"
   }
 }

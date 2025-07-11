@@ -1,5 +1,5 @@
 import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client"; // composed client
-import { OpenApiRPC as OpenApiRPCFromBundle } from "../dist/index.mjs"; // bundle
+import { OpenApiRPC as OpenApiRPCFromBundle } from "vovk-hello-world"; // bundle
 
 async function main() {
   const updateUserResponse = await UserRPC.updateUser({
@@ -18,22 +18,24 @@ async function main() {
     },
   });
 
-  console.log(updateUserResponse);
+  console.log('UserRPC.updateUser:', updateUserResponse);
 
   const openapiResponse = await OpenApiRPC.getSpec();
   console.log(
-    `OpenApiRPC.getSpec result: ${openapiResponse.info.title} ${openapiResponse.info.version}`,
+    `OpenApiRPC.getSpec from the local module: ${openapiResponse.info.title} ${openapiResponse.info.version}`,
   );
 
-  const openapiResponseFromBundle = await OpenApiRPCFromBundle.getSpec();
-  console.log(
-    `OpenApiRPC.getSpec from bundle result: ${openapiResponseFromBundle.info.title} ${openapiResponseFromBundle.info.version}`,
-  );
   const streamResponse = await StreamRPC.streamTokens();
   console.log(`streamTokens:`);
   for await (const item of streamResponse) {
     process.stdout.write(item.message);
   }
   process.stdout.write("\n");
+
+  const openapiResponseFromBundle = await OpenApiRPCFromBundle.getSpec();
+  console.log(
+    `OpenApiRPC.getSpec from "vovk-hello-world" package: ${openapiResponseFromBundle.info.title} ${openapiResponseFromBundle.info.version}`,
+  );
+ 
 }
 main().catch(console.error);
