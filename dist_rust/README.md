@@ -4,20 +4,22 @@
 
 License: **MIT**
 
+
 ```bash
 # Install the package
 cargo install vovk_hello_world
 ```
 
+
+
 ## mod user_rpc
-
+        
 ### user_rpc::update_user
-
 > Update user
 
 Update user by ID
 
-`POST  http://localhost:3000/api/users/:id`
+`POST  http://localhost:3000/api/users/{id}`
 
 ```rust
 use vovk_hello_world::user_rpc;
@@ -31,34 +33,35 @@ pub fn main() {
           "name": "John Doe",
           "age": 25
         }
-    })).unwrap(), /* body */
+    })).unwrap(), /* body */ 
     from_value(json!({
         "notify": "email"
-    })).unwrap(), /* query */
+    })).unwrap(), /* query */ 
     from_value(json!({
         "id": "123e4567-e89b-12d3-a456-426614174000"
-    })).unwrap(), /* params */
-    None, /* headers (HashMap) */
-    None, /* api_root */
+    })).unwrap(), /* params */ 
+    None, /* headers (HashMap) */ 
+    None, /* api_root */ 
     false, /* disable_client_validation */
   );
 
   match response {
     Ok(output) => println!("{:?}", output),
-    /*
+    /* 
     output {
         "success": true
-    }
+    } 
     */
     Err(e) => println!("error: {:?}", e),
   }
 }
 ```
+        
+    
 
 ## mod stream_rpc
-
+        
 ### stream_rpc::stream_tokens
-
 > Stream tokens
 
 Stream tokens to the client
@@ -71,11 +74,11 @@ use serde_json::{ from_value, json };
 
 pub fn main() {
   let response = stream_rpc::stream_tokens(
-    (), /* body */
-    (), /* query */
-    (), /* params */
-    None, /* headers (HashMap) */
-    None, /* api_root */
+    (), /* body */ 
+    (), /* query */ 
+    (), /* params */ 
+    None, /* headers (HashMap) */ 
+    None, /* api_root */ 
     false, /* disable_client_validation */
   );
 
@@ -94,11 +97,13 @@ pub fn main() {
   }
 }
 ```
+        
+    
+
 
 ## mod open_api_rpc
-
+        
 ### open_api_rpc::get_spec
-
 > OpenAPI spec
 
 Get the OpenAPI spec for the "Hello World" app API
@@ -111,14 +116,17 @@ use serde_json::{ from_value, json };
 
 pub fn main() {
   let response = open_api_rpc::get_spec(
-    (), /* body */
-    (), /* query */
-    (), /* params */
-    None, /* headers (HashMap) */
-    None, /* api_root */
+    (), /* body */ 
+    (), /* query */ 
+    (), /* params */ 
+    None, /* headers (HashMap) */ 
+    None, /* api_root */ 
     false, /* disable_client_validation */
   );
 
-
+  
 }
 ```
+        
+    
+

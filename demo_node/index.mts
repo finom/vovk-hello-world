@@ -22,16 +22,18 @@ async function main() {
 
   const openapiResponse = await OpenApiRPC.getSpec();
   console.log(
-    `getSpec result: ${openapiResponse.info.title} ${openapiResponse.info.version}`,
+    `OpenApiRPC.getSpec result: ${openapiResponse.info.title} ${openapiResponse.info.version}`,
   );
 
   const openapiResponseFromBundle = await OpenApiRPCFromBundle.getSpec();
   console.log(
-    `getSpec from bundle result: ${openapiResponseFromBundle.info.title} ${openapiResponseFromBundle.info.version}`,
+    `OpenApiRPC.getSpec from bundle result: ${openapiResponseFromBundle.info.title} ${openapiResponseFromBundle.info.version}`,
   );
   const streamResponse = await StreamRPC.streamTokens();
+  console.log(`streamTokens:`);
   for await (const item of streamResponse) {
-    console.log(`stream_tokens iteration: ${JSON.stringify(item)}`);
+    process.stdout.write(item.message);
   }
+  process.stdout.write("\n");
 }
 main().catch(console.error);
