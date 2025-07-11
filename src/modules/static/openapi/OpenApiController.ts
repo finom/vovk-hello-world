@@ -1,6 +1,6 @@
-import { prefix, get } from "vovk";
-import { openapi, fromSchema } from "vovk-openapi";
+import { prefix, get, openapi, vovkSchemaToOpenAPI } from "vovk";
 import { schema } from "vovk-client";
+import packageJson from "../../../../package.json" with { type: "json" };
 
 @prefix("openapi")
 export default class OpenApiController {
@@ -10,7 +10,7 @@ export default class OpenApiController {
   })
   @get("spec.json")
   static getSpec = async () => {
-    return fromSchema({
+    return vovkSchemaToOpenAPI({
       rootEntry: "api",
       schema,
       openAPIObject: {
@@ -22,12 +22,10 @@ export default class OpenApiController {
             name: "MIT",
             url: "https://opensource.org/licenses/MIT",
           },
-          version: "1.0.0",
+          version: packageJson.version,
         },
       },
-      package: {
-        name: "vovk-showcase",
-      },
+      package: packageJson,
     });
   };
 }

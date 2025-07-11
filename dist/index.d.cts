@@ -8,10 +8,11 @@ import * as openapi3_ts_oas3139 from "openapi3-ts/oas31";
 declare const schema: {
   $schema: string;
   segments: {
-    "": {
+    '': {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;
+      segmentType: string;
       controllers: {
         UserRPC: {
           rpcModuleName: string;
@@ -145,6 +146,7 @@ declare const schema: {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;
+      segmentType: string;
       controllers: {
         OpenApiRPC: {
           rpcModuleName: string;
@@ -176,25 +178,20 @@ declare const schema: {
 //#endregion
 //#region tmp_ts_rpc/index.d.ts
 declare const UserRPC: {
-  updateUser: (<
-    R,
-    F extends unknown = vovk0.VovkDefaultFetcherOptions<{
-      apiRoot?: string;
-      disableClientValidation?: boolean;
-      validateOnClient?: vovk0.VovkValidateOnClient;
-      interpretAs?: string;
-      init?: RequestInit;
-    }>,
-  >(options: {
-    body:
-      | FormData
-      | {
-          email: string;
-          profile: {
-            name: string;
-            age: number;
-          };
-        };
+  updateUser: (<R, F extends unknown = vovk0.VovkDefaultFetcherOptions<{
+    apiRoot?: string;
+    disableClientValidation?: boolean;
+    validateOnClient?: vovk0.VovkValidateOnClient;
+    interpretAs?: string;
+    init?: RequestInit;
+  }>>(options: {
+    body: {
+      email: string;
+      profile: {
+        name: string;
+        age: number;
+      };
+    };
     query: {
       notify: "email" | "push" | "none";
     };
@@ -206,20 +203,13 @@ declare const UserRPC: {
     validateOnClient?: vovk0.VovkValidateOnClient | undefined;
     interpretAs?: string | undefined;
     init?: RequestInit | undefined;
-    transform?:
-      | ((
-          staticMethodReturn: {
-            success: true;
-          },
-          resp: Response,
-        ) => R)
-      | undefined;
+    transform?: ((staticMethodReturn: {
+      success: true;
+    }, resp: Response) => R) | undefined;
     fetcher?: VovkClientFetcher<F> | undefined;
-  }) => R extends object
-    ? Promise<Awaited<R>>
-    : Promise<{
-        success: true;
-      }>) & {
+  }) => R extends object ? Promise<Awaited<R>> : Promise<{
+    success: true;
+  }>) & {
     isRPC: true;
     schema: vovk0.VovkHandlerSchema;
     controllerSchema: vovk0.VovkControllerSchema;
@@ -243,156 +233,89 @@ declare const UserRPC: {
         success: boolean;
       };
       iteration: unknown;
-      isForm: any;
+      isForm: false;
     };
   } & {
-    useQuery: (
-      input: {
-        body:
-          | FormData
-          | {
-              email: string;
-              profile: {
-                name: string;
-                age: number;
-              };
-            };
-        query: {
-          notify: "email" | "push" | "none";
+    useQuery: (input: {
+      body: {
+        email: string;
+        profile: {
+          name: string;
+          age: number;
         };
-        params: {
-          id: string;
-        };
-        apiRoot?: string | undefined;
-        disableClientValidation?: boolean | undefined;
-        validateOnClient?: vovk0.VovkValidateOnClient | undefined;
-        interpretAs?: string | undefined;
-        init?: RequestInit | undefined;
-        transform?:
-          | ((
-              staticMethodReturn: {
-                success: true;
-              },
-              resp: Response,
-            ) => unknown)
-          | undefined;
-        fetcher?: VovkClientFetcher<unknown> | undefined;
-      },
-      options?:
-        | Omit<
-            _tanstack_react_query8.UseQueryOptions<
-              Promise<{
-                success: true;
-              }>,
-              Error,
-              Promise<{
-                success: true;
-              }>,
-              readonly unknown[]
-            >,
-            "queryFn" | "queryKey"
-          >
-        | undefined,
-      queryClient?: _tanstack_query_core9.QueryClient,
-    ) => _tanstack_react_query8.UseQueryResult<
-      {
+      };
+      query: {
+        notify: "email" | "push" | "none";
+      };
+      params: {
+        id: string;
+      };
+      apiRoot?: string | undefined;
+      disableClientValidation?: boolean | undefined;
+      validateOnClient?: vovk0.VovkValidateOnClient | undefined;
+      interpretAs?: string | undefined;
+      init?: RequestInit | undefined;
+      transform?: ((staticMethodReturn: {
         success: true;
-      },
-      vovk0.HttpException
-    >;
-    useMutation: (
-      options?:
-        | Omit<
-            _tanstack_react_query8.UseMutationOptions<
-              Promise<{
-                success: true;
-              }>,
-              Error,
-              void,
-              unknown
-            >,
-            "mutationFn"
-          >
-        | undefined,
-      queryClient?: _tanstack_query_core9.QueryClient,
-    ) => _tanstack_react_query8.UseMutationResult<
-      {
+      }, resp: Response) => unknown) | undefined;
+      fetcher?: VovkClientFetcher<unknown> | undefined;
+    }, options?: Omit<_tanstack_react_query8.UseQueryOptions<Promise<{
+      success: true;
+    }>, Error, Promise<{
+      success: true;
+    }>, readonly unknown[]>, "queryFn" | "queryKey"> | undefined, queryClient?: _tanstack_query_core9.QueryClient) => _tanstack_react_query8.UseQueryResult<{
+      success: true;
+    }, vovk0.HttpException>;
+    useMutation: (options?: Omit<_tanstack_react_query8.UseMutationOptions<Promise<{
+      success: true;
+    }>, Error, void, unknown>, "mutationFn"> | undefined, queryClient?: _tanstack_query_core9.QueryClient) => _tanstack_react_query8.UseMutationResult<{
+      success: true;
+    }, vovk0.HttpException, {
+      body: {
+        email: string;
+        profile: {
+          name: string;
+          age: number;
+        };
+      };
+      query: {
+        notify: "email" | "push" | "none";
+      };
+      params: {
+        id: string;
+      };
+      apiRoot?: string | undefined;
+      disableClientValidation?: boolean | undefined;
+      validateOnClient?: vovk0.VovkValidateOnClient | undefined;
+      interpretAs?: string | undefined;
+      init?: RequestInit | undefined;
+      transform?: ((staticMethodReturn: {
         success: true;
-      },
-      vovk0.HttpException,
-      {
-        body:
-          | FormData
-          | {
-              email: string;
-              profile: {
-                name: string;
-                age: number;
-              };
-            };
-        query: {
-          notify: "email" | "push" | "none";
-        };
-        params: {
-          id: string;
-        };
-        apiRoot?: string | undefined;
-        disableClientValidation?: boolean | undefined;
-        validateOnClient?: vovk0.VovkValidateOnClient | undefined;
-        interpretAs?: string | undefined;
-        init?: RequestInit | undefined;
-        transform?:
-          | ((
-              staticMethodReturn: {
-                success: true;
-              },
-              resp: Response,
-            ) => unknown)
-          | undefined;
-        fetcher?: VovkClientFetcher<unknown> | undefined;
-      },
-      unknown
-    >;
+      }, resp: Response) => unknown) | undefined;
+      fetcher?: VovkClientFetcher<unknown> | undefined;
+    }, unknown>;
   };
 };
 declare const StreamRPC: {
-  streamTokens: (<
-    R,
-    F extends unknown = vovk0.VovkDefaultFetcherOptions<{
-      apiRoot?: string;
-      disableClientValidation?: boolean;
-      validateOnClient?: vovk0.VovkValidateOnClient;
-      interpretAs?: string;
-      init?: RequestInit;
-    }>,
-  >(
-    options?:
-      | {
-          apiRoot?: string | undefined;
-          disableClientValidation?: boolean | undefined;
-          validateOnClient?: vovk0.VovkValidateOnClient | undefined;
-          interpretAs?: string | undefined;
-          init?: RequestInit | undefined;
-          transform?:
-            | ((
-                staticMethodReturn: AsyncGenerator<
-                  {
-                    message: string;
-                  },
-                  void,
-                  unknown
-                >,
-                resp: Response,
-              ) => R)
-            | undefined;
-          fetcher?: VovkClientFetcher<F> | undefined;
-        }
-      | undefined,
-  ) => Promise<
-    vovk0.VovkStreamAsyncIterable<{
+  streamTokens: (<R, F extends unknown = vovk0.VovkDefaultFetcherOptions<{
+    apiRoot?: string;
+    disableClientValidation?: boolean;
+    validateOnClient?: vovk0.VovkValidateOnClient;
+    interpretAs?: string;
+    init?: RequestInit;
+  }>>(options?: {
+    apiRoot?: string | undefined;
+    disableClientValidation?: boolean | undefined;
+    validateOnClient?: vovk0.VovkValidateOnClient | undefined;
+    interpretAs?: string | undefined;
+    init?: RequestInit | undefined;
+    transform?: ((staticMethodReturn: AsyncGenerator<{
       message: string;
-    }>
-  >) & {
+    }, void, unknown>, resp: Response) => R) | undefined;
+    fetcher?: VovkClientFetcher<F> | undefined;
+  } | undefined) => Promise<vovk0.VovkStreamAsyncIterable<{
+    message: string;
+  }>>) & {
     isRPC: true;
     schema: vovk0.VovkHandlerSchema;
     controllerSchema: vovk0.VovkControllerSchema;
@@ -406,103 +329,41 @@ declare const StreamRPC: {
       iteration: {
         message: string;
       };
-      isForm: any;
+      isForm: false;
     };
   } & {
-    useQuery: (
-      input?:
-        | {
-            apiRoot?: string | undefined;
-            disableClientValidation?: boolean | undefined;
-            validateOnClient?: vovk0.VovkValidateOnClient | undefined;
-            interpretAs?: string | undefined;
-            init?: RequestInit | undefined;
-            transform?:
-              | ((
-                  staticMethodReturn: AsyncGenerator<
-                    {
-                      message: string;
-                    },
-                    void,
-                    unknown
-                  >,
-                  resp: Response,
-                ) => unknown)
-              | undefined;
-            fetcher?: VovkClientFetcher<unknown> | undefined;
-          }
-        | undefined,
-      options?:
-        | Omit<
-            _tanstack_react_query8.UseQueryOptions<
-              Promise<
-                vovk0.VovkStreamAsyncIterable<{
-                  message: string;
-                }>
-              >,
-              Error,
-              Promise<
-                vovk0.VovkStreamAsyncIterable<{
-                  message: string;
-                }>
-              >,
-              readonly unknown[]
-            >,
-            "queryFn" | "queryKey"
-          >
-        | undefined,
-      queryClient?: _tanstack_query_core9.QueryClient,
-    ) => _tanstack_react_query8.UseQueryResult<
-      {
+    useQuery: (input?: {
+      apiRoot?: string | undefined;
+      disableClientValidation?: boolean | undefined;
+      validateOnClient?: vovk0.VovkValidateOnClient | undefined;
+      interpretAs?: string | undefined;
+      init?: RequestInit | undefined;
+      transform?: ((staticMethodReturn: AsyncGenerator<{
         message: string;
-      }[],
-      vovk0.HttpException
-    >;
-    useMutation: (
-      options?:
-        | Omit<
-            _tanstack_react_query8.UseMutationOptions<
-              Promise<
-                vovk0.VovkStreamAsyncIterable<{
-                  message: string;
-                }>
-              >,
-              Error,
-              void,
-              unknown
-            >,
-            "mutationFn"
-          >
-        | undefined,
-      queryClient?: _tanstack_query_core9.QueryClient,
-    ) => _tanstack_react_query8.UseMutationResult<
-      vovk0.VovkStreamAsyncIterable<{
+      }, void, unknown>, resp: Response) => unknown) | undefined;
+      fetcher?: VovkClientFetcher<unknown> | undefined;
+    } | undefined, options?: Omit<_tanstack_react_query8.UseQueryOptions<Promise<vovk0.VovkStreamAsyncIterable<{
+      message: string;
+    }>>, Error, Promise<vovk0.VovkStreamAsyncIterable<{
+      message: string;
+    }>>, readonly unknown[]>, "queryFn" | "queryKey"> | undefined, queryClient?: _tanstack_query_core9.QueryClient) => _tanstack_react_query8.UseQueryResult<{
+      message: string;
+    }[], vovk0.HttpException>;
+    useMutation: (options?: Omit<_tanstack_react_query8.UseMutationOptions<Promise<vovk0.VovkStreamAsyncIterable<{
+      message: string;
+    }>>, Error, void, unknown>, "mutationFn"> | undefined, queryClient?: _tanstack_query_core9.QueryClient) => _tanstack_react_query8.UseMutationResult<vovk0.VovkStreamAsyncIterable<{
+      message: string;
+    }>, vovk0.HttpException, {
+      apiRoot?: string | undefined;
+      disableClientValidation?: boolean | undefined;
+      validateOnClient?: vovk0.VovkValidateOnClient | undefined;
+      interpretAs?: string | undefined;
+      init?: RequestInit | undefined;
+      transform?: ((staticMethodReturn: AsyncGenerator<{
         message: string;
-      }>,
-      vovk0.HttpException,
-      | {
-          apiRoot?: string | undefined;
-          disableClientValidation?: boolean | undefined;
-          validateOnClient?: vovk0.VovkValidateOnClient | undefined;
-          interpretAs?: string | undefined;
-          init?: RequestInit | undefined;
-          transform?:
-            | ((
-                staticMethodReturn: AsyncGenerator<
-                  {
-                    message: string;
-                  },
-                  void,
-                  unknown
-                >,
-                resp: Response,
-              ) => unknown)
-            | undefined;
-          fetcher?: VovkClientFetcher<unknown> | undefined;
-        }
-      | undefined,
-      unknown
-    >;
+      }, void, unknown>, resp: Response) => unknown) | undefined;
+      fetcher?: VovkClientFetcher<unknown> | undefined;
+    } | undefined, unknown>;
   };
 };
 declare const OpenApiRPC: {

@@ -2,10 +2,11 @@
 declare const schema: {
   $schema: string;
   segments: {
-    "": {
+    '': {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;
+      segmentType: string;
       controllers: {
         UserRPC: {
           rpcModuleName: string;
@@ -139,6 +140,7 @@ declare const schema: {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;
+      segmentType: string;
       controllers: {
         OpenApiRPC: {
           rpcModuleName: string;
