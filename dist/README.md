@@ -1,6 +1,6 @@
 
 
-# vovk-hello-world v0.0.10 [![TypeScript](https://badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)](https://www.typescriptlang.org/) [![Vovk.ts](https://badgen.net/badge/Built%20with/Vovk.ts/333333?icon=https://vovk.dev/icon-white.svg)](https://vovk.dev)
+# vovk-hello-world v0.0.11 [![TypeScript](https://badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)](https://www.typescriptlang.org/) [![Vovk.ts](https://badgen.net/badge/Built%20with/Vovk.ts/333333?icon=https://vovk.dev/icon-white.svg)](https://vovk.dev)
 
 > A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.
 
