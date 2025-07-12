@@ -1,5 +1,5 @@
 from dist_python.src.vovk_hello_world import UserRPC, OpenApiRPC, StreamRPC  # local module
-# import vovk_hello_world  # installed package
+import vovk_hello_world  # installed package
 
 def main():
     # Update user using local module
@@ -29,8 +29,8 @@ def main():
     print()  # Add newline after streaming
     
     # Get OpenAPI spec from installed package
-    # openapi_response_from_bundle = vovk_hello_world.OpenApiRPC.get_spec()
-    # print(f"OpenApiRPC.get_spec from \"vovk-hello-world\" package: {openapi_response_from_bundle['info']['title']} {openapi_response_from_bundle['info']['version']}")
+    openapi_response_from_bundle = vovk_hello_world.OpenApiRPC.get_spec()
+    print(f"OpenApiRPC.get_spec from \"vovk-hello-world\" package: {openapi_response_from_bundle['info']['title']} {openapi_response_from_bundle['info']['version']}")
 
 if __name__ == "__main__":
     try:

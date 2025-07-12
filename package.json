@@ -12,7 +12,7 @@
     "demo": "npm run demo:ts && npm run demo:rs && npm run demo:py",
     "demo:ts": "node --experimental-strip-types demo_node/index.mts",
     "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml",
-    "demo:py": "python3 demo_python.py",
+    "demo:py": "python3 -m pip install --upgrade vovk_hello_world --quiet && python3 demo_python.py",
     "#comment2": "Postversion scripts for publishing",
     "postversion:ts": "npm run bundle && npm publish ./dist",
     "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml --allow-dirty",
@@ -46,8 +46,8 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.11",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.290",
-    "vovk-python": "^0.0.1-draft.47",
-    "vovk-rust": "^0.0.1-draft.36"
+    "vovk-cli": "^0.0.1-draft.291",
+    "vovk-python": "^0.0.1-draft.49",
+    "vovk-rust": "^0.0.1-draft.37"
   }
 }
