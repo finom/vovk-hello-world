@@ -8,13 +8,19 @@
     "start": "next start",
     "lint": "next lint",
     "bundle": "vovk bundle",
-    "postversion:ts": "npm run bundle && npm publish ./dist",
-    "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml",
-    "postversion": "npm run postversion:ts && npm run postversion:rs && git push && git push --tags",
+
+    "#comment1": "Demo scripts for running examples in different languages",
     "demo": "npm run demo:node && npm run demo:rs && npm run demo:py",
     "demo:ts": "node --experimental-strip-types demo_node/index.mts",
     "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml",
     "demo:py": "python3 demo_python.py",
+
+    "#comment2": "Postversion scripts for publishing",
+    "postversion:ts": "npm run bundle && npm publish ./dist",
+    "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml",
+    "postversion:py": "python3 -m build --wheel --sdist && python3 -m twine upload dist_python/dist/*",
+    "postversion": "npm run postversion:ts && npm run postversion:rs && git push && git push --tags",
+    
     "patch": "npm version patch"
   },
   "license": "MIT",
@@ -28,9 +34,7 @@
     "vovk-ajv": "^0.0.0-draft.78",
     "vovk-client": "^0.0.4-draft.91",
     "vovk-hello-world": "^0.0.2",
-    "vovk-python": "^0.0.1-draft.43",
     "vovk-react-query": "^0.0.1-draft.78",
-    "vovk-rust": "^0.0.1-draft.34",
     "vovk-zod": "^1.0.0-draft.117",
     "zod": "^4.0.5"
   },
@@ -45,6 +49,8 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.11",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.286"
+    "vovk-cli": "^0.0.1-draft.286",
+    "vovk-python": "^0.0.1-draft.44",
+    "vovk-rust": "^0.0.1-draft.34"
   }
 }
