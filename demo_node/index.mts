@@ -2,6 +2,7 @@ import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client"; // composed client
 import { OpenApiRPC as OpenApiRPCFromBundle } from "vovk-hello-world"; // bundle
 
 async function main() {
+  console.log("\n--- Node.js Demo ---");
   const updateUserResponse = await UserRPC.updateUser({
     params: {
       id: "123e4567-e89b-12d3-a456-426614174000",

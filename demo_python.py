@@ -2,6 +2,7 @@ from dist_python.src.vovk_hello_world import UserRPC, OpenApiRPC, StreamRPC  # l
 import vovk_hello_world  # installed package
 
 def main():
+    print("\n--- Python Demo ---")
     # Update user using local module
     update_user_response = UserRPC.update_user(
         params={"id": "123e4567-e89b-12d3-a456-426614174000"},
@@ -30,7 +31,7 @@ def main():
     
     # Get OpenAPI spec from installed package
     openapi_response_from_bundle = vovk_hello_world.OpenApiRPC.get_spec()
-    print(f"OpenApiRPC.get_spec from \"vovk-hello-world\" package: {openapi_response_from_bundle['info']['title']} {openapi_response_from_bundle['info']['version']}")
+    print(f"OpenApiRPC.get_spec from \"vovk_hello_world\" package: {openapi_response_from_bundle['info']['title']} {openapi_response_from_bundle['info']['version']}")
 
 if __name__ == "__main__":
     try:
