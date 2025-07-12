@@ -1,0 +1,53 @@
+{
+  "name": "vovk-hello-world",
+  "version": "0.0.19",
+  "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
+  "scripts": {
+    "dev": "vovk dev --next-dev -- --turbopack",
+    "build": "vovk generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "bundle": "vovk bundle",
+    "#comment1": "Demo scripts for running examples in different languages",
+    "demo": "npm run demo:ts && npm run demo:rs && npm run demo:py",
+    "demo:ts": "node --experimental-strip-types demo_node/index.mts",
+    "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml --quiet",
+    "demo:py": "python3 -m pip install --upgrade vovk_hello_world --quiet && python3 demo_python.py",
+    "#comment2": "Postversion scripts for publishing",
+    "postversion:ts": "npm run bundle && npm publish ./dist",
+    "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml --allow-dirty",
+    "postversion:py": "python3 -m build ./dist_python --wheel --sdist && python3 -m twine upload ./dist_python/dist/*",
+    "postversion": "vovk generate && npm run postversion:ts && npm run postversion:rs && npm run postversion:py && git push && git push --tags",
+    "patch": "npm version patch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@scalar/api-reference-react": "^0.7.30",
+    "@tanstack/react-query": "^5.82.0",
+    "next": "15.3.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vovk": "^3.0.0-draft.321",
+    "vovk-ajv": "^0.0.0-draft.80",
+    "vovk-client": "^0.0.4-draft.91",
+    "vovk-hello-world": "^0.0.2",
+    "vovk-react-query": "^0.0.1-draft.78",
+    "vovk-zod": "^1.0.0-draft.119",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.5",
+    "postcss": "^8",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5",
+    "vovk-cli": "^0.0.1-draft.292",
+    "vovk-python": "^0.0.1-draft.49",
+    "vovk-rust": "^0.0.1-draft.37"
+  }
+}

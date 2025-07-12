@@ -1,0 +1,20 @@
+{
+  "name": "vovk-hello-world",
+  "version": "0.0.19",
+  "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
+  "license": "MIT",
+  "main": "./index.cjs",
+  "module": "./index.mjs",
+  "types": "./index.d.mts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    },
+    "./schema": {
+      "import": "./schema.cjs",
+      "require": "./schema.cjs",
+      "types": "./schema.d.cts"
+    }
+  }
+}
