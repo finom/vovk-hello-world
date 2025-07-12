@@ -15,7 +15,7 @@
     "demo:py": "python3 demo_python.py",
     "#comment2": "Postversion scripts for publishing",
     "postversion:ts": "npm run bundle && npm publish ./dist",
-    "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml",
+    "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml --allow-dirty",
     "postversion:py": "python3 -m build --wheel --sdist && python3 -m twine upload dist_python/dist/*",
     "postversion": "vovk generate && npm run postversion:ts && npm run postversion:rs && git push && git push --tags",
     "patch": "npm version patch"
