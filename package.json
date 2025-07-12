@@ -47,7 +47,7 @@
     "tailwindcss": "^4.1.11",
     "typescript": "^5",
     "vovk-cli": "^0.0.1-draft.286",
-    "vovk-python": "^0.0.1-draft.44",
+    "vovk-python": "^0.0.1-draft.45",
     "vovk-rust": "^0.0.1-draft.34"
   }
 }

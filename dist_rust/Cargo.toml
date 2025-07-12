@@ -1,7 +1,7 @@
 
 [package]
 name = "vovk_hello_world"
-version = "0.0.11"
+version = "0.0.12"
 edition = "2021"
 description = "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC."
 license = "MIT"
