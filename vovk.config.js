@@ -6,7 +6,7 @@ const config = {
     createRPC: "vovk-react-query",
     validateOnClient: "vovk-ajv",
   },
-  origin: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000",
+  origin: process.env.VERCEL_ENV ? `https://vovk-hello-world.vercel.app` : "http://localhost:3000",
   composedClient: {
     fromTemplates: ["mjs", "cjs", "py", "rs"],
   },
