@@ -17,7 +17,7 @@
     "postversion:ts": "npm run bundle && npm publish ./dist",
     "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml",
     "postversion:py": "python3 -m build --wheel --sdist && python3 -m twine upload dist_python/dist/*",
-    "postversion": "npm run generate && npm run postversion:ts && npm run postversion:rs && git push && git push --tags",
+    "postversion": "vovk generate && npm run postversion:ts && npm run postversion:rs && git push && git push --tags",
     "patch": "npm version patch"
   },
   "license": "MIT",
