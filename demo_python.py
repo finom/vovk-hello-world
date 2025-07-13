@@ -1,5 +1,5 @@
 from dist_python.src.vovk_hello_world import UserRPC, OpenApiRPC, StreamRPC  # local module
-import vovk_hello_world  # installed package
+import vovk_hello_world
 
 def main():
     print("\n--- Python Demo ---")
