@@ -1,6 +1,6 @@
 {
   "name": "vovk-hello-world",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
   "license": "MIT",
   "main": "./index.cjs",
