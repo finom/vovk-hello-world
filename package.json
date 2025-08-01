@@ -23,17 +23,15 @@
   "license": "MIT",
   "dependencies": {
     "@scalar/api-reference-react": "^0.7.30",
-    "@tanstack/react-query": "^5.82.0",
     "next": "15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "vovk": "^3.0.0-draft.331",
-    "vovk-ajv": "^0.0.0-draft.83",
-    "vovk-client": "^0.0.4-draft.91",
+    "vovk": "^3.0.0-draft.348",
+    "vovk-ajv": "^0.0.0-draft.85",
+    "vovk-client": "^0.0.4-draft.111",
     "vovk-hello-world": "^0.0.2",
-    "vovk-react-query": "^0.0.1-draft.78",
-    "vovk-zod": "^1.0.0-draft.122",
-    "zod": "^4.0.5"
+    "vovk-zod": "^1.0.0-draft.126",
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -46,8 +44,8 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.11",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.299",
-    "vovk-python": "^0.0.1-draft.54",
-    "vovk-rust": "^0.0.1-draft.40"
+    "vovk-cli": "^0.0.1-draft.304",
+    "vovk-python": "^0.0.1-draft.56",
+    "vovk-rust": "^0.0.1-draft.42"
   }
 }

@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import { z } from "zod";
 import { prefix, post, openapi } from "vovk";
 import { withZod } from "vovk-zod";
 import UserService from "./UserService";

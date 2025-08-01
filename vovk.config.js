@@ -3,17 +3,19 @@
 /** @type {import('vovk').VovkConfig} */
 const config = {
   imports: {
-    createRPC: "vovk-react-query",
     validateOnClient: "vovk-ajv",
   },
   origin: process.env.VERCEL_ENV ? `https://vovk-hello-world.vercel.app` : "http://localhost:3000",
   composedClient: {
     fromTemplates: ["mjs", "cjs", "py", "rs"],
+    // enabled: true,
+    // outDir: "./node_modules/.vovk-client",
   },
   /* bundle: {
     outDir: "./dist",
   }, */
   segmentedClient: {
+    // fromTemplates: ["mjs", "cjs"],
     enabled: true,
     // outDir: "./src/client",
   },
