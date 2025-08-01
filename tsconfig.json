@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "vovk/*": ["./node_modules/vovk/*"],
     },
     "experimentalDecorators": true
   },
