@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { type VovkQuery } from "vovk";
 import { UserRPC } from "../../client/root"; // segmented client
+import { useMutation } from "@tanstack/react-query";
 
 const UserFormDemo = () => {
   const [disableClientValidation, setDisableClientValidation] = useState(false);
@@ -9,7 +10,9 @@ const UserFormDemo = () => {
   const [age, setAge] = useState(35);
   const [email, setEmail] = useState("john@example.com");
   const [id, setId] = useState("a937629d-e8f6-4b1e-a819-7669358650a0");
-  const updateUserMutation = UserRPC.updateUser.useMutation();
+  const updateUserMutation = useMutation({
+    mutationFn: UserRPC.updateUser,
+  });
   const [notify, setNotify] = useState<
     VovkQuery<typeof UserRPC.updateUser>["notify"]
   >(
