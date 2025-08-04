@@ -2,7 +2,7 @@
 declare const schema: {
   $schema: string;
   segments: {
-    "": {
+    '': {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;
@@ -162,8 +162,8 @@ declare const schema: {
   };
   meta: {
     config: {
-      $schema: string;
       libs: {};
+      $schema: string;
     };
     $schema: string;
     apiRoot: string;
