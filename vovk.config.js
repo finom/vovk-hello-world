@@ -23,6 +23,9 @@ const config = {
     enabled: true,
     // outDir: "./src/client",
   },
+  bundle: {
+    origin: PROD_URL, // force origin
+  },
   clientTemplateDefs: {
     py: {
       extends: 'py',
