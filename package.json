@@ -27,7 +27,7 @@
     "next": "15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "vovk": "^3.0.0-draft.357",
+    "vovk": "^3.0.0-draft.358",
     "vovk-ajv": "^0.0.0-draft.88",
     "vovk-client": "^0.0.4-draft.114",
     "vovk-hello-world": "^0.0.33",
@@ -45,7 +45,7 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.11",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.327",
+    "vovk-cli": "^0.0.1-draft.328",
     "vovk-python": "^0.0.1-draft.59",
     "vovk-rust": "^0.0.1-draft.45"
   }
