@@ -27,11 +27,11 @@
     "next": "15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "vovk": "^3.0.0-draft.352",
-    "vovk-ajv": "^0.0.0-draft.87",
-    "vovk-client": "^0.0.4-draft.113",
+    "vovk": "^3.0.0-draft.356",
+    "vovk-ajv": "^0.0.0-draft.88",
+    "vovk-client": "^0.0.4-draft.114",
     "vovk-hello-world": "^0.0.33",
-    "vovk-zod": "^1.0.0-draft.128",
+    "vovk-zod": "^1.0.0-draft.129",
     "zod": "^4.0.14"
   },
   "devDependencies": {
@@ -45,8 +45,8 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.11",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.310",
-    "vovk-python": "^0.0.1-draft.58",
-    "vovk-rust": "^0.0.1-draft.44"
+    "vovk-cli": "^0.0.1-draft.324",
+    "vovk-python": "^0.0.1-draft.59",
+    "vovk-rust": "^0.0.1-draft.45"
   }
 }
