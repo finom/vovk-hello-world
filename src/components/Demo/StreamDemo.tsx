@@ -1,5 +1,8 @@
 "use client";
-import { useQuery, experimental_streamedQuery as streamedQuery } from "@tanstack/react-query";
+import {
+  useQuery,
+  experimental_streamedQuery as streamedQuery,
+} from "@tanstack/react-query";
 import { StreamRPC } from "../../client/root"; // segmented client
 
 const StreamDemo = () => {

@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "vovk/*": ["./node_modules/vovk/*"],
+      "vovk/*": ["./node_modules/vovk/*"]
     },
     "experimentalDecorators": true
   },

@@ -2,7 +2,7 @@
 declare const schema: {
   $schema: string;
   segments: {
-    '': {
+    "": {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;

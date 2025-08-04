@@ -1,7 +1,9 @@
 import Demo from "@/components/Demo";
+import { headers } from "next/headers";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+  const isIframe = (await headers()).get("sec-fetch-dest") === "iframe";
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)] max-w-full">
       <main className="flex flex-col gap-8 row-start-2 items-center justify-items-center sm:items-start">
@@ -92,68 +94,119 @@ export default function Home() {
         >
           <Demo />
         </div>
-        <div className="grid grid-cols-2 gap-4 w-full place-items-center">
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://vovk.dev/guides/hello-world"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/file.svg"
-              alt="File icon"
-              width={16}
-              height={16}
-            />
-            More&nbsp;info
-          </a>
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="/scalar"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/scalar.svg"
-              alt="Scalar icon"
-              width={16}
-              height={16}
-            />
-            OpenAPI spec
-          </a>
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://github.com/finom/vovk-hello-world"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/github-mark.svg"
-              alt="Github icon"
-              width={16}
-              height={16}
-            />
-            Github&nbsp;repo
-          </a>
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://vovk.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/globe.svg"
-              alt="Globe icon"
-              width={16}
-              height={16}
-            />
-            vovk.dev
-          </a>
-        </div>
+        {!isIframe && (
+          <>
+            <div className="grid grid-cols-2 gap-4 w-full place-items-center">
+              <a
+                className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                href="https://vovk.dev/guides/hello-world"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src="/file.svg"
+                  alt="File icon"
+                  width={16}
+                  height={16}
+                />
+                More&nbsp;info
+              </a>
+              <a
+                className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                href="/scalar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src="/scalar.svg"
+                  alt="Scalar icon"
+                  width={16}
+                  height={16}
+                />
+                OpenAPI spec
+              </a>
+              <a
+                className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                href="https://github.com/finom/vovk-hello-world"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src="/github-mark.svg"
+                  alt="Github icon"
+                  width={16}
+                  height={16}
+                />
+                Github&nbsp;repo
+              </a>
+              <a
+                className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                href="https://vovk.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src="/globe.svg"
+                  alt="Globe icon"
+                  width={16}
+                  height={16}
+                />
+                vovk.dev
+              </a>
+            </div>
+            <div className="grid grid-cols-3 gap-4 w-full place-items-center">
+              <a
+                className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                href="https://npmjs.com/package/vovk-hello-world"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src="/npm.svg"
+                  alt="NPM icon"
+                  width={16}
+                  height={16}
+                />
+                On NPM
+              </a>
+              <a
+                className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                href="https://crates.io/crates/vovk_hello_world"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src="/rust.svg"
+                  alt="Rust icon"
+                  width={16}
+                  height={16}
+                />
+                On Crates
+              </a>
+              <a
+                className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                href="https://pypi.org/project/vovk-hello-world"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src="/pypi.svg"
+                  alt="PyPI icon"
+                  width={16}
+                  height={16}
+                />
+                On PyPI
+              </a>
+            </div>
+          </>
+        )}
       </main>
     </div>
   );

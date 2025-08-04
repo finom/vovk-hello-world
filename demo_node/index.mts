@@ -19,7 +19,7 @@ async function main() {
     },
   });
 
-  console.log('UserRPC.updateUser:', updateUserResponse);
+  console.log("UserRPC.updateUser:", updateUserResponse);
 
   const openapiResponse = await OpenApiRPC.getSpec();
   console.log(
@@ -37,6 +37,5 @@ async function main() {
   console.log(
     `OpenApiRPC.getSpec from "vovk-hello-world" package: ${openapiResponseFromBundle.info.title} ${openapiResponseFromBundle.info.version}`,
   );
- 
 }
 main().catch(console.error);
