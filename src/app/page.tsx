@@ -51,6 +51,7 @@ export default async function Home() {
           [&_input]:border-gray-100
           [&_input]:outline-none 
           [&_input]:rounded-sm 
+          dark:[&_input]:bg-gray-100
           dark:[&_input]:border-none 
           dark:[&_input]:text-black 
 
@@ -60,6 +61,7 @@ export default async function Home() {
           [&_select]:border-gray-100
           [&_select]:outline-none 
           [&_select]:rounded-sm 
+          dark:[&_select]:bg-gray-100
           dark:[&_select]:border-none 
           dark:[&_select]:text-black 
 

@@ -1,8 +1,8 @@
 {
   "$schema": "https://vovk.dev/api/spec/v3/schema.json",
   "meta": {
+    "$schema": "https://vovk.dev/api/spec/v3/meta.json",
     "config": {
-      "libs": {},
       "$schema": "https://vovk.dev/api/spec/v3/config.json"
     }
   },
