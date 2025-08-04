@@ -1,6 +1,6 @@
 {
   "name": "vovk-hello-world",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
   "scripts": {
     "dev": "vovk dev --next-dev -- --turbopack",
