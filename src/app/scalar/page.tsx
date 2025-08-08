@@ -1,7 +1,22 @@
+"use client";
 import { ApiReferenceReact } from "@scalar/api-reference-react";
 import "@scalar/api-reference-react/style.css";
+import { useEffect } from "react";
 
-async function App() {
+function App() {
+  useEffect(() => {
+    const sendHeight = () => {
+      const height = document.documentElement.scrollHeight;
+      window.parent.postMessage({ iframeHeight: height }, '*');
+    };
+
+    sendHeight();
+    window.addEventListener('resize', sendHeight);
+
+    return () => {
+      window.removeEventListener('resize', sendHeight);
+    };
+  }, []);
   return (
     <ApiReferenceReact
       configuration={{
