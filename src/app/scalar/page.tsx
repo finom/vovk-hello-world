@@ -1,38 +1,27 @@
-"use client";
 import { ApiReferenceReact } from "@scalar/api-reference-react";
 import "@scalar/api-reference-react/style.css";
-import { useEffect } from "react";
+import { headers } from "next/headers";
 
-function App() {
-  useEffect(() => {
-    const sendHeight = () => {
-      const height = document.documentElement.scrollHeight;
-      window.parent.postMessage({ iframeHeight: height }, '*');
-    };
-
-    sendHeight();
-    window.addEventListener('resize', sendHeight);
-
-    return () => {
-      window.removeEventListener('resize', sendHeight);
-    };
-  }, []);
+async function App() {
+  const isIframe = (await headers()).get("sec-fetch-dest") === "iframe";
   return (
-    <ApiReferenceReact
-      configuration={{
-        url: "/api/static/openapi/spec.json",
-        servers: [
-          {
-            url: "http://localhost:3000",
-            description: "Localhost",
-          },
-          {
-            url: "https://vovk-hello-world.vercel.app",
-            description: "Production",
-          },
-        ],
-      }}
-    />
+      <ApiReferenceReact
+        configuration={{
+          showSidebar: !isIframe,
+          url: "/api/static/openapi/spec.json",
+          hideModels: true,
+          servers: [
+            {
+              url: "http://localhost:3000",
+              description: "Localhost",
+            },
+            {
+              url: "https://vovk-hello-world.vercel.app",
+              description: "Production",
+            },
+          ],
+        }}
+      />
   );
 }
 
