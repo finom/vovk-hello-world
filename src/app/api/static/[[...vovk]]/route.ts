@@ -9,7 +9,7 @@ export type Controllers = typeof controllers;
 export function generateStaticParams() {
   return generateStaticAPI(controllers);
 }
-export const { GET } = initSegment({
+export const { GET, OPTIONS } = initSegment({
   segmentName: "static",
   emitSchema: true,
   controllers,

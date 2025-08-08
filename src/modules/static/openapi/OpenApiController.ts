@@ -8,7 +8,7 @@ export default class OpenApiController {
     summary: "OpenAPI spec",
     description: 'Get the OpenAPI spec for the "Hello World" app API',
   })
-  @get("spec.json")
+  @get("spec.json", { cors: true })
   static getSpec = async () => {
     return vovkSchemaToOpenAPI({
       rootEntry: "api",
