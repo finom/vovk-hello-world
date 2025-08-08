@@ -1,32 +1,27 @@
-"use client";
 import { ApiReferenceReact } from "@scalar/api-reference-react";
 import "@scalar/api-reference-react/style.css";
+import { headers } from "next/headers";
 
-function App() {
+async function App() {
+  const isIframe = (await headers()).get("sec-fetch-dest") === "iframe";
   return (
-    <>
-      <style jsx global>{`
-        .app-wrapper {
-          padding: 0;
-        }
-      `}</style>
-      <ApiReferenceReact
-        configuration={{
-          url: "/api/static/openapi/spec.json",
-          hideModels: true,
-          servers: [
-            {
-              url: "http://localhost:3000",
-              description: "Localhost",
-            },
-            {
-              url: "https://vovk-hello-world.vercel.app",
-              description: "Production",
-            },
-          ],
-        }}
-      />
-    </>
+    <ApiReferenceReact
+      configuration={{
+        showSidebar: !isIframe,
+        url: "/api/static/openapi/spec.json",
+        hideModels: true,
+        servers: [
+          {
+            url: "http://localhost:3000",
+            description: "Localhost",
+          },
+          {
+            url: "https://vovk-hello-world.vercel.app",
+            description: "Production",
+          },
+        ],
+      }}
+    />
   );
 }
 

@@ -1,14 +1,14 @@
 {
-  "$schema": "https://vovk.dev/api/spec/v3/schema.json",
+  "$schema": "https://vovk.dev/api/schema/v3/schema.json",
   "meta": {
-    "$schema": "https://vovk.dev/api/spec/v3/meta.json",
+    "$schema": "https://vovk.dev/api/schema/v3/meta.json",
     "config": {
-      "$schema": "https://vovk.dev/api/spec/v3/config.json"
+      "$schema": "https://vovk.dev/api/schema/v3/config.json"
     }
   },
   "segments": {
     "": {
-      "$schema": "https://vovk.dev/api/spec/v3/segment.json",
+      "$schema": "https://vovk.dev/api/schema/v3/segment.json",
       "emitSchema": true,
       "segmentName": "",
       "segmentType": "segment",
@@ -171,7 +171,7 @@
       }
     },
     "static": {
-      "$schema": "https://vovk.dev/api/spec/v3/segment.json",
+      "$schema": "https://vovk.dev/api/schema/v3/segment.json",
       "emitSchema": true,
       "segmentName": "static",
       "segmentType": "segment",
