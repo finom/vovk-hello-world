@@ -1,0 +1,6 @@
+markdown: kramdown
+theme: minimal
+plugins:
+  - jekyll-seo-tag
+include:
+  - assets/css/dark-mode.css

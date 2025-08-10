@@ -7,9 +7,7 @@ const config = {
   imports: {
     validateOnClient: "vovk-ajv",
   },
-  origin: process.env.VERCEL_ENV
-    ? PROD_URL
-    : `http://localhost:${process.env.PORT || 3000}`,
+  // origin: '/',
   composedClient: {
     fromTemplates: ["mjs", "cjs", "py", "rs"],
     // enabled: true,
