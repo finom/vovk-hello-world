@@ -1,5 +1,4 @@
 markdown: kramdown
-theme: minimal
 plugins:
   - jekyll-seo-tag
 include:
