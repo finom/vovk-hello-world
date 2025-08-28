@@ -1,5 +1,13 @@
 {
-  "info": {},
+  "info": {
+    "title": "\"Hello World\" app API",
+    "version": "1.0.0",
+    "description": "API for \"Hello World\" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
   "openapi": "3.1.0",
   "components": {
     "schemas": {

@@ -2,7 +2,7 @@
 declare const schema: {
   $schema: string;
   segments: {
-    "": {
+    '': {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;
@@ -95,12 +95,12 @@ declare const schema: {
                   additionalProperties: boolean;
                 };
               };
-              path: string;
-              httpMethod: string;
-              openapi: {
+              operationObject: {
                 summary: string;
                 description: string;
               };
+              path: string;
+              httpMethod: string;
             };
           };
         };
@@ -125,12 +125,12 @@ declare const schema: {
                   additionalProperties: boolean;
                 };
               };
-              path: string;
-              httpMethod: string;
-              openapi: {
+              operationObject: {
                 summary: string;
                 description: string;
               };
+              path: string;
+              httpMethod: string;
             };
           };
         };
@@ -150,7 +150,7 @@ declare const schema: {
             getSpec: {
               path: string;
               httpMethod: string;
-              openapi: {
+              operationObject: {
                 summary: string;
                 description: string;
               };
@@ -161,12 +161,18 @@ declare const schema: {
     };
   };
   meta: {
+    $schema: string;
     config: {
       libs: {};
+      generatorConfig: {
+        imports: {
+          validateOnClient: string;
+        };
+        origin: string;
+        segments: {};
+      };
       $schema: string;
     };
-    $schema: string;
-    apiRoot: string;
   };
 };
 //#endregion

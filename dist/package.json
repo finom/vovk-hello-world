@@ -1,20 +1,73 @@
 {
-  "name": "vovk-hello-world",
-  "version": "0.0.43",
-  "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
-  "license": "MIT",
   "main": "./index.cjs",
   "module": "./index.mjs",
   "types": "./index.d.mts",
   "exports": {
     ".": {
       "import": "./index.mjs",
-      "require": "./index.cjs"
+      "require": "./index.cjs",
+      "types": "./index.d.mts"
     },
     "./schema": {
       "import": "./schema.cjs",
       "require": "./schema.cjs",
       "types": "./schema.d.cts"
+    },
+    "./openapi": {
+      "import": "./openapi.cjs",
+      "require": "./openapi.cjs",
+      "types": "./openapi.d.cts"
     }
+  },
+  "name": "vovk-hello-world",
+  "version": "0.0.44",
+  "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
+  "scripts": {
+    "dev": "vovk dev --next-dev -- --turbopack",
+    "build": "vovk generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "bundle": "vovk bundle",
+    "#comment1": "Demo scripts for running examples in different languages",
+    "demo": "npm run demo:ts && npm run demo:rs && npm run demo:py",
+    "demo:ts": "node --experimental-strip-types demo_node/index.mts",
+    "demo:rs": "cargo run --manifest-path ./demo_rust/Cargo.toml --quiet",
+    "demo:py": "python3 -m pip install --upgrade vovk_hello_world --quiet && python3 demo_python.py",
+    "#comment2": "Postversion scripts for publishing",
+    "postversion:ts": "npm run bundle && npm publish ./dist",
+    "postversion:rs": "cargo publish --manifest-path dist_rust/Cargo.toml --allow-dirty",
+    "postversion:py": "python3 -m build ./dist_python --wheel --sdist && python3 -m twine upload ./dist_python/dist/*",
+    "postversion": "vovk generate && npm run postversion:ts && npm run postversion:rs && npm run postversion:py && git push && git push --tags",
+    "patch": "npm version patch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@scalar/api-reference-react": "^0.7.42",
+    "@tanstack/react-query": "^5.85.5",
+    "ajv": "^8.17.1",
+    "next": "15.5.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "vovk": "^3.0.0-draft.407",
+    "vovk-ajv": "^0.0.0-draft.100",
+    "vovk-client": "^0.0.4-draft.128",
+    "vovk-hello-world": "^0.0.43",
+    "vovk-zod": "^1.0.0-draft.141",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "postcss": "^8",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5",
+    "vovk-cli": "^0.0.1-draft.345",
+    "vovk-python": "^0.0.1-draft.70",
+    "vovk-rust": "^0.0.1-draft.56"
   }
 }

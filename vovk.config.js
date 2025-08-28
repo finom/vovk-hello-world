@@ -5,10 +5,22 @@ const PROD_URL = "https://vovk-hello-world.vercel.app";
 /** @type {import('vovk').VovkConfig} */
 const config = {
   generatorConfig: {
-    // origin: '/',
+    origin: 'http://localhost:3000',
     imports: {
       validateOnClient: "vovk-ajv",
     },
+    openAPIObject: {
+      info: {
+        title: '"Hello World" app API',
+        description:
+          'API for "Hello World" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.',
+        license: {
+          name: "MIT",
+          url: "https://opensource.org/licenses/MIT",
+        },
+        version: "1.0.0",
+      },
+    }
   },
 
   composedClient: {
