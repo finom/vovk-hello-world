@@ -165,10 +165,21 @@ declare const schema: {
     config: {
       libs: {};
       generatorConfig: {
+        origin: string;
         imports: {
           validateOnClient: string;
         };
-        origin: string;
+        openAPIObject: {
+          info: {
+            title: string;
+            description: string;
+            license: {
+              name: string;
+              url: string;
+            };
+            version: string;
+          };
+        };
         segments: {};
       };
       $schema: string;

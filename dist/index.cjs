@@ -28,8 +28,17 @@ var $schema$2 = "https://vovk.dev/api/schema/v3/meta.json";
 var config = {
 	"libs": {},
 	"generatorConfig": {
+		"origin": "http://localhost:3000",
 		"imports": { "validateOnClient": "vovk-ajv" },
-		"origin": "",
+		"openAPIObject": { "info": {
+			"title": "\"Hello World\" app API",
+			"description": "API for \"Hello World\" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
+			"license": {
+				"name": "MIT",
+				"url": "https://opensource.org/licenses/MIT"
+			},
+			"version": "1.0.0"
+		} },
 		"segments": {}
 	},
 	"$schema": "https://vovk.dev/api/schema/v3/config.json"
@@ -212,7 +221,15 @@ const schema = {
 
 //#endregion
 //#region tmp_prebundle/openapi.json
-var info = {};
+var info = {
+	"title": "\"Hello World\" app API",
+	"version": "1.0.0",
+	"description": "API for \"Hello World\" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
+	"license": {
+		"name": "MIT",
+		"url": "https://opensource.org/licenses/MIT"
+	}
+};
 var openapi = "3.1.0";
 var components = { "schemas": {
 	"HttpStatus": {
@@ -463,15 +480,15 @@ var openapi_default = {
 //#region tmp_prebundle/index.ts
 const UserRPC = (0, vovk.createRPC)(schema, "", "UserRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "/api"
+	apiRoot: "http://localhost:3000/api"
 });
 const StreamRPC = (0, vovk.createRPC)(schema, "", "StreamRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "/api"
+	apiRoot: "http://localhost:3000/api"
 });
 const OpenApiRPC = (0, vovk.createRPC)(schema, "static", "OpenApiRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "/api"
+	apiRoot: "http://localhost:3000/api"
 });
 
 //#endregion
