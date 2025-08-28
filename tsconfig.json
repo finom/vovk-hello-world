@@ -24,6 +24,12 @@
     },
     "experimentalDecorators": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../vovk.dev/src/app/hello-world/ApiRef.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../vovk.dev/src/app/hello-world/ApiRef.tsx"
+  ],
   "exclude": ["node_modules"]
 }

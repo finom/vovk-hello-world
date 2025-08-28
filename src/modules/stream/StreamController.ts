@@ -1,11 +1,11 @@
-import { prefix, get, openapi } from "vovk";
+import { prefix, get, operation } from "vovk";
 import { withZod } from "vovk-zod";
 import { z } from "zod/v4";
 import StreamService from "./StreamService";
 
 @prefix("streams")
 export default class StreamController {
-  @openapi({
+  @operation({
     summary: "Stream tokens",
     description: "Stream tokens to the client",
   })

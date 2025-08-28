@@ -7,13 +7,13 @@ use vovk_hello_world_local::{
 use vovk_hello_world::open_api_rpc as open_api_rpc_from_crate;
 pub fn main() {
   println!("\n--- Rust Demo ---");
-  use user_rpc::update_user_::{ 
+  use user_rpc::update_user_::{
     body as Body, 
-    query as Query, 
-    params as Params 
+    body_::profile as Profile,
+    query as Query,
+    query_::notify as Notify,
+    params as Params,
   };
-  use user_rpc::update_user_::body_::profile as Profile;
-  use user_rpc::update_user_::query_::notify as Notify;
 
   let update_user_response = user_rpc::update_user(
     Body {

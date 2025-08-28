@@ -4,10 +4,13 @@ const PROD_URL = "https://vovk-hello-world.vercel.app";
 // Commented lines indicate default values
 /** @type {import('vovk').VovkConfig} */
 const config = {
-  imports: {
-    validateOnClient: "vovk-ajv",
+  generatorConfig: {
+    // origin: '/',
+    imports: {
+      validateOnClient: "vovk-ajv",
+    },
   },
-  // origin: '/',
+
   composedClient: {
     fromTemplates: ["mjs", "cjs", "py", "rs"],
     // enabled: true,
@@ -22,19 +25,19 @@ const config = {
     // outDir: "./src/client",
   },
   bundle: {
-    origin: PROD_URL, // force origin
+    generatorConfig: { origin: PROD_URL },
   },
   clientTemplateDefs: {
     py: {
-      extends: 'py',
-      origin: PROD_URL, // force origin
+      extends: "py",
+      generatorConfig: { origin: PROD_URL },
       composedClient: {
         // outDir: "./dist_python",
       },
     },
     rs: {
-      extends: 'rs',
-      origin: PROD_URL, // force origin
+      extends: "rs",
+      generatorConfig: { origin: PROD_URL },
       composedClient: {
         // outDir: "./dist_rust",
       },

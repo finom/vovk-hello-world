@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { prefix, post, openapi } from "vovk";
+import { prefix, post, operation } from "vovk";
 import { withZod } from "vovk-zod";
 import UserService from "./UserService";
 
 @prefix("users")
 export default class UserController {
-  @openapi({
+  @operation({
     summary: "Update user",
     description: "Update user by ID",
   })

@@ -1,21 +1,24 @@
 from dist_python.src.vovk_hello_world import UserRPC, OpenApiRPC, StreamRPC  # local module
 import vovk_hello_world
 
-def main():
+def main() -> None:
     print("\n--- Python Demo ---")
+
+    body: UserRPC.UpdateUserBody = {
+        "email": "john@example.com",
+        "profile": {
+            "name": "John Doe",
+            "age": 25
+        }
+    }
+    query: UserRPC.UpdateUserQuery = {"notify": "email"}
+    params: UserRPC.UpdateUserParams = {"id": "123e4567-e89b-12d3-a456-426614174000"}
     # Update user using local module
     update_user_response = UserRPC.update_user(
-        params={"id": "123e4567-e89b-12d3-a456-426614174000"},
-        body={
-            "email": "john@example.com",
-            "profile": {
-                "name": "John Doe",
-                "age": 25
-            }
-        },
-        query={"notify": "email"}
+        params=params,
+        body=body,
+        query=query
     )
-    
     print('UserRPC.update_user:', update_user_response)
     
     # Get OpenAPI spec from local module

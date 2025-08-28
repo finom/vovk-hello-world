@@ -12,7 +12,7 @@
         "getSpec": {
           "path": "spec.json",
           "httpMethod": "GET",
-          "openapi": {
+          "operationObject": {
             "summary": "OpenAPI spec",
             "description": "Get the OpenAPI spec for the \"Hello World\" app API"
           }

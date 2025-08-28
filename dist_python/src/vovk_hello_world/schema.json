@@ -3,6 +3,14 @@
   "meta": {
     "$schema": "https://vovk.dev/api/schema/v3/meta.json",
     "config": {
+      "libs": {},
+      "generatorConfig": {
+        "imports": {
+          "validateOnClient": "vovk-ajv"
+        },
+        "origin": "",
+        "segments": {}
+      },
       "$schema": "https://vovk.dev/api/schema/v3/config.json"
     }
   },
@@ -103,7 +111,7 @@
                       ],
                       "type": "string",
                       "format": "uuid",
-                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$"
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
                     }
                   },
                   "required": [
@@ -127,12 +135,12 @@
                   "additionalProperties": false
                 }
               },
-              "path": "{id}",
-              "httpMethod": "POST",
-              "openapi": {
+              "operationObject": {
                 "summary": "Update user",
                 "description": "Update user by ID"
-              }
+              },
+              "path": "{id}",
+              "httpMethod": "POST"
             }
           }
         },
@@ -159,12 +167,12 @@
                   "additionalProperties": false
                 }
               },
-              "path": "tokens",
-              "httpMethod": "GET",
-              "openapi": {
+              "operationObject": {
                 "summary": "Stream tokens",
                 "description": "Stream tokens to the client"
-              }
+              },
+              "path": "tokens",
+              "httpMethod": "GET"
             }
           }
         }
@@ -184,7 +192,7 @@
             "getSpec": {
               "path": "spec.json",
               "httpMethod": "GET",
-              "openapi": {
+              "operationObject": {
                 "summary": "OpenAPI spec",
                 "description": "Get the OpenAPI spec for the \"Hello World\" app API"
               }
