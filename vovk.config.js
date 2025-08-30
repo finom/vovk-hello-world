@@ -38,6 +38,7 @@ const config = {
   },
   bundle: {
     generatorConfig: { origin: PROD_URL },
+    keepPrebundleDir: true,
   },
   clientTemplateDefs: {
     py: {
@@ -60,4 +61,5 @@ const config = {
     service: "vovk-cli/module-templates/service.ts.ejs",
   },
 };
+
 module.exports = config;

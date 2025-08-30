@@ -20,7 +20,7 @@
     }
   },
   "name": "vovk-hello-world",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
   "scripts": {
     "dev": "vovk dev --next-dev -- --turbopack",
@@ -48,7 +48,7 @@
     "next": "15.5.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "vovk": "^3.0.0-draft.407",
+    "vovk": "^3.0.0-draft.408",
     "vovk-ajv": "^0.0.0-draft.100",
     "vovk-client": "^0.0.4-draft.128",
     "vovk-hello-world": "^0.0.43",
@@ -66,7 +66,7 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.12",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.345",
+    "vovk-cli": "^0.0.1-draft.346",
     "vovk-python": "^0.0.1-draft.70",
     "vovk-rust": "^0.0.1-draft.56"
   }
