@@ -8,7 +8,7 @@ async function App() {
     <ApiReferenceReact
       configuration={{
         showSidebar: !isIframe,
-        url: "/api/static/openapi/spec.json",
+        url: "/api/static/openapi.json",
         hideModels: true,
         servers: [
           {
