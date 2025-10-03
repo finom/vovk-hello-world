@@ -3,9 +3,169 @@
   "meta": {
     "$schema": "https://vovk.dev/api/schema/v3/meta.json",
     "config": {
+      "$schema": "https://vovk.dev/api/schema/v3/config.json",
+      "clientTemplateDefs": {
+        "openapiTs": {
+          "templatePath": "vovk-cli/client-templates/openapiTs/",
+          "requires": {
+            "openapiJson": "./"
+          }
+        },
+        "openapiCjs": {
+          "templatePath": "vovk-cli/client-templates/openapiCjs/",
+          "requires": {
+            "openapiJson": "./"
+          }
+        },
+        "openapiJson": {
+          "templatePath": "vovk-cli/client-templates/openapiJson/"
+        },
+        "ts": {
+          "templatePath": "vovk-cli/client-templates/ts/",
+          "requires": {
+            "schemaTs": "./",
+            "openapiTs": "./",
+            "mixins": "./"
+          }
+        },
+        "cjs": {
+          "templatePath": "vovk-cli/client-templates/cjs/",
+          "requires": {
+            "schemaCjs": "./",
+            "openapiCjs": "./",
+            "mixins": "./"
+          }
+        },
+        "mjs": {
+          "templatePath": "vovk-cli/client-templates/mjs/",
+          "requires": {
+            "schemaCjs": "./",
+            "openapiCjs": "./",
+            "mixins": "./"
+          }
+        },
+        "schemaTs": {
+          "templatePath": "vovk-cli/client-templates/schemaTs/"
+        },
+        "schemaCjs": {
+          "templatePath": "vovk-cli/client-templates/schemaCjs/"
+        },
+        "schemaJson": {
+          "templatePath": "vovk-cli/client-templates/schemaJson/"
+        },
+        "readme": {
+          "templatePath": "vovk-cli/client-templates/readme/"
+        },
+        "packageJson": {
+          "templatePath": "vovk-cli/client-templates/packageJson/"
+        },
+        "mixins": {
+          "templatePath": "vovk-cli/client-templates/mixins/"
+        },
+        "rsSrc": {
+          "templatePath": "vovk-rust/client-templates/rsSrc/",
+          "requires": {
+            "schemaJson": "./"
+          }
+        },
+        "rsPkg": {
+          "templatePath": "vovk-rust/client-templates/rsPkg/"
+        },
+        "rsReadme": {
+          "templatePath": "vovk-rust/client-templates/rsReadme/"
+        },
+        "rs": {
+          "composedClient": {
+            "outDir": "dist_rust"
+          },
+          "requires": {
+            "rsSrc": "./src/",
+            "rsPkg": "./",
+            "rsReadme": "./"
+          },
+          "extends": "rs",
+          "generatorConfig": {
+            "origin": "https://vovk-hello-world.vercel.app"
+          },
+          "segmentedClient": {}
+        },
+        "pySrc": {
+          "templatePath": "vovk-python/client-templates/pySrc/",
+          "requires": {
+            "schemaJson": "./"
+          }
+        },
+        "pyPkg": {
+          "templatePath": "vovk-python/client-templates/pyPkg/"
+        },
+        "pyReadme": {
+          "templatePath": "vovk-python/client-templates/pyReadme/"
+        },
+        "py": {
+          "composedClient": {
+            "outDir": "dist_python"
+          },
+          "requires": {
+            "pySrc": "./src/[package_name]/",
+            "pyPkg": "./",
+            "pyReadme": "./"
+          },
+          "extends": "py",
+          "generatorConfig": {
+            "origin": "https://vovk-hello-world.vercel.app"
+          },
+          "segmentedClient": {}
+        }
+      },
+      "emitConfig": [
+        "libs",
+        "generatorConfig"
+      ],
+      "composedClient": {
+        "fromTemplates": [
+          "mjs",
+          "cjs",
+          "py",
+          "rs"
+        ],
+        "enabled": true,
+        "outDir": "./node_modules/.vovk-client",
+        "prettifyClient": false
+      },
+      "segmentedClient": {
+        "enabled": true,
+        "fromTemplates": [
+          "ts"
+        ],
+        "outDir": "src/client",
+        "prettifyClient": true
+      },
+      "bundle": {
+        "prebundleOutDir": "tmp_prebundle",
+        "keepPrebundleDir": true,
+        "requires": {
+          "readme": ".",
+          "packageJson": "."
+        },
+        "generatorConfig": {
+          "origin": "https://vovk-hello-world.vercel.app"
+        },
+        "tsdownBuildOptions": {
+          "outDir": "dist"
+        }
+      },
+      "modulesDir": "src/modules",
+      "schemaOutDir": "./.vovk-schema",
+      "rootEntry": "api",
+      "rootSegmentModulesDirName": "",
+      "logLevel": "info",
+      "devHttps": false,
+      "moduleTemplates": {
+        "service": "vovk-cli/module-templates/service.ts.ejs",
+        "controller": "vovk-zod/module-templates/controller.ts.ejs"
+      },
       "libs": {},
       "generatorConfig": {
-        "origin": "http://localhost:3000",
         "imports": {
           "validateOnClient": "vovk-ajv"
         },
@@ -20,9 +180,9 @@
             "version": "1.0.0"
           }
         },
+        "origin": "",
         "segments": {}
-      },
-      "$schema": "https://vovk.dev/api/schema/v3/config.json"
+      }
     }
   },
   "segments": {
@@ -198,10 +358,10 @@
         "OpenApiRPC": {
           "rpcModuleName": "OpenApiRPC",
           "originalControllerName": "OpenApiController",
-          "prefix": "openapi",
+          "prefix": "",
           "handlers": {
             "getSpec": {
-              "path": "spec.json",
+              "path": "openapi.json",
               "httpMethod": "GET",
               "operationObject": {
                 "summary": "OpenAPI spec",

@@ -1,4 +1,5 @@
 {
+  "openapi": "3.1.0",
   "info": {
     "title": "\"Hello World\" app API",
     "version": "1.0.0",
@@ -8,7 +9,6 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "openapi": "3.1.0",
   "components": {
     "schemas": {
       "HttpStatus": {
@@ -47,7 +47,7 @@
     }
   },
   "paths": {
-    "/api/static/openapi/spec.json": {
+    "/api/static/openapi.json": {
       "get": {
         "summary": "OpenAPI spec",
         "description": "Get the OpenAPI spec for the \"Hello World\" app API",
@@ -65,7 +65,7 @@
           {
             "label": "Rust RPC",
             "lang": "rust",
-            "source": "use vovk_client::open_api_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\n\npub fn main() {\n  let response = open_api_rpc::get_spec(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n}"
+            "source": "use vovk_client::open_api_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = open_api_rpc::get_spec(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n}"
           }
         ]
       }

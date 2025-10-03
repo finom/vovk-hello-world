@@ -29,7 +29,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "vovk": "^3.0.0-draft.442",
-    "vovk-ajv": "^0.0.0-draft.106",
+    "vovk-ajv": "^0.0.0-draft.107",
     "vovk-client": "^0.0.4-draft.134",
     "vovk-hello-world": "^0.0.43",
     "vovk-zod": "^1.0.0-draft.147",
@@ -49,5 +49,6 @@
     "vovk-cli": "^0.0.1-draft.372",
     "vovk-python": "^0.0.1-draft.76",
     "vovk-rust": "^0.0.1-draft.62"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -7,10 +7,10 @@
     "OpenApiRPC": {
       "rpcModuleName": "OpenApiRPC",
       "originalControllerName": "OpenApiController",
-      "prefix": "openapi",
+      "prefix": "",
       "handlers": {
         "getSpec": {
-          "path": "spec.json",
+          "path": "openapi.json",
           "httpMethod": "GET",
           "operationObject": {
             "summary": "OpenAPI spec",
