@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "@scalar/api-reference-react": "^0.7.42",
-    "@tanstack/react-query": "^5.85.5",
+    "@tanstack/react-query": "^5.90.2",
     "ajv": "^8.17.1",
     "next": "15.5.2",
     "react": "^19.1.1",

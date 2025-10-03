@@ -9,7 +9,7 @@ const StreamDemo = () => {
   const { data } = useQuery({
     queryKey: StreamRPC.streamTokens.queryKey(),
     queryFn: streamedQuery({
-      queryFn: () => StreamRPC.streamTokens(),
+      streamFn: () => StreamRPC.streamTokens(),
     }),
   });
 
