@@ -101,7 +101,7 @@ export default async function Home() {
             <div className="grid grid-cols-2 gap-4 w-full place-items-center">
               <a
                 className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                href="https://vovk.dev/guides/hello-world"
+                href="https://vovk.dev/hello-world"
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -1,6 +1,6 @@
 import { prefix, get, operation } from "vovk";
 import { withZod } from "vovk-zod";
-import { z } from "zod/v4";
+import { z } from "zod";
 import StreamService from "./StreamService";
 
 @prefix("streams")

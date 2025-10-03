@@ -1,4 +1,4 @@
-import { VovkIteration } from "vovk";
+import type { VovkIteration } from "vovk";
 import type StreamController from "./StreamController";
 
 export default class StreamService {
