@@ -4,7 +4,8 @@
   "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
   "scripts": {
     "dev": "vovk dev --next-dev -- --turbopack",
-    "build": "vovk generate && next build",
+    "prebuild": "vovk generate",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "bundle": "vovk bundle",
