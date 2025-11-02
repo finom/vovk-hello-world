@@ -37,9 +37,18 @@ const config = {
   bundle: {
     outputConfig: { origin: PROD_URL },
     keepPrebundleDir: true,
-    tsdownBuildOptions: { 
-      tsconfig: "./tsconfig.bundle.json",
-      // outDir: "./dist" 
+    build: async ({ entry, outDir }) => {
+      const { build } = await import('tsdown');
+      await build({
+        entry,
+        dts: true,
+        format: ['cjs', 'esm'],
+        hash: false,
+        fixedExtension: true,
+        clean: true,
+        outDir,
+        tsconfig: './tsconfig.bundle.json',
+      });
     },
   },
   clientTemplateDefs: {

@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@scalar/api-reference-react": "^0.7.42",
+    "@standard-schema/spec": "^1.0.0",
     "@tanstack/react-query": "^5.90.2",
     "ajv": "^8.17.1",
     "next": "15.5.2",
@@ -46,10 +47,14 @@
     "eslint-config-next": "15.5.2",
     "postcss": "^8",
     "tailwindcss": "^4.1.12",
+    "tsdown": "^0.15.12",
     "typescript": "^5",
     "vovk-cli": "^0.0.1-draft.376",
     "vovk-python": "^0.0.1-draft.77",
     "vovk-rust": "^0.0.1-draft.63"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "#TODO": "Remove overrides when tsdown is renewed to support rolldown-plugin-dts v0.17.3+",
+  "overrides": {
+    "rolldown-plugin-dts": "0.17.3"
+  }
 }

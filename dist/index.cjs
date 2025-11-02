@@ -1,4 +1,28 @@
-import { createRPC } from "vovk";
+//#region rolldown:runtime
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+	if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
+		key = keys[i];
+		if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+			get: ((k) => from[k]).bind(null, key),
+			enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+		});
+	}
+	return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+	value: mod,
+	enumerable: true
+}) : target, mod));
+
+//#endregion
+let vovk = require("vovk");
+vovk = __toESM(vovk);
 
 //#region .vovk-schema/root.json
 var root_default = {
@@ -431,18 +455,27 @@ var openapi_default = {
 
 //#endregion
 //#region tmp_prebundle/index.ts
-const UserRPC = createRPC(schema, "", "UserRPC", import("vovk"), {
+const UserRPC = (0, vovk.createRPC)(schema, "", "UserRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const StreamRPC = createRPC(schema, "", "StreamRPC", import("vovk"), {
+const StreamRPC = (0, vovk.createRPC)(schema, "", "StreamRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const OpenApiRPC = createRPC(schema, "static", "OpenApiRPC", import("vovk"), {
+const OpenApiRPC = (0, vovk.createRPC)(schema, "static", "OpenApiRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
 
 //#endregion
-export { OpenApiRPC, StreamRPC, UserRPC, openapi_default as openapi, schema };
+exports.OpenApiRPC = OpenApiRPC;
+exports.StreamRPC = StreamRPC;
+exports.UserRPC = UserRPC;
+Object.defineProperty(exports, 'openapi', {
+  enumerable: true,
+  get: function () {
+    return openapi_default;
+  }
+});
+exports.schema = schema;
