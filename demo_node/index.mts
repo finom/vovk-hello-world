@@ -1,5 +1,5 @@
 import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client"; // composed client
-import { OpenApiRPC as OpenApiRPCFromBundle } from "vovk-hello-world"; // bundle
+import { OpenApiRPC as OpenApiRPCFromBundle } from "vovk-hello-world"; //published bundle
 
 async function main() {
   console.log("\n--- Node.js Demo ---");

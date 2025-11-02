@@ -118,8 +118,7 @@
         }
       },
       "emitConfig": [
-        "libs",
-        "outputConfig"
+        "libs"
       ],
       "composedClient": {
         "fromTemplates": [
@@ -143,15 +142,13 @@
       "bundle": {
         "prebundleOutDir": "tmp_prebundle",
         "keepPrebundleDir": true,
+        "outDir": "dist",
         "requires": {
           "readme": ".",
           "packageJson": "."
         },
         "outputConfig": {
           "origin": "https://hello-world.vovk.dev"
-        },
-        "tsdownBuildOptions": {
-          "outDir": "dist"
         }
       },
       "modulesDir": "src/modules",
@@ -161,8 +158,8 @@
       "logLevel": "info",
       "devHttps": false,
       "moduleTemplates": {
-        "service": "vovk-cli/module-templates/service.ts.ejs",
-        "controller": "vovk-zod/module-templates/controller.ts.ejs"
+        "service": "vovk-cli/module-templates/type/service.ts.ejs",
+        "controller": "vovk-cli/module-templates/type/controller.ts.ejs"
       },
       "libs": {},
       "outputConfig": {

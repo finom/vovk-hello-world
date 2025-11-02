@@ -6,7 +6,9 @@ const PROD_URL = "https://hello-world.vovk.dev";
 const config = {
   logLevel: "debug",
   outputConfig: {
-    // origin: '',
+    origin: process.env.NODE_ENV === "production"
+      ? PROD_URL
+      : `http://localhost:${process.env.PORT ?? 3000}`,
     imports: {
       validateOnClient: "vovk-ajv",
     },
