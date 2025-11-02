@@ -2,14 +2,14 @@
   "$schema": "https://vovk.dev/api/schema/v3/meta.json",
   "config": {
     "libs": {},
-    "generatorConfig": {
+    "outputConfig": {
       "imports": {
         "validateOnClient": "vovk-ajv"
       },
       "openAPIObject": {
         "info": {
           "title": "\"Hello World\" app API",
-          "description": "API for \"Hello World\" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
+          "description": "API for \"Hello World\" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
           "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"

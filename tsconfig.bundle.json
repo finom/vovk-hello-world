@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./src/*"],
+      "vovk/*": ["./node_modules/vovk/*"],
+    },
+  }
+}

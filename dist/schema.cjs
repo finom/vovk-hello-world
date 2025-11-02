@@ -1,32 +1,6 @@
 
-//#region .vovk-schema/_meta.json
-var $schema$2 = "https://vovk.dev/api/schema/v3/meta.json";
-var config = {
-	"libs": {},
-	"generatorConfig": {
-		"origin": "http://localhost:3000",
-		"imports": { "validateOnClient": "vovk-ajv" },
-		"openAPIObject": { "info": {
-			"title": "\"Hello World\" app API",
-			"description": "API for \"Hello World\" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
-			"license": {
-				"name": "MIT",
-				"url": "https://opensource.org/licenses/MIT"
-			},
-			"version": "1.0.0"
-		} },
-		"segments": {}
-	},
-	"$schema": "https://vovk.dev/api/schema/v3/config.json"
-};
-var _meta_default = {
-	$schema: $schema$2,
-	config
-};
-
-//#endregion
 //#region .vovk-schema/root.json
-var $schema$1 = "https://vovk.dev/api/schema/v3/segment.json";
+var $schema$2 = "https://vovk.dev/api/schema/v3/segment.json";
 var emitSchema$1 = true;
 var segmentName$1 = "";
 var segmentType$1 = "segment";
@@ -149,7 +123,7 @@ var controllers$1 = {
 	}
 };
 var root_default = {
-	$schema: $schema$1,
+	$schema: $schema$2,
 	emitSchema: emitSchema$1,
 	segmentName: segmentName$1,
 	segmentType: segmentType$1,
@@ -158,16 +132,16 @@ var root_default = {
 
 //#endregion
 //#region .vovk-schema/static.json
-var $schema = "https://vovk.dev/api/schema/v3/segment.json";
+var $schema$1 = "https://vovk.dev/api/schema/v3/segment.json";
 var emitSchema = true;
 var segmentName = "static";
 var segmentType = "segment";
 var controllers = { "OpenApiRPC": {
 	"rpcModuleName": "OpenApiRPC",
 	"originalControllerName": "OpenApiController",
-	"prefix": "openapi",
+	"prefix": "",
 	"handlers": { "getSpec": {
-		"path": "spec.json",
+		"path": "openapi.json",
 		"httpMethod": "GET",
 		"operationObject": {
 			"summary": "OpenAPI spec",
@@ -176,11 +150,37 @@ var controllers = { "OpenApiRPC": {
 	} }
 } };
 var static_default = {
-	$schema,
+	$schema: $schema$1,
 	emitSchema,
 	segmentName,
 	segmentType,
 	controllers
+};
+
+//#endregion
+//#region .vovk-schema/_meta.json
+var $schema = "https://vovk.dev/api/schema/v3/meta.json";
+var config = {
+	"libs": {},
+	"outputConfig": {
+		"imports": { "validateOnClient": "vovk-ajv" },
+		"openAPIObject": { "info": {
+			"title": "\"Hello World\" app API",
+			"description": "API for \"Hello World\" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
+			"license": {
+				"name": "MIT",
+				"url": "https://opensource.org/licenses/MIT"
+			},
+			"version": "1.0.0"
+		} },
+		"origin": "",
+		"segments": {}
+	},
+	"$schema": "https://vovk.dev/api/schema/v3/config.json"
+};
+var _meta_default = {
+	$schema,
+	config
 };
 
 //#endregion
@@ -192,7 +192,7 @@ const segments = {
 const schema = {
 	$schema: "https://vovk.dev/api/schema/v3/schema.json",
 	segments,
-	meta: { ..._meta_default }
+	meta: _meta_default
 };
 
 //#endregion

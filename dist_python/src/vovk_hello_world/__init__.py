@@ -6,10 +6,10 @@ from .api_client import ApiClient, HttpException
 
 HttpException = HttpException
 
-client = ApiClient('https://vovk-hello-world.vercel.app/api')
+client = ApiClient('https://hello-world.vovk.dev/api')
  
 class UserRPC: 
-    # UserRPC.update_user POST `https://vovk-hello-world.vercel.app/api/users/{id}`
+    # UserRPC.update_user POST `https://hello-world.vovk.dev/api/users/{id}`
     class __UpdateUserBody_profile(TypedDict):
         """
         User profile object
@@ -66,7 +66,7 @@ class UserRPC:
         
      
 class StreamRPC: 
-    # StreamRPC.stream_tokens GET `https://vovk-hello-world.vercel.app/api/streams/tokens`
+    # StreamRPC.stream_tokens GET `https://hello-world.vovk.dev/api/streams/tokens`
     class StreamTokensIteration(TypedDict):
         """
         Streamed token object
@@ -95,7 +95,7 @@ class StreamRPC:
     
  
 class OpenApiRPC: 
-    # OpenApiRPC.get_spec GET `https://vovk-hello-world.vercel.app/api/static/openapi.json`
+    # OpenApiRPC.get_spec GET `https://hello-world.vovk.dev/api/static/openapi.json`
 
     @staticmethod
     def get_spec(

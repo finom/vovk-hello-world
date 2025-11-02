@@ -1,10 +1,11 @@
 // @ts-check
 
-const PROD_URL = "https://vovk-hello-world.vercel.app";
+const PROD_URL = "https://hello-world.vovk.dev";
 // Commented lines indicate default values
 /** @type {import('vovk').VovkConfig} */
 const config = {
-  generatorConfig: {
+  logLevel: "debug",
+  outputConfig: {
     // origin: '',
     imports: {
       validateOnClient: "vovk-ajv",
@@ -13,7 +14,7 @@ const config = {
       info: {
         title: '"Hello World" app API',
         description:
-          'API for "Hello World" app hosted at https://vovk-hello-world.vercel.app/. Source code is available on Github https://github.com/finom/vovk-hello-world.',
+          'API for "Hello World" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world.',
         license: {
           name: "MIT",
           url: "https://opensource.org/licenses/MIT",
@@ -34,26 +35,25 @@ const config = {
     // outDir: "./src/client",
   },
   bundle: {
-    generatorConfig: { origin: PROD_URL },
+    outputConfig: { origin: PROD_URL },
     keepPrebundleDir: true,
-    // tsdownBuildOptions: { outDir: "./dist" },
+    tsdownBuildOptions: { 
+      tsconfig: "./tsconfig.bundle.json",
+      // outDir: "./dist" 
+    },
   },
   clientTemplateDefs: {
     py: {
       extends: "py",
-      generatorConfig: { origin: PROD_URL },
+      outputConfig: { origin: PROD_URL },
       // composedClient: { outDir: "./dist_python" },
     },
     rs: {
       extends: "rs",
-      generatorConfig: { origin: PROD_URL },
+      outputConfig: { origin: PROD_URL },
       // composedClient: { outDir: "./dist_rust" },
     },
-  },
-  moduleTemplates: {
-    controller: "vovk-zod/module-templates/controller.ts.ejs",
-    service: "vovk-cli/module-templates/service.ts.ejs",
-  },
+  }
 };
 
 module.exports = config;

@@ -11,7 +11,7 @@ pub mod user_rpc {
     use crate::http_request::{HttpException, http_request, http_request_stream};
     use std::collections::HashMap;
 
-    // UserRPC.update_user POST `https://vovk-hello-world.vercel.app/api/users/{id}`
+    // UserRPC.update_user POST `https://hello-world.vovk.dev/api/users/{id}`
     pub mod update_user_ {
       use serde::{Serialize, Deserialize};
       /// User data object
@@ -100,7 +100,7 @@ pub mod user_rpc {
             update_user_::query,
             update_user_::params
         >(
-            "https://vovk-hello-world.vercel.app/api",
+            "https://hello-world.vovk.dev/api",
             "",
             "UserRPC",
             "updateUser",
@@ -123,7 +123,7 @@ pub mod stream_rpc {
     use crate::http_request::{HttpException, http_request, http_request_stream};
     use std::collections::HashMap;
 
-    // StreamRPC.stream_tokens GET `https://vovk-hello-world.vercel.app/api/streams/tokens`
+    // StreamRPC.stream_tokens GET `https://hello-world.vovk.dev/api/streams/tokens`
     pub mod stream_tokens_ {
       use serde::{Serialize, Deserialize};
       /// Streamed token object
@@ -151,7 +151,7 @@ pub mod stream_rpc {
             (),
             ()
         >(
-            "https://vovk-hello-world.vercel.app/api",
+            "https://hello-world.vovk.dev/api",
             "",
             "StreamRPC",
             "streamTokens",
@@ -176,7 +176,7 @@ pub mod open_api_rpc {
     use crate::http_request::{HttpException, http_request, http_request_stream};
     use std::collections::HashMap;
 
-    // OpenApiRPC.get_spec GET `https://vovk-hello-world.vercel.app/api/static/openapi.json`
+    // OpenApiRPC.get_spec GET `https://hello-world.vovk.dev/api/static/openapi.json`
 
 
     pub fn get_spec( 
@@ -193,7 +193,7 @@ pub mod open_api_rpc {
             (),
             ()
         >(
-            "https://vovk-hello-world.vercel.app/api",
+            "https://hello-world.vovk.dev/api",
             "static",
             "OpenApiRPC",
             "getSpec",

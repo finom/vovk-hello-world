@@ -164,8 +164,7 @@ declare const schema: {
     $schema: string;
     config: {
       libs: {};
-      generatorConfig: {
-        origin: string;
+      outputConfig: {
         imports: {
           validateOnClient: string;
         };
@@ -180,6 +179,7 @@ declare const schema: {
             version: string;
           };
         };
+        origin: string;
         segments: {};
       };
       $schema: string;

@@ -611,7 +611,7 @@
     "@inquirer/core" "^10.2.2"
     "@inquirer/type" "^3.0.8"
 
-"@inquirer/prompts@^7.8.4":
+"@inquirer/prompts@^7.8.6":
   version "7.8.6"
   resolved "https://registry.yarnpkg.com/@inquirer/prompts/-/prompts-7.8.6.tgz#697e411535ae3b37a25fb35774ecf4d53a0e9f92"
   integrity sha512-68JhkiojicX9SBUD8FE/pSKbOKtwoyaVj1kwqLfvjlVXZvOy3iaSWX4dCLsZyYx/5Ur07Fq+yuDNOen+5ce6ig==
@@ -929,7 +929,7 @@
     semver "^7.3.5"
     which "^5.0.0"
 
-"@npmcli/package-json@^7.0.0":
+"@npmcli/package-json@^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@npmcli/package-json/-/package-json-7.0.1.tgz#709e852298777f6f1251afa2f200d3843f65caf3"
   integrity sha512-956YUeI0YITbk2+KnirCkD19HLzES0habV+Els+dyZaVsaM6VGSiNwnRu6t3CZaqDLz4KXy2zx+0N/Zy6YjlAA==
@@ -1005,11 +1005,6 @@
   version "1.0.0-beta.41"
   resolved "https://registry.yarnpkg.com/@rolldown/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.0.0-beta.41.tgz#835249a46b851cf18eb0560464a6275d0f6dc087"
   integrity sha512-MioXcCIX/wB1pBnBoJx8q4OGucUAfC1+/X1ilKFsjDK05VwbLZGRgOVD5OJJpUQPK86DhQciNBrfOKDiatxNmg==
-
-"@rolldown/binding-linux-x64-gnu@1.0.0-beta.36":
-  version "1.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/@rolldown/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.0.0-beta.36.tgz#9c40324c41ed3423dfe2332a905dfe859cbebcd7"
-  integrity sha512-wUdZljtx9W1V9KlnmwPgF0o2ZPFq2zffr/q+wM+GUrSFIJNmP9w0zgyl1coCt1ESnNyYYyJh8T1bqvx8+16SqA==
 
 "@rolldown/binding-linux-x64-gnu@1.0.0-beta.41":
   version "1.0.0-beta.41"
@@ -2636,7 +2631,7 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-dotenv@^17.2.2:
+dotenv@^17.2.3:
   version "17.2.3"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-17.2.3.tgz#ad995d6997f639b11065f419a22fabf567cdb9a2"
   integrity sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==
@@ -5871,7 +5866,7 @@ tsconfig-paths@^3.15.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tsdown@^0.15.0:
+tsdown@^0.15.6:
   version "0.15.6"
   resolved "https://registry.yarnpkg.com/tsdown/-/tsdown-0.15.6.tgz#10218cbebf53307f7cb1db4da2c6eed95827d7b4"
   integrity sha512-W6++O3JeV9gm3JY6P/vLiC7zzTcJbZhQxXb+p3AvRMpDOPBIg82yXULyZCcwjsihY/bFG+Qw37HkezZbP7fzUg==
@@ -5903,7 +5898,7 @@ type-check@^0.4.0, type-check@~0.4.0:
   dependencies:
     prelude-ls "^1.2.1"
 
-type-fest@*:
+type-fest@*, type-fest@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-5.0.1.tgz#546c87966765f88f4f36e0521be4b3d0215b4cab"
   integrity sha512-9MpwAI52m8H6ssA542UxSLnSiSD2dsC3/L85g6hVubLSXd82wdI80eZwTWhdOfN67NlA+D+oipAs1MlcTcu3KA==
@@ -5995,7 +5990,7 @@ undici-types@~7.13.0:
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.13.0.tgz#a20ba7c0a2be0c97bd55c308069d29d167466bff"
   integrity sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ==
 
-undici@^7.15.0:
+undici@^7.16.0:
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/undici/-/undici-7.16.0.tgz#cb2a1e957726d458b536e3f076bf51f066901c1a"
   integrity sha512-QEg3HPMll0o3t2ourKwOeUAZ159Kn9mx5pnzHRQO8+Wixmh88YdZRiIwat0iNzNNXn0yoEtXJqFpyW7eM8BV7g==
@@ -6145,31 +6140,31 @@ vfile@^6.0.0:
     "@types/unist" "^3.0.0"
     vfile-message "^4.0.0"
 
-vovk-ajv@^0.0.0-draft.107:
-  version "0.0.0-draft.107"
-  resolved "https://registry.yarnpkg.com/vovk-ajv/-/vovk-ajv-0.0.0-draft.107.tgz#54d4e7e9e80c44f8e50eaabb464b60345b07e783"
-  integrity sha512-Alj5GXYxcnOxh2SRIwiWx74I4DC6JHe7gcehAbZDkgIoed7V4r8BQQcgkKwieqMv20DsEjFdLdZqCTnCKn8pfw==
+vovk-ajv@^0.0.0-draft.108:
+  version "0.0.0-draft.108"
+  resolved "https://registry.yarnpkg.com/vovk-ajv/-/vovk-ajv-0.0.0-draft.108.tgz#d4809e2b70648bf7da8eaa9092945983c6e31266"
+  integrity sha512-8kZJ0Qq1HCq2uMhljSYM7+GrfQ98DDz0Z1gEuTy3qxmtGk+mjSbDwZtAGJvV+BjExk5Kkr10ulRX69+F7f7DlA==
   dependencies:
     ajv "^8.17.1"
     ajv-errors "^3.0.0"
     ajv-formats "^3.0.1"
     ajv-i18n "^4.2.0"
 
-vovk-cli@^0.0.1-draft.372:
-  version "0.0.1-draft.372"
-  resolved "https://registry.yarnpkg.com/vovk-cli/-/vovk-cli-0.0.1-draft.372.tgz#acfa32b1d61054e8e977bf24125809ac738b0e39"
-  integrity sha512-JP/xxP+8gqc8IxeYXUxW6UAN6vcflRBG0xr62NasWRpEbIq2EZPVxC1N7NcOJH4pTD1vcVaXM8MHQo61Y7QmQA==
+vovk-cli@^0.0.1-draft.376:
+  version "0.0.1-draft.376"
+  resolved "https://registry.yarnpkg.com/vovk-cli/-/vovk-cli-0.0.1-draft.376.tgz#3d1d57e053957da86a7397b9f12e2e2b5a1ce880"
+  integrity sha512-B6Mp/hUiilsDVqXJ0OqdVK4zgpVB4sDEwfmACWiUtunmSZjVzJMHa63+I/NZoO8sMhsl4jFchv+DS89ZG9WbEQ==
   dependencies:
     "@iarna/toml" "^2.2.5"
-    "@inquirer/prompts" "^7.8.4"
-    "@npmcli/package-json" "^7.0.0"
+    "@inquirer/prompts" "^7.8.6"
+    "@npmcli/package-json" "^7.0.1"
     "@types/json-schema" "^7.0.15"
     chalk "^5.6.2"
     chokidar "^4.0.3"
     clone-deep "^4.0.1"
     commander "^13.1.0"
     concurrently "^9.2.1"
-    dotenv "^17.2.2"
+    dotenv "^17.2.3"
     ejs "^3.1.10"
     get-tsconfig "^4.10.1"
     glob "^11.0.3"
@@ -6183,44 +6178,44 @@ vovk-cli@^0.0.1-draft.372:
     prettier "^3.6.2"
     tar-stream "^3.1.7"
     ts-morph "^27.0.0"
-    tsdown "^0.15.0"
-    type-fest "^4.41.0"
-    undici "^7.15.0"
+    tsdown "^0.15.6"
+    type-fest "^5.0.1"
+    undici "^7.16.0"
     yaml "^2.8.1"
   optionalDependencies:
-    "@rolldown/binding-linux-x64-gnu" "1.0.0-beta.36"
+    "@rolldown/binding-linux-x64-gnu" "1.0.0-beta.41"
 
-vovk-client@^0.0.4-draft.134:
-  version "0.0.4-draft.134"
-  resolved "https://registry.yarnpkg.com/vovk-client/-/vovk-client-0.0.4-draft.134.tgz#b36dd5b4cd61d99e2061c528c961cba4cdf398ca"
-  integrity sha512-j/0n8MBdHNZMOGpspaGQTYmPUZfLk+MUUPFmWzw2i7umHniz9g80CClDxZ7m5YPeT/yQLCC/LBEdAo1+3k2SHA==
+vovk-client@^0.0.4-draft.135:
+  version "0.0.4-draft.135"
+  resolved "https://registry.yarnpkg.com/vovk-client/-/vovk-client-0.0.4-draft.135.tgz#4b72df57d6a96130c51a12f10bef46c640546bb4"
+  integrity sha512-S4HMDqLPP1oXjsKLGk2BHabC8HWPypAAoUPQkGKDcKxDeMwpvnLPd/Unf+jt2Qu6jTxw6mhGqUUMeL/kTAm33A==
 
 vovk-hello-world@^0.0.43:
   version "0.0.43"
   resolved "https://registry.yarnpkg.com/vovk-hello-world/-/vovk-hello-world-0.0.43.tgz#b9c0bb39a046621ca46d2ff472d2dedfc1ff1307"
   integrity sha512-APp5i2dVD3Nr5zV49dcC5ZWnGg/SUkjIaoLQ0lg16zo75bEtqB4BuiQqZwmKa15YqiYcqN2DrXrYpjNtiMdSVg==
 
-vovk-python@^0.0.1-draft.76:
-  version "0.0.1-draft.76"
-  resolved "https://registry.yarnpkg.com/vovk-python/-/vovk-python-0.0.1-draft.76.tgz#ad4b8ae1cb12b523651e36a42cc1fe953f93255b"
-  integrity sha512-jmN9HwF3QUaqJtXXP+r9XhREBrRKoTzFvvSjfc6gtNGsg6YHxQngIKbWG1R71uFHPSU1PpjboJvNEwmca7sBsQ==
+vovk-python@^0.0.1-draft.77:
+  version "0.0.1-draft.77"
+  resolved "https://registry.yarnpkg.com/vovk-python/-/vovk-python-0.0.1-draft.77.tgz#66c93cf4515fe484e76b117125c2e0b7119cbf85"
+  integrity sha512-Nf2cPRLs5zAVCUnQ/pKbZjFGvSErej9uWGOwjdvt5qPEXZUjd2fg8PpNW/Y0eNmj49W31Bk7YGKzjFS+d3hwSQ==
 
-vovk-rust@^0.0.1-draft.62:
-  version "0.0.1-draft.62"
-  resolved "https://registry.yarnpkg.com/vovk-rust/-/vovk-rust-0.0.1-draft.62.tgz#f43cee5025576a9ad326cfc0de714b1e426f5913"
-  integrity sha512-jalNTrkL8let95Bl2OQxAI9i94oxdpmqkA6i+z9wxs9WnkeXNZ/M3U5ZAlyCZ4ZOwjhJ3EO0vBfVJtkw4MCuyg==
+vovk-rust@^0.0.1-draft.63:
+  version "0.0.1-draft.63"
+  resolved "https://registry.yarnpkg.com/vovk-rust/-/vovk-rust-0.0.1-draft.63.tgz#bdbc22d623493e8f747861291fe88b6c784685d8"
+  integrity sha512-/TZKbTexkQreuwjNB8jDRNcFpc34KKcGP/5ry8QS8kJ9FDq+SOHn1LQg1MhJ5H+dNvDoFiD5IQENSnDLDE1rVw==
 
-vovk-zod@^1.0.0-draft.147:
-  version "1.0.0-draft.147"
-  resolved "https://registry.yarnpkg.com/vovk-zod/-/vovk-zod-1.0.0-draft.147.tgz#6f96de48118e5a7710851b509a25f8320af0eca8"
-  integrity sha512-pTHxrlm9G+1RC9igAQUHYaOt/zWtnKJ4XjgT8+xA5l6E8pEqXDqP9b5Vw4fwvVMuWQUx0BdZtOsVXNfrnNuYOw==
+vovk-zod@^1.0.0-draft.148:
+  version "1.0.0-draft.148"
+  resolved "https://registry.yarnpkg.com/vovk-zod/-/vovk-zod-1.0.0-draft.148.tgz#aa3e4a10b790620422f6efabc29b2f2b2e27a55e"
+  integrity sha512-QBFCrWvrHR1/IR2FMe0LJ4uV82l23CmGoa7Q6UOAA0J3W464xVQvuT/sGYQR30DYU3UdsGgnYoL6IISXzRMPqg==
   dependencies:
     "@finom/zod-to-json-schema" "^3.24.11"
 
-vovk@^3.0.0-draft.442:
-  version "3.0.0-draft.442"
-  resolved "https://registry.yarnpkg.com/vovk/-/vovk-3.0.0-draft.442.tgz#6f12d46a71be1b3a8480778ef0c7bb634c1a9979"
-  integrity sha512-TKVR0IiSzezW0ZlvIwqGfx4mAbgYiX7hwagFhBHJ/tkJeaPVgiHQkn7q/vHJco3KaR/vtk5lCJ/ahO/FXN4F1g==
+vovk@^3.0.0-draft.443:
+  version "3.0.0-draft.443"
+  resolved "https://registry.yarnpkg.com/vovk/-/vovk-3.0.0-draft.443.tgz#40130a8cb499011847748f96bd007c4cece48740"
+  integrity sha512-f42ehTVlv+pZQrWHB/y5RF2yE/gHDL1fxtwTeTYH1Ph+v366OpjkIpg2iRdDLdEdsI2pUVF/rLtk/6jkrOS64g==
   dependencies:
     "@standard-schema/spec" "^1.0.0"
     type-fest "*"
