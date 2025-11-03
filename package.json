@@ -26,7 +26,7 @@
     "postversion:node": "vovk bundle && npm publish ./dist",
     "postversion:rust": "cargo publish --manifest-path dist_rust/Cargo.toml --allow-dirty",
     "postversion:python": "python3 -m build ./dist_python --wheel --sdist && python3 -m twine upload ./dist_python/dist/*",
-    "postversion": "vovk generate && npm run postversion:node && npm run postversion:rust && npm run postversion:python && git push && git push --tags",
+    "postversion": "vovk generate && npm run postversion:node && npm run postversion:rust && npm run postversion:python && git commit -am \"auto: Regenerate clients after version bump\" && git push && git push --tags",
     "patch": "npm version patch"
   },
   "license": "MIT",
@@ -41,7 +41,7 @@
     "vovk": "^3.0.0-draft.469",
     "vovk-ajv": "^0.0.0-draft.108",
     "vovk-client": "^0.0.4-draft.135",
-    "vovk-hello-world": "^0.0.54",
+    "vovk-hello-world": "^0.0.55",
     "vovk-zod": "^1.0.0-draft.148",
     "zod": "^4.1.12"
   },
