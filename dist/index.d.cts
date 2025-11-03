@@ -178,24 +178,33 @@ declare const schema: {
 //#endregion
 //#region tmp_prebundle/openapi.d.ts
 declare let openapi: string;
-declare let info: {};
+declare namespace info {
+  let title: string;
+  let version: string;
+  let description: string;
+  namespace license {
+    let name: string;
+    let url: string;
+  }
+}
 declare namespace components {
   namespace schemas {
     namespace HttpStatus {
       export let type: string;
-      export let description: string;
+      let description_1: string;
+      export { description_1 as description };
       let _enum: number[];
       export { _enum as enum };
     }
     namespace VovkErrorResponse {
       let type_1: string;
       export { type_1 as type };
-      let description_1: string;
-      export { description_1 as description };
+      let description_2: string;
+      export { description_2 as description };
       export namespace properties {
         namespace cause {
-          let description_2: string;
-          export { description_2 as description };
+          let description_3: string;
+          export { description_3 as description };
         }
         namespace statusCode {
           let $ref: string;
@@ -203,16 +212,16 @@ declare namespace components {
         namespace message {
           let type_2: string;
           export { type_2 as type };
-          let description_3: string;
-          export { description_3 as description };
+          let description_4: string;
+          export { description_4 as description };
         }
         namespace isError {
           let type_3: string;
           export { type_3 as type };
           let _const: boolean;
           export { _const as const };
-          let description_4: string;
-          export { description_4 as description };
+          let description_5: string;
+          export { description_5 as description };
         }
       }
       export let required: string[];

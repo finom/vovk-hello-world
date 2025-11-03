@@ -198,7 +198,15 @@ const schema = {
 //#region tmp_prebundle/openapi.json
 var openapi_default = {
 	openapi: "3.1.0",
-	info: {},
+	info: {
+		"title": "\"Hello World\" app API",
+		"version": "1.0.0",
+		"description": "API for \"Hello World\" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
+		"license": {
+			"name": "MIT",
+			"url": "https://opensource.org/licenses/MIT"
+		}
+	},
 	components: { "schemas": {
 		"HttpStatus": {
 			"type": "integer",
@@ -286,17 +294,17 @@ var openapi_default = {
 				{
 					"label": "TypeScript RPC",
 					"lang": "typescript",
-					"source": "import { UserRPC } from 'vovk-client';\n\nconst response = await UserRPC.updateUser({\n    body: {\n        // -----\n        // User data object\n        // -----\n        // User email\n        email: \"john@example.com\",\n        // User profile object\n        profile: {\n            // User full name\n            name: \"John Doe\",\n            // User age\n            age: 25\n        }\n    },\n    query: {\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        notify: \"email\"\n    },\n    params: {\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        id: \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n});\n\nconsole.log(response); \n/* \n{\n    // -----\n    // Response object\n    // -----\n    // Success status\n    success: true\n}\n*/"
+					"source": "import { UserRPC } from 'vovk-hello-world';\n\nconst response = await UserRPC.updateUser({\n    body: {\n        // -----\n        // User data object\n        // -----\n        // User email\n        email: \"john@example.com\",\n        // User profile object\n        profile: {\n            // User full name\n            name: \"John Doe\",\n            // User age\n            age: 25\n        }\n    },\n    query: {\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        notify: \"email\"\n    },\n    params: {\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        id: \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n});\n\nconsole.log(response); \n/* \n{\n    // -----\n    // Response object\n    // -----\n    // Success status\n    success: true\n}\n*/"
 				},
 				{
 					"label": "Python RPC",
 					"lang": "python",
-					"source": "from vovk_client import UserRPC\n\nresponse = UserRPC.update_user(\n    body={\n        # -----\n        # User data object\n        # -----\n        # User email\n        \"email\": \"john@example.com\",\n        # User profile object\n        \"profile\": {\n            # User full name\n            \"name\": \"John Doe\",\n            # User age\n            \"age\": 25\n        }\n    },\n    query={\n        # -----\n        # Query parameters\n        # -----\n        # Notification type\n        \"notify\": \"email\"\n    },\n    params={\n        # -----\n        # Path parameters\n        # -----\n        # User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n)\n\nprint(response)\n{\n    # -----\n    # Response object\n    # -----\n    # Success status\n    \"success\": true\n}"
+					"source": "from vovk_hello_world import UserRPC\n\nresponse = UserRPC.update_user(\n    body={\n        # -----\n        # User data object\n        # -----\n        # User email\n        \"email\": \"john@example.com\",\n        # User profile object\n        \"profile\": {\n            # User full name\n            \"name\": \"John Doe\",\n            # User age\n            \"age\": 25\n        }\n    },\n    query={\n        # -----\n        # Query parameters\n        # -----\n        # Notification type\n        \"notify\": \"email\"\n    },\n    params={\n        # -----\n        # Path parameters\n        # -----\n        # User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n)\n\nprint(response)\n{\n    # -----\n    # Response object\n    # -----\n    # Success status\n    \"success\": true\n}"
 				},
 				{
 					"label": "Rust RPC",
 					"lang": "rust",
-					"source": "use vovk_client::user_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = user_rpc::update_user(\n    from_value(json!({\n        // -----\n        // User data object\n        // -----\n        // User email\n        \"email\": \"john@example.com\",\n        // User profile object\n        \"profile\": {\n            // User full name\n            \"name\": \"John Doe\",\n            // User age\n            \"age\": 25\n        }\n    })).unwrap(), /* body */ \n    from_value(json!({\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        \"notify\": \"email\"\n    })).unwrap(), /* query */ \n    from_value(json!({\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    })).unwrap(), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n\nmatch response {\n    Ok(output) => println!(\"{:?}\", output),\n    /* \n    output {\n        // -----\n        // Response object\n        // -----\n        // Success status\n        success: true\n    } \n    */\n    Err(e) => println!(\"error: {:?}\", e),\n  }\n}"
+					"source": "use vovk_hello_world::user_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = user_rpc::update_user(\n    from_value(json!({\n        // -----\n        // User data object\n        // -----\n        // User email\n        \"email\": \"john@example.com\",\n        // User profile object\n        \"profile\": {\n            // User full name\n            \"name\": \"John Doe\",\n            // User age\n            \"age\": 25\n        }\n    })).unwrap(), /* body */ \n    from_value(json!({\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        \"notify\": \"email\"\n    })).unwrap(), /* query */ \n    from_value(json!({\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    })).unwrap(), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n\nmatch response {\n    Ok(output) => println!(\"{:?}\", output),\n    /* \n    output {\n        // -----\n        // Response object\n        // -----\n        // Success status\n        success: true\n    } \n    */\n    Err(e) => println!(\"error: {:?}\", e),\n  }\n}"
 				}
 			],
 			"parameters": [{
@@ -386,17 +394,17 @@ var openapi_default = {
 				{
 					"label": "TypeScript RPC",
 					"lang": "typescript",
-					"source": "import { StreamRPC } from 'vovk-client';\n\nusing response = await StreamRPC.streamTokens();\n\nfor await (const item of response) {\n    console.log(item); \n    /*\n    {\n        // -----\n        // Streamed token object\n        // -----\n        // Message from the token\n        message: \"string\"\n    }\n    */\n}"
+					"source": "import { StreamRPC } from 'vovk-hello-world';\n\nusing response = await StreamRPC.streamTokens();\n\nfor await (const item of response) {\n    console.log(item); \n    /*\n    {\n        // -----\n        // Streamed token object\n        // -----\n        // Message from the token\n        message: \"string\"\n    }\n    */\n}"
 				},
 				{
 					"label": "Python RPC",
 					"lang": "python",
-					"source": "from vovk_client import StreamRPC\n\nresponse = StreamRPC.stream_tokens()\n\nfor i, item in enumerate(response):\n    print(f\"iteration #{i}:\\n {item}\")\n    # iteration #0:\n    {\n        # -----\n        # Streamed token object\n        # -----\n        # Message from the token\n        \"message\": \"string\"\n    }"
+					"source": "from vovk_hello_world import StreamRPC\n\nresponse = StreamRPC.stream_tokens()\n\nfor i, item in enumerate(response):\n    print(f\"iteration #{i}:\\n {item}\")\n    # iteration #0:\n    {\n        # -----\n        # Streamed token object\n        # -----\n        # Message from the token\n        \"message\": \"string\"\n    }"
 				},
 				{
 					"label": "Rust RPC",
 					"lang": "rust",
-					"source": "use vovk_client::stream_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = stream_rpc::stream_tokens(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n\nmatch response {\n    Ok(stream) => {\n      for (i, item) in stream.enumerate() {\n        println!(\"#{}: {:?}\", i, item);\n        /*\n        #0: iteration {\n            // -----\n            // Streamed token object\n            // -----\n            // Message from the token\n            message: \"string\"\n        }\n        */\n      }\n    },\n    Err(e) => println!(\"Error initiating stream: {:?}\", e),\n  }\n}"
+					"source": "use vovk_hello_world::stream_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = stream_rpc::stream_tokens(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n\nmatch response {\n    Ok(stream) => {\n      for (i, item) in stream.enumerate() {\n        println!(\"#{}: {:?}\", i, item);\n        /*\n        #0: iteration {\n            // -----\n            // Streamed token object\n            // -----\n            // Message from the token\n            message: \"string\"\n        }\n        */\n      }\n    },\n    Err(e) => println!(\"Error initiating stream: {:?}\", e),\n  }\n}"
 				}
 			],
 			"responses": { "200": {
@@ -422,17 +430,17 @@ var openapi_default = {
 				{
 					"label": "TypeScript RPC",
 					"lang": "typescript",
-					"source": "import { OpenApiRPC } from 'vovk-client';\n\nconst response = await OpenApiRPC.getSpec();"
+					"source": "import { OpenApiRPC } from 'vovk-hello-world';\n\nconst response = await OpenApiRPC.getSpec();"
 				},
 				{
 					"label": "Python RPC",
 					"lang": "python",
-					"source": "from vovk_client import OpenApiRPC\n\nresponse = OpenApiRPC.get_spec()"
+					"source": "from vovk_hello_world import OpenApiRPC\n\nresponse = OpenApiRPC.get_spec()"
 				},
 				{
 					"label": "Rust RPC",
 					"lang": "rust",
-					"source": "use vovk_client::open_api_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = open_api_rpc::get_spec(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n}"
+					"source": "use vovk_hello_world::open_api_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = open_api_rpc::get_spec(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n}"
 				}
 			]
 		} }
@@ -443,15 +451,15 @@ var openapi_default = {
 //#region tmp_prebundle/index.ts
 const UserRPC = (0, vovk.createRPC)(schema, "", "UserRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "http://localhost:3000/api"
+	apiRoot: "https://hello-world.vovk.dev/api"
 });
 const StreamRPC = (0, vovk.createRPC)(schema, "", "StreamRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "http://localhost:3000/api"
+	apiRoot: "https://hello-world.vovk.dev/api"
 });
 const OpenApiRPC = (0, vovk.createRPC)(schema, "static", "OpenApiRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "http://localhost:3000/api"
+	apiRoot: "https://hello-world.vovk.dev/api"
 });
 
 //#endregion

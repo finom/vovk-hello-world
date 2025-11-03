@@ -1,7 +1,7 @@
 import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client"; 
 
 async function main() {
-  console.log("\n--- Node.js Demo ---");
+  console.log("\n--- Node.js Demo (Local) ---");
   const updateUserResponse = await UserRPC.updateUser({
     params: {
       id: "123e4567-e89b-12d3-a456-426614174000",

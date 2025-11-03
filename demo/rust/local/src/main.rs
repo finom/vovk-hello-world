@@ -4,9 +4,8 @@ use vovk_hello_world_local::{
   open_api_rpc, 
   stream_rpc 
 };
-use vovk_hello_world::open_api_rpc as open_api_rpc_from_crate;
 pub fn main() {
-  println!("\n--- Rust Demo ---");
+  println!("\n--- Rust Demo (Local) ---");
   use user_rpc::update_user_::{
     body as Body, 
     body_::profile as Profile,
@@ -81,28 +80,5 @@ pub fn main() {
       println!();
     },
     Err(e) => println!("Error initiating stream: {:?}", e),
-  }
-
-  let openapi_response_from_crate = open_api_rpc_from_crate::get_spec(
-    (),
-    (),
-    (),
-    None,
-    None,
-    false,
-  );
-
-  match openapi_response_from_crate {
-    Ok(spec) => {
-      if let (Some(title), Some(version)) = (
-        spec["info"]["title"].as_str(),
-        spec["info"]["version"].as_str()
-      ) {
-        println!("open_api_rpc.get_spec from \"vovk_hello_world\" crate: {} {}", title, version);
-      } else {
-        println!("Could not extract title or version from OpenAPI spec");
-      }
-    },
-    Err(e) => println!("Error fetching OpenAPI spec from crate: {:?}", e),
   }
 }

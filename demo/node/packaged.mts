@@ -1,7 +1,7 @@
 import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-hello-world";
 
 async function main() {
-  console.log("\n--- Node.js Demo ---");
+  console.log("\n--- Node.js Demo (Packaged) ---");
   const updateUserResponse = await UserRPC.updateUser({
     params: {
       id: "123e4567-e89b-12d3-a456-426614174000",
@@ -21,7 +21,6 @@ async function main() {
   console.log("UserRPC.updateUser:", updateUserResponse);
 
   const openapiResponse = await OpenApiRPC.getSpec();
-  console.log('openapiResponse', openapiResponse)
   console.log(
     `OpenApiRPC.getSpec response: ${openapiResponse.info.title} ${openapiResponse.info.version}`,
   );

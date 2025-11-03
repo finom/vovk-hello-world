@@ -1,13 +1,13 @@
 // @ts-check
 
-const PROD_URL = "https://hello-world.vovk.dev";
+const PROD_ORIGIN = "https://hello-world.vovk.dev";
 // Commented lines indicate default values
 /** @type {import('vovk').VovkConfig} */
 const config = {
   logLevel: "debug",
   outputConfig: {
     origin: process.env.NODE_ENV === "production"
-      ? PROD_URL
+      ? PROD_ORIGIN
       : `http://localhost:${process.env.PORT ?? 3000}`,
     imports: {
       validateOnClient: "vovk-ajv",
@@ -25,7 +25,6 @@ const config = {
       },
     }
   },
-
   composedClient: {
     fromTemplates: ["mjs", "cjs", "py", "rs"],
     // enabled: true,
@@ -37,7 +36,7 @@ const config = {
     // outDir: "./src/client",
   },
   bundle: {
-    outputConfig: { origin: PROD_URL },
+    outputConfig: { origin: PROD_ORIGIN },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
       const { build } = await import('tsdown');
@@ -56,12 +55,12 @@ const config = {
   clientTemplateDefs: {
     py: {
       extends: "py",
-      outputConfig: { origin: PROD_URL },
+      outputConfig: { origin: PROD_ORIGIN },
       // composedClient: { outDir: "./dist_python" },
     },
     rs: {
       extends: "rs",
-      outputConfig: { origin: PROD_URL },
+      outputConfig: { origin: PROD_ORIGIN },
       // composedClient: { outDir: "./dist_rust" },
     },
   }
