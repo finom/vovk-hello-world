@@ -469,15 +469,15 @@ var openapi_default = {
 //#region tmp_prebundle/index.ts
 const UserRPC = createRPC(schema, "", "UserRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "http://localhost:3000/api"
+	apiRoot: "https://hello-world.vovk.dev/api"
 });
 const StreamRPC = createRPC(schema, "", "StreamRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "http://localhost:3000/api"
+	apiRoot: "https://hello-world.vovk.dev/api"
 });
 const OpenApiRPC = createRPC(schema, "static", "OpenApiRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "http://localhost:3000/api"
+	apiRoot: "https://hello-world.vovk.dev/api"
 });
 
 //#endregion
