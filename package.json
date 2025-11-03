@@ -41,7 +41,7 @@
     "vovk": "^3.0.0-draft.469",
     "vovk-ajv": "^0.0.0-draft.108",
     "vovk-client": "^0.0.4-draft.135",
-    "vovk-hello-world": "^0.0.55",
+    "vovk-hello-world": "^0.0.56",
     "vovk-zod": "^1.0.0-draft.148",
     "zod": "^4.1.12"
   },
