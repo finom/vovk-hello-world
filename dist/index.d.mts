@@ -1,8 +1,9 @@
-import * as vovk_mjs0 from "vovk/mjs";
+import * as vovk0 from "vovk";
 import * as _standard_schema_spec0 from "@standard-schema/spec";
 import * as zod0 from "zod";
 import * as zod_v4_core0 from "zod/v4/core";
 import * as vovk_mjs_client_types0 from "vovk/mjs/client/types";
+import * as openapi3_ts_oas310 from "openapi3-ts/oas31";
 
 //#region tmp_prebundle/schema.d.ts
 declare const schema: {
@@ -170,24 +171,6 @@ declare const schema: {
     $schema: string;
     config: {
       libs: {};
-      outputConfig: {
-        imports: {
-          validateOnClient: string;
-        };
-        openAPIObject: {
-          info: {
-            title: string;
-            description: string;
-            license: {
-              name: string;
-              url: string;
-            };
-            version: string;
-          };
-        };
-        origin: string;
-        segments: {};
-      };
       $schema: string;
     };
   };
@@ -392,7 +375,7 @@ declare namespace __json_default_export {
 //#endregion
 //#region tmp_prebundle/index.d.ts
 declare const UserRPC: {
-  updateUser: vovk_mjs_client_types0.ClientMethod<((req: vovk_mjs0.VovkRequest<{
+  updateUser: vovk_mjs_client_types0.ClientMethod<((req: vovk0.VovkRequest<{
     email: string;
     profile: {
       name: string;
@@ -431,8 +414,8 @@ declare const UserRPC: {
     };
     isRPC?: boolean;
   } & {
-    schema: Omit<vovk_mjs0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk_mjs0.VovkHandlerSchema>;
-    wrapper?: (req: vovk_mjs0.VovkRequest<any, any, any>, params: {
+    schema: Omit<vovk0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk0.VovkHandlerSchema>;
+    wrapper?: (req: vovk0.VovkRequest<any, any, any>, params: {
       id: string;
     }) => Promise<{
       success: true;
@@ -518,8 +501,8 @@ declare const UserRPC: {
   }, {
     apiRoot?: string;
     disableClientValidation?: boolean;
-    validateOnClient?: vovk_mjs0.VovkValidateOnClient<unknown> | Promise<{
-      validateOnClient: vovk_mjs0.VovkValidateOnClient<unknown>;
+    validateOnClient?: vovk0.VovkValidateOnClient<unknown> | Promise<{
+      validateOnClient: vovk0.VovkValidateOnClient<unknown>;
     }> | undefined;
     interpretAs?: string;
     init?: RequestInit;
@@ -541,8 +524,8 @@ declare const StreamRPC: {
     };
     isRPC?: boolean;
   } & {
-    schema: Omit<vovk_mjs0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk_mjs0.VovkHandlerSchema>;
-    wrapper?: (req: vovk_mjs0.VovkRequest<any, any, any>, params: undefined) => AsyncGenerator<{
+    schema: Omit<vovk0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk0.VovkHandlerSchema>;
+    wrapper?: (req: vovk0.VovkRequest<any, any, any>, params: undefined) => AsyncGenerator<{
       message: string;
     }, void, unknown>;
   } & {
@@ -592,15 +575,15 @@ declare const StreamRPC: {
   }, {
     apiRoot?: string;
     disableClientValidation?: boolean;
-    validateOnClient?: vovk_mjs0.VovkValidateOnClient<unknown> | Promise<{
-      validateOnClient: vovk_mjs0.VovkValidateOnClient<unknown>;
+    validateOnClient?: vovk0.VovkValidateOnClient<unknown> | Promise<{
+      validateOnClient: vovk0.VovkValidateOnClient<unknown>;
     }> | undefined;
     interpretAs?: string;
     init?: RequestInit;
   }, unknown>;
 };
 declare const OpenApiRPC: {
-  getSpec: () => any;
+  getSpec: () => openapi3_ts_oas310.OpenAPIObject;
 };
 //#endregion
 export { OpenApiRPC, StreamRPC, UserRPC, __json_default_export as openapi, schema };

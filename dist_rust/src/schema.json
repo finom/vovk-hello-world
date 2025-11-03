@@ -163,6 +163,7 @@
       },
       "libs": {},
       "outputConfig": {
+        "origin": "http://localhost:3000",
         "imports": {
           "validateOnClient": "vovk-ajv"
         },
@@ -177,7 +178,6 @@
             "version": "1.0.0"
           }
         },
-        "origin": "",
         "segments": {}
       }
     }

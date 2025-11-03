@@ -32,7 +32,7 @@ const config = {
     // outDir: "./node_modules/.vovk-client",
   },
   segmentedClient: {
-    // fromTemplates: ["mjs", "cjs"],
+    // fromTemplates: ["ts"],
     enabled: true,
     // outDir: "./src/client",
   },

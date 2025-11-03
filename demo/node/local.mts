@@ -1,5 +1,4 @@
-import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client"; // composed client
-import { OpenApiRPC as OpenApiRPCFromBundle } from "vovk-hello-world"; //published bundle
+import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client"; 
 
 async function main() {
   console.log("\n--- Node.js Demo ---");
@@ -23,7 +22,7 @@ async function main() {
 
   const openapiResponse = await OpenApiRPC.getSpec();
   console.log(
-    `OpenApiRPC.getSpec from the local module: ${openapiResponse.info.title} ${openapiResponse.info.version}`,
+    `OpenApiRPC.getSpec response: ${openapiResponse.info.title} ${openapiResponse.info.version}`,
   );
 
   const streamResponse = await StreamRPC.streamTokens();
@@ -32,10 +31,5 @@ async function main() {
     process.stdout.write(item.message);
   }
   process.stdout.write("\n");
-
-  const openapiResponseFromBundle = await OpenApiRPCFromBundle.getSpec();
-  console.log(
-    `OpenApiRPC.getSpec from "vovk-hello-world" package: ${openapiResponseFromBundle.info.title} ${openapiResponseFromBundle.info.version}`,
-  );
 }
 main().catch(console.error);

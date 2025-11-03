@@ -178,20 +178,6 @@ var _meta_default = {
 	$schema: "https://vovk.dev/api/schema/v3/meta.json",
 	config: {
 		"libs": {},
-		"outputConfig": {
-			"imports": { "validateOnClient": "vovk-ajv" },
-			"openAPIObject": { "info": {
-				"title": "\"Hello World\" app API",
-				"description": "API for \"Hello World\" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world.",
-				"license": {
-					"name": "MIT",
-					"url": "https://opensource.org/licenses/MIT"
-				},
-				"version": "1.0.0"
-			} },
-			"origin": "",
-			"segments": {}
-		},
 		"$schema": "https://vovk.dev/api/schema/v3/config.json"
 	}
 };
@@ -457,15 +443,15 @@ var openapi_default = {
 //#region tmp_prebundle/index.ts
 const UserRPC = (0, vovk.createRPC)(schema, "", "UserRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "https://hello-world.vovk.dev/api"
+	apiRoot: "http://localhost:3000/api"
 });
 const StreamRPC = (0, vovk.createRPC)(schema, "", "StreamRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "https://hello-world.vovk.dev/api"
+	apiRoot: "http://localhost:3000/api"
 });
 const OpenApiRPC = (0, vovk.createRPC)(schema, "static", "OpenApiRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "https://hello-world.vovk.dev/api"
+	apiRoot: "http://localhost:3000/api"
 });
 
 //#endregion

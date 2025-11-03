@@ -1,8 +1,15 @@
-from dist_python.src.vovk_hello_world import UserRPC, OpenApiRPC, StreamRPC  # local module
-import vovk_hello_world
+# Add ../dist_python/src to sys.path so we can import the local module
+import os
+import sys
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOCAL_SRC = os.path.normpath(os.path.join(BASE_DIR, "..", "dist_python", "src"))
+if LOCAL_SRC not in sys.path:
+    sys.path.insert(0, LOCAL_SRC)
+
+from vovk_hello_world import UserRPC, OpenApiRPC, StreamRPC
 
 def main() -> None:
-    print("\n--- Python Demo ---")
+    print("\n--- Python Demo (Local) ---")
 
     body: UserRPC.UpdateUserBody = {
         "email": "john@example.com",
@@ -31,10 +38,6 @@ def main() -> None:
     for item in stream_response:
         print(item['message'], end='', flush=True)
     print()  # Add newline after streaming
-    
-    # Get OpenAPI spec from installed package
-    openapi_response_from_bundle = vovk_hello_world.OpenApiRPC.get_spec()
-    print(f"OpenApiRPC.get_spec from \"vovk_hello_world\" package: {openapi_response_from_bundle['info']['title']} {openapi_response_from_bundle['info']['version']}")
 
 if __name__ == "__main__":
     try:
