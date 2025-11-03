@@ -13,6 +13,8 @@ export default class UserService {
       notify satisfies "email" | "push" | "none",
     );
     return {
+      id,
+      notify,
       success: true,
     } satisfies VovkOutput<typeof UserController.updateUser>;
   };

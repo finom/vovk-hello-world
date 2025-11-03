@@ -54,6 +54,10 @@ export default class UserController {
     output: z
       .object({
         success: z.boolean().meta({ description: "Success status" }),
+        id: z.uuid().meta({ description: "User ID" }),
+        notify: z.enum(["email", "push", "none"]).meta({
+          description: "Notification type",
+        }),
       })
       .meta({ description: "Response object" }),
     async handle(req, { id }) {
