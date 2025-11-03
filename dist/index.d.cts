@@ -399,6 +399,8 @@ declare const UserRPC: {
   }: {
     id: string;
   }) => Promise<{
+    id: string;
+    notify: "email" | "push" | "none";
     success: true;
   }>) & {
     __types: {
@@ -417,6 +419,8 @@ declare const UserRPC: {
       };
       output: {
         success: boolean;
+        id: string;
+        notify: "email" | "push" | "none";
       };
       iteration: unknown;
       isForm: false;
@@ -427,11 +431,15 @@ declare const UserRPC: {
     wrapper?: (req: vovk0.VovkRequest<any, any, any>, params: {
       id: string;
     }) => Promise<{
+      id: string;
+      notify: "email" | "push" | "none";
       success: true;
     }>;
   } & {
     fn: {
       <TReturnType = Promise<{
+        id: string;
+        notify: "email" | "push" | "none";
         success: true;
       }>>(input?: {
         disableClientValidation?: boolean;
@@ -458,6 +466,8 @@ declare const UserRPC: {
         };
       }): TReturnType;
       <TReturnType = Promise<{
+        id: string;
+        notify: "email" | "push" | "none";
         success: true;
       }>>(input: {
         disableClientValidation?: boolean;
@@ -488,6 +498,12 @@ declare const UserRPC: {
       iteration?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
       output?: zod0.ZodObject<{
         success: zod0.ZodBoolean;
+        id: zod0.ZodUUID;
+        notify: zod0.ZodEnum<{
+          email: "email";
+          push: "push";
+          none: "none";
+        }>;
       }, zod_v4_core0.$strip>;
       params?: zod0.ZodObject<{
         id: zod0.ZodUUID;

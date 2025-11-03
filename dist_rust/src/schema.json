@@ -155,7 +155,7 @@
       "schemaOutDir": "./.vovk-schema",
       "rootEntry": "api",
       "rootSegmentModulesDirName": "",
-      "logLevel": "debug",
+      "logLevel": "info",
       "devHttps": false,
       "moduleTemplates": {
         "service": "vovk-cli/module-templates/type/service.ts.ejs",
@@ -295,10 +295,27 @@
                     "success": {
                       "description": "Success status",
                       "type": "boolean"
+                    },
+                    "id": {
+                      "description": "User ID",
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                    },
+                    "notify": {
+                      "description": "Notification type",
+                      "type": "string",
+                      "enum": [
+                        "email",
+                        "push",
+                        "none"
+                      ]
                     }
                   },
                   "required": [
-                    "success"
+                    "success",
+                    "id",
+                    "notify"
                   ],
                   "additionalProperties": false
                 }
