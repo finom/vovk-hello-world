@@ -155,7 +155,7 @@
       "schemaOutDir": "./.vovk-schema",
       "rootEntry": "api",
       "rootSegmentModulesDirName": "",
-      "logLevel": "info",
+      "logLevel": "debug",
       "devHttps": false,
       "moduleTemplates": {
         "service": "vovk-cli/module-templates/type/service.ts.ejs",

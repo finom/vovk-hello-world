@@ -97,6 +97,17 @@ declare const schema: {
                       description: string;
                       type: string;
                     };
+                    id: {
+                      description: string;
+                      type: string;
+                      format: string;
+                      pattern: string;
+                    };
+                    notify: {
+                      description: string;
+                      type: string;
+                      enum: string[];
+                    };
                   };
                   required: string[];
                   additionalProperties: boolean;
@@ -277,6 +288,17 @@ declare let paths: {
                   success: {
                     description: string;
                     type: string;
+                  };
+                  id: {
+                    description: string;
+                    type: string;
+                    format: string;
+                    pattern: string;
+                  };
+                  notify: {
+                    description: string;
+                    type: string;
+                    enum: string[];
                   };
                 };
                 required: string[];

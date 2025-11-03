@@ -83,11 +83,32 @@ var root_default = {
 						"$schema": "https://json-schema.org/draft/2020-12/schema",
 						"description": "Response object",
 						"type": "object",
-						"properties": { "success": {
-							"description": "Success status",
-							"type": "boolean"
-						} },
-						"required": ["success"],
+						"properties": {
+							"success": {
+								"description": "Success status",
+								"type": "boolean"
+							},
+							"id": {
+								"description": "User ID",
+								"type": "string",
+								"format": "uuid",
+								"pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+							},
+							"notify": {
+								"description": "Notification type",
+								"type": "string",
+								"enum": [
+									"email",
+									"push",
+									"none"
+								]
+							}
+						},
+						"required": [
+							"success",
+							"id",
+							"notify"
+						],
 						"additionalProperties": false
 					}
 				},
@@ -270,17 +291,17 @@ var openapi_default = {
 				{
 					"label": "TypeScript RPC",
 					"lang": "typescript",
-					"source": "import { UserRPC } from 'vovk-hello-world';\n\nconst response = await UserRPC.updateUser({\n    body: {\n        // -----\n        // User data object\n        // -----\n        // User email\n        email: \"john@example.com\",\n        // User profile object\n        profile: {\n            // User full name\n            name: \"John Doe\",\n            // User age\n            age: 25\n        }\n    },\n    query: {\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        notify: \"email\"\n    },\n    params: {\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        id: \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n});\n\nconsole.log(response); \n/* \n{\n    // -----\n    // Response object\n    // -----\n    // Success status\n    success: true\n}\n*/"
+					"source": "import { UserRPC } from 'vovk-hello-world';\n\nconst response = await UserRPC.updateUser({\n    body: {\n        // -----\n        // User data object\n        // -----\n        // User email\n        email: \"john@example.com\",\n        // User profile object\n        profile: {\n            // User full name\n            name: \"John Doe\",\n            // User age\n            age: 25\n        }\n    },\n    query: {\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        notify: \"email\"\n    },\n    params: {\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        id: \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n});\n\nconsole.log(response); \n/* \n{\n    // -----\n    // Response object\n    // -----\n    // Success status\n    success: true,\n    // User ID\n    id: \"00000000-0000-0000-0000-000000000000\",\n    // Notification type\n    notify: \"email\"\n}\n*/"
 				},
 				{
 					"label": "Python RPC",
 					"lang": "python",
-					"source": "from vovk_hello_world import UserRPC\n\nresponse = UserRPC.update_user(\n    body={\n        # -----\n        # User data object\n        # -----\n        # User email\n        \"email\": \"john@example.com\",\n        # User profile object\n        \"profile\": {\n            # User full name\n            \"name\": \"John Doe\",\n            # User age\n            \"age\": 25\n        }\n    },\n    query={\n        # -----\n        # Query parameters\n        # -----\n        # Notification type\n        \"notify\": \"email\"\n    },\n    params={\n        # -----\n        # Path parameters\n        # -----\n        # User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n)\n\nprint(response)\n{\n    # -----\n    # Response object\n    # -----\n    # Success status\n    \"success\": true\n}"
+					"source": "from vovk_hello_world import UserRPC\n\nresponse = UserRPC.update_user(\n    body={\n        # -----\n        # User data object\n        # -----\n        # User email\n        \"email\": \"john@example.com\",\n        # User profile object\n        \"profile\": {\n            # User full name\n            \"name\": \"John Doe\",\n            # User age\n            \"age\": 25\n        }\n    },\n    query={\n        # -----\n        # Query parameters\n        # -----\n        # Notification type\n        \"notify\": \"email\"\n    },\n    params={\n        # -----\n        # Path parameters\n        # -----\n        # User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    },\n)\n\nprint(response)\n{\n    # -----\n    # Response object\n    # -----\n    # Success status\n    \"success\": true,\n    # User ID\n    \"id\": \"00000000-0000-0000-0000-000000000000\",\n    # Notification type\n    \"notify\": \"email\"\n}"
 				},
 				{
 					"label": "Rust RPC",
 					"lang": "rust",
-					"source": "use vovk_hello_world::user_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = user_rpc::update_user(\n    from_value(json!({\n        // -----\n        // User data object\n        // -----\n        // User email\n        \"email\": \"john@example.com\",\n        // User profile object\n        \"profile\": {\n            // User full name\n            \"name\": \"John Doe\",\n            // User age\n            \"age\": 25\n        }\n    })).unwrap(), /* body */ \n    from_value(json!({\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        \"notify\": \"email\"\n    })).unwrap(), /* query */ \n    from_value(json!({\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    })).unwrap(), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n\nmatch response {\n    Ok(output) => println!(\"{:?}\", output),\n    /* \n    output {\n        // -----\n        // Response object\n        // -----\n        // Success status\n        success: true\n    } \n    */\n    Err(e) => println!(\"error: {:?}\", e),\n  }\n}"
+					"source": "use vovk_hello_world::user_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = user_rpc::update_user(\n    from_value(json!({\n        // -----\n        // User data object\n        // -----\n        // User email\n        \"email\": \"john@example.com\",\n        // User profile object\n        \"profile\": {\n            // User full name\n            \"name\": \"John Doe\",\n            // User age\n            \"age\": 25\n        }\n    })).unwrap(), /* body */ \n    from_value(json!({\n        // -----\n        // Query parameters\n        // -----\n        // Notification type\n        \"notify\": \"email\"\n    })).unwrap(), /* query */ \n    from_value(json!({\n        // -----\n        // Path parameters\n        // -----\n        // User ID\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n    })).unwrap(), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n\nmatch response {\n    Ok(output) => println!(\"{:?}\", output),\n    /* \n    output {\n        // -----\n        // Response object\n        // -----\n        // Success status\n        success: true,\n        // User ID\n        id: \"00000000-0000-0000-0000-000000000000\",\n        // Notification type\n        notify: \"email\"\n    } \n    */\n    Err(e) => println!(\"error: {:?}\", e),\n  }\n}"
 				}
 			],
 			"parameters": [{
@@ -314,11 +335,32 @@ var openapi_default = {
 					"$schema": "https://json-schema.org/draft/2020-12/schema",
 					"description": "Response object",
 					"type": "object",
-					"properties": { "success": {
-						"description": "Success status",
-						"type": "boolean"
-					} },
-					"required": ["success"],
+					"properties": {
+						"success": {
+							"description": "Success status",
+							"type": "boolean"
+						},
+						"id": {
+							"description": "User ID",
+							"type": "string",
+							"format": "uuid",
+							"pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+						},
+						"notify": {
+							"description": "Notification type",
+							"type": "string",
+							"enum": [
+								"email",
+								"push",
+								"none"
+							]
+						}
+					},
+					"required": [
+						"success",
+						"id",
+						"notify"
+					],
 					"additionalProperties": false
 				} } }
 			} },
