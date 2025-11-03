@@ -451,15 +451,15 @@ var openapi_default = {
 //#region tmp_prebundle/index.ts
 const UserRPC = (0, vovk.createRPC)(schema, "", "UserRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "https://hello-world.vovk.dev/api"
+	apiRoot: "http://localhost:3000/api"
 });
 const StreamRPC = (0, vovk.createRPC)(schema, "", "StreamRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "https://hello-world.vovk.dev/api"
+	apiRoot: "http://localhost:3000/api"
 });
 const OpenApiRPC = (0, vovk.createRPC)(schema, "static", "OpenApiRPC", import("vovk"), {
 	validateOnClient: import("vovk-ajv"),
-	apiRoot: "https://hello-world.vovk.dev/api"
+	apiRoot: "http://localhost:3000/api"
 });
 
 //#endregion
