@@ -117,7 +117,7 @@
           "segmentedClient": {}
         }
       },
-      "emitConfig": [
+      "exposeConfigKeys": [
         "libs"
       ],
       "composedClient": {
