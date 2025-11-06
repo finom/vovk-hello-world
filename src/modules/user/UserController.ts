@@ -19,10 +19,13 @@ export default class UserController {
         }),
         profile: z
           .object({
-            name: z.string().meta({
-              description: "User full name",
-              examples: ["John Doe", "Jane Smith"],
-            }),
+            name: z
+              .string()
+              .min(2)
+              .meta({
+                description: "User full name",
+                examples: ["John Doe", "Jane Smith"],
+              }),
             age: z
               .int()
               .min(16)
