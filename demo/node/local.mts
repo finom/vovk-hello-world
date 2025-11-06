@@ -1,4 +1,4 @@
-import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client"; 
+import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-client";
 
 async function main() {
   console.log("\n--- Node.js Demo (Local) ---");

@@ -1,7 +1,7 @@
 from vovk_hello_world import UserRPC, OpenApiRPC, StreamRPC
 
 def main() -> None:
-    print("\n--- Python Demo (Package) ---")
+    print("\n--- Python Demo (Packaged) ---")
 
     body: UserRPC.UpdateUserBody = {
         "email": "john@example.com",

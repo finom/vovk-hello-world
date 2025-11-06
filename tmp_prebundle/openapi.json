@@ -15,54 +15,10 @@
         "type": "integer",
         "description": "HTTP status code",
         "enum": [
-          100,
-          101,
-          102,
-          103,
-          200,
-          201,
-          202,
-          203,
-          204,
-          205,
-          206,
-          300,
-          301,
-          302,
-          303,
-          304,
-          307,
-          308,
-          400,
-          401,
-          402,
-          403,
-          404,
-          405,
-          406,
-          407,
-          408,
-          409,
-          410,
-          411,
-          412,
-          413,
-          414,
-          415,
-          416,
-          417,
-          418,
-          421,
-          422,
-          424,
-          428,
-          429,
-          500,
-          501,
-          502,
-          503,
-          504,
-          505
+          100, 101, 102, 103, 200, 201, 202, 203, 204, 205, 206, 300, 301, 302,
+          303, 304, 307, 308, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409,
+          410, 411, 412, 413, 414, 415, 416, 417, 418, 421, 422, 424, 428, 429,
+          500, 501, 502, 503, 504, 505
         ]
       },
       "VovkErrorResponse": {
@@ -85,11 +41,7 @@
             "description": "Indicates that this object represents an error"
           }
         },
-        "required": [
-          "statusCode",
-          "message",
-          "isError"
-        ],
+        "required": ["statusCode", "message", "isError"],
         "additionalProperties": false
       }
     }
@@ -124,11 +76,7 @@
             "schema": {
               "description": "Notification type",
               "type": "string",
-              "enum": [
-                "email",
-                "push",
-                "none"
-              ]
+              "enum": ["email", "push", "none"]
             }
           },
           {
@@ -137,9 +85,7 @@
             "required": true,
             "schema": {
               "description": "User ID",
-              "examples": [
-                "123e4567-e89b-12d3-a456-426614174000"
-              ],
+              "examples": ["123e4567-e89b-12d3-a456-426614174000"],
               "type": "string",
               "format": "uuid",
               "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
@@ -169,18 +115,10 @@
                     "notify": {
                       "description": "Notification type",
                       "type": "string",
-                      "enum": [
-                        "email",
-                        "push",
-                        "none"
-                      ]
+                      "enum": ["email", "push", "none"]
                     }
                   },
-                  "required": [
-                    "success",
-                    "id",
-                    "notify"
-                  ],
+                  "required": ["success", "id", "notify"],
                   "additionalProperties": false
                 }
               }
@@ -199,10 +137,7 @@
                 "properties": {
                   "email": {
                     "description": "User email",
-                    "examples": [
-                      "john@example.com",
-                      "jane@example.com"
-                    ],
+                    "examples": ["john@example.com", "jane@example.com"],
                     "type": "string",
                     "format": "email",
                     "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
@@ -213,34 +148,22 @@
                     "properties": {
                       "name": {
                         "description": "User full name",
-                        "examples": [
-                          "John Doe",
-                          "Jane Smith"
-                        ],
+                        "examples": ["John Doe", "Jane Smith"],
                         "type": "string"
                       },
                       "age": {
                         "description": "User age",
-                        "examples": [
-                          25,
-                          30
-                        ],
+                        "examples": [25, 30],
                         "type": "integer",
                         "minimum": 16,
                         "maximum": 120
                       }
                     },
-                    "required": [
-                      "name",
-                      "age"
-                    ],
+                    "required": ["name", "age"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "email",
-                  "profile"
-                ],
+                "required": ["email", "profile"],
                 "additionalProperties": false
               }
             }
@@ -284,9 +207,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "additionalProperties": false,
                   "examples": [
                     "{\"message\":\"string\"}\n{\"message\":\"string\"}\n{\"message\":\"string\"}"

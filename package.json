@@ -17,6 +17,7 @@
     "demo:python:packaged": "python3 demo/python/packaged.py",
     "demo:local": "npm run demo:node:local && npm run demo:rust:local && npm run demo:python:local",
     "demo:packaged": "npm run demo:node:packaged && npm run demo:rust:packaged && npm run demo:python:packaged",
+    "demo:all": "npm run demo:local && npm run demo:packaged",
     "#comment2": "Installation scripts for installing the latest version of the vovk-hello-world package in different languages",
     "install:node": "npm install vovk-hello-world@latest",
     "install:rust": "cargo update --manifest-path ./demo/rust/packaged/Cargo.toml",
@@ -38,7 +39,7 @@
     "next": "16.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "vovk": "^3.0.0-draft.470",
+    "vovk": "^3.0.0-draft.473",
     "vovk-ajv": "^0.0.0-draft.108",
     "vovk-client": "^0.0.4-draft.135",
     "vovk-hello-world": "^0.0.56",
@@ -57,7 +58,7 @@
     "tailwindcss": "^4.1.16",
     "tsdown": "^0.16.0",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.394",
+    "vovk-cli": "^0.0.1-draft.397",
     "vovk-python": "^0.0.1-draft.77",
     "vovk-rust": "^0.0.1-draft.63"
   }

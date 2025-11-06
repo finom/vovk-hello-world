@@ -16,7 +16,7 @@
 
 A minimal "Hello, World!" example for Vovk.ts. Published on [NPM](https://www.npmjs.com/package/vovk-hello-world), [Crates](https://crates.io/crates/vovk_hello_world) and [PyPI](https://pypi.org/project/vovk-hello-world/).
 
-## Topics/concepts covered 
+## Topics/concepts covered
 
 - [Zod validation](https://vovk.dev/validation/zod), with a `body`, `query` and `params` inputs and schema descriptions using Zod's [meta](https://zod.dev/metadata#meta) method.
 - [Client-side validation](https://vovk.dev/validation/client) for RPC method requests.

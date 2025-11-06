@@ -9,7 +9,7 @@ import * as openapi3_ts_oas310 from "openapi3-ts/oas31";
 declare const schema: {
   $schema: string;
   segments: {
-    '': {
+    "": {
       $schema: string;
       emitSchema: boolean;
       segmentName: string;
@@ -250,31 +250,34 @@ declare let paths: {
         lang: string;
         source: string;
       }[];
-      parameters: ({
-        name: string;
-        in: string;
-        required: boolean;
-        schema: {
-          description: string;
-          type: string;
-          enum: string[];
-          examples?: undefined;
-          format?: undefined;
-          pattern?: undefined;
-        };
-      } | {
-        name: string;
-        in: string;
-        required: boolean;
-        schema: {
-          description: string;
-          examples: string[];
-          type: string;
-          format: string;
-          pattern: string;
-          enum?: undefined;
-        };
-      })[];
+      parameters: (
+        | {
+            name: string;
+            in: string;
+            required: boolean;
+            schema: {
+              description: string;
+              type: string;
+              enum: string[];
+              examples?: undefined;
+              format?: undefined;
+              pattern?: undefined;
+            };
+          }
+        | {
+            name: string;
+            in: string;
+            required: boolean;
+            schema: {
+              description: string;
+              examples: string[];
+              type: string;
+              format: string;
+              pattern: string;
+              enum?: undefined;
+            };
+          }
+      )[];
       responses: {
         "200": {
           description: string;
@@ -406,231 +409,316 @@ declare namespace __json_default_export {
 //#endregion
 //#region tmp_prebundle/index.d.ts
 declare const UserRPC: {
-  updateUser: vovk_mjs_client_types0.ClientMethod<((req: vovk0.VovkRequest<{
-    email: string;
-    profile: {
-      name: string;
-      age: number;
-    };
-  }, {
-    notify: "email" | "push" | "none";
-  }, {
-    id: string;
-  }>, {
-    id
-  }: {
-    id: string;
-  }) => Promise<{
-    id: string;
-    notify: "email" | "push" | "none";
-    success: true;
-  }>) & {
-    __types: {
-      body: {
-        email: string;
-        profile: {
-          name: string;
-          age: number;
-        };
-      };
-      query: {
-        notify: "email" | "push" | "none";
-      };
-      params: {
+  updateUser: vovk_mjs_client_types0.ClientMethod<
+    ((
+      req: vovk0.VovkRequest<
+        {
+          email: string;
+          profile: {
+            name: string;
+            age: number;
+          };
+        },
+        {
+          notify: "email" | "push" | "none";
+        },
+        {
+          id: string;
+        }
+      >,
+      {
+        id,
+      }: {
         id: string;
-      };
-      output: {
-        success: boolean;
-        id: string;
-        notify: "email" | "push" | "none";
-      };
-      iteration: unknown;
-      isForm: false;
-    };
-    isRPC?: boolean;
-  } & {
-    schema: Omit<vovk0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk0.VovkHandlerSchema>;
-    wrapper?: (req: vovk0.VovkRequest<any, any, any>, params: {
-      id: string;
-    }) => Promise<{
+      },
+    ) => Promise<{
       id: string;
       notify: "email" | "push" | "none";
       success: true;
-    }>;
-  } & {
-    fn: {
-      <TReturnType = Promise<{
-        id: string;
-        notify: "email" | "push" | "none";
-        success: true;
-      }>>(input?: {
-        disableClientValidation?: boolean;
-      } & {
-        body?: {
+    }>) & {
+      __types: {
+        body: {
           email: string;
           profile: {
             name: string;
             age: number;
           };
         };
-      } & {
-        query?: {
+        query: {
           notify: "email" | "push" | "none";
         };
-      } & {
-        params?: {
+        params: {
           id: string;
         };
-      } & {
-        meta?: {
-          [key: string]: any;
-          __disableClientValidation?: boolean;
+        output: {
+          success: boolean;
+          id: string;
+          notify: "email" | "push" | "none";
         };
-      }): TReturnType;
-      <TReturnType = Promise<{
+        iteration: unknown;
+        isForm: false;
+      };
+      isRPC?: boolean;
+    } & {
+      schema: Omit<vovk0.VovkHandlerSchema, "httpMethod" | "path"> &
+        Partial<vovk0.VovkHandlerSchema>;
+      wrapper?: (
+        req: vovk0.VovkRequest<any, any, any>,
+        params: {
+          id: string;
+        },
+      ) => Promise<{
         id: string;
         notify: "email" | "push" | "none";
         success: true;
-      }>>(input: {
-        disableClientValidation?: boolean;
-      } & {
-        body?: {
-          email: string;
-          profile: {
-            name: string;
-            age: number;
-          };
-        };
-      } & {
-        query?: {
-          notify: "email" | "push" | "none";
-        };
-      } & {
-        params?: {
-          id: string;
-        };
-      } & {
-        meta?: {
-          [key: string]: any;
-          __disableClientValidation?: boolean;
-        };
-      }): TReturnType;
-    };
-    models: {
-      iteration?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
-      output?: zod0.ZodObject<{
-        success: zod0.ZodBoolean;
-        id: zod0.ZodUUID;
-        notify: zod0.ZodEnum<{
-          email: "email";
-          push: "push";
-          none: "none";
-        }>;
-      }, zod_v4_core0.$strip>;
-      params?: zod0.ZodObject<{
-        id: zod0.ZodUUID;
-      }, zod_v4_core0.$strip>;
-      query?: zod0.ZodObject<{
-        notify: zod0.ZodEnum<{
-          email: "email";
-          push: "push";
-          none: "none";
-        }>;
-      }, zod_v4_core0.$strip>;
-      body?: zod0.ZodObject<{
-        email: zod0.ZodEmail;
-        profile: zod0.ZodObject<{
-          name: zod0.ZodString;
-          age: zod0.ZodInt;
-        }, zod_v4_core0.$strip>;
-      }, zod_v4_core0.$strip>;
-    };
-  }, {
-    apiRoot?: string;
-    disableClientValidation?: boolean;
-    validateOnClient?: vovk0.VovkValidateOnClient<unknown> | Promise<{
-      validateOnClient: vovk0.VovkValidateOnClient<unknown>;
-    }> | undefined;
-    interpretAs?: string;
-    init?: RequestInit;
-  }, unknown>;
+      }>;
+    } & {
+      fn: {
+        <
+          TReturnType = Promise<{
+            id: string;
+            notify: "email" | "push" | "none";
+            success: true;
+          }>,
+        >(
+          input?: {
+            disableClientValidation?: boolean;
+          } & {
+            body?: {
+              email: string;
+              profile: {
+                name: string;
+                age: number;
+              };
+            };
+          } & {
+            query?: {
+              notify: "email" | "push" | "none";
+            };
+          } & {
+            params?: {
+              id: string;
+            };
+          } & {
+            meta?: {
+              [key: string]: any;
+              __disableClientValidation?: boolean;
+            };
+          },
+        ): TReturnType;
+        <
+          TReturnType = Promise<{
+            id: string;
+            notify: "email" | "push" | "none";
+            success: true;
+          }>,
+        >(
+          input: {
+            disableClientValidation?: boolean;
+          } & {
+            body?: {
+              email: string;
+              profile: {
+                name: string;
+                age: number;
+              };
+            };
+          } & {
+            query?: {
+              notify: "email" | "push" | "none";
+            };
+          } & {
+            params?: {
+              id: string;
+            };
+          } & {
+            meta?: {
+              [key: string]: any;
+              __disableClientValidation?: boolean;
+            };
+          },
+        ): TReturnType;
+      };
+      models: {
+        iteration?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
+        output?: zod0.ZodObject<
+          {
+            success: zod0.ZodBoolean;
+            id: zod0.ZodUUID;
+            notify: zod0.ZodEnum<{
+              email: "email";
+              push: "push";
+              none: "none";
+            }>;
+          },
+          zod_v4_core0.$strip
+        >;
+        params?: zod0.ZodObject<
+          {
+            id: zod0.ZodUUID;
+          },
+          zod_v4_core0.$strip
+        >;
+        query?: zod0.ZodObject<
+          {
+            notify: zod0.ZodEnum<{
+              email: "email";
+              push: "push";
+              none: "none";
+            }>;
+          },
+          zod_v4_core0.$strip
+        >;
+        body?: zod0.ZodObject<
+          {
+            email: zod0.ZodEmail;
+            profile: zod0.ZodObject<
+              {
+                name: zod0.ZodString;
+                age: zod0.ZodInt;
+              },
+              zod_v4_core0.$strip
+            >;
+          },
+          zod_v4_core0.$strip
+        >;
+      };
+    },
+    {
+      apiRoot?: string;
+      disableClientValidation?: boolean;
+      validateOnClient?:
+        | vovk0.VovkValidateOnClient<unknown>
+        | Promise<{
+            validateOnClient: vovk0.VovkValidateOnClient<unknown>;
+          }>
+        | undefined;
+      interpretAs?: string;
+      init?: RequestInit;
+    },
+    unknown
+  >;
 };
 declare const StreamRPC: {
-  streamTokens: vovk_mjs_client_types0.ClientMethod<(() => AsyncGenerator<{
-    message: string;
-  }, void, unknown>) & {
-    __types: {
-      body: unknown;
-      query: unknown;
-      params: unknown;
-      output: unknown;
-      iteration: {
+  streamTokens: vovk_mjs_client_types0.ClientMethod<
+    (() => AsyncGenerator<
+      {
         message: string;
+      },
+      void,
+      unknown
+    >) & {
+      __types: {
+        body: unknown;
+        query: unknown;
+        params: unknown;
+        output: unknown;
+        iteration: {
+          message: string;
+        };
+        isForm: false;
       };
-      isForm: false;
-    };
-    isRPC?: boolean;
-  } & {
-    schema: Omit<vovk0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk0.VovkHandlerSchema>;
-    wrapper?: (req: vovk0.VovkRequest<any, any, any>, params: undefined) => AsyncGenerator<{
-      message: string;
-    }, void, unknown>;
-  } & {
-    fn: {
-      <TReturnType = AsyncGenerator<{
-        message: string;
-      }, void, unknown>>(input?: {
-        disableClientValidation?: boolean;
-      } & {
-        body?: unknown;
-      } & {
-        query?: unknown;
-      } & {
-        params?: unknown;
-      } & {
-        meta?: {
-          [key: string]: any;
-          __disableClientValidation?: boolean;
-        };
-      }): TReturnType;
-      <TReturnType = AsyncGenerator<{
-        message: string;
-      }, void, unknown>>(input: {
-        disableClientValidation?: boolean;
-      } & {
-        body?: unknown;
-      } & {
-        query?: unknown;
-      } & {
-        params?: unknown;
-      } & {
-        meta?: {
-          [key: string]: any;
-          __disableClientValidation?: boolean;
-        };
-      }): TReturnType;
-    };
-    models: {
-      iteration?: zod0.ZodObject<{
-        message: zod0.ZodString;
-      }, zod_v4_core0.$strip>;
-      output?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
-      params?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
-      query?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
-      body?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
-    };
-  }, {
-    apiRoot?: string;
-    disableClientValidation?: boolean;
-    validateOnClient?: vovk0.VovkValidateOnClient<unknown> | Promise<{
-      validateOnClient: vovk0.VovkValidateOnClient<unknown>;
-    }> | undefined;
-    interpretAs?: string;
-    init?: RequestInit;
-  }, unknown>;
+      isRPC?: boolean;
+    } & {
+      schema: Omit<vovk0.VovkHandlerSchema, "httpMethod" | "path"> &
+        Partial<vovk0.VovkHandlerSchema>;
+      wrapper?: (
+        req: vovk0.VovkRequest<any, any, any>,
+        params: undefined,
+      ) => AsyncGenerator<
+        {
+          message: string;
+        },
+        void,
+        unknown
+      >;
+    } & {
+      fn: {
+        <
+          TReturnType = AsyncGenerator<
+            {
+              message: string;
+            },
+            void,
+            unknown
+          >,
+        >(
+          input?: {
+            disableClientValidation?: boolean;
+          } & {
+            body?: unknown;
+          } & {
+            query?: unknown;
+          } & {
+            params?: unknown;
+          } & {
+            meta?: {
+              [key: string]: any;
+              __disableClientValidation?: boolean;
+            };
+          },
+        ): TReturnType;
+        <
+          TReturnType = AsyncGenerator<
+            {
+              message: string;
+            },
+            void,
+            unknown
+          >,
+        >(
+          input: {
+            disableClientValidation?: boolean;
+          } & {
+            body?: unknown;
+          } & {
+            query?: unknown;
+          } & {
+            params?: unknown;
+          } & {
+            meta?: {
+              [key: string]: any;
+              __disableClientValidation?: boolean;
+            };
+          },
+        ): TReturnType;
+      };
+      models: {
+        iteration?: zod0.ZodObject<
+          {
+            message: zod0.ZodString;
+          },
+          zod_v4_core0.$strip
+        >;
+        output?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
+        params?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
+        query?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
+        body?: _standard_schema_spec0.StandardSchemaV1<unknown, unknown>;
+      };
+    },
+    {
+      apiRoot?: string;
+      disableClientValidation?: boolean;
+      validateOnClient?:
+        | vovk0.VovkValidateOnClient<unknown>
+        | Promise<{
+            validateOnClient: vovk0.VovkValidateOnClient<unknown>;
+          }>
+        | undefined;
+      interpretAs?: string;
+      init?: RequestInit;
+    },
+    unknown
+  >;
 };
 declare const OpenApiRPC: {
   getSpec: () => openapi3_ts_oas310.OpenAPIObject;
 };
 //#endregion
-export { OpenApiRPC, StreamRPC, UserRPC, __json_default_export as openapi, schema };
+export {
+  OpenApiRPC,
+  StreamRPC,
+  UserRPC,
+  __json_default_export as openapi,
+  schema,
+};

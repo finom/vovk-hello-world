@@ -6,9 +6,6 @@ const PROD_ORIGIN = "https://hello-world.vovk.dev";
 const config = {
   logLevel: "debug",
   outputConfig: {
-    origin: process.env.NODE_ENV === "production"
-      ? PROD_ORIGIN
-      : `http://localhost:${process.env.PORT ?? 3000}`,
     imports: {
       validateOnClient: "vovk-ajv",
     },
@@ -23,32 +20,39 @@ const config = {
         },
         version: "1.0.0",
       },
-    }
+    },
   },
   composedClient: {
     fromTemplates: ["mjs", "cjs", "py", "rs"],
     // enabled: true,
     // outDir: "./node_modules/.vovk-client",
+    outputConfig: {
+      origin:
+        process.env.NODE_ENV === "production"
+          ? null
+          : `http://localhost:${process.env.PORT ?? 3000}`,
+    },
   },
   segmentedClient: {
     // fromTemplates: ["ts"],
     enabled: true,
     // outDir: "./src/client",
+    // outputConfig: { origin: '' },
   },
   bundle: {
     outputConfig: { origin: PROD_ORIGIN },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
-      const { build } = await import('tsdown');
+      const { build } = await import("tsdown");
       await build({
         entry,
         dts: true,
-        format: ['cjs', 'esm'],
+        format: ["cjs", "esm"],
         hash: false,
         fixedExtension: true,
         clean: true,
         outDir,
-        tsconfig: './tsconfig.bundle.json',
+        tsconfig: "./tsconfig.bundle.json",
       });
     },
   },
@@ -63,7 +67,7 @@ const config = {
       outputConfig: { origin: PROD_ORIGIN },
       // composedClient: { outDir: "./dist_rust" },
     },
-  }
+  },
 };
 
 module.exports = config;
