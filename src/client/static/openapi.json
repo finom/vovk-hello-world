@@ -9,6 +9,16 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
+  "servers": [
+    {
+      "url": "https://hello-world.vovk.dev",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Localhost"
+    }
+  ],
   "components": {
     "schemas": {
       "HttpStatus": {
