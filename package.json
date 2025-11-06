@@ -38,7 +38,7 @@
     "next": "16.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "vovk": "^3.0.0-draft.469",
+    "vovk": "^3.0.0-draft.470",
     "vovk-ajv": "^0.0.0-draft.108",
     "vovk-client": "^0.0.4-draft.135",
     "vovk-hello-world": "^0.0.56",
@@ -55,14 +55,10 @@
     "eslint-config-next": "16.0.1",
     "postcss": "^8",
     "tailwindcss": "^4.1.16",
-    "tsdown": "^0.15.12",
+    "tsdown": "^0.16.0",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-draft.392",
+    "vovk-cli": "^0.0.1-draft.394",
     "vovk-python": "^0.0.1-draft.77",
     "vovk-rust": "^0.0.1-draft.63"
-  },
-  "#TODO": "Remove overrides when tsdown is renewed to support rolldown-plugin-dts v0.17.3+",
-  "overrides": {
-    "rolldown-plugin-dts": "0.17.3"
   }
 }
