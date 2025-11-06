@@ -10,16 +10,6 @@ async function App() {
         showSidebar: !isIframe,
         url: "/api/static/openapi.json",
         hideModels: true,
-        servers: [
-          {
-            url: "http://localhost:3000",
-            description: "Localhost",
-          },
-          {
-            url: "https://hello-world.vovk.dev",
-            description: "Production",
-          },
-        ],
       }}
     />
   );

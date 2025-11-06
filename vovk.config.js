@@ -20,6 +20,16 @@ const config = {
         },
         version: "1.0.0",
       },
+      servers: [
+        {
+          url: "https://hello-world.vovk.dev",
+          description: "Production",
+        },
+        {
+          url: "http://localhost:3000",
+          description: "Localhost",
+        },
+      ],
     },
   },
   composedClient: {
