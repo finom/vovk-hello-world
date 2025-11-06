@@ -10,14 +10,15 @@ const UserFormDemo = () => {
   const [age, setAge] = useState(35);
   const [email, setEmail] = useState("john@example.com");
   const [id, setId] = useState("a937629d-e8f6-4b1e-a819-7669358650a0");
-  const updateUserMutation = useMutation({
-    mutationFn: UserRPC.updateUser,
-  });
   const [notify, setNotify] = useState<
     VovkQuery<typeof UserRPC.updateUser>["notify"]
   >(
-    "sms" as "email", // set error value by default
+    "sms" as "email", // intentionally use an invalid value
   );
+
+  const updateUserMutation = useMutation({
+    mutationFn: UserRPC.updateUser,
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
