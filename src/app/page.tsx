@@ -5,7 +5,7 @@ import Image from "next/image";
 export default async function Home() {
   const isIframe = (await headers()).get("sec-fetch-dest") === "iframe";
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)] max-w-full">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-(family-name:--font-geist-sans) max-w-full">
       <main className="flex flex-col gap-8 row-start-2 items-center justify-items-center sm:items-start">
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <Image
@@ -30,7 +30,7 @@ export default async function Home() {
         <div
           className={`
           w-96
-          font-[family-name:var(--font-geist-mono)]
+          font-(family-name:--font-geist-mono)
           text-sm
 
           [&_form_>_div]:w-full 
@@ -65,7 +65,7 @@ export default async function Home() {
           dark:[&_select]:border-none 
           dark:[&_select]:text-black 
 
-          [&_[type="checkbox"]]:mr-2
+          **:[[type="checkbox"]]:mr-2
 
           [&_button]:rounded-full 
           [&_button]:border border-solid 
