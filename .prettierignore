@@ -1,0 +1,6 @@
+.vovk-schema
+.mypy_cache
+dist
+dist_rust
+dist_python
+tmp_prebundle
