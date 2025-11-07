@@ -42,12 +42,14 @@ const config = {
           ? null
           : `http://localhost:${process.env.PORT ?? 3000}`,
     },
+    // prettifyClient: false,
   },
   segmentedClient: {
     // fromTemplates: ["ts"],
     enabled: true,
     // outDir: "./src/client",
     // outputConfig: { origin: '' },
+    // prettifyClient: true,
   },
   bundle: {
     outputConfig: { origin: PROD_ORIGIN },
