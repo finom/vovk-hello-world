@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { type VovkQuery } from "vovk";
-import { UserRPC } from "../../client/root"; // segmented client
+import type { VovkQuery } from "vovk";
 import { useMutation } from "@tanstack/react-query";
+import { UserRPC } from "../../client/root"; // segmented client
 
 const UserFormDemo = () => {
   const [disableClientValidation, setDisableClientValidation] = useState(false);
