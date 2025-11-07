@@ -24,13 +24,12 @@
     "install:python": "python3 -m pip install --upgrade vovk_hello_world --quiet",
     "install:all": "npm run install:node && npm run install:rust && npm run install:python",
     "#comment3": "--- Scripts for publishing ---",
-    "check-uncommitted": "git diff --quiet && git diff --cached --quiet || (echo '❌ Uncommitted changes!' && exit 1)",
-    "preversion": "npm run check-uncommitted && vovk generate && vovk bundle",
-    "postversion:node": "npm publish ./dist",
-    "postversion:rust": "cargo publish --manifest-path dist_rust/Cargo.toml --allow-dirty",
-    "postversion:python": "python3 -m build ./dist_python --wheel --sdist && python3 -m twine upload ./dist_python/dist/*",
-    "postversion": "npm run postversion:node && npm run postversion:python && npm run postversion:rust && git push && git push --tags",
-    "patch": "npm version patch"
+    "publish:node": "npm publish ./dist",
+    "publish:rust": "cargo publish --manifest-path dist_rust/Cargo.toml --allow-dirty",
+    "publish:python": "python3 -m build ./dist_python --wheel --sdist && python3 -m twine upload ./dist_python/dist/*",
+    "git-tag": "git add . && git commit -m \"chore: release v$(node -p \"require('./package.json').version\")\" && git tag v$(node -p \"require('./package.json').version\")",
+    "postversion": "vovk generate && vovk bundle && npm run publish:node && npm run publish:rust && npm run publish:python && npm run git-tag",
+    "patch": "npm version patch --no-git-tag-version"
   },
   "license": "MIT",
   "dependencies": {
