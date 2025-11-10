@@ -18,7 +18,7 @@ async function main() {
     },
   });
 
-  console.log("UserRPC.updateUser:", updateUserResponse);
+  console.log("UserRPC.updateUser response:", updateUserResponse);
 
   const openapiResponse = await OpenApiRPC.getSpec();
   console.log(

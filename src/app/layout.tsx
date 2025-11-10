@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Vovk.ts - "Hello World" example',
-  description: 'A simple "Hello World" example using Vovk.ts',
+  title: 'Vovk.ts - "Hello World" Example',
+  description: 'A "Hello World" example using Vovk.ts',
 };
 
 export default function RootLayout({

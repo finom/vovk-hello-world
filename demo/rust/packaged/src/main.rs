@@ -34,7 +34,7 @@ pub fn main() {
   );
 
   match update_user_response {
-    Ok(response) => println!("user_rpc.update_user: {:?}", response),
+    Ok(response) => println!("user_rpc.update_user response: {:?}", response),
     Err(e) => println!("update_user error: {:?}", e),
   }
 
@@ -53,7 +53,7 @@ pub fn main() {
         spec["info"]["title"].as_str(),
         spec["info"]["version"].as_str()
       ) {
-        println!("open_api_rpc.get_spec from the local module: {} {}", title, version);
+        println!("open_api_rpc.get_spec response: {} {}", title, version);
       } else {
         println!("Could not extract title or version from OpenAPI spec");
       }
@@ -72,7 +72,7 @@ pub fn main() {
   
   match stream_response {
     Ok(stream) => {
-      print!("streamTokens:\n");
+      print!("stream_rpc.stream_tokens response:\n");
       for (_i, item) in stream.enumerate() {
         print!("{}", item.message.as_str());
         std::io::stdout().flush().unwrap();

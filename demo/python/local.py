@@ -25,13 +25,13 @@ def main() -> None:
         body=body,
         query=query
     )
-    print('UserRPC.update_user:', update_user_response)
+    print('UserRPC.update_user response:', update_user_response)
     
     openapi_response = OpenApiRPC.get_spec()
-    print(f"OpenApiRPC.get_spec from the local module: {openapi_response['info']['title']} {openapi_response['info']['version']}")
+    print(f"OpenApiRPC.get_spec response: {openapi_response['info']['title']} {openapi_response['info']['version']}")
     
     stream_response = StreamRPC.stream_tokens()
-    print("streamTokens:")
+    print("StreamRPC.stream_tokens response:")
     for item in stream_response:
         print(item['message'], end='', flush=True)
     print()  # Add newline after streaming
