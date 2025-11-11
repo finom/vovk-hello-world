@@ -1,7 +1,7 @@
 {
   "name": "vovk-hello-world",
   "version": "0.0.63",
-  "description": "A showcase for Next.js + Vovk.ts + Zod, demonstrating its capabilities with TypeScript, Rust, and Python RPC.",
+  "description": "A showcase app built with Next.js + Vovk.ts + Zod. For more details, visit https://vovk.dev/hello-world",
   "scripts": {
     "dev": "vovk dev --next-dev -- --turbopack",
     "prebuild": "vovk generate",
@@ -33,6 +33,15 @@
     "patch": "npm run check-uncommitted && npm version patch --no-git-tag-version"
   },
   "license": "MIT",
+  "repository": {
+     "type": "git",
+     "url": "git+https://github.com/finom/vovk-hello-world.git"
+  },
+  "homepage": "https://vovk.dev/hello-world",
+  "bugs": {
+    "url": "https://github.com/finom/vovk-hello-world/issues"
+  },
+  "keywords": ["vovk", "rpc", "hello world", "openapi", "typescript", "nextjs", "zod", "python", "rust", "api"],
   "dependencies": {
     "@scalar/api-reference-react": "^0.8.1",
     "@standard-schema/spec": "^1.0.0",

@@ -13,7 +13,7 @@ const config = {
       info: {
         title: '"Hello World" app API',
         description:
-          'API for "Hello World" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world.',
+          'API for "Hello World" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world. For more information about this app, visit the documentation page https://vovk.dev/hello-world.',
         license: {
           name: "MIT",
           url: "https://opensource.org/licenses/MIT",
