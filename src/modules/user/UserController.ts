@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { prefix, post, operation } from "vovk";
-import { withZod } from "vovk-zod";
+import { procedure, prefix, post, operation } from "vovk";
 import UserService from "./UserService";
 
 @prefix("users")
@@ -10,7 +9,7 @@ export default class UserController {
     description: "Update user by ID",
   })
   @post("{id}")
-  static updateUser = withZod({
+  static updateUser = procedure({
     body: z
       .object({
         email: z.email().meta({

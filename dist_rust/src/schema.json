@@ -4,6 +4,7 @@
     "$schema": "https://vovk.dev/api/schema/v3/meta.json",
     "config": {
       "libs": {},
+      "rootEntry": "api",
       "$schema": "https://vovk.dev/api/schema/v3/config.json"
     }
   },
@@ -63,15 +64,13 @@
                       "required": [
                         "name",
                         "age"
-                      ],
-                      "additionalProperties": false
+                      ]
                     }
                   },
                   "required": [
                     "email",
                     "profile"
-                  ],
-                  "additionalProperties": false
+                  ]
                 },
                 "query": {
                   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -90,8 +89,7 @@
                   },
                   "required": [
                     "notify"
-                  ],
-                  "additionalProperties": false
+                  ]
                 },
                 "params": {
                   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -110,8 +108,7 @@
                   },
                   "required": [
                     "id"
-                  ],
-                  "additionalProperties": false
+                  ]
                 },
                 "output": {
                   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -142,8 +139,7 @@
                     "success",
                     "id",
                     "notify"
-                  ],
-                  "additionalProperties": false
+                  ]
                 }
               },
               "operationObject": {
@@ -174,8 +170,7 @@
                   },
                   "required": [
                     "message"
-                  ],
-                  "additionalProperties": false
+                  ]
                 }
               },
               "operationObject": {

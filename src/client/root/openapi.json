@@ -128,8 +128,7 @@
                       "enum": ["email", "push", "none"]
                     }
                   },
-                  "required": ["success", "id", "notify"],
-                  "additionalProperties": false
+                  "required": ["success", "id", "notify"]
                 }
               }
             }
@@ -170,12 +169,10 @@
                         "maximum": 120
                       }
                     },
-                    "required": ["name", "age"],
-                    "additionalProperties": false
+                    "required": ["name", "age"]
                   }
                 },
-                "required": ["email", "profile"],
-                "additionalProperties": false
+                "required": ["email", "profile"]
               }
             }
           }
@@ -219,7 +216,6 @@
                     }
                   },
                   "required": ["message"],
-                  "additionalProperties": false,
                   "examples": [
                     "{\"message\":\"string\"}\n{\"message\":\"string\"}\n{\"message\":\"string\"}"
                   ]

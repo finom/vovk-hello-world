@@ -1,5 +1,4 @@
-import { prefix, get, operation } from "vovk";
-import { withZod } from "vovk-zod";
+import { procedure, prefix, get, operation } from "vovk";
 import { z } from "zod";
 import StreamService from "./StreamService";
 
@@ -10,7 +9,7 @@ export default class StreamController {
     description: "Stream tokens to the client",
   })
   @get("tokens")
-  static streamTokens = withZod({
+  static streamTokens = procedure({
     iteration: z
       .object({
         message: z.string().meta({ description: "Message from the token" }),
