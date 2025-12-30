@@ -1,10 +1,14 @@
 use std::io::Write;
+use futures_util::StreamExt;
 use vovk_hello_world_local::{
   user_rpc, 
   open_api_rpc, 
-  stream_rpc 
+  stream_rpc,
+  HttpException,
 };
-pub fn main() {
+
+#[tokio::main]
+pub async fn main() -> Result<(), HttpException> {
   println!("\n--- Rust Demo (Local) ---");
   use user_rpc::update_user_::{
     body as Body, 
@@ -31,12 +35,9 @@ pub fn main() {
     None,
     None,
     false,
-  );
+  ).await?;
 
-  match update_user_response {
-    Ok(response) => println!("user_rpc.update_user response: {:?}", response),
-    Err(e) => println!("update_user error: {:?}", e),
-  }
+  println!("user_rpc.update_user response: {:?}", update_user_response);
 
   let openapi_response = open_api_rpc::get_spec(
     (),
@@ -45,20 +46,15 @@ pub fn main() {
     None,
     None,
     false,
-  );
+  ).await?;
 
-  match openapi_response {
-    Ok(spec) => {
-      if let (Some(title), Some(version)) = (
-        spec["info"]["title"].as_str(),
-        spec["info"]["version"].as_str()
-      ) {
-        println!("open_api_rpc.get_spec response: {} {}", title, version);
-      } else {
-        println!("Could not extract title or version from OpenAPI spec");
-      }
-    },
-    Err(e) => println!("Error fetching OpenAPI spec: {:?}", e),
+  if let (Some(title), Some(version)) = (
+    openapi_response["info"]["title"].as_str(),
+    openapi_response["info"]["version"].as_str()
+  ) {
+    println!("open_api_rpc.get_spec response: {} {}", title, version);
+  } else {
+    println!("Could not extract title or version from OpenAPI spec");
   }
 
   let stream_response = stream_rpc::stream_tokens(
@@ -68,17 +64,16 @@ pub fn main() {
       None,
       None,
       false,
-  );
+  ).await?;
   
-  match stream_response {
-    Ok(stream) => {
-      print!("stream_rpc.stream_tokens response:\n");
-      for (_i, item) in stream.enumerate() {
-        print!("{}", item.message.as_str());
-        std::io::stdout().flush().unwrap();
-      }
-      println!();
-    },
-    Err(e) => println!("Error initiating stream: {:?}", e),
+  print!("stream_rpc.stream_tokens response:\n");
+  let mut stream = stream_response;
+  while let Some(item) = stream.next().await {
+    let val = item?;
+    print!("{}", val.message.as_str());
+    std::io::stdout().flush().unwrap();
   }
+  println!();
+
+  Ok(())
 }

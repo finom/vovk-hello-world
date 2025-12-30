@@ -3,12 +3,16 @@
   "version": "0.0.68",
   "description": "A showcase app built with Next.js + Vovk.ts + Zod. For more details, visit https://vovk.dev/hello-world",
   "scripts": {
-    "dev": "vovk dev --next-dev -- --turbopack",
+    "dev": "vovk dev --next-dev",
     "prebuild": "vovk generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "#comment1": "--- Demo scripts for running examples in different languages ---",
+    "test:node": "node --experimental-strip-types --test",
+    "test:python": "python3 -m pip install -r test/python/requirements.txt && python3 -m unittest discover -s test/python -p '*_test.py'",
+    "pretest": "next build",
+    "test": "concurrently 'next start' 'sleep 10 && npm run test:node && npm run test:python' --kill-others --success first",
     "demo:node:local": "node --experimental-strip-types demo/node/local.mts",
     "demo:node:packaged": "node --experimental-strip-types demo/node/packaged.mts",
     "demo:rust:local": "cargo run --manifest-path ./demo/rust/local/Cargo.toml --quiet",
@@ -56,7 +60,7 @@
     "next": "16.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "vovk": "^3.0.0-beta.86",
+    "vovk": "^3.0.0-beta.87",
     "vovk-ajv": "^0.0.0-beta.4",
     "vovk-client": "^0.0.4-beta.4",
     "zod": "^4.2.1"
@@ -73,9 +77,9 @@
     "tailwindcss": "^4.1.18",
     "tsdown": "^0.18.3",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-beta.58",
+    "vovk-cli": "^0.0.1-beta.59",
     "vovk-hello-world": "^0.0.68",
     "vovk-python": "^0.0.1-beta.4",
-    "vovk-rust": "^0.0.1-beta.4"
+    "vovk-rust": "^0.0.1-beta.6"
   }
 }
