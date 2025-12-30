@@ -75,7 +75,7 @@
           {
             "label": "Rust RPC",
             "lang": "rust",
-            "source": "use vovk_hello_world::open_api_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n\npub fn main() {\n  let response = open_api_rpc::get_spec(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  );\n}"
+            "source": "use vovk_hello_world::open_api_rpc;\nuse serde_json::{ \n  from_value, \n  json \n};\n#[tokio::main]\nasync fn main() {\n  let response = open_api_rpc::get_spec(\n    (), /* body */ \n    (), /* query */ \n    (), /* params */ \n    None, /* headers (HashMap) */ \n    None, /* api_root */\n    false, /* disable_client_validation */\n  ).await;\n}"
           }
         ]
       }

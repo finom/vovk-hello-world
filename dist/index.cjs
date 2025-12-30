@@ -43,12 +43,10 @@ var root_default = {
 										"maximum": 120
 									}
 								},
-								"required": ["name", "age"],
-								"additionalProperties": false
+								"required": ["name", "age"]
 							}
 						},
-						"required": ["email", "profile"],
-						"additionalProperties": false
+						"required": ["email", "profile"]
 					},
 					"query": {
 						"$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -63,8 +61,7 @@ var root_default = {
 								"none"
 							]
 						} },
-						"required": ["notify"],
-						"additionalProperties": false
+						"required": ["notify"]
 					},
 					"params": {
 						"$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -77,8 +74,7 @@ var root_default = {
 							"format": "uuid",
 							"pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
 						} },
-						"required": ["id"],
-						"additionalProperties": false
+						"required": ["id"]
 					},
 					"output": {
 						"$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -109,8 +105,7 @@ var root_default = {
 							"success",
 							"id",
 							"notify"
-						],
-						"additionalProperties": false
+						]
 					}
 				},
 				"operationObject": {
@@ -134,8 +129,7 @@ var root_default = {
 						"description": "Message from the token",
 						"type": "string"
 					} },
-					"required": ["message"],
-					"additionalProperties": false
+					"required": ["message"]
 				} },
 				"operationObject": {
 					"summary": "Stream tokens",
@@ -176,6 +170,7 @@ var _meta_default = {
 	$schema: "https://vovk.dev/api/schema/v3/meta.json",
 	config: {
 		"libs": {},
+		"rootEntry": "api",
 		"$schema": "https://vovk.dev/api/schema/v3/config.json"
 	}
 };
