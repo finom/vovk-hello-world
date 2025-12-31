@@ -3,7 +3,7 @@ import {
   useQuery,
   experimental_streamedQuery as streamedQuery,
 } from "@tanstack/react-query";
-import { StreamRPC } from "../../client/root"; // segmented client
+import { StreamRPC } from "../../client/root"; // segmented client, just for demo
 
 const StreamDemo = () => {
   const { data, refetch } = useQuery({
