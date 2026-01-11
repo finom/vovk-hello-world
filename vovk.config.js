@@ -64,7 +64,7 @@ const config = {
         fixedExtension: true,
         clean: true,
         outDir,
-        tsconfig: "./tsconfig.bundle.json",
+        noExternal: ["vovk/createRPC", "vovk/fetcher", "vovk-ajv"],
       });
     },
   },

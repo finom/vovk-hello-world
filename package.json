@@ -1,7 +1,7 @@
 {
   "name": "vovk-hello-world",
   "version": "0.0.69",
-  "description": "A showcase app built with Next.js + Vovk.ts + Zod. For more details, visit https://vovk.dev/hello-world",
+  "description": "A \"Hello World!\" app built with Next.js, Vovk.ts and Zod. For details, visit https://vovk.dev/hello-world",
   "scripts": {
     "dev": "vovk dev --next-dev",
     "prebuild": "vovk generate",
@@ -32,7 +32,6 @@
   },
   "keywords": [
     "vovk",
-    "rpc",
     "openapi",
     "zod",
     "api"
@@ -45,7 +44,7 @@
     "next": "16.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "vovk": "^3.0.0-beta.87",
+    "vovk": "^3.0.0-beta.104",
     "vovk-ajv": "^0.0.0-beta.4",
     "vovk-client": "^0.0.4-beta.4",
     "zod": "^4.2.1"
@@ -62,7 +61,7 @@
     "tailwindcss": "^4.1.18",
     "tsdown": "^0.18.3",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-beta.59",
+    "vovk-cli": "^0.0.1-beta.67",
     "vovk-hello-world": "^0.0.68",
     "vovk-python": "^0.0.1-beta.4",
     "vovk-rust": "^0.0.1-beta.6"

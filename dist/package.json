@@ -11,7 +11,7 @@
   },
   "name": "vovk-hello-world",
   "version": "0.0.69",
-  "description": "A showcase app built with Next.js + Vovk.ts + Zod. For more details, visit https://vovk.dev/hello-world",
+  "description": "A \"Hello World!\" app built with Next.js, Vovk.ts and Zod. For details, visit https://vovk.dev/hello-world",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,7 +23,6 @@
   },
   "keywords": [
     "vovk",
-    "rpc",
     "openapi",
     "zod",
     "api"
