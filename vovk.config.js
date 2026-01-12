@@ -52,19 +52,26 @@ const config = {
     // prettifyClient: true,
   },
   bundle: {
-    outputConfig: { origin: PROD_ORIGIN },
+    outputConfig: { origin: PROD_ORIGIN, imports: { validateOnClient: null } },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
       const { build } = await import("tsdown");
       await build({
         entry,
         dts: true,
-        format: ["cjs", "esm"],
+        format: 'esm',
         hash: false,
         fixedExtension: true,
         clean: true,
         outDir,
-        noExternal: ["vovk/createRPC", "vovk/fetcher", "vovk-ajv"],
+        platform: 'neutral',
+        outExtensions: () => ({ js: '.js', dts: '.d.ts' }),
+        inputOptions: {
+          resolve: {
+            mainFields: ['module', 'main'],
+          },
+        },
+        noExternal: ['vovk', 'vovk/*', 'vovk-ajv', 'ajv/**', 'ajv-errors', 'ajv-formats/**'],
       });
     },
   },

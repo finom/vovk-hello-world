@@ -1,6 +1,6 @@
-import * as vovk0 from "vovk";
-import * as vovk_mjs_types0 from "vovk/mjs/types";
-import * as vovk_mjs_validation_types0 from "vovk/mjs/validation/types";
+import * as vovk2 from "vovk";
+import * as vovk_mjs_types7 from "vovk/mjs/types";
+import * as vovk_mjs_validation_types4 from "vovk/mjs/validation/types";
 import { z } from "zod";
 import * as vovk_mjs0 from "vovk/mjs";
 import * as vovk_mjs_internal0 from "vovk/mjs/internal";
@@ -8,7 +8,7 @@ import * as openapi3_ts_oas310 from "openapi3-ts/oas31";
 
 //#region src/modules/user/UserController.d.ts
 declare class UserController {
-  static updateUser: ((req: vovk0.VovkRequest<{
+  static updateUser: ((req: vovk2.VovkRequest<{
     email: string;
     profile: {
       name: string;
@@ -51,8 +51,8 @@ declare class UserController {
     };
     isRPC?: boolean;
   } & {
-    schema: Omit<vovk_mjs_types0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk_mjs_types0.VovkHandlerSchema>;
-    wrapper?: ((req: vovk0.VovkRequest<any, any, any>, params: {
+    schema: Omit<vovk_mjs_types7.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk_mjs_types7.VovkHandlerSchema>;
+    wrapper?: ((req: vovk2.VovkRequest<any, any, any>, params: {
       id: string;
     }) => Promise<{
       id: string;
@@ -90,7 +90,7 @@ declare class UserController {
           id: string;
           notify: "email" | "push" | "none";
           success: true;
-        }, fakeReq: Pick<vovk0.VovkRequest<any, any, any>, "vovk">) => TTransformed;
+        }, fakeReq: Pick<vovk2.VovkRequest<any, any, any>, "vovk">) => TTransformed;
       }): Promise<TTransformed>;
       <TReturnType = Promise<{
         id: string;
@@ -153,8 +153,8 @@ declare class UserController {
     };
     definition: {
       isForm: false | undefined;
-      disableServerSideValidation: boolean | vovk_mjs_types0.VovkValidationType[] | undefined;
-      skipSchemaEmission: boolean | vovk_mjs_types0.VovkValidationType[] | undefined;
+      disableServerSideValidation: boolean | vovk_mjs_types7.VovkValidationType[] | undefined;
+      skipSchemaEmission: boolean | vovk_mjs_types7.VovkValidationType[] | undefined;
       validateEachIteration: boolean | undefined;
       body: z.ZodObject<{
         email: z.ZodEmail;
@@ -182,8 +182,8 @@ declare class UserController {
           none: "none";
         }>;
       }, z.core.$strip> | undefined;
-      iteration: vovk_mjs_validation_types0.CombinedSpec<unknown, unknown> | undefined;
-      handle: vovk_mjs_types0.VovkTypedMethod<(req: vovk0.VovkRequest<{
+      iteration: vovk_mjs_validation_types4.CombinedSpec<unknown, unknown> | undefined;
+      handle: vovk_mjs_types7.VovkTypedMethod<(req: vovk2.VovkRequest<{
         email: string;
         profile: {
           name: string;
@@ -217,7 +217,7 @@ declare class UserController {
         notify: "email" | "push" | "none";
       }, unknown, false>;
       toJSONSchema: ((model: any, meta: {
-        validationType: vovk_mjs_types0.VovkValidationType;
+        validationType: vovk_mjs_types7.VovkValidationType;
       }) => any) | undefined;
       validate: (data: unknown, model: NonNullable<z.ZodObject<{
         email: z.ZodEmail;
@@ -225,7 +225,7 @@ declare class UserController {
           name: z.ZodString;
           age: z.ZodInt;
         }, z.core.$strip>;
-      }, z.core.$strip> | vovk_mjs_validation_types0.CombinedSpec<unknown, unknown> | z.ZodObject<{
+      }, z.core.$strip> | vovk_mjs_validation_types4.CombinedSpec<unknown, unknown> | z.ZodObject<{
         id: z.ZodUUID;
       }, z.core.$strip> | z.ZodObject<{
         notify: z.ZodEnum<{
@@ -242,13 +242,13 @@ declare class UserController {
           none: "none";
         }>;
       }, z.core.$strip>>, meta: {
-        validationType: vovk_mjs_types0.VovkValidationType | "form";
-        req: vovk0.VovkRequest<any, any, any>;
+        validationType: vovk_mjs_types7.VovkValidationType | "form";
+        req: vovk2.VovkRequest<any, any, any>;
         status?: number;
         i?: number;
       }) => unknown;
       preferTransformed: boolean;
-      operationObject: vovk_mjs_types0.VovkOperationObject | undefined;
+      operationObject: vovk_mjs_types7.VovkOperationObject | undefined;
     };
   };
 }
@@ -270,8 +270,8 @@ declare class StreamController {
     };
     isRPC?: boolean;
   } & {
-    schema: Omit<vovk_mjs_types0.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk_mjs_types0.VovkHandlerSchema>;
-    wrapper?: ((req: vovk0.VovkRequest<any, any, any>, params: undefined) => AsyncGenerator<{
+    schema: Omit<vovk_mjs_types7.VovkHandlerSchema, "httpMethod" | "path"> & Partial<vovk_mjs_types7.VovkHandlerSchema>;
+    wrapper?: ((req: vovk2.VovkRequest<any, any, any>, params: undefined) => AsyncGenerator<{
       message: string;
     }, void, unknown>) | undefined;
   } & {
@@ -293,7 +293,7 @@ declare class StreamController {
       }, "transform"> & {
         transform: (result: AsyncGenerator<{
           message: string;
-        }, void, unknown>, fakeReq: Pick<vovk0.VovkRequest<any, any, any>, "vovk">) => TTransformed;
+        }, void, unknown>, fakeReq: Pick<vovk2.VovkRequest<any, any, any>, "vovk">) => TTransformed;
       }): Promise<TTransformed>;
       <TReturnType = AsyncGenerator<{
         message: string;
@@ -332,34 +332,34 @@ declare class StreamController {
     };
     definition: {
       isForm: false | undefined;
-      disableServerSideValidation: boolean | vovk_mjs_types0.VovkValidationType[] | undefined;
-      skipSchemaEmission: boolean | vovk_mjs_types0.VovkValidationType[] | undefined;
+      disableServerSideValidation: boolean | vovk_mjs_types7.VovkValidationType[] | undefined;
+      skipSchemaEmission: boolean | vovk_mjs_types7.VovkValidationType[] | undefined;
       validateEachIteration: boolean | undefined;
-      body: vovk_mjs_validation_types0.CombinedSpec<unknown, unknown> | undefined;
-      query: vovk_mjs_validation_types0.CombinedSpec<unknown, unknown> | undefined;
-      params: vovk_mjs_validation_types0.CombinedSpec<unknown, unknown> | undefined;
-      output: vovk_mjs_validation_types0.CombinedSpec<unknown, unknown> | undefined;
+      body: vovk_mjs_validation_types4.CombinedSpec<unknown, unknown> | undefined;
+      query: vovk_mjs_validation_types4.CombinedSpec<unknown, unknown> | undefined;
+      params: vovk_mjs_validation_types4.CombinedSpec<unknown, unknown> | undefined;
+      output: vovk_mjs_validation_types4.CombinedSpec<unknown, unknown> | undefined;
       iteration: z.ZodObject<{
         message: z.ZodString;
       }, z.core.$strip> | undefined;
-      handle: vovk_mjs_types0.VovkTypedMethod<() => AsyncGenerator<{
+      handle: vovk_mjs_types7.VovkTypedMethod<() => AsyncGenerator<{
         message: string;
       }, void, unknown>, unknown, unknown, unknown, unknown, {
         message: string;
       }, false>;
       toJSONSchema: ((model: any, meta: {
-        validationType: vovk_mjs_types0.VovkValidationType;
+        validationType: vovk_mjs_types7.VovkValidationType;
       }) => any) | undefined;
-      validate: (data: unknown, model: NonNullable<vovk_mjs_validation_types0.CombinedSpec<unknown, unknown> | z.ZodObject<{
+      validate: (data: unknown, model: NonNullable<vovk_mjs_validation_types4.CombinedSpec<unknown, unknown> | z.ZodObject<{
         message: z.ZodString;
       }, z.core.$strip>>, meta: {
-        validationType: vovk_mjs_types0.VovkValidationType | "form";
-        req: vovk0.VovkRequest<any, any, any>;
+        validationType: vovk_mjs_types7.VovkValidationType | "form";
+        req: vovk2.VovkRequest<any, any, any>;
         status?: number;
         i?: number;
       }) => unknown;
       preferTransformed: boolean;
-      operationObject: vovk_mjs_types0.VovkOperationObject | undefined;
+      operationObject: vovk_mjs_types7.VovkOperationObject | undefined;
     };
   };
 }

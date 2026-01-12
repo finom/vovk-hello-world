@@ -1,7 +1,34 @@
-const require_chunk = require('./chunk.cjs');
+//#region rolldown:runtime
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __commonJSMin = (cb, mod) => () => (mod || cb((mod = { exports: {} }).exports, mod), mod.exports);
+var __copyProps = (to, from, except, desc) => {
+	if (from && typeof from === "object" || typeof from === "function") {
+		for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
+			key = keys[i];
+			if (!__hasOwnProp.call(to, key) && key !== except) {
+				__defProp(to, key, {
+					get: ((k) => from[k]).bind(null, key),
+					enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+				});
+			}
+		}
+	}
+	return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+	value: mod,
+	enumerable: true
+}) : target, mod));
+
+//#endregion
 
 //#region node_modules/vovk/mjs/types.js
-var require_types = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_types = /* @__PURE__ */ __commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.VovkSchemaIdEnum = exports.HttpStatus = exports.HttpMethod = void 0;
 	/**
@@ -86,7 +113,7 @@ var require_types = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
 
 //#endregion
 //#region node_modules/vovk/mjs/core/HttpException.js
-var require_HttpException = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_HttpException = /* @__PURE__ */ __commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.HttpException = void 0;
 	/**
@@ -120,7 +147,7 @@ var require_HttpException = /* @__PURE__ */ require_chunk.__commonJSMin(((export
 
 //#endregion
 //#region node_modules/vovk/mjs/client/fetcher.js
-var require_fetcher = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_fetcher = /* @__PURE__ */ __commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.fetcher = exports.DEFAULT_ERROR_MESSAGE = void 0;
 	exports.createFetcher = createFetcher;
@@ -232,6 +259,18 @@ var require_fetcher = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => 
 }));
 
 //#endregion
+Object.defineProperty(exports, '__commonJSMin', {
+  enumerable: true,
+  get: function () {
+    return __commonJSMin;
+  }
+});
+Object.defineProperty(exports, '__toESM', {
+  enumerable: true,
+  get: function () {
+    return __toESM;
+  }
+});
 Object.defineProperty(exports, 'require_HttpException', {
   enumerable: true,
   get: function () {

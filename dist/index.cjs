@@ -1,8 +1,7 @@
-const require_chunk = require('./chunk.cjs');
 const require_fetcher$1 = require('./fetcher.cjs');
 
 //#region node_modules/vovk/mjs/client/defaultHandler.js
-var require_defaultHandler = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_defaultHandler = /* @__PURE__ */ require_fetcher$1.__commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.defaultHandler = exports.DEFAULT_ERROR_MESSAGE = void 0;
 	const HttpException_1 = require_fetcher$1.require_HttpException();
@@ -29,7 +28,7 @@ var require_defaultHandler = /* @__PURE__ */ require_chunk.__commonJSMin(((expor
 
 //#endregion
 //#region node_modules/vovk/mjs/utils/shim.js
-var require_shim = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_shim = /* @__PURE__ */ require_fetcher$1.__commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	if (typeof Symbol.dispose !== "symbol") Object.defineProperty(Symbol, "dispose", {
 		configurable: false,
@@ -47,7 +46,7 @@ var require_shim = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
 
 //#endregion
 //#region node_modules/vovk/mjs/client/defaultStreamHandler.js
-var require_defaultStreamHandler = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_defaultStreamHandler = /* @__PURE__ */ require_fetcher$1.__commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.defaultStreamHandler = exports.DEFAULT_ERROR_MESSAGE = void 0;
 	const types_1 = require_fetcher$1.require_types();
@@ -267,7 +266,7 @@ var require_defaultStreamHandler = /* @__PURE__ */ require_chunk.__commonJSMin((
 
 //#endregion
 //#region node_modules/vovk/mjs/client/serializeQuery.js
-var require_serializeQuery = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_serializeQuery = /* @__PURE__ */ require_fetcher$1.__commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.serializeQuery = serializeQuery;
 	/**
@@ -350,7 +349,7 @@ var require_serializeQuery = /* @__PURE__ */ require_chunk.__commonJSMin(((expor
 * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-var require_deepExtend = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_deepExtend = /* @__PURE__ */ require_fetcher$1.__commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.deepExtend = deepExtend;
 	exports.deepCloneArray = deepCloneArray;
@@ -423,7 +422,7 @@ var require_deepExtend = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) 
 
 //#endregion
 //#region node_modules/vovk/mjs/client/createRPC.js
-var require_createRPC = /* @__PURE__ */ require_chunk.__commonJSMin(((exports) => {
+var require_createRPC = /* @__PURE__ */ require_fetcher$1.__commonJSMin(((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.createRPC = void 0;
 	const fetcher_1 = require_fetcher$1.require_fetcher();
@@ -724,16 +723,16 @@ const schema = {
 
 //#endregion
 //#region tmp_prebundle/index.ts
-const UserRPC = (0, import_createRPC.createRPC)(schema, "", "UserRPC", Promise.resolve().then(() => require_chunk.__toDynamicImportESM()(require("./fetcher2.cjs"))), {
-	validateOnClient: Promise.resolve().then(() => require_chunk.__toDynamicImportESM()(require("./vovk-ajv.cjs"))),
+const UserRPC = (0, import_createRPC.createRPC)(schema, "", "UserRPC", Promise.resolve().then(() => /* @__PURE__ */ require_fetcher$1.__toESM(require("./fetcher2.cjs").default)), {
+	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const StreamRPC = (0, import_createRPC.createRPC)(schema, "", "StreamRPC", Promise.resolve().then(() => require_chunk.__toDynamicImportESM()(require("./fetcher2.cjs"))), {
-	validateOnClient: Promise.resolve().then(() => require_chunk.__toDynamicImportESM()(require("./vovk-ajv.cjs"))),
+const StreamRPC = (0, import_createRPC.createRPC)(schema, "", "StreamRPC", Promise.resolve().then(() => /* @__PURE__ */ require_fetcher$1.__toESM(require("./fetcher2.cjs").default)), {
+	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const OpenApiRPC = (0, import_createRPC.createRPC)(schema, "static", "OpenApiRPC", Promise.resolve().then(() => require_chunk.__toDynamicImportESM()(require("./fetcher2.cjs"))), {
-	validateOnClient: Promise.resolve().then(() => require_chunk.__toDynamicImportESM()(require("./vovk-ajv.cjs"))),
+const OpenApiRPC = (0, import_createRPC.createRPC)(schema, "static", "OpenApiRPC", Promise.resolve().then(() => /* @__PURE__ */ require_fetcher$1.__toESM(require("./fetcher2.cjs").default)), {
+	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
 

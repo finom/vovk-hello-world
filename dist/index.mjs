@@ -1,5 +1,4 @@
-import { r as __toDynamicImportESM, t as __commonJSMin } from "./chunk.mjs";
-import { n as require_HttpException, r as require_types, t as require_fetcher } from "./fetcher.mjs";
+import { a as __toESM, i as __commonJSMin, n as require_HttpException, r as require_types, t as require_fetcher } from "./fetcher.mjs";
 
 //#region node_modules/vovk/mjs/client/defaultHandler.js
 var require_defaultHandler = /* @__PURE__ */ __commonJSMin(((exports) => {
@@ -724,16 +723,16 @@ const schema = {
 
 //#endregion
 //#region tmp_prebundle/index.ts
-const UserRPC = (0, import_createRPC.createRPC)(schema, "", "UserRPC", import("./fetcher2.mjs").then(__toDynamicImportESM()), {
-	validateOnClient: import("./vovk-ajv.mjs").then(__toDynamicImportESM()),
+const UserRPC = (0, import_createRPC.createRPC)(schema, "", "UserRPC", import("./fetcher2.mjs").then((m) => /* @__PURE__ */ __toESM(m.default)), {
+	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const StreamRPC = (0, import_createRPC.createRPC)(schema, "", "StreamRPC", import("./fetcher2.mjs").then(__toDynamicImportESM()), {
-	validateOnClient: import("./vovk-ajv.mjs").then(__toDynamicImportESM()),
+const StreamRPC = (0, import_createRPC.createRPC)(schema, "", "StreamRPC", import("./fetcher2.mjs").then((m) => /* @__PURE__ */ __toESM(m.default)), {
+	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const OpenApiRPC = (0, import_createRPC.createRPC)(schema, "static", "OpenApiRPC", import("./fetcher2.mjs").then(__toDynamicImportESM()), {
-	validateOnClient: import("./vovk-ajv.mjs").then(__toDynamicImportESM()),
+const OpenApiRPC = (0, import_createRPC.createRPC)(schema, "static", "OpenApiRPC", import("./fetcher2.mjs").then((m) => /* @__PURE__ */ __toESM(m.default)), {
+	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
 
