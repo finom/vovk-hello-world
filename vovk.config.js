@@ -33,7 +33,7 @@ const config = {
     },
   },
   composedClient: {
-    fromTemplates: ["mjs", "cjs", "py", "rs"],
+    fromTemplates: ["js", "py", "rs"],
     // enabled: true,
     // outDir: "./node_modules/.vovk-client",
     outputConfig: {
