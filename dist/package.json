@@ -1,16 +1,15 @@
 {
-  "main": "./index.cjs",
-  "module": "./index.mjs",
-  "types": "./index.d.mts",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./index.cjs",
-      "types": "./index.d.mts"
+      "default": "./index.js",
+      "types": "./index.d.ts"
     }
   },
   "name": "vovk-hello-world",
-  "version": "0.0.70",
+  "version": "0.0.72",
   "description": "A \"Hello World!\" app built with Next.js, Vovk.ts and Zod. For details, visit https://vovk.dev/hello-world",
   "license": "MIT",
   "repository": {
