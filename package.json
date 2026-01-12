@@ -37,7 +37,7 @@
     "api"
   ],
   "dependencies": {
-    "@scalar/api-reference-react": "^0.8.20",
+    "@scalar/api-reference-react": "^0.8.21",
     "@standard-schema/spec": "^1.1.0",
     "@tanstack/react-query": "^5.90.16",
     "ajv": "^8.17.1",
@@ -45,7 +45,7 @@
     "next": "16.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "vovk": "^3.0.0-beta.118",
+    "vovk": "^3.0.0-beta.119",
     "vovk-ajv": "^0.0.0-beta.17",
     "vovk-client": "^0.0.4-beta.18",
     "zod": "^4.3.5"
@@ -63,7 +63,7 @@
     "tsdown": "^0.19.0",
     "typescript": "^5",
     "vovk-cli": "^0.0.1-beta.80",
-    "vovk-hello-world": "^0.0.70",
+    "vovk-hello-world": "^0.0.72",
     "vovk-python": "^0.0.1-beta.7",
     "vovk-rust": "^0.0.1-beta.9"
   }

@@ -1,6 +1,236 @@
-import { a as HttpStatus, i as HttpException, r as fetcher } from "./fetcher.js";
+//#region rolldown:runtime
+var __defProp = Object.defineProperty;
+var __esmMin = (fn, res) => () => (fn && (res = fn(fn = 0)), res);
+var __exportAll = (all, symbols) => {
+	let target = {};
+	for (var name in all) {
+		__defProp(target, name, {
+			get: all[name],
+			enumerable: true
+		});
+	}
+	if (symbols) {
+		__defProp(target, Symbol.toStringTag, { value: "Module" });
+	}
+	return target;
+};
 
+//#endregion
+//#region node_modules/vovk/dist/types.js
+var HttpMethod, HttpStatus, VovkSchemaIdEnum;
+var init_types = __esmMin(() => {
+	;
+	(function(HttpMethod$1) {
+		HttpMethod$1["GET"] = "GET";
+		HttpMethod$1["POST"] = "POST";
+		HttpMethod$1["PUT"] = "PUT";
+		HttpMethod$1["PATCH"] = "PATCH";
+		HttpMethod$1["DELETE"] = "DELETE";
+		HttpMethod$1["HEAD"] = "HEAD";
+		HttpMethod$1["OPTIONS"] = "OPTIONS";
+	})(HttpMethod || (HttpMethod = {}));
+	;
+	(function(HttpStatus$1) {
+		HttpStatus$1[HttpStatus$1["NULL"] = 0] = "NULL";
+		HttpStatus$1[HttpStatus$1["CONTINUE"] = 100] = "CONTINUE";
+		HttpStatus$1[HttpStatus$1["SWITCHING_PROTOCOLS"] = 101] = "SWITCHING_PROTOCOLS";
+		HttpStatus$1[HttpStatus$1["PROCESSING"] = 102] = "PROCESSING";
+		HttpStatus$1[HttpStatus$1["EARLYHINTS"] = 103] = "EARLYHINTS";
+		HttpStatus$1[HttpStatus$1["OK"] = 200] = "OK";
+		HttpStatus$1[HttpStatus$1["CREATED"] = 201] = "CREATED";
+		HttpStatus$1[HttpStatus$1["ACCEPTED"] = 202] = "ACCEPTED";
+		HttpStatus$1[HttpStatus$1["NON_AUTHORITATIVE_INFORMATION"] = 203] = "NON_AUTHORITATIVE_INFORMATION";
+		HttpStatus$1[HttpStatus$1["NO_CONTENT"] = 204] = "NO_CONTENT";
+		HttpStatus$1[HttpStatus$1["RESET_CONTENT"] = 205] = "RESET_CONTENT";
+		HttpStatus$1[HttpStatus$1["PARTIAL_CONTENT"] = 206] = "PARTIAL_CONTENT";
+		HttpStatus$1[HttpStatus$1["AMBIGUOUS"] = 300] = "AMBIGUOUS";
+		HttpStatus$1[HttpStatus$1["MOVED_PERMANENTLY"] = 301] = "MOVED_PERMANENTLY";
+		HttpStatus$1[HttpStatus$1["FOUND"] = 302] = "FOUND";
+		HttpStatus$1[HttpStatus$1["SEE_OTHER"] = 303] = "SEE_OTHER";
+		HttpStatus$1[HttpStatus$1["NOT_MODIFIED"] = 304] = "NOT_MODIFIED";
+		HttpStatus$1[HttpStatus$1["TEMPORARY_REDIRECT"] = 307] = "TEMPORARY_REDIRECT";
+		HttpStatus$1[HttpStatus$1["PERMANENT_REDIRECT"] = 308] = "PERMANENT_REDIRECT";
+		HttpStatus$1[HttpStatus$1["BAD_REQUEST"] = 400] = "BAD_REQUEST";
+		HttpStatus$1[HttpStatus$1["UNAUTHORIZED"] = 401] = "UNAUTHORIZED";
+		HttpStatus$1[HttpStatus$1["PAYMENT_REQUIRED"] = 402] = "PAYMENT_REQUIRED";
+		HttpStatus$1[HttpStatus$1["FORBIDDEN"] = 403] = "FORBIDDEN";
+		HttpStatus$1[HttpStatus$1["NOT_FOUND"] = 404] = "NOT_FOUND";
+		HttpStatus$1[HttpStatus$1["METHOD_NOT_ALLOWED"] = 405] = "METHOD_NOT_ALLOWED";
+		HttpStatus$1[HttpStatus$1["NOT_ACCEPTABLE"] = 406] = "NOT_ACCEPTABLE";
+		HttpStatus$1[HttpStatus$1["PROXY_AUTHENTICATION_REQUIRED"] = 407] = "PROXY_AUTHENTICATION_REQUIRED";
+		HttpStatus$1[HttpStatus$1["REQUEST_TIMEOUT"] = 408] = "REQUEST_TIMEOUT";
+		HttpStatus$1[HttpStatus$1["CONFLICT"] = 409] = "CONFLICT";
+		HttpStatus$1[HttpStatus$1["GONE"] = 410] = "GONE";
+		HttpStatus$1[HttpStatus$1["LENGTH_REQUIRED"] = 411] = "LENGTH_REQUIRED";
+		HttpStatus$1[HttpStatus$1["PRECONDITION_FAILED"] = 412] = "PRECONDITION_FAILED";
+		HttpStatus$1[HttpStatus$1["PAYLOAD_TOO_LARGE"] = 413] = "PAYLOAD_TOO_LARGE";
+		HttpStatus$1[HttpStatus$1["URI_TOO_LONG"] = 414] = "URI_TOO_LONG";
+		HttpStatus$1[HttpStatus$1["UNSUPPORTED_MEDIA_TYPE"] = 415] = "UNSUPPORTED_MEDIA_TYPE";
+		HttpStatus$1[HttpStatus$1["REQUESTED_RANGE_NOT_SATISFIABLE"] = 416] = "REQUESTED_RANGE_NOT_SATISFIABLE";
+		HttpStatus$1[HttpStatus$1["EXPECTATION_FAILED"] = 417] = "EXPECTATION_FAILED";
+		HttpStatus$1[HttpStatus$1["I_AM_A_TEAPOT"] = 418] = "I_AM_A_TEAPOT";
+		HttpStatus$1[HttpStatus$1["MISDIRECTED"] = 421] = "MISDIRECTED";
+		HttpStatus$1[HttpStatus$1["UNPROCESSABLE_ENTITY"] = 422] = "UNPROCESSABLE_ENTITY";
+		HttpStatus$1[HttpStatus$1["FAILED_DEPENDENCY"] = 424] = "FAILED_DEPENDENCY";
+		HttpStatus$1[HttpStatus$1["PRECONDITION_REQUIRED"] = 428] = "PRECONDITION_REQUIRED";
+		HttpStatus$1[HttpStatus$1["TOO_MANY_TRequestS"] = 429] = "TOO_MANY_TRequestS";
+		HttpStatus$1[HttpStatus$1["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
+		HttpStatus$1[HttpStatus$1["NOT_IMPLEMENTED"] = 501] = "NOT_IMPLEMENTED";
+		HttpStatus$1[HttpStatus$1["BAD_GATEWAY"] = 502] = "BAD_GATEWAY";
+		HttpStatus$1[HttpStatus$1["SERVICE_UNAVAILABLE"] = 503] = "SERVICE_UNAVAILABLE";
+		HttpStatus$1[HttpStatus$1["GATEWAY_TIMEOUT"] = 504] = "GATEWAY_TIMEOUT";
+		HttpStatus$1[HttpStatus$1["HTTP_VERSION_NOT_SUPPORTED"] = 505] = "HTTP_VERSION_NOT_SUPPORTED";
+	})(HttpStatus || (HttpStatus = {}));
+	;
+	(function(VovkSchemaIdEnum$1) {
+		VovkSchemaIdEnum$1["META"] = "https://vovk.dev/api/schema/v3/meta.json";
+		VovkSchemaIdEnum$1["CONFIG"] = "https://vovk.dev/api/schema/v3/config.json";
+		VovkSchemaIdEnum$1["SEGMENT"] = "https://vovk.dev/api/schema/v3/segment.json";
+		VovkSchemaIdEnum$1["SCHEMA"] = "https://vovk.dev/api/schema/v3/schema.json";
+	})(VovkSchemaIdEnum || (VovkSchemaIdEnum = {}));
+});
+
+//#endregion
+//#region node_modules/vovk/dist/core/HttpException.js
+var HttpException;
+var init_HttpException = __esmMin(() => {
+	HttpException = class extends Error {
+		statusCode;
+		message;
+		cause;
+		constructor(statusCode, message, cause) {
+			super(message);
+			this.statusCode = statusCode;
+			this.message = message;
+			this.cause = cause;
+		}
+		toJSON() {
+			return {
+				isError: true,
+				statusCode: this.statusCode,
+				message: this.message,
+				...this.cause ? { cause: this.cause } : {}
+			};
+		}
+	};
+});
+
+//#endregion
+//#region node_modules/vovk/dist/client/fetcher.js
+var fetcher_exports = /* @__PURE__ */ __exportAll({
+	DEFAULT_ERROR_MESSAGE: () => DEFAULT_ERROR_MESSAGE$2,
+	createFetcher: () => createFetcher,
+	fetcher: () => fetcher
+});
+/**
+* Creates a customizable fetcher function for client requests.
+* @see https://vovk.dev/imports
+*/
+function createFetcher({ prepareRequestInit, transformResponse, onSuccess, onError } = {}) {
+	const newFetcher = async ({ httpMethod, getURL, validate, defaultHandler: defaultHandler$1, defaultStreamHandler: defaultStreamHandler$1, schema: schema$1 }, inputOptions) => {
+		let response = null;
+		let respData = null;
+		let requestInit = null;
+		try {
+			const { meta, apiRoot, disableClientValidation, init, interpretAs } = inputOptions;
+			let { body, query, params } = inputOptions;
+			const endpoint = getURL({
+				apiRoot,
+				params,
+				query
+			});
+			const unusedParams = Array.from(new URL(endpoint.startsWith("/") ? `http://localhost${endpoint}` : endpoint).pathname.matchAll(/\{([^}]+)\}/g)).map((m) => m[1]);
+			if (unusedParams.length) throw new HttpException(HttpStatus.NULL, `Unused params: ${unusedParams.join(", ")} in ${endpoint}`, {
+				body,
+				query,
+				params,
+				endpoint
+			});
+			if (!disableClientValidation) try {
+				({body, query, params} = await validate(inputOptions, { endpoint }) ?? {
+					body,
+					query,
+					params
+				});
+			} catch (e) {
+				if (e instanceof HttpException) throw e;
+				throw new HttpException(HttpStatus.NULL, e.message ?? DEFAULT_ERROR_MESSAGE$2, {
+					body,
+					query,
+					params,
+					endpoint
+				});
+			}
+			requestInit = {
+				method: httpMethod,
+				...init,
+				headers: {
+					accept: "application/jsonl, application/json",
+					...body instanceof FormData ? {} : { "content-type": "application/json" },
+					...meta ? { "x-meta": JSON.stringify(meta) } : {},
+					...init?.headers
+				}
+			};
+			if (body instanceof FormData) requestInit.body = body;
+			else if (body) requestInit.body = JSON.stringify(body);
+			const abortController = new AbortController();
+			requestInit.signal = abortController.signal;
+			requestInit = prepareRequestInit ? await prepareRequestInit(requestInit, inputOptions) : requestInit;
+			try {
+				response = await fetch(endpoint, requestInit);
+			} catch (e) {
+				throw new HttpException(HttpStatus.NULL, (e?.message ?? DEFAULT_ERROR_MESSAGE$2) + " " + endpoint, {
+					body,
+					query,
+					params,
+					endpoint
+				});
+			}
+			const contentType = interpretAs ?? response.headers.get("content-type");
+			if (contentType?.startsWith("application/jsonl")) respData = defaultStreamHandler$1({
+				response,
+				abortController
+			});
+			else if (contentType?.startsWith("application/json")) respData = await defaultHandler$1({
+				response,
+				schema: schema$1
+			});
+			else respData = response;
+			respData = transformResponse ? await transformResponse(respData, inputOptions, {
+				response,
+				init: requestInit,
+				schema: schema$1
+			}) : respData;
+			await onSuccess?.(respData, inputOptions, {
+				response,
+				init: requestInit,
+				schema: schema$1
+			});
+			return [respData, response];
+		} catch (error) {
+			await onError?.(error, inputOptions, {
+				response,
+				init: requestInit,
+				respData,
+				schema: schema$1
+			});
+			throw error;
+		}
+	};
+	return newFetcher;
+}
+var DEFAULT_ERROR_MESSAGE$2, fetcher;
+var init_fetcher = __esmMin(() => {
+	init_types();
+	init_HttpException();
+	DEFAULT_ERROR_MESSAGE$2 = "Unknown error at default fetcher";
+	fetcher = createFetcher();
+});
+
+//#endregion
 //#region node_modules/vovk/dist/client/defaultHandler.js
+init_fetcher();
+init_HttpException();
 const DEFAULT_ERROR_MESSAGE$1 = "Unknown error at defaultHandler";
 const getNestedValue = (obj, path) => {
 	return path.split(".").reduce((o, key) => o && typeof o === "object" ? o[key] : void 0, obj);
@@ -37,6 +267,8 @@ if (typeof Symbol.asyncDispose !== "symbol") Object.defineProperty(Symbol, "asyn
 
 //#endregion
 //#region node_modules/vovk/dist/client/defaultStreamHandler.js
+init_types();
+init_HttpException();
 const DEFAULT_ERROR_MESSAGE = "An unknown error at defaultStreamHandler";
 const defaultStreamHandler = ({ response, abortController }) => {
 	if (!response.ok) {
@@ -683,15 +915,15 @@ const schema = {
 
 //#endregion
 //#region tmp_prebundle/index.ts
-const UserRPC = createRPC(schema, "", "UserRPC", import("./fetcher2.js"), {
+const UserRPC = createRPC(schema, "", "UserRPC", Promise.resolve().then(() => (init_fetcher(), fetcher_exports)), {
 	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const StreamRPC = createRPC(schema, "", "StreamRPC", import("./fetcher2.js"), {
+const StreamRPC = createRPC(schema, "", "StreamRPC", Promise.resolve().then(() => (init_fetcher(), fetcher_exports)), {
 	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });
-const OpenApiRPC = createRPC(schema, "static", "OpenApiRPC", import("./fetcher2.js"), {
+const OpenApiRPC = createRPC(schema, "static", "OpenApiRPC", Promise.resolve().then(() => (init_fetcher(), fetcher_exports)), {
 	validateOnClient: void 0,
 	apiRoot: "https://hello-world.vovk.dev/api"
 });

@@ -57,8 +57,10 @@ const config = {
     build: async ({ entry, outDir }) => {
       const { build } = await import("tsdown");
       await build({
-        entry,
-        dts: true,
+        entry: { index: entry },
+        dts: {
+          resolve: [/^(?!.*webpack)/],
+        },
         format: 'esm',
         hash: false,
         fixedExtension: true,
@@ -66,12 +68,15 @@ const config = {
         outDir,
         platform: 'neutral',
         outExtensions: () => ({ js: '.js', dts: '.d.ts' }),
+        outputOptions: {
+          inlineDynamicImports: true,
+        },
         inputOptions: {
           resolve: {
             mainFields: ['module', 'main'],
           },
         },
-        noExternal: ['vovk', 'vovk/*', 'vovk-ajv', 'ajv/**', 'ajv-errors', 'ajv-formats/**'],
+        noExternal: ['vovk/**', 'vovk-ajv', 'ajv/**', 'ajv-errors', 'ajv-formats/**'],
       });
     },
   },
