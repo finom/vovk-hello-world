@@ -18,7 +18,7 @@
 
 ---
 
-## vovk-hello-world [![npm version](https://badge.fury.io/js/vovk-hello-world.svg)](https://www.npmjs.com/package/vovk-hello-world) [![crates.io](https://img.shields.io/crates/v/vovk-hello-world.svg)](https://crates.io/crates/vovk-hello-world) [![PyPI version](https://badge.fury.io/py/vovk-hello-world.svg)](https://pypi.org/project/vovk-hello-world/)
+## vovk-hello-world [![CI](https://github.com/finom/vovk-hello-world/actions/workflows/main.yml/badge.svg)](https://github.com/finom/vovk-hello-world/actions/workflows/main.yml) [![npm version](https://badge.fury.io/js/vovk-hello-world.svg)](https://www.npmjs.com/package/vovk-hello-world) [![crates.io](https://img.shields.io/crates/v/vovk-hello-world.svg)](https://crates.io/crates/vovk-hello-world) [![PyPI version](https://badge.fury.io/py/vovk-hello-world.svg)](https://pypi.org/project/vovk-hello-world/)
 
 A "Hello, World!" example for Vovk.ts with JSON and JSONLines endpoints, [OpenAPI spec](https://vovk.dev/openapi) and Zod validation. The client libraries are published on [NPM](https://www.npmjs.com/package/vovk-hello-world), [Crates](https://crates.io/crates/vovk_hello_world) and [PyPI](https://pypi.org/project/vovk-hello-world/).
 
