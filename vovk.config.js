@@ -59,24 +59,30 @@ const config = {
       await build({
         entry: { index: entry },
         dts: {
-          resolve: [/^(?!.*webpack)/],
+          resolve: true,
         },
-        format: 'esm',
+        format: "esm",
         hash: false,
         fixedExtension: true,
         clean: true,
         outDir,
-        platform: 'neutral',
-        outExtensions: () => ({ js: '.js', dts: '.d.ts' }),
+        platform: "neutral",
+        outExtensions: () => ({ js: ".js", dts: ".d.ts" }),
         outputOptions: {
           inlineDynamicImports: true,
         },
         inputOptions: {
           resolve: {
-            mainFields: ['module', 'main'],
+            mainFields: ["module", "main"],
           },
         },
-        noExternal: ['vovk/**', 'vovk-ajv', 'ajv/**', 'ajv-errors', 'ajv-formats/**'],
+        noExternal: [
+          "vovk/**",
+          "vovk-ajv",
+          "ajv/**",
+          "ajv-errors",
+          "ajv-formats/**",
+        ],
       });
     },
   },

@@ -20,6 +20,7 @@
   "bugs": {
     "url": "https://github.com/finom/vovk-hello-world/issues"
   },
+  "author": "Andrey Gubanov",
   "keywords": [
     "vovk",
     "openapi",

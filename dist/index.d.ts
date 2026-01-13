@@ -1,2842 +1,7 @@
-/// <reference types="node" preserve="true" />
-/// <reference types="react" preserve="true" />
-/// <reference types="react/experimental" preserve="true" />
-/// <reference types="react-dom" preserve="true" />
-/// <reference types="react-dom/experimental" preserve="true" />
-import { webpack } from "next/dist/compiled/webpack/webpack";
-import React$1 from "react";
-import { Agent, IncomingHttpHeaders, IncomingMessage, OutgoingHttpHeaders, ServerResponse } from "http";
-import { Agent as Agent$1 } from "https";
-import { ParsedUrlQuery } from "querystring";
-import * as react_jsx_runtime0 from "react/jsx-runtime";
-import { Readable } from "stream";
-import fs$1 from "fs";
+import { NextResponse } from "next/server.js";
 
-//#region node_modules/next/dist/shared/lib/constants.d.ts
-declare const COMPILER_NAMES: {
-  readonly client: "client";
-  readonly server: "server";
-  readonly edgeServer: "edge-server";
-};
-//#endregion
-//#region node_modules/next/dist/lib/load-custom-routes.d.ts
-type RouteHas = {
-  type: 'header' | 'cookie' | 'query';
-  key: string;
-  value?: string;
-} | {
-  type: 'host';
-  key?: undefined;
-  value: string;
-};
-type Rewrite = {
-  source: string;
-  destination: string;
-  basePath?: false;
-  locale?: false;
-  has?: RouteHas[];
-  missing?: RouteHas[];
-};
-type Header = {
-  source: string;
-  basePath?: false;
-  locale?: false;
-  headers: Array<{
-    key: string;
-    value: string;
-  }>;
-  has?: RouteHas[];
-  missing?: RouteHas[];
-};
-type Redirect = {
-  source: string;
-  destination: string;
-  basePath?: false;
-  locale?: false;
-  has?: RouteHas[];
-  missing?: RouteHas[];
-  priority?: boolean;
-} & ({
-  statusCode?: never;
-  permanent: boolean;
-} | {
-  statusCode: number;
-  permanent?: never;
-});
-//#endregion
-//#region node_modules/next/dist/shared/lib/image-config.d.ts
-declare const VALID_LOADERS: readonly ["default", "imgix", "cloudinary", "akamai", "custom"];
-type LoaderValue = (typeof VALID_LOADERS)[number];
-type LocalPattern = {
-  /**
-   * Can be literal or wildcard.
-   * Single `*` matches a single path segment.
-   * Double `**` matches any number of path segments.
-   */
-  pathname?: string;
-  /**
-   * Can be literal query string such as `?v=1` or
-   * empty string meaning no query string.
-   */
-  search?: string;
-};
-type RemotePattern = {
-  /**
-   * Must be `http` or `https`.
-   */
-  protocol?: 'http' | 'https';
-  /**
-   * Can be literal or wildcard.
-   * Single `*` matches a single subdomain.
-   * Double `**` matches any number of subdomains.
-   */
-  hostname: string;
-  /**
-   * Can be literal port such as `8080` or empty string
-   * meaning no port.
-   */
-  port?: string;
-  /**
-   * Can be literal or wildcard.
-   * Single `*` matches a single path segment.
-   * Double `**` matches any number of path segments.
-   */
-  pathname?: string;
-  /**
-   * Can be literal query string such as `?v=1` or
-   * empty string meaning no query string.
-   */
-  search?: string;
-};
-type ImageFormat = 'image/avif' | 'image/webp';
-/**
- * Image configurations
- *
- * @see [Image configuration options](https://nextjs.org/docs/api-reference/next/image#configuration-options)
- */
-type ImageConfigComplete = {
-  /** @see [Device sizes documentation](https://nextjs.org/docs/api-reference/next/image#device-sizes) */
-  deviceSizes: number[];
-  /** @see [Image sizing documentation](https://nextjs.org/docs/app/building-your-application/optimizing/images#image-sizing) */
-  imageSizes: number[];
-  /** @see [Image loaders configuration](https://nextjs.org/docs/api-reference/next/legacy/image#loader) */
-  loader: LoaderValue;
-  /** @see [Image loader configuration](https://nextjs.org/docs/app/api-reference/components/image#path) */
-  path: string;
-  /** @see [Image loader configuration](https://nextjs.org/docs/api-reference/next/image#loader-configuration) */
-  loaderFile: string;
-  /**
-   * @deprecated Use `remotePatterns` instead.
-   */
-  domains: string[];
-  /** @see [Disable static image import configuration](https://nextjs.org/docs/api-reference/next/image#disable-static-imports) */
-  disableStaticImages: boolean;
-  /** @see [Cache behavior](https://nextjs.org/docs/api-reference/next/image#caching-behavior) */
-  minimumCacheTTL: number;
-  /** @see [Acceptable formats](https://nextjs.org/docs/api-reference/next/image#acceptable-formats) */
-  formats: ImageFormat[];
-  /** @see [Maximum Redirects](https://nextjs.org/docs/api-reference/next/image#maximumredirects) */
-  maximumRedirects: number;
-  /** @see [Dangerously Allow Local IP](https://nextjs.org/docs/api-reference/next/image#dangerously-allow-local-ip) */
-  dangerouslyAllowLocalIP: boolean;
-  /** @see [Dangerously Allow SVG](https://nextjs.org/docs/api-reference/next/image#dangerously-allow-svg) */
-  dangerouslyAllowSVG: boolean;
-  /** @see [Content Security Policy](https://nextjs.org/docs/api-reference/next/image#contentsecuritypolicy) */
-  contentSecurityPolicy: string;
-  /** @see [Content Disposition Type](https://nextjs.org/docs/api-reference/next/image#contentdispositiontype) */
-  contentDispositionType: 'inline' | 'attachment';
-  /** @see [Remote Patterns](https://nextjs.org/docs/api-reference/next/image#remotepatterns) */
-  remotePatterns: Array<URL | RemotePattern>;
-  /** @see [Local Patterns](https://nextjs.org/docs/api-reference/next/image#localPatterns) */
-  localPatterns: LocalPattern[] | undefined;
-  /** @see [Qualities](https://nextjs.org/docs/api-reference/next/image#qualities) */
-  qualities: number[] | undefined;
-  /** @see [Unoptimized](https://nextjs.org/docs/api-reference/next/image#unoptimized) */
-  unoptimized: boolean;
-};
-type ImageConfig = Partial<ImageConfigComplete>;
-//#endregion
-//#region node_modules/next/dist/build/webpack/plugins/subresource-integrity-plugin.d.ts
-type SubresourceIntegrityAlgorithm = 'sha256' | 'sha384' | 'sha512';
-//#endregion
-//#region node_modules/next/dist/server/base-http/index.d.ts
-type FetchMetric = {
-  url: string;
-  idx: number;
-  end: number;
-  start: number;
-  method: string;
-  status: number;
-  cacheReason: string;
-  cacheStatus: 'hit' | 'miss' | 'skip' | 'hmr';
-  cacheWarning?: string;
-};
-type FetchMetrics = Array<FetchMetric>;
-declare abstract class BaseNextRequest<Body = any> {
-  method: string;
-  url: string;
-  body: Body;
-  protected _cookies: NextApiRequestCookies | undefined;
-  abstract headers: IncomingHttpHeaders;
-  abstract fetchMetrics: FetchMetric[] | undefined;
-  constructor(method: string, url: string, body: Body);
-  get cookies(): Partial<{
-    [key: string]: string;
-  }>;
-}
-//#endregion
-//#region node_modules/next/dist/server/api-utils/index.d.ts
-type NextApiRequestCookies = Partial<{
-  [key: string]: string;
-}>;
-type __ApiPreviewProps = {
-  previewModeId: string;
-  previewModeEncryptionKey: string;
-  previewModeSigningKey: string;
-};
-//#endregion
-//#region node_modules/next/dist/server/lib/experimental/ppr.d.ts
-/**
- * If set to `incremental`, only those leaf pages that export
- * `experimental_ppr = true` will have partial prerendering enabled. If any
- * page exports this value as `false` or does not export it at all will not
- * have partial prerendering enabled. If set to a boolean, the options for
- * `experimental_ppr` will be ignored.
- */
-type ExperimentalPPRConfig = boolean | 'incremental';
-//#endregion
-//#region node_modules/next/dist/build/analysis/get-page-static-info.d.ts
-type ProxyMatcher = {
-  regexp: string;
-  locale?: false;
-  has?: RouteHas[];
-  missing?: RouteHas[];
-  originalSource: string;
-};
-//#endregion
-//#region node_modules/next/dist/lib/constants.d.ts
-declare const TEXT_PLAIN_CONTENT_TYPE_HEADER = "text/plain";
-declare const HTML_CONTENT_TYPE_HEADER = "text/html; charset=utf-8";
-declare const JSON_CONTENT_TYPE_HEADER = "application/json; charset=utf-8";
-//#endregion
-//#region node_modules/next/dist/compiled/@edge-runtime/cookies/index.d.ts
-/**
- * Basic HTTP cookie parser and serializer for HTTP servers.
- */
-
-/**
- * Additional serialization options
- */
-interface CookieSerializeOptions {
-  /**
-   * Specifies the value for the {@link https://tools.ietf.org/html/rfc6265#section-5.2.3|Domain Set-Cookie attribute}. By default, no
-   * domain is set, and most clients will consider the cookie to apply to only
-   * the current domain.
-   */
-  domain?: string | undefined;
-
-  /**
-   * Specifies a function that will be used to encode a cookie's value. Since
-   * value of a cookie has a limited character set (and must be a simple
-   * string), this function can be used to encode a value into a string suited
-   * for a cookie's value.
-   *
-   * The default function is the global `encodeURIComponent`, which will
-   * encode a JavaScript string into UTF-8 byte sequences and then URL-encode
-   * any that fall outside of the cookie range.
-   */
-  encode?(value: string): string;
-
-  /**
-   * Specifies the `Date` object to be the value for the {@link https://tools.ietf.org/html/rfc6265#section-5.2.1|`Expires` `Set-Cookie` attribute}. By default,
-   * no expiration is set, and most clients will consider this a "non-persistent cookie" and will delete
-   * it on a condition like exiting a web browser application.
-   *
-   * *Note* the {@link https://tools.ietf.org/html/rfc6265#section-5.3|cookie storage model specification}
-   * states that if both `expires` and `maxAge` are set, then `maxAge` takes precedence, but it is
-   * possible not all clients by obey this, so if both are set, they should
-   * point to the same date and time.
-   */
-  expires?: Date | undefined;
-  /**
-   * Specifies the boolean value for the {@link https://tools.ietf.org/html/rfc6265#section-5.2.6|`HttpOnly` `Set-Cookie` attribute}.
-   * When truthy, the `HttpOnly` attribute is set, otherwise it is not. By
-   * default, the `HttpOnly` attribute is not set.
-   *
-   * *Note* be careful when setting this to true, as compliant clients will
-   * not allow client-side JavaScript to see the cookie in `document.cookie`.
-   */
-  httpOnly?: boolean | undefined;
-  /**
-   * Specifies the number (in seconds) to be the value for the `Max-Age`
-   * `Set-Cookie` attribute. The given number will be converted to an integer
-   * by rounding down. By default, no maximum age is set.
-   *
-   * *Note* the {@link https://tools.ietf.org/html/rfc6265#section-5.3|cookie storage model specification}
-   * states that if both `expires` and `maxAge` are set, then `maxAge` takes precedence, but it is
-   * possible not all clients by obey this, so if both are set, they should
-   * point to the same date and time.
-   */
-  maxAge?: number | undefined;
-  /**
-   * Specifies the `boolean` value for the [`Partitioned` `Set-Cookie`](rfc-cutler-httpbis-partitioned-cookies)
-   * attribute. When truthy, the `Partitioned` attribute is set, otherwise it is not. By default, the
-   * `Partitioned` attribute is not set.
-   *
-   * **note** This is an attribute that has not yet been fully standardized, and may change in the future.
-   * This also means many clients may ignore this attribute until they understand it.
-   *
-   * More information about can be found in [the proposal](https://github.com/privacycg/CHIPS)
-   */
-  partitioned?: boolean | undefined;
-  /**
-   * Specifies the value for the {@link https://tools.ietf.org/html/rfc6265#section-5.2.4|`Path` `Set-Cookie` attribute}.
-   * By default, the path is considered the "default path".
-   */
-  path?: string | undefined;
-  /**
-   * Specifies the `string` to be the value for the [`Priority` `Set-Cookie` attribute][rfc-west-cookie-priority-00-4.1].
-   *
-   * - `'low'` will set the `Priority` attribute to `Low`.
-   * - `'medium'` will set the `Priority` attribute to `Medium`, the default priority when not set.
-   * - `'high'` will set the `Priority` attribute to `High`.
-   *
-   * More information about the different priority levels can be found in
-   * [the specification][rfc-west-cookie-priority-00-4.1].
-   *
-   * **note** This is an attribute that has not yet been fully standardized, and may change in the future.
-   * This also means many clients may ignore this attribute until they understand it.
-   */
-  priority?: "low" | "medium" | "high" | undefined;
-  /**
-   * Specifies the boolean or string to be the value for the {@link https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.2.7|`SameSite` `Set-Cookie` attribute}.
-   *
-   * - `true` will set the `SameSite` attribute to `Strict` for strict same
-   * site enforcement.
-   * - `false` will not set the `SameSite` attribute.
-   * - `'lax'` will set the `SameSite` attribute to Lax for lax same site
-   * enforcement.
-   * - `'strict'` will set the `SameSite` attribute to Strict for strict same
-   * site enforcement.
-   *  - `'none'` will set the SameSite attribute to None for an explicit
-   *  cross-site cookie.
-   *
-   * More information about the different enforcement levels can be found in {@link https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.2.7|the specification}.
-   *
-   * *note* This is an attribute that has not yet been fully standardized, and may change in the future. This also means many clients may ignore this attribute until they understand it.
-   */
-  sameSite?: true | false | "lax" | "strict" | "none" | undefined;
-  /**
-   * Specifies the boolean value for the {@link https://tools.ietf.org/html/rfc6265#section-5.2.5|`Secure` `Set-Cookie` attribute}. When truthy, the
-   * `Secure` attribute is set, otherwise it is not. By default, the `Secure` attribute is not set.
-   *
-   * *Note* be careful when setting this to `true`, as compliant clients will
-   * not send the cookie back to the server in the future if the browser does
-   * not have an HTTPS connection.
-   */
-  secure?: boolean | undefined;
-}
-
-/**
- * {@link https://wicg.github.io/cookie-store/#dictdef-cookielistitem CookieListItem}
- * as specified by W3C.
- */
-interface CookieListItem extends Pick<CookieSerializeOptions, 'domain' | 'path' | 'secure' | 'sameSite' | 'partitioned'> {
-  /** A string with the name of a cookie. */
-  name: string;
-  /** A string containing the value of the cookie. */
-  value: string;
-  /** A number of milliseconds or Date interface containing the expires of the cookie. */
-  expires?: number | CookieSerializeOptions['expires'];
-}
-/**
- * Superset of {@link CookieListItem} extending it with
- * the `httpOnly`, `maxAge` and `priority` properties.
- */
-type ResponseCookie = CookieListItem & Pick<CookieSerializeOptions, 'httpOnly' | 'maxAge' | 'priority'>;
-/**
- * Subset of {@link CookieListItem}, only containing `name` and `value`
- * since other cookie attributes aren't be available on a `Request`.
- */
-type RequestCookie = Pick<CookieListItem, 'name' | 'value'>;
-
-/**
- * A class for manipulating {@link Request} cookies (`Cookie` header).
- */
-declare class RequestCookies {
-  constructor(requestHeaders: Headers);
-  [Symbol.iterator](): MapIterator<[string, RequestCookie]>;
-  /**
-   * The amount of cookies received from the client
-   */
-  get size(): number;
-  get(...args: [name: string] | [RequestCookie]): RequestCookie | undefined;
-  getAll(...args: [name: string] | [RequestCookie] | []): RequestCookie[];
-  has(name: string): boolean;
-  set(...args: [key: string, value: string] | [options: RequestCookie]): this;
-  /**
-   * Delete the cookies matching the passed name or names in the request.
-   */
-  delete(/** Name or names of the cookies to be deleted  */
-  names: string | string[]): boolean | boolean[];
-  /**
-   * Delete all the cookies in the cookies in the request.
-   */
-  clear(): this;
-  toString(): string;
-}
-
-/**
- * A class for manipulating {@link Response} cookies (`Set-Cookie` header).
- * Loose implementation of the experimental [Cookie Store API](https://wicg.github.io/cookie-store/#dictdef-cookie)
- * The main difference is `ResponseCookies` methods do not return a Promise.
- */
-declare class ResponseCookies {
-  constructor(responseHeaders: Headers);
-  /**
-   * {@link https://wicg.github.io/cookie-store/#CookieStore-get CookieStore#get} without the Promise.
-   */
-  get(...args: [key: string] | [options: ResponseCookie]): ResponseCookie | undefined;
-  /**
-   * {@link https://wicg.github.io/cookie-store/#CookieStore-getAll CookieStore#getAll} without the Promise.
-   */
-  getAll(...args: [key: string] | [options: ResponseCookie] | []): ResponseCookie[];
-  has(name: string): boolean;
-  /**
-   * {@link https://wicg.github.io/cookie-store/#CookieStore-set CookieStore#set} without the Promise.
-   */
-  set(...args: [key: string, value: string, cookie?: Partial<ResponseCookie>] | [options: ResponseCookie]): this;
-  /**
-   * {@link https://wicg.github.io/cookie-store/#CookieStore-delete CookieStore#delete} without the Promise.
-   */
-  delete(...args: [key: string] | [options: Omit<ResponseCookie, 'value' | 'expires'>]): this;
-  toString(): string;
-}
-//#endregion
-//#region node_modules/next/dist/shared/lib/app-router-types.d.ts
-type DynamicParamTypes = 'catchall' | 'catchall-intercepted-(..)(..)' | 'catchall-intercepted-(.)' | 'catchall-intercepted-(..)' | 'catchall-intercepted-(...)' | 'optional-catchall' | 'dynamic' | 'dynamic-intercepted-(..)(..)' | 'dynamic-intercepted-(.)' | 'dynamic-intercepted-(..)' | 'dynamic-intercepted-(...)';
-type DynamicParamTypesShort = 'c' | 'ci(..)(..)' | 'ci(.)' | 'ci(..)' | 'ci(...)' | 'oc' | 'd' | 'di(..)(..)' | 'di(.)' | 'di(..)' | 'di(...)';
-//#endregion
-//#region node_modules/next/dist/server/request/fallback-params.d.ts
-type OpaqueFallbackRouteParamValue = [
-/**
- * The search value of the fallback route param. This is the opaque key
- * that will be used to replace the dynamic param in the postponed state.
- */
-searchValue: string,
-/**
- * The dynamic param type of the fallback route param. This is the type of
- * the dynamic param that will be used to replace the dynamic param in the
- * postponed state.
- */
-dynamicParamType: DynamicParamTypesShort];
-/**
- * An opaque fallback route params object. This is used to store the fallback
- * route params in a way that is not easily accessible to the client.
- */
-type OpaqueFallbackRouteParams = ReadonlyMap<string, OpaqueFallbackRouteParamValue>;
-//#endregion
-//#region node_modules/next/dist/server/lib/cache-control.d.ts
-/**
- * The revalidate option used internally for pages. A value of `false` means
- * that the page should not be revalidated. A number means that the page
- * should be revalidated after the given number of seconds (this also includes
- * `1` which means to revalidate after 1 second). A value of `0` is not a valid
- * value for this option.
- */
-type Revalidate = number | false;
-interface CacheControl {
-  revalidate: Revalidate;
-  expire: number | undefined;
-}
-//#endregion
-//#region node_modules/next/dist/server/lib/cache-handlers/types.d.ts
-/**
- * A timestamp in milliseconds elapsed since the epoch
- */
-type Timestamp = number;
-interface CacheEntry {
-  /**
-   * The ReadableStream can error and only have partial data so any cache
-   * handlers need to handle this case and decide to keep the partial cache
-   * around or not.
-   */
-  value: ReadableStream<Uint8Array>;
-  /**
-   * The tags configured for the entry excluding soft tags
-   */
-  tags: string[];
-  /**
-   * This is for the client, not used to calculate cache entry expiration
-   * [duration in seconds]
-   */
-  stale: number;
-  /**
-   * When the cache entry was created [timestamp in milliseconds]
-   */
-  timestamp: Timestamp;
-  /**
-   * How long the entry is allowed to be used (should be longer than revalidate)
-   * [duration in seconds]
-   */
-  expire: number;
-  /**
-   * How long until the entry should be revalidated [duration in seconds]
-   */
-  revalidate: number;
-}
-//#endregion
-//#region node_modules/next/dist/server/resume-data-cache/cache-store.d.ts
-/**
- * A generic cache store type that provides a subset of Map functionality
- */
-type CacheStore<T$1> = Pick<Map<string, T$1>, 'entries' | 'keys' | 'size' | 'get' | 'set'>;
-/**
- * A cache store specifically for fetch cache values
- */
-type FetchCacheStore = CacheStore<CachedFetchValue>;
-/**
- * A cache store for encrypted bound args of inline server functions.
- */
-type EncryptedBoundArgsCacheStore = CacheStore<string>;
-/**
- * An in-memory-only cache store for decrypted bound args of inline server
- * functions.
- */
-type DecryptedBoundArgsCacheStore = CacheStore<string>;
-/**
- * A cache store specifically for "use cache" values that stores promises of
- * cache entries.
- */
-type UseCacheCacheStore = CacheStore<Promise<CacheEntry>>;
-//#endregion
-//#region node_modules/next/dist/server/resume-data-cache/resume-data-cache.d.ts
-/**
- * An immutable version of the resume data cache used during rendering.
- * This cache is read-only and cannot be modified once created.
- */
-interface RenderResumeDataCache {
-  /**
-   * A read-only Map store for values cached by the 'use cache' React hook.
-   * The 'set' operation is omitted to enforce immutability.
-   */
-  readonly cache: Omit<UseCacheCacheStore, 'set'>;
-  /**
-   * A read-only Map store for cached fetch responses.
-   * The 'set' operation is omitted to enforce immutability.
-   */
-  readonly fetch: Omit<FetchCacheStore, 'set'>;
-  /**
-   * A read-only Map store for encrypted bound args of inline server functions.
-   * The 'set' operation is omitted to enforce immutability.
-   */
-  readonly encryptedBoundArgs: Omit<EncryptedBoundArgsCacheStore, 'set'>;
-  /**
-   * A read-only Map store for decrypted bound args of inline server functions.
-   * This is only intended for in-memory usage during pre-rendering, and must
-   * not be persisted in the resume store. The 'set' operation is omitted to
-   * enforce immutability.
-   */
-  readonly decryptedBoundArgs: Omit<DecryptedBoundArgsCacheStore, 'set'>;
-}
-//#endregion
-//#region node_modules/next/dist/client/components/app-router-headers.d.ts
-declare const RSC_CONTENT_TYPE_HEADER: "text/x-component";
-declare const NEXT_RSC_UNION_QUERY: "_rsc";
-//#endregion
-//#region node_modules/next/dist/server/render-result.d.ts
-type ContentTypeOption = typeof RSC_CONTENT_TYPE_HEADER | typeof HTML_CONTENT_TYPE_HEADER | typeof JSON_CONTENT_TYPE_HEADER | typeof TEXT_PLAIN_CONTENT_TYPE_HEADER;
-type AppPageRenderResultMetadata = {
-  flightData?: Buffer;
-  cacheControl?: CacheControl;
-  staticBailoutInfo?: {
-    stack?: string;
-    description?: string;
-  };
-  /**
-   * The postponed state if the render had postponed and needs to be resumed.
-   */
-  postponed?: string;
-  /**
-   * The headers to set on the response that were added by the render.
-   */
-  headers?: OutgoingHttpHeaders;
-  statusCode?: number;
-  fetchTags?: string;
-  fetchMetrics?: FetchMetrics;
-  segmentData?: Map<string, Buffer>;
-  /**
-   * In development, the resume data cache is warmed up before the render. This
-   * is attached to the metadata so that it can be used during the render. When
-   * prerendering, the filled resume data cache is also attached to the metadata
-   * so that it can be used when prerendering matching fallback shells.
-   */
-  renderResumeDataCache?: RenderResumeDataCache;
-};
-type PagesRenderResultMetadata = {
-  pageData?: any;
-  cacheControl?: CacheControl;
-  assetQueryString?: string;
-  isNotFound?: boolean;
-  isRedirect?: boolean;
-};
-type StaticRenderResultMetadata = {};
-type RenderResultMetadata = AppPageRenderResultMetadata & PagesRenderResultMetadata & StaticRenderResultMetadata;
-type RenderResultResponse = ReadableStream<Uint8Array>[] | ReadableStream<Uint8Array> | string | Buffer | null;
-type RenderResultOptions<Metadata extends RenderResultMetadata = RenderResultMetadata> = {
-  contentType: ContentTypeOption | null;
-  waitUntil?: Promise<unknown>;
-  metadata: Metadata;
-};
-declare class RenderResult<Metadata extends RenderResultMetadata = RenderResultMetadata> {
-  /**
-   * The detected content type for the response. This is used to set the
-   * `Content-Type` header.
-   */
-  readonly contentType: ContentTypeOption | null;
-  /**
-   * The metadata for the response. This is used to set the revalidation times
-   * and other metadata.
-   */
-  readonly metadata: Readonly<Metadata>;
-  /**
-   * The response itself. This can be a string, a stream, or null. If it's a
-   * string, then it's a static response. If it's a stream, then it's a
-   * dynamic response. If it's null, then the response was not found or was
-   * already sent.
-   */
-  private response;
-  /**
-   * A render result that represents an empty response. This is used to
-   * represent a response that was not found or was already sent.
-   */
-  static readonly EMPTY: RenderResult<StaticRenderResultMetadata>;
-  /**
-   * Creates a new RenderResult instance from a static response.
-   *
-   * @param value the static response value
-   * @param contentType the content type of the response
-   * @returns a new RenderResult instance
-   */
-  static fromStatic(value: string | Buffer, contentType: ContentTypeOption): RenderResult<StaticRenderResultMetadata>;
-  private readonly waitUntil?;
-  constructor(response: RenderResultResponse, {
-    contentType,
-    waitUntil,
-    metadata
-  }: RenderResultOptions<Metadata>);
-  assignMetadata(metadata: Metadata): void;
-  /**
-   * Returns true if the response is null. It can be null if the response was
-   * not found or was already sent.
-   */
-  get isNull(): boolean;
-  /**
-   * Returns false if the response is a string. It can be a string if the page
-   * was prerendered. If it's not, then it was generated dynamically.
-   */
-  get isDynamic(): boolean;
-  /**
-   * Returns the response if it is a string. If the page was dynamic, this will
-   * return a promise if the `stream` option is true, or it will throw an error.
-   *
-   * @param stream Whether or not to return a promise if the response is dynamic
-   * @returns The response as a string
-   */
-  toUnchunkedString(stream?: false): string;
-  toUnchunkedString(stream: true): Promise<string>;
-  /**
-   * Returns a readable stream of the response.
-   */
-  private get readable();
-  /**
-   * Coerces the response to an array of streams. This will convert the response
-   * to an array of streams if it is not already one.
-   *
-   * @returns An array of streams
-   */
-  private coerce;
-  /**
-   * Unshifts a new stream to the response. This will convert the response to an
-   * array of streams if it is not already one and will add the new stream to
-   * the start of the array. When this response is piped, all of the streams
-   * will be piped one after the other.
-   *
-   * @param readable The new stream to unshift
-   */
-  unshift(readable: ReadableStream<Uint8Array>): void;
-  /**
-   * Chains a new stream to the response. This will convert the response to an
-   * array of streams if it is not already one and will add the new stream to
-   * the end. When this response is piped, all of the streams will be piped
-   * one after the other.
-   *
-   * @param readable The new stream to chain
-   */
-  push(readable: ReadableStream<Uint8Array>): void;
-  /**
-   * Pipes the response to a writable stream. This will close/cancel the
-   * writable stream if an error is encountered. If this doesn't throw, then
-   * the writable stream will be closed or aborted.
-   *
-   * @param writable Writable stream to pipe the response to
-   */
-  pipeTo(writable: WritableStream<Uint8Array>): Promise<void>;
-  /**
-   * Pipes the response to a node response. This will close/cancel the node
-   * response if an error is encountered.
-   *
-   * @param res
-   */
-  pipeToNodeResponse(res: ServerResponse): Promise<void>;
-}
-//#endregion
-//#region node_modules/next/dist/server/route-kind.d.ts
-declare const enum RouteKind {
-  /**
-   * `PAGES` represents all the React pages that are under `pages/`.
-   */
-  PAGES = "PAGES",
-  /**
-   * `PAGES_API` represents all the API routes under `pages/api/`.
-   */
-  PAGES_API = "PAGES_API",
-  /**
-   * `APP_PAGE` represents all the React pages that are under `app/` with the
-   * filename of `page.{j,t}s{,x}`.
-   */
-  APP_PAGE = "APP_PAGE",
-  /**
-   * `APP_ROUTE` represents all the API routes and metadata routes that are under `app/` with the
-   * filename of `route.{j,t}s{,x}`.
-   */
-  APP_ROUTE = "APP_ROUTE",
-  /**
-   * `IMAGE` represents all the images that are generated by `next/image`.
-   */
-  IMAGE = "IMAGE",
-}
-//#endregion
-//#region node_modules/next/dist/server/response-cache/types.d.ts
-interface ServerComponentsHmrCache {
-  get(key: string): CachedFetchData | undefined;
-  set(key: string, data: CachedFetchData): void;
-}
-type CachedFetchData = {
-  headers: Record<string, string>;
-  body: string;
-  url: string;
-  status?: number;
-};
-declare const enum CachedRouteKind {
-  APP_PAGE = "APP_PAGE",
-  APP_ROUTE = "APP_ROUTE",
-  PAGES = "PAGES",
-  FETCH = "FETCH",
-  REDIRECT = "REDIRECT",
-  IMAGE = "IMAGE",
-}
-interface CachedFetchValue {
-  kind: CachedRouteKind.FETCH;
-  data: CachedFetchData;
-  tags?: string[];
-  revalidate: number;
-}
-interface CachedRedirectValue {
-  kind: CachedRouteKind.REDIRECT;
-  props: Object;
-}
-interface CachedAppPageValue {
-  kind: CachedRouteKind.APP_PAGE;
-  html: RenderResult;
-  rscData: Buffer | undefined;
-  status: number | undefined;
-  postponed: string | undefined;
-  headers: OutgoingHttpHeaders | undefined;
-  segmentData: Map<string, Buffer> | undefined;
-}
-interface CachedPageValue {
-  kind: CachedRouteKind.PAGES;
-  html: RenderResult;
-  pageData: Object;
-  status: number | undefined;
-  headers: OutgoingHttpHeaders | undefined;
-}
-interface CachedRouteValue {
-  kind: CachedRouteKind.APP_ROUTE;
-  body: Buffer;
-  status: number;
-  headers: OutgoingHttpHeaders;
-}
-interface CachedImageValue {
-  kind: CachedRouteKind.IMAGE;
-  etag: string;
-  upstreamEtag: string;
-  buffer: Buffer;
-  extension: string;
-  isMiss?: boolean;
-  isStale?: boolean;
-}
-interface IncrementalCachedAppPageValue {
-  kind: CachedRouteKind.APP_PAGE;
-  html: string;
-  rscData: Buffer | undefined;
-  headers: OutgoingHttpHeaders | undefined;
-  postponed: string | undefined;
-  status: number | undefined;
-  segmentData: Map<string, Buffer> | undefined;
-}
-interface IncrementalCachedPageValue {
-  kind: CachedRouteKind.PAGES;
-  html: string;
-  pageData: Object;
-  headers: OutgoingHttpHeaders | undefined;
-  status: number | undefined;
-}
-interface IncrementalResponseCacheEntry {
-  cacheControl?: CacheControl;
-  /**
-   * timestamp in milliseconds to revalidate after
-   */
-  revalidateAfter?: Revalidate;
-  /**
-   * `-1` here dictates a blocking revalidate should be used
-   */
-  isStale?: boolean | -1;
-  isMiss?: boolean;
-  value: Exclude<IncrementalCacheValue, CachedFetchValue> | null;
-}
-interface IncrementalFetchCacheEntry {
-  /**
-   * `-1` here dictates a blocking revalidate should be used
-   */
-  isStale?: boolean | -1;
-  value: CachedFetchValue;
-}
-type IncrementalCacheValue = CachedRedirectValue | IncrementalCachedPageValue | IncrementalCachedAppPageValue | CachedImageValue | CachedFetchValue | CachedRouteValue;
-type ResponseCacheValue = CachedRedirectValue | CachedPageValue | CachedAppPageValue | CachedImageValue | CachedRouteValue;
-type ResponseCacheEntry = {
-  cacheControl?: CacheControl;
-  value: ResponseCacheValue | null;
-  isStale?: boolean | -1;
-  isMiss?: boolean;
-};
-declare const enum IncrementalCacheKind {
-  APP_PAGE = "APP_PAGE",
-  APP_ROUTE = "APP_ROUTE",
-  PAGES = "PAGES",
-  FETCH = "FETCH",
-  IMAGE = "IMAGE",
-}
-interface GetIncrementalFetchCacheContext {
-  kind: IncrementalCacheKind.FETCH;
-  revalidate?: Revalidate;
-  fetchUrl?: string;
-  fetchIdx?: number;
-  tags?: string[];
-  softTags?: string[];
-}
-interface GetIncrementalResponseCacheContext {
-  kind: Exclude<IncrementalCacheKind, IncrementalCacheKind.FETCH>;
-  /**
-   * True if the route is enabled for PPR.
-   */
-  isRoutePPREnabled?: boolean;
-  /**
-   * True if this is a fallback request.
-   */
-  isFallback: boolean;
-}
-interface SetIncrementalFetchCacheContext {
-  fetchCache: true;
-  fetchUrl?: string;
-  fetchIdx?: number;
-  tags?: string[];
-  isImplicitBuildTimeCache?: boolean;
-}
-interface SetIncrementalResponseCacheContext {
-  fetchCache?: false;
-  cacheControl?: CacheControl;
-  /**
-   * True if the route is enabled for PPR.
-   */
-  isRoutePPREnabled?: boolean;
-  /**
-   * True if this is a fallback request.
-   */
-  isFallback?: boolean;
-}
-interface IncrementalResponseCache {
-  get(cacheKey: string, ctx: GetIncrementalResponseCacheContext): Promise<IncrementalResponseCacheEntry | null>;
-  set(key: string, data: Exclude<IncrementalCacheValue, CachedFetchValue> | null, ctx: SetIncrementalResponseCacheContext): Promise<void>;
-}
-interface IncrementalCache$1 extends IncrementalResponseCache {
-  get(cacheKey: string, ctx: GetIncrementalFetchCacheContext): Promise<IncrementalFetchCacheEntry | null>;
-  get(cacheKey: string, ctx: GetIncrementalResponseCacheContext): Promise<IncrementalResponseCacheEntry | null>;
-  set(key: string, data: CachedFetchValue | null, ctx: SetIncrementalFetchCacheContext): Promise<void>;
-  set(key: string, data: Exclude<IncrementalCacheValue, CachedFetchValue> | null, ctx: SetIncrementalResponseCacheContext): Promise<void>;
-  revalidateTag(tags: string | string[], durations?: {
-    expire?: number;
-  }): Promise<void>;
-}
-//#endregion
-//#region node_modules/next/dist/server/route-definitions/route-definition.d.ts
-interface RouteDefinition<K$1 extends RouteKind = RouteKind> {
-  readonly kind: K$1;
-  readonly bundlePath: string;
-  readonly filename: string;
-  /**
-   * Describes the pathname including all internal modifiers such as
-   * intercepting routes, parallel routes and route/page suffixes that are not
-   * part of the pathname.
-   */
-  readonly page: string;
-  /**
-   * The pathname (including dynamic placeholders) for a route to resolve.
-   */
-  readonly pathname: string;
-}
-//#endregion
-//#region node_modules/next/dist/server/route-matches/route-match.d.ts
-/**
- * RouteMatch is the resolved match for a given request. This will contain all
- * the dynamic parameters used for this route.
- */
-interface RouteMatch<D extends RouteDefinition = RouteDefinition> {
-  readonly definition: D;
-  /**
-   * params when provided are the dynamic route parameters that were parsed from
-   * the incoming request pathname. If a route match is returned without any
-   * params, it should be considered a static route.
-   */
-  readonly params: Params$1 | undefined;
-}
-//#endregion
-//#region node_modules/next/dist/server/body-streams.d.ts
-interface CloneableBody {
-  finalize(): Promise<void>;
-  cloneBodyStream(): Readable;
-}
-//#endregion
-//#region node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.d.ts
-type PagesDevOverlayBridgeType = typeof PagesDevOverlayBridge;
-interface PagesDevOverlayBridgeProps {
-  children?: React$1.ReactNode;
-}
-declare function PagesDevOverlayBridge({
-  children
-}: PagesDevOverlayBridgeProps): react_jsx_runtime0.JSX.Element;
-//#endregion
-//#region node_modules/next/dist/server/request-meta.d.ts
-declare const NEXT_REQUEST_META: unique symbol;
-type NextIncomingMessage = (BaseNextRequest | IncomingMessage) & {
-  [NEXT_REQUEST_META]?: RequestMeta;
-};
-/**
- * The callback function to call when a response cache entry was generated or
- * looked up in the cache. When it returns true, the server assumes that the
- * handler has already responded to the request and will not do so itself.
- */
-type OnCacheEntryHandler = (
-/**
- * The response cache entry that was generated or looked up in the cache.
- */
-cacheEntry: ResponseCacheEntry,
-/**
- * The request metadata.
- */
-requestMeta: {
-  /**
-   * The URL that was used to make the request.
-   */
-  url: string | undefined;
-}) => Promise<boolean | void> | boolean | void;
-interface RequestMeta {
-  /**
-   * The query that was used to make the request.
-   */
-  initQuery?: ParsedUrlQuery;
-  /**
-   * The URL that was used to make the request.
-   */
-  initURL?: string;
-  /**
-   * The protocol that was used to make the request.
-   */
-  initProtocol?: string;
-  /**
-   * The body that was read from the request. This is used to allow the body to
-   * be read multiple times.
-   */
-  clonableBody?: CloneableBody;
-  /**
-   * True when the request matched a locale domain that was configured in the
-   * next.config.js file.
-   */
-  isLocaleDomain?: boolean;
-  /**
-   * True when the request had locale information stripped from the pathname
-   * part of the URL.
-   */
-  didStripLocale?: boolean;
-  /**
-   * If the request had it's URL rewritten, this is the URL it was rewritten to.
-   */
-  rewroteURL?: string;
-  /**
-   * The cookies that were added by middleware and were added to the response.
-   */
-  middlewareCookie?: string[];
-  /**
-   * The match on the request for a given route.
-   */
-  match?: RouteMatch;
-  /**
-   * The incremental cache to use for the request.
-   */
-  incrementalCache?: IncrementalCache;
-  /**
-   * The server components HMR cache, only for dev.
-   */
-  serverComponentsHmrCache?: ServerComponentsHmrCache;
-  /**
-   * Equals the segment path that was used for the prefetch RSC request.
-   */
-  segmentPrefetchRSCRequest?: string;
-  /**
-   * True when the request is for the prefetch flight data.
-   */
-  isPrefetchRSCRequest?: true;
-  /**
-   * True when the request is for the flight data.
-   */
-  isRSCRequest?: true;
-  /**
-   * A search param set by the Next.js client when performing RSC requests.
-   * Because some CDNs do not vary their cache entries on our custom headers,
-   * this search param represents a hash of the header values. For any cached
-   * RSC request, we should verify that the hash matches before responding.
-   * Otherwise this can lead to cache poisoning.
-   * TODO: Consider not using custom request headers at all, and instead encode
-   * everything into the search param.
-   */
-  cacheBustingSearchParam?: string;
-  /**
-   * True when the request is for the `/_next/data` route using the pages
-   * router.
-   */
-  isNextDataReq?: true;
-  /**
-   * Postponed state to use for resumption. If present it's assumed that the
-   * request is for a page that has postponed (there are no guarantees that the
-   * page actually has postponed though as it would incur an additional cache
-   * lookup).
-   */
-  postponed?: string;
-  /**
-   * If provided, this will be called when a response cache entry was generated
-   * or looked up in the cache.
-   *
-   * @deprecated Use `onCacheEntryV2` instead.
-   */
-  onCacheEntry?: OnCacheEntryHandler;
-  /**
-   * If provided, this will be called when a response cache entry was generated
-   * or looked up in the cache.
-   */
-  onCacheEntryV2?: OnCacheEntryHandler;
-  /**
-   * The previous revalidate before rendering 404 page for notFound: true
-   */
-  notFoundRevalidate?: number | false;
-  /**
-   * In development, the original source page that returned a 404.
-   */
-  developmentNotFoundSourcePage?: string;
-  /**
-   * The path we routed to and should be invoked
-   */
-  invokePath?: string;
-  /**
-   * The specific page output we should be matching
-   */
-  invokeOutput?: string;
-  /**
-   * The status we are invoking the request with from routing
-   */
-  invokeStatus?: number;
-  /**
-   * The routing error we are invoking with
-   */
-  invokeError?: Error;
-  /**
-   * The query parsed for the invocation
-   */
-  invokeQuery?: Record<string, undefined | string | string[]>;
-  /**
-   * Whether the request is a middleware invocation
-   */
-  middlewareInvoke?: boolean;
-  /**
-   * Whether the request should render the fallback shell or not.
-   */
-  renderFallbackShell?: boolean;
-  /**
-   * Whether the request is for the custom error page.
-   */
-  customErrorRender?: true;
-  /**
-   * Whether to bubble up the NoFallbackError to the caller when a 404 is
-   * returned.
-   */
-  bubbleNoFallback?: true;
-  /**
-   * True when the request had locale information inferred from the default
-   * locale.
-   */
-  localeInferredFromDefault?: true;
-  /**
-   * The locale that was inferred or explicitly set for the request.
-   */
-  locale?: string;
-  /**
-   * The default locale that was inferred or explicitly set for the request.
-   */
-  defaultLocale?: string;
-  /**
-   * The relative project dir the server is running in from project root
-   */
-  relativeProjectDir?: string;
-  /**
-   * The dist directory the server is currently using
-   */
-  distDir?: string;
-  /**
-   * The query after resolving routes
-   */
-  query?: ParsedUrlQuery;
-  /**
-   * The params after resolving routes
-   */
-  params?: ParsedUrlQuery;
-  /**
-   * ErrorOverlay component to use in development for pages router
-   */
-  PagesErrorDebug?: PagesDevOverlayBridgeType;
-  /**
-   * Whether server is in minimal mode (this will be replaced with more
-   * specific flags in future)
-   */
-  minimalMode?: boolean;
-  /**
-   * DEV only: The fallback params that should be used when validating prerenders during dev
-   */
-  devFallbackParams?: OpaqueFallbackRouteParams;
-  /**
-   * DEV only: Request timings in process.hrtime.bigint()
-   */
-  devRequestTimingStart?: bigint;
-  devRequestTimingMiddlewareStart?: bigint;
-  devRequestTimingMiddlewareEnd?: bigint;
-  devRequestTimingInternalsEnd?: bigint;
-  /**
-   * DEV only: The duration of getStaticPaths/generateStaticParams in process.hrtime.bigint()
-   */
-  devGenerateStaticParamsDuration?: bigint;
-}
-type NextQueryMetadata = {
-  /**
-   * The `_rsc` query parameter used for cache busting to ensure that the RSC
-   * requests do not get cached by the browser explicitly.
-   */
-  [NEXT_RSC_UNION_QUERY]?: string;
-};
-type NextParsedUrlQuery = ParsedUrlQuery & NextQueryMetadata;
-//#endregion
-//#region node_modules/next/dist/server/lib/i18n-provider.d.ts
-/**
- * The result of matching a locale aware route.
- */
-interface LocaleAnalysisResult {
-  /**
-   * The pathname without the locale prefix (if any).
-   */
-  pathname: string;
-  /**
-   * The detected locale. If no locale was detected, this will be `undefined`.
-   */
-  detectedLocale?: string;
-  /**
-   * True if the locale was inferred from the default locale.
-   */
-  inferredFromDefault: boolean;
-}
-type LocaleAnalysisOptions = {
-  /**
-   * When provided, it will be used as the default locale if the locale
-   * cannot be inferred from the pathname.
-   */
-  defaultLocale?: string;
-};
-/**
- * The I18NProvider is used to match locale aware routes, detect the locale from
- * the pathname and hostname and normalize the pathname by removing the locale
- * prefix.
- */
-declare class I18NProvider {
-  readonly config: Readonly<I18NConfig>;
-  private readonly lowerCaseLocales;
-  private readonly lowerCaseDomains?;
-  constructor(config: Readonly<I18NConfig>);
-  /**
-   * Detects the domain locale from the hostname and the detected locale if
-   * provided.
-   *
-   * @param hostname The hostname to detect the domain locale from, this must be lowercased.
-   * @param detectedLocale The detected locale to use if the hostname does not match.
-   * @returns The domain locale if found, `undefined` otherwise.
-   */
-  detectDomainLocale(hostname?: string, detectedLocale?: string): DomainLocale | undefined;
-  /**
-   * Pulls the pre-computed locale and inference results from the query
-   * object.
-   *
-   * @param req the request object
-   * @param pathname the pathname that could contain a locale prefix
-   * @returns the locale analysis result
-   */
-  fromRequest(req: NextIncomingMessage, pathname: string): LocaleAnalysisResult;
-  /**
-   * Analyzes the pathname for a locale and returns the pathname without it.
-   *
-   * @param pathname The pathname that could contain a locale prefix.
-   * @param options The options to use when matching the locale.
-   * @returns The matched locale and the pathname without the locale prefix
-   *          (if any).
-   */
-  analyze(pathname: string, options?: LocaleAnalysisOptions): LocaleAnalysisResult;
-}
-//#endregion
-//#region node_modules/next/dist/server/web/next-url.d.ts
-interface Options {
-  base?: string | URL;
-  headers?: OutgoingHttpHeaders;
-  forceLocale?: boolean;
-  nextConfig?: {
-    basePath?: string;
-    i18n?: I18NConfig | null;
-    trailingSlash?: boolean;
-  };
-  i18nProvider?: I18NProvider;
-}
-declare const Internal: unique symbol;
-declare class NextURL {
-  private [Internal];
-  constructor(input: string | URL, base?: string | URL, opts?: Options);
-  constructor(input: string | URL, opts?: Options);
-  private analyze;
-  private formatPathname;
-  private formatSearch;
-  get buildId(): string | undefined;
-  set buildId(buildId: string | undefined);
-  get locale(): string;
-  set locale(locale: string);
-  get defaultLocale(): string | undefined;
-  get domainLocale(): DomainLocale | undefined;
-  get searchParams(): URLSearchParams;
-  get host(): string;
-  set host(value: string);
-  get hostname(): string;
-  set hostname(value: string);
-  get port(): string;
-  set port(value: string);
-  get protocol(): string;
-  set protocol(value: string);
-  get href(): string;
-  set href(url: string);
-  get origin(): string;
-  get pathname(): string;
-  set pathname(value: string);
-  get hash(): string;
-  set hash(value: string);
-  get search(): string;
-  set search(value: string);
-  get password(): string;
-  set password(value: string);
-  get username(): string;
-  set username(value: string);
-  get basePath(): string;
-  set basePath(value: string);
-  toString(): string;
-  toJSON(): string;
-  clone(): NextURL;
-}
-//#endregion
-//#region node_modules/next/dist/server/web/spec-extension/response.d.ts
-declare const INTERNALS: unique symbol;
-/**
- * This class extends the [Web `Response` API](https://developer.mozilla.org/docs/Web/API/Response) with additional convenience methods.
- *
- * Read more: [Next.js Docs: `NextResponse`](https://nextjs.org/docs/app/api-reference/functions/next-response)
- */
-declare class NextResponse<Body = unknown> extends Response {
-  [INTERNALS]: {
-    cookies: ResponseCookies;
-    url?: NextURL;
-    body?: Body;
-  };
-  constructor(body?: BodyInit | null, init?: ResponseInit);
-  get cookies(): ResponseCookies;
-  static json<JsonBody>(body: JsonBody, init?: ResponseInit): NextResponse<JsonBody>;
-  static redirect(url: string | NextURL | URL, init?: number | ResponseInit): NextResponse<unknown>;
-  static rewrite(destination: string | NextURL | URL, init?: MiddlewareResponseInit): NextResponse<unknown>;
-  static next(init?: MiddlewareResponseInit): NextResponse<unknown>;
-}
-interface ResponseInit extends globalThis.ResponseInit {
-  nextConfig?: {
-    basePath?: string;
-    i18n?: I18NConfig;
-    trailingSlash?: boolean;
-  };
-  url?: string;
-}
-interface ModifiedRequest {
-  /**
-   * If this is set, the request headers will be overridden with this value.
-   */
-  headers?: Headers;
-}
-interface MiddlewareResponseInit extends globalThis.ResponseInit {
-  /**
-   * These fields will override the request from clients.
-   */
-  request?: ModifiedRequest;
-}
-//#endregion
-//#region node_modules/next/dist/shared/lib/deep-readonly.d.ts
-/**
- * A type that represents a deeply readonly object. This is similar to
- * TypeScript's `Readonly` type, but it recursively applies the `readonly`
- * modifier to all properties of an object and all elements of arrays.
- */
-type DeepReadonly<T$1> = T$1 extends (infer R)[] ? ReadonlyArray<DeepReadonly<R>> : T$1 extends object ? { readonly [K in keyof T$1]: DeepReadonly<T$1[K]> } : T$1;
-//#endregion
-//#region node_modules/next/dist/client/route-loader.d.ts
-declare global {
-  interface Window {
-    __BUILD_MANIFEST?: Record<string, string[]>;
-    __BUILD_MANIFEST_CB?: Function;
-    __SERVER_FILES_MANIFEST?: RequiredServerFilesManifest;
-    __MIDDLEWARE_MATCHERS?: ProxyMatcher[];
-    __MIDDLEWARE_MANIFEST_CB?: Function;
-    __REACT_LOADABLE_MANIFEST?: any;
-    __DYNAMIC_CSS_MANIFEST?: any;
-    __RSC_MANIFEST?: any;
-    __RSC_SERVER_MANIFEST?: any;
-    __NEXT_FONT_MANIFEST?: any;
-    __SUBRESOURCE_INTEGRITY_MANIFEST?: string;
-    __INTERCEPTION_ROUTE_REWRITE_MANIFEST?: string;
-  }
-}
-//#endregion
-//#region node_modules/next/dist/client/page-loader.d.ts
-declare global {
-  interface Window {
-    __DEV_MIDDLEWARE_MATCHERS?: ProxyMatcher[];
-    __DEV_PAGES_MANIFEST?: {
-      pages: string[];
-    };
-    __SSG_MANIFEST_CB?: () => void;
-    __SSG_MANIFEST?: Set<string>;
-  }
-}
-//#endregion
-//#region node_modules/next/dist/shared/lib/router/router.d.ts
-declare global {
-  interface Window {
-    __NEXT_DATA__: NEXT_DATA;
-  }
-}
-//#endregion
-//#region node_modules/next/dist/shared/lib/loadable.shared-runtime.d.ts
-declare global {
-  interface Window {
-    __NEXT_PRELOADREADY?: (ids?: (string | number)[]) => Promise<void>;
-  }
-}
-//#endregion
-//#region node_modules/next/dist/server/app-render/entry-base.d.ts
-declare global {
-  var __next__clear_chunk_cache__: (() => void) | null | undefined;
-  var __turbopack_clear_chunk_cache__: () => void | null | undefined;
-}
-//#endregion
-//#region node_modules/next/dist/build/rendering-mode.d.ts
-/**
- * The rendering mode for a route.
- */
-declare const enum RenderingMode {
-  /**
-   * `STATIC` rendering mode will output a fully static HTML page or error if
-   * anything dynamic is used.
-   */
-  STATIC = "STATIC",
-  /**
-   * `PARTIALLY_STATIC` rendering mode will output a fully static HTML page if
-   * the route is fully static, but will output a partially static HTML page if
-   * the route uses uses any dynamic API's.
-   */
-  PARTIALLY_STATIC = "PARTIALLY_STATIC",
-}
-//#endregion
-//#region node_modules/next/dist/build/index.d.ts
-type Fallback = null | boolean | string;
-interface PrerenderManifestRoute {
-  dataRoute: string | null;
-  experimentalBypassFor?: RouteHas[];
-  /**
-   * The headers that should be served along side this prerendered route.
-   */
-  initialHeaders?: Record<string, string>;
-  /**
-   * The status code that should be served along side this prerendered route.
-   */
-  initialStatus?: number;
-  /**
-   * The revalidate value for this route. This might be inferred from:
-   * - route segment configs
-   * - fetch calls
-   * - unstable_cache
-   * - "use cache"
-   */
-  initialRevalidateSeconds: Revalidate;
-  /**
-   * The expire value for this route, which is inferred from the "use cache"
-   * functions that are used by the route, or the expireTime config.
-   */
-  initialExpireSeconds: number | undefined;
-  /**
-   * The prefetch data route associated with this page. If not defined, this
-   * page does not support prefetching.
-   */
-  prefetchDataRoute: string | null | undefined;
-  /**
-   * The dynamic route that this statically prerendered route is based on. If
-   * this is null, then the route was not based on a dynamic route.
-   */
-  srcRoute: string | null;
-  /**
-   * @deprecated use `renderingMode` instead
-   */
-  experimentalPPR: boolean | undefined;
-  /**
-   * The rendering mode for this route. Only `undefined` when not an app router
-   * route.
-   */
-  renderingMode: RenderingMode | undefined;
-  /**
-   * The headers that are allowed to be used when revalidating this route. These
-   * are used internally by Next.js to revalidate routes.
-   */
-  allowHeader: string[];
-}
-interface DynamicPrerenderManifestRoute {
-  dataRoute: string | null;
-  dataRouteRegex: string | null;
-  experimentalBypassFor?: RouteHas[];
-  fallback: Fallback;
-  /**
-   * When defined, it describes the revalidation configuration for the fallback
-   * route.
-   */
-  fallbackRevalidate: Revalidate | undefined;
-  /**
-   * When defined, it describes the expire configuration for the fallback route.
-   */
-  fallbackExpire: number | undefined;
-  /**
-   * The headers that should used when serving the fallback.
-   */
-  fallbackHeaders?: Record<string, string>;
-  /**
-   * The status code that should be used when serving the fallback.
-   */
-  fallbackStatus?: number;
-  /**
-   * The root params that are unknown for this fallback route.
-   */
-  fallbackRootParams: readonly string[] | undefined;
-  /**
-   * The fallback route params for this route that were parsed from the loader
-   * tree.
-   */
-  fallbackRouteParams: readonly FallbackRouteParam[] | undefined;
-  /**
-   * The source route that this fallback route is based on. This is a reference
-   * so that we can associate this dynamic route with the correct source.
-   */
-  fallbackSourceRoute: string | undefined;
-  prefetchDataRoute: string | null | undefined;
-  prefetchDataRouteRegex: string | null | undefined;
-  routeRegex: string;
-  /**
-   * @deprecated use `renderingMode` instead
-   */
-  experimentalPPR: boolean | undefined;
-  /**
-   * The rendering mode for this route. Only `undefined` when not an app router
-   * route.
-   */
-  renderingMode: RenderingMode | undefined;
-  /**
-   * The headers that are allowed to be used when revalidating this route. These
-   * are used internally by Next.js to revalidate routes.
-   */
-  allowHeader: string[];
-}
-type PrerenderManifest = {
-  version: 4;
-  routes: {
-    [route: string]: PrerenderManifestRoute;
-  };
-  dynamicRoutes: {
-    [route: string]: DynamicPrerenderManifestRoute;
-  };
-  notFoundRoutes: string[];
-  preview: __ApiPreviewProps;
-};
-interface RequiredServerFilesManifest {
-  version: number;
-  config: NextConfigRuntime;
-  appDir: string;
-  relativeAppDir: string;
-  files: string[];
-  ignore: string[];
-}
-//#endregion
-//#region node_modules/next/dist/server/lib/incremental-cache/index.d.ts
-interface CacheHandlerContext {
-  fs?: CacheFs;
-  dev?: boolean;
-  flushToDisk?: boolean;
-  serverDistDir?: string;
-  maxMemoryCacheSize?: number;
-  fetchCacheKeyPrefix?: string;
-  prerenderManifest?: PrerenderManifest;
-  revalidatedTags: string[];
-  _requestHeaders: IncrementalCache['requestHeaders'];
-}
-interface CacheHandlerValue {
-  lastModified: number;
-  age?: number;
-  cacheState?: string;
-  value: IncrementalCacheValue | null;
-}
-declare class CacheHandler {
-  constructor(_ctx: CacheHandlerContext);
-  get(_cacheKey: string, _ctx: GetIncrementalFetchCacheContext | GetIncrementalResponseCacheContext): Promise<CacheHandlerValue | null>;
-  set(_cacheKey: string, _data: IncrementalCacheValue | null, _ctx: SetIncrementalFetchCacheContext | SetIncrementalResponseCacheContext): Promise<void>;
-  revalidateTag(_tags: string | string[], _durations?: {
-    expire?: number;
-  }): Promise<void>;
-  resetRequestCache(): void;
-}
-declare class IncrementalCache implements IncrementalCache$1 {
-  readonly dev?: boolean;
-  readonly disableForTestmode?: boolean;
-  readonly cacheHandler?: CacheHandler;
-  readonly hasCustomCacheHandler: boolean;
-  readonly prerenderManifest: DeepReadonly<PrerenderManifest>;
-  readonly requestHeaders: Record<string, undefined | string | string[]>;
-  readonly allowedRevalidateHeaderKeys?: string[];
-  readonly minimalMode?: boolean;
-  readonly fetchCacheKeyPrefix?: string;
-  readonly isOnDemandRevalidate?: boolean;
-  readonly revalidatedTags?: readonly string[];
-  private static readonly debug;
-  private readonly locks;
-  /**
-   * The cache controls for routes. This will source the values from the
-   * prerender manifest until the in-memory cache is updated with new values.
-   */
-  private readonly cacheControls;
-  constructor({
-    fs,
-    dev,
-    flushToDisk,
-    minimalMode,
-    serverDistDir,
-    requestHeaders,
-    maxMemoryCacheSize,
-    getPrerenderManifest,
-    fetchCacheKeyPrefix,
-    CurCacheHandler,
-    allowedRevalidateHeaderKeys
-  }: {
-    fs?: CacheFs;
-    dev: boolean;
-    minimalMode?: boolean;
-    serverDistDir?: string;
-    flushToDisk?: boolean;
-    allowedRevalidateHeaderKeys?: string[];
-    requestHeaders: IncrementalCache['requestHeaders'];
-    maxMemoryCacheSize?: number;
-    getPrerenderManifest: () => DeepReadonly<PrerenderManifest>;
-    fetchCacheKeyPrefix?: string;
-    CurCacheHandler?: typeof CacheHandler;
-  });
-  private calculateRevalidate;
-  _getPathname(pathname: string, fetchCache?: boolean): string;
-  resetRequestCache(): void;
-  lock(cacheKey: string): Promise<() => Promise<void> | void>;
-  revalidateTag(tags: string | string[], durations?: {
-    expire?: number;
-  }): Promise<void>;
-  generateCacheKey(url: string, init?: RequestInit | Request): Promise<string>;
-  get(cacheKey: string, ctx: GetIncrementalFetchCacheContext): Promise<IncrementalFetchCacheEntry | null>;
-  get(cacheKey: string, ctx: GetIncrementalResponseCacheContext): Promise<IncrementalResponseCacheEntry | null>;
-  set(pathname: string, data: CachedFetchValue | null, ctx: SetIncrementalFetchCacheContext): Promise<void>;
-  set(pathname: string, data: Exclude<IncrementalCacheValue, CachedFetchValue> | null, ctx: SetIncrementalResponseCacheContext): Promise<void>;
-}
-//#endregion
-//#region node_modules/next/dist/server/app-render/create-error-handler.d.ts
-declare global {
-  var __next_log_error__: undefined | ((err: unknown) => void);
-}
-//#endregion
-//#region node_modules/next/dist/server/request/params.d.ts
-type ParamValue = string | Array<string> | undefined;
-type Params$1 = Record<string, ParamValue>;
-//#endregion
-//#region node_modules/next/dist/build/static-paths/types.d.ts
-type FallbackRouteParam = {
-  /**
-   * The name of the param.
-   */
-  readonly paramName: string;
-  /**
-   * The type of the param.
-   */
-  readonly paramType: DynamicParamTypes;
-};
-//#endregion
-//#region node_modules/next/dist/types.d.ts
-declare module 'react' {
-  interface ImgHTMLAttributes<T$1> {
-    fetchPriority?: 'high' | 'low' | 'auto' | undefined;
-  }
-}
-type FileSizeSuffix = `${'k' | 'K' | 'm' | 'M' | 'g' | 'G' | 't' | 'T' | 'p' | 'P'}${'b' | 'B'}`;
-type SizeLimit = number | `${number}${FileSizeSuffix}`;
-declare global {
-  interface Crypto {
-    readonly subtle: SubtleCrypto;
-    getRandomValues<T$1 extends Int8Array | Int16Array | Int32Array | Uint8Array | Uint16Array | Uint32Array | Uint8ClampedArray | Float32Array | Float64Array | DataView | null>(array: T$1): T$1;
-    randomUUID(): string;
-  }
-  var __NEXT_HTTP_AGENT_OPTIONS: {
-    keepAlive?: boolean;
-  } | undefined;
-  var __NEXT_UNDICI_AGENT_SET: boolean;
-  var __NEXT_HTTP_AGENT: Agent;
-  var __NEXT_HTTPS_AGENT: Agent$1;
-}
-//#endregion
-//#region node_modules/next/dist/shared/lib/utils.d.ts
-/**
- * Web vitals provided to _app.reportWebVitals by Core Web Vitals plugin developed by Google Chrome team.
- * https://nextjs.org/blog/next-9-4#integrated-web-vitals-reporting
- */
-declare const WEB_VITALS: readonly ["CLS", "FCP", "FID", "INP", "LCP", "TTFB"];
-type NEXT_DATA = {
-  props: Record<string, any>;
-  page: string;
-  query: ParsedUrlQuery;
-  buildId: string;
-  assetPrefix?: string;
-  nextExport?: boolean;
-  autoExport?: boolean;
-  isFallback?: boolean;
-  isExperimentalCompile?: boolean;
-  dynamicIds?: (string | number)[];
-  err?: Error & {
-    statusCode?: number;
-    source?: typeof COMPILER_NAMES.server | typeof COMPILER_NAMES.edgeServer;
-  };
-  gsp?: boolean;
-  gssp?: boolean;
-  customServer?: boolean;
-  gip?: boolean;
-  appGip?: boolean;
-  locale?: string;
-  locales?: readonly string[];
-  defaultLocale?: string;
-  domainLocales?: readonly DomainLocale[];
-  scriptLoader?: any[];
-  isPreview?: boolean;
-  notFoundSrcPage?: string;
-};
-interface CacheFs {
-  existsSync: typeof fs$1.existsSync;
-  readFile: typeof fs$1.promises.readFile;
-  readFileSync: typeof fs$1.readFileSync;
-  writeFile(f: string, d: any): Promise<void>;
-  mkdir(dir: string): Promise<void | string>;
-  stat(f: string): Promise<{
-    mtime: Date;
-  }>;
-}
-//#endregion
-//#region node_modules/next/dist/cli/next-test.d.ts
-declare const SUPPORTED_TEST_RUNNERS_LIST: readonly ["playwright"];
-type SupportedTestRunners = (typeof SUPPORTED_TEST_RUNNERS_LIST)[number];
-//#endregion
-//#region node_modules/next/dist/server/config-shared.d.ts
-type NextConfigComplete = Required<Omit<NextConfig, 'configFile'>> & {
-  images: Required<ImageConfigComplete>;
-  typescript: TypeScriptConfig;
-  configFile: string | undefined;
-  configFileName: string;
-  htmlLimitedBots: string | undefined;
-  experimental: ExperimentalConfig;
-  distDirRoot: string;
-};
-type I18NDomains = readonly DomainLocale[];
-interface I18NConfig {
-  defaultLocale: string;
-  domains?: I18NDomains;
-  localeDetection?: false;
-  locales: readonly string[];
-}
-interface DomainLocale {
-  defaultLocale: string;
-  domain: string;
-  http?: true;
-  locales?: readonly string[];
-}
-interface TypeScriptConfig {
-  /** Do not run TypeScript during production builds (`next build`). */
-  ignoreBuildErrors?: boolean;
-  /** Relative path to a custom tsconfig file */
-  tsconfigPath?: string;
-}
-interface EmotionConfig {
-  sourceMap?: boolean;
-  autoLabel?: 'dev-only' | 'always' | 'never';
-  labelFormat?: string;
-  importMap?: {
-    [importName: string]: {
-      [exportName: string]: {
-        canonicalImport?: [string, string];
-        styledBaseImport?: [string, string];
-      };
-    };
-  };
-}
-interface StyledComponentsConfig {
-  /**
-   * Enabled by default in development, disabled in production to reduce file size,
-   * setting this will override the default for all environments.
-   */
-  displayName?: boolean;
-  topLevelImportPaths?: string[];
-  ssr?: boolean;
-  fileName?: boolean;
-  meaninglessFileNames?: string[];
-  minify?: boolean;
-  transpileTemplateLiterals?: boolean;
-  namespace?: string;
-  pure?: boolean;
-  cssProp?: boolean;
-}
-type JSONValue = string | number | boolean | JSONValue[] | {
-  [k: string]: JSONValue;
-};
-type TurbopackLoaderOptions = Record<string, JSONValue>;
-type TurbopackLoaderItem = string | {
-  loader: string;
-  options?: TurbopackLoaderOptions;
-};
-type TurbopackLoaderBuiltinCondition = 'browser' | 'foreign' | 'development' | 'production' | 'node' | 'edge-light';
-type TurbopackRuleCondition = {
-  all: TurbopackRuleCondition[];
-} | {
-  any: TurbopackRuleCondition[];
-} | {
-  not: TurbopackRuleCondition;
-} | TurbopackLoaderBuiltinCondition | {
-  path?: string | RegExp;
-  content?: RegExp;
-};
-type TurbopackRuleConfigItem = {
-  loaders: TurbopackLoaderItem[];
-  as?: string;
-  condition?: TurbopackRuleCondition;
-};
-/**
- * This can be an object representing a single configuration, or a list of
- * loaders and/or rule configuration objects.
- *
- * - A list of loader path strings or objects is the "shorthand" syntax.
- * - A list of rule configuration objects can be useful when each configuration
- *   object has different `condition` fields, but still match the same top-level
- *   path glob.
- */
-type TurbopackRuleConfigCollection = TurbopackRuleConfigItem | (TurbopackLoaderItem | TurbopackRuleConfigItem)[];
-interface TurbopackOptions {
-  /**
-   * (`next --turbopack` only) A mapping of aliased imports to modules to load in their place.
-   *
-   * @see [Resolve Alias](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#resolving-aliases)
-   */
-  resolveAlias?: Record<string, string | string[] | Record<string, string | string[]>>;
-  /**
-   * (`next --turbopack` only) A list of extensions to resolve when importing files.
-   *
-   * @see [Resolve Extensions](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#resolving-custom-extensions)
-   */
-  resolveExtensions?: string[];
-  /**
-   * (`next --turbopack` only) A list of webpack loaders to apply when running with Turbopack.
-   *
-   * @see [Turbopack Loaders](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#configuring-webpack-loaders)
-   */
-  rules?: Record<string, TurbopackRuleConfigCollection>;
-  /**
-   * This is the repo root usually and only files above this
-   * directory can be resolved by turbopack.
-   */
-  root?: string;
-  /**
-   * Enables generation of debug IDs in JavaScript bundles and source maps.
-   * These debug IDs help with debugging and error tracking by providing stable identifiers.
-   *
-   * @see https://github.com/tc39/ecma426/blob/main/proposals/debug-id.md TC39 Debug ID Proposal
-   */
-  debugIds?: boolean;
-}
-interface WebpackConfigContext {
-  /** Next.js root directory */
-  dir: string;
-  /** Indicates if the compilation will be done in development */
-  dev: boolean;
-  /** It's `true` for server-side compilation, and `false` for client-side compilation */
-  isServer: boolean;
-  /**  The build id, used as a unique identifier between builds */
-  buildId: string;
-  /** The next.config.js merged with default values */
-  config: NextConfigComplete;
-  /** Default loaders used internally by Next.js */
-  defaultLoaders: {
-    /** Default babel-loader configuration */
-    babel: any;
-  };
-  /** Number of total Next.js pages */
-  totalPages: number;
-  /** The webpack configuration */
-  webpack: any;
-  /** The current server runtime */
-  nextRuntime?: 'nodejs' | 'edge';
-}
-interface NextJsWebpackConfig {
-  (/** Existing Webpack config */
-  config: any, context: WebpackConfigContext): any;
-}
-/**
- * Set of options for React Compiler that Next.js currently supports.
- *
- * These options may be changed in breaking ways at any time without notice
- * while support for React Compiler is experimental.
- *
- * @see https://react.dev/reference/react-compiler/configuration
- */
-interface ReactCompilerOptions {
-  /**
-   * Controls the strategy for determining which functions the React Compiler
-   * will optimize.
-   *
-   * The default is `'infer'`, which uses intelligent heuristics to identify
-   * React components and hooks.
-   *
-   * When using `infer`, Next.js applies its own heuristics before calling
-   * `react-compiler`. This improves compilation performance by avoiding extra
-   * invocations of Babel and reducing redundant parsing of code.
-   *
-   * @see https://react.dev/reference/react-compiler/compilationMode
-   */
-  compilationMode?: 'infer' | 'annotation' | 'all';
-  /**
-   * Controls how the React Compiler handles errors during compilation.
-   *
-   * The default is `'none'`, which skips components which cannot be compiled.
-   *
-   * @see https://react.dev/reference/react-compiler/panicThreshold
-   */
-  panicThreshold?: 'none' | 'critical_errors' | 'all_errors';
-}
-interface IncomingRequestLoggingConfig {
-  /**
-   * A regular expression array to match incoming requests that should not be logged.
-   * You can specify multiple patterns to match incoming requests that should not be logged.
-   */
-  ignore?: RegExp[];
-}
-interface LoggingConfig {
-  fetches?: {
-    fullUrl?: boolean;
-    /**
-     * If true, fetch requests that are restored from the HMR cache are logged
-     * during an HMR refresh request, i.e. when editing a server component.
-     */
-    hmrRefreshes?: boolean;
-  };
-  /**
-   * If set to false, incoming request logging is disabled.
-   * You can specify a pattern to match incoming requests that should not be logged.
-   */
-  incomingRequests?: boolean | IncomingRequestLoggingConfig;
-}
-interface ExperimentalConfig {
-  adapterPath?: string;
-  useSkewCookie?: boolean;
-  /** @deprecated use top-level `cacheHandlers` instead */
-  cacheHandlers?: NextConfig['cacheHandlers'];
-  multiZoneDraftMode?: boolean;
-  appNavFailHandling?: boolean;
-  prerenderEarlyExit?: boolean;
-  linkNoTouchStart?: boolean;
-  caseSensitiveRoutes?: boolean;
-  /**
-   * The origins that are allowed to write the rewritten headers when
-   * performing a non-relative rewrite. When undefined, no non-relative
-   * rewrites will get the rewrite headers.
-   */
-  clientParamParsingOrigins?: string[];
-  dynamicOnHover?: boolean;
-  preloadEntriesOnStart?: boolean;
-  clientRouterFilter?: boolean;
-  clientRouterFilterRedirects?: boolean;
-  /**
-   * This config can be used to override the cache behavior for the client router.
-   * These values indicate the time, in seconds, that the cache should be considered
-   * reusable. When the `prefetch` Link prop is left unspecified, this will use the `dynamic` value.
-   * When the `prefetch` Link prop is set to `true`, this will use the `static` value.
-   */
-  staleTimes?: {
-    dynamic?: number;
-    /** Must be greater than or equal to 30 seconds, to ensure prefetching is not completely wasteful */
-    static?: number;
-  };
-  /**
-   * @deprecated use top-level `cacheLife` instead
-   */
-  cacheLife?: NextConfig['cacheLife'];
-  clientRouterFilterAllowedRate?: number;
-  /**
-   * @deprecated Use `externalProxyRewritesResolve` instead.
-   */
-  externalMiddlewareRewritesResolve?: boolean;
-  externalProxyRewritesResolve?: boolean;
-  extensionAlias?: Record<string, any>;
-  allowedRevalidateHeaderKeys?: string[];
-  fetchCacheKeyPrefix?: string;
-  imgOptConcurrency?: number | null;
-  imgOptTimeoutInSeconds?: number;
-  imgOptMaxInputPixels?: number;
-  imgOptSequentialRead?: boolean | null;
-  imgOptSkipMetadata?: boolean | null;
-  optimisticClientCache?: boolean;
-  /**
-   * @deprecated use config.expireTime instead
-   */
-  expireTime?: number;
-  /**
-   * @deprecated Use `proxyPrefetch` instead.
-   */
-  middlewarePrefetch?: 'strict' | 'flexible';
-  proxyPrefetch?: 'strict' | 'flexible';
-  manualClientBasePath?: boolean;
-  /**
-   * CSS Chunking strategy. Defaults to `true` ("loose" mode), which guesses dependencies
-   * between CSS files to keep ordering of them.
-   * An alternative is 'strict', which will try to keep correct ordering as
-   * much as possible, even when this leads to many requests.
-   */
-  cssChunking?: boolean | 'strict';
-  disablePostcssPresetEnv?: boolean;
-  cpus?: number;
-  memoryBasedWorkersCount?: boolean;
-  proxyTimeout?: number;
-  isrFlushToDisk?: boolean;
-  workerThreads?: boolean;
-  optimizeCss?: boolean | Record<string, unknown>;
-  nextScriptWorkers?: boolean;
-  scrollRestoration?: boolean;
-  externalDir?: boolean;
-  disableOptimizedLoading?: boolean;
-  /** @deprecated A no-op as of Next 16, size metrics were removed from the build output. */
-  gzipSize?: boolean;
-  craCompat?: boolean;
-  esmExternals?: boolean | 'loose';
-  fullySpecified?: boolean;
-  urlImports?: NonNullable<webpack.Configuration['experiments']>['buildHttp'];
-  swcTraceProfiling?: boolean;
-  forceSwcTransforms?: boolean;
-  swcPlugins?: Array<[string, Record<string, unknown>]>;
-  largePageDataBytes?: number;
-  /**
-   * If set to `false`, webpack won't fall back to polyfill Node.js modules in the browser
-   * Full list of old polyfills is accessible here:
-   * [webpack/webpack#ModuleNotoundError.js#L13-L42](https://github.com/webpack/webpack/blob/2a0536cf510768111a3a6dceeb14cb79b9f59273/lib/ModuleNotFoundError.js#L13-L42)
-   */
-  fallbackNodePolyfills?: false;
-  sri?: {
-    algorithm?: SubresourceIntegrityAlgorithm;
-  };
-  webVitalsAttribution?: Array<(typeof WEB_VITALS)[number]>;
-  /**
-   * Automatically apply the "modularizeImports" optimization to imports of the specified packages.
-   */
-  optimizePackageImports?: string[];
-  /**
-   * Optimize React APIs for server builds.
-   */
-  optimizeServerReact?: boolean;
-  /**
-   * Displays an indicator when a React Transition has no other indicator rendered.
-   * This includes displaying an indicator on client-side navigations.
-   */
-  transitionIndicator?: boolean;
-  /**
-   * A target memory limit for turbo, in bytes.
-   */
-  turbopackMemoryLimit?: number;
-  /**
-   * Enable minification. Defaults to true in build mode and false in dev mode.
-   */
-  turbopackMinify?: boolean;
-  /**
-   * Enable support for `with {type: "module"}` for ESM imports.
-   */
-  turbopackImportTypeBytes?: boolean;
-  /**
-   * Enable scope hoisting. Defaults to true in build mode. Always disabled in development mode.
-   */
-  turbopackScopeHoisting?: boolean;
-  /**
-   * Enable nested async chunking for client side assets. Defaults to true in build mode and false in dev mode.
-   * This optimization computes all possible paths through dynamic imports in the applications to figure out the modules needed at dynamic imports for every path.
-   */
-  turbopackClientSideNestedAsyncChunking?: boolean;
-  /**
-   * Enable nested async chunking for server side assets. Defaults to false in dev and build mode.
-   * This optimization computes all possible paths through dynamic imports in the applications to figure out the modules needed at dynamic imports for every path.
-   */
-  turbopackServerSideNestedAsyncChunking?: boolean;
-  /**
-   * Enable filesystem cache for the turbopack dev server.
-   *
-   * Defaults to `true`.
-   */
-  turbopackFileSystemCacheForDev?: boolean;
-  /**
-   * Enable filesystem cache for the turbopack build.
-   *
-   * Defaults to `false`.
-   */
-  turbopackFileSystemCacheForBuild?: boolean;
-  /**
-   * Enable source maps. Defaults to true.
-   */
-  turbopackSourceMaps?: boolean;
-  /**
-   * Enable extraction of source maps from input files. Defaults to true.
-   */
-  turbopackInputSourceMaps?: boolean;
-  /**
-   * Enable tree shaking for the turbopack dev server and build.
-   */
-  turbopackTreeShaking?: boolean;
-  /**
-   * Enable removing unused imports for turbopack dev server and build.
-   */
-  turbopackRemoveUnusedImports?: boolean;
-  /**
-   * Enable removing unused exports for turbopack dev server and build.
-   */
-  turbopackRemoveUnusedExports?: boolean;
-  /**
-   * Enable local analysis to infer side effect free modules. When enabled, Turbopack will
-   * analyze module code to determine if it has side effects. This can improve tree shaking
-   * and bundle size at the cost of some additional analysis.
-   *
-   * Defaults to `true` in canary builds only
-   */
-  turbopackInferModuleSideEffects?: boolean;
-  /**
-   * Use the system-provided CA roots instead of bundled CA roots for external HTTPS requests
-   * made by Turbopack. Currently this is only used for fetching data from Google Fonts.
-   *
-   * This may be useful in cases where you or an employer are MITMing traffic.
-   *
-   * This option is experimental because:
-   * - This may cause small performance problems, as it uses [`rustls-native-certs`](
-   *   https://github.com/rustls/rustls-native-certs).
-   * - In the future, this may become the default, and this option may be eliminated, once
-   *   <https://github.com/seanmonstar/reqwest/issues/2159> is resolved.
-   *
-   * Users who need to configure this behavior system-wide can override the project
-   * configuration using the `NEXT_TURBOPACK_EXPERIMENTAL_USE_SYSTEM_TLS_CERTS=1` environment
-   * variable.
-   *
-   * This option is ignored on Windows on ARM, where the native TLS implementation is always
-   * used.
-   *
-   * If you need to set a proxy, Turbopack [respects the common `HTTP_PROXY` and `HTTPS_PROXY`
-   * environment variable convention](https://docs.rs/reqwest/latest/reqwest/#proxies). HTTP
-   * proxies are supported, SOCKS proxies are not currently supported.
-   */
-  turbopackUseSystemTlsCerts?: boolean;
-  /**
-   * Set this to `false` to disable the automatic configuration of the babel loader when a Babel
-   * configuration file is present. This option is enabled by default.
-   *
-   * If this is set to `false`, but `reactCompiler` is `true`, the built-in Babel will
-   * still be configured, but any Babel configuration files on disk will be ignored. If you wish to
-   * use React Compiler with a different manually-configured `babel-loader`, you should disable both
-   * this and `reactCompiler`.
-   */
-  turbopackUseBuiltinBabel?: boolean;
-  /**
-   * Set this to `false` to disable the automatic configuration of the sass loader. The sass loader
-   * configuration is enabled by default.
-   */
-  turbopackUseBuiltinSass?: boolean;
-  /**
-   * The module ID strategy to use for Turbopack.
-   * If not set, the default is `'named'` for development and `'deterministic'`
-   * for production.
-   */
-  turbopackModuleIds?: 'named' | 'deterministic';
-  /**
-   * For use with `@next/mdx`. Compile MDX files using the new Rust compiler.
-   * @see https://nextjs.org/docs/app/api-reference/next-config-js/mdxRs
-   */
-  mdxRs?: boolean | {
-    development?: boolean;
-    jsx?: boolean;
-    jsxRuntime?: string;
-    jsxImportSource?: string;
-    providerImportSource?: string;
-    mdxType?: 'gfm' | 'commonmark';
-  };
-  /**
-   * Enable type checking for Link and Router.push, etc.
-   * @deprecated Use `typedRoutes` instead — this feature is now stable.
-   * @see https://nextjs.org/docs/app/api-reference/config/typescript#statically-typed-links
-   */
-  typedRoutes?: boolean;
-  /**
-   * Enable type-checking and autocompletion for environment variables.
-   *
-   * @default false
-   */
-  typedEnv?: boolean;
-  /**
-   * Runs the compilations for server and edge in parallel instead of in serial.
-   * This will make builds faster if there is enough server and edge functions
-   * in the application at the cost of more memory.
-   *
-   * NOTE: This option is only valid when the build process can use workers. See
-   * the documentation for `webpackBuildWorker` for more details.
-   */
-  parallelServerCompiles?: boolean;
-  /**
-   * Runs the logic to collect build traces for the server routes in parallel
-   * with other work during the compilation. This will increase the speed of
-   * the build at the cost of more memory. This option may incur some additional
-   * work compared to if the option was disabled since the work is started
-   * before data from the client compilation is available to potentially reduce
-   * the amount of code that needs to be traced. Despite that, this may still
-   * result in faster builds for some applications.
-   *
-   * Valid values are:
-   * - `true`: Collect the server build traces in parallel.
-   * - `false`: Do not collect the server build traces in parallel.
-   * - `undefined`: Collect server build traces in parallel only in the `experimental-compile` mode.
-   *
-   * NOTE: This option is only valid when the build process can use workers. See
-   * the documentation for `webpackBuildWorker` for more details.
-   */
-  parallelServerBuildTraces?: boolean;
-  /**
-   * Run the Webpack build in a separate process to optimize memory usage during build.
-   * Valid values are:
-   * - `false`: Disable the Webpack build worker
-   * - `true`: Enable the Webpack build worker
-   * - `undefined`: Enable the Webpack build worker only if the webpack config is not customized
-   */
-  webpackBuildWorker?: boolean;
-  /**
-   * Enables optimizations to reduce memory usage in Webpack. This reduces the max size of the heap
-   * but may increase compile times slightly.
-   * Valid values are:
-   * - `false`: Disable Webpack memory optimizations (default).
-   * - `true`: Enables Webpack memory optimizations.
-   */
-  webpackMemoryOptimizations?: boolean;
-  /**
-   * The array of the meta tags to the client injected by tracing propagation data.
-   */
-  clientTraceMetadata?: string[];
-  /**
-   * @deprecated This configuration option has been merged into `cacheComponents`.
-   * The Partial Prerendering feature is still available via `cacheComponents`.
-   */
-  ppr?: ExperimentalPPRConfig;
-  /**
-   * Enables experimental taint APIs in React.
-   * Using this feature will enable the `react@experimental` for the `app` directory.
-   */
-  taint?: boolean;
-  /**
-   * Uninstalls all "unhandledRejection" and "uncaughtException" listeners from
-   * the global process so that we can override the behavior, which in some
-   * runtimes is to exit the process.
-   *
-   * This is experimental until we've considered the impact in various
-   * deployment environments.
-   */
-  removeUncaughtErrorAndRejectionListeners?: boolean;
-  /**
-   * During an RSC request, validates that the request headers match the
-   * cache-busting search parameter sent by the client.
-   */
-  validateRSCRequestHeaders?: boolean;
-  serverActions?: {
-    /**
-     * Allows adjusting body parser size limit for server actions.
-     */
-    bodySizeLimit?: SizeLimit;
-    /**
-     * Allowed origins that can bypass Server Action's CSRF check. This is helpful
-     * when you have reverse proxy in front of your app.
-     * @example
-     * ["my-app.com", "*.my-app.com"]
-     */
-    allowedOrigins?: string[];
-  };
-  /**
-   * enables the minification of server code.
-   */
-  serverMinification?: boolean;
-  /**
-   * Enables source maps generation for the server production bundle.
-   */
-  serverSourceMaps?: boolean;
-  useWasmBinary?: boolean;
-  /**
-   * Use lightningcss instead of postcss-loader
-   */
-  useLightningcss?: boolean;
-  /**
-   * Enables view transitions by using the {@link https://react.dev/reference/react/ViewTransition ViewTransition} Component.
-   */
-  viewTransition?: boolean;
-  /**
-   * Enables `fetch` requests to be proxied to the experimental test proxy server
-   */
-  testProxy?: boolean;
-  /**
-   * Set a default test runner to be used by `next experimental-test`.
-   */
-  defaultTestRunner?: SupportedTestRunners;
-  /**
-   * Allow NODE_ENV=development even for `next build`.
-   */
-  allowDevelopmentBuild?: true;
-  /**
-   * @deprecated use `config.bundlePagesRouterDependencies` instead
-   *
-   */
-  bundlePagesExternals?: boolean;
-  /**
-   * @deprecated use `config.serverExternalPackages` instead
-   *
-   */
-  serverComponentsExternalPackages?: string[];
-  /**
-   * When enabled, in dev mode, Next.js will send React's debug info through the
-   * WebSocket connection, instead of including it in the main RSC payload.
-   */
-  reactDebugChannel?: boolean;
-  /**
-   * @deprecated use top-level `cacheComponents` instead
-   */
-  cacheComponents?: boolean;
-  /**
-   * The number of times to retry static generation (per page) before giving up.
-   */
-  staticGenerationRetryCount?: number;
-  /**
-   * The amount of pages to export per worker during static generation.
-   */
-  staticGenerationMaxConcurrency?: number;
-  /**
-   * The minimum number of pages to be chunked into each export worker.
-   */
-  staticGenerationMinPagesPerWorker?: number;
-  /**
-   * Allows previously fetched data to be re-used when editing server components.
-   */
-  serverComponentsHmrCache?: boolean;
-  /**
-   * Render <style> tags inline in the HTML for imported CSS assets.
-   * Supports app-router in production mode only.
-   */
-  inlineCss?: boolean;
-  /**
-   * This config allows you to enable the experimental navigation API `forbidden` and `unauthorized`.
-   */
-  authInterrupts?: boolean;
-  /**
-   * Enables the use of the `"use cache"` directive.
-   */
-  useCache?: boolean;
-  /**
-   * Enables detection and reporting of slow modules during development builds.
-   * Enabling this may impact build performance to ensure accurate measurements.
-   */
-  slowModuleDetection?: {
-    /**
-     * The time threshold in milliseconds for identifying slow modules.
-     * Modules taking longer than this build time threshold will be reported.
-     */
-    buildTimeThresholdMs: number;
-  };
-  /**
-   * Enables using the global-not-found.js file in the app directory
-   *
-   */
-  globalNotFound?: boolean;
-  /**
-   * Enable debug information to be forwarded from browser to dev server stdout/stderr
-   */
-  browserDebugInfoInTerminal?: boolean | {
-    /**
-     * Option to limit stringification at a specific nesting depth when logging circular objects.
-     * @default 5
-     */
-    depthLimit?: number;
-    /**
-     * Maximum number of properties/elements to stringify when logging objects/arrays with circular references.
-     * @default 100
-     */
-    edgeLimit?: number;
-    /**
-     * Whether to include source location information in debug output when available
-     */
-    showSourceLocation?: boolean;
-  };
-  /**
-   * Enable accessing root params via the `next/root-params` module.
-   */
-  rootParams?: boolean;
-  /**
-   * Use an isolated directory for development builds to prevent conflicts
-   * with production builds. Development builds will use `{distDir}/dev`
-   * instead of `{distDir}`.
-   */
-  isolatedDevBuild?: boolean;
-  /**
-   * Body size limit for request bodies with middleware configured.
-   * Defaults to 10MB. Can be specified as a number (bytes) or string (e.g. '5mb').
-   *
-   * @deprecated Use `proxyClientMaxBodySize` instead.
-   */
-  middlewareClientMaxBodySize?: SizeLimit;
-  /**
-   * Body size limit for request bodies with proxy configured.
-   * Defaults to 10MB. Can be specified as a number (bytes) or string (e.g. '5mb').
-   */
-  proxyClientMaxBodySize?: SizeLimit;
-  /**
-   * Enable the Model Context Protocol (MCP) server for AI-assisted development.
-   * When enabled, Next.js will expose an MCP server at `/_next/mcp` that provides
-   * code intelligence and project context to AI assistants.
-   *
-   * @default true
-   */
-  mcpServer?: boolean;
-  /**
-   * Acquires a lockfile at `<distDir>/lock` when starting `next dev` or `next
-   * build`. Failing to acquire the lock causes the process to exit with an
-   * error message.
-   *
-   * This is because if multiple processes write to the same `distDir` at the
-   * same time, it can mangle the state of the directory. Disabling this option
-   * is not recommended.
-   *
-   * @default true
-   */
-  lockDistDir?: boolean;
-  /**
-   * Hide logs that occur after a render has already aborted.
-   * This can help reduce noise in the console when dealing with aborted renders.
-   *
-   * @default false
-   */
-  hideLogsAfterAbort?: boolean;
-  /**
-   * Whether `process.env.NEXT_DEPLOYMENT_ID` is available at runtime in the server (and `next
-   * build` doesn't need to embed the deployment ID value into the build output).
-   *
-   * @default false
-   */
-  runtimeServerDeploymentId?: boolean;
-}
-type ExportPathMap = {
-  [path: string]: {
-    page: string;
-    query?: NextParsedUrlQuery;
-  };
-};
-/**
- * Next.js can be configured through a `next.config.js` file in the root of your project directory.
- *
- * This can change the behavior, enable experimental features, and configure other advanced options.
- *
- * Read more: [Next.js Docs: `next.config.js`](https://nextjs.org/docs/app/api-reference/config/next-config-js)
- */
-interface NextConfig {
-  allowedDevOrigins?: string[];
-  exportPathMap?: (defaultMap: ExportPathMap, ctx: {
-    dev: boolean;
-    dir: string;
-    outDir: string | null;
-    distDir: string;
-    buildId: string;
-  }) => Promise<ExportPathMap> | ExportPathMap;
-  /**
-   * Internationalization configuration
-   *
-   * @see [Internationalization docs](https://nextjs.org/docs/advanced-features/i18n-routing)
-   */
-  i18n?: I18NConfig | null;
-  /**
-   * @see [Next.js TypeScript documentation](https://nextjs.org/docs/app/api-reference/config/typescript)
-   */
-  typescript?: TypeScriptConfig;
-  /**
-   * Enable type checking for Link and Router.push, etc.
-   * This feature requires TypeScript in your project.
-   *
-   * @see [Typed Links documentation](https://nextjs.org/docs/app/api-reference/config/typescript#statically-typed-links)
-   */
-  typedRoutes?: boolean;
-  /**
-   * Headers allow you to set custom HTTP headers for an incoming request path.
-   *
-   * @see [Headers configuration documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/headers)
-   */
-  headers?: () => Promise<Header[]> | Header[];
-  /**
-   * Rewrites allow you to map an incoming request path to a different destination path.
-   *
-   * @see [Rewrites configuration documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/rewrites)
-   */
-  rewrites?: () => Promise<Rewrite[] | {
-    beforeFiles?: Rewrite[];
-    afterFiles?: Rewrite[];
-    fallback?: Rewrite[];
-  }> | Rewrite[] | {
-    beforeFiles?: Rewrite[];
-    afterFiles?: Rewrite[];
-    fallback?: Rewrite[];
-  };
-  /**
-   * Redirects allow you to redirect an incoming request path to a different destination path.
-   *
-   * @see [Redirects configuration documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/redirects)
-   */
-  redirects?: () => Promise<Redirect[]> | Redirect[];
-  /**
-   * @see [Moment.js locales excluded by default](https://nextjs.org/docs/upgrading#momentjs-locales-excluded-by-default)
-   */
-  excludeDefaultMomentLocales?: boolean;
-  /**
-   * Before continuing to add custom webpack configuration to your application make sure Next.js doesn't already support your use-case
-   *
-   * @see [Custom Webpack Config documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/webpack)
-   */
-  webpack?: NextJsWebpackConfig | null;
-  /**
-   * By default Next.js will redirect urls with trailing slashes to their counterpart without a trailing slash.
-   *
-   * @default false
-   * @see [Trailing Slash Configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/trailingSlash)
-   */
-  trailingSlash?: boolean;
-  /**
-   * Next.js comes with built-in support for environment variables
-   *
-   * @see [Environment Variables documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/env)
-   */
-  env?: Record<string, string | undefined>;
-  /**
-   * Destination directory (defaults to `.next`)
-   */
-  distDir?: string;
-  /**
-   * The build output directory (defaults to `.next`) is now cleared by default except for the Next.js caches.
-   */
-  cleanDistDir?: boolean;
-  /**
-   * To set up a CDN, you can set up an asset prefix and configure your CDN's origin to resolve to the domain that Next.js is hosted on.
-   *
-   * @see [CDN Support with Asset Prefix](https://nextjs.org/docs/app/api-reference/config/next-config-js/assetPrefix)
-   */
-  assetPrefix?: string;
-  /**
-   * The default cache handler for the Pages and App Router uses the filesystem cache. This requires no configuration, however, you can customize the cache handler if you prefer.
-   *
-   * @see [Configuring Caching](https://nextjs.org/docs/app/building-your-application/deploying#configuring-caching) and the [API Reference](https://nextjs.org/docs/app/api-reference/next-config-js/incrementalCacheHandlerPath).
-   */
-  cacheHandler?: string | undefined;
-  cacheHandlers?: {
-    default?: string;
-    remote?: string;
-    static?: string;
-    [handlerName: string]: string | undefined;
-  };
-  /**
-   * Configure the in-memory cache size in bytes. Defaults to 50 MB.
-   * If `cacheMaxMemorySize: 0`, this disables in-memory caching entirely.
-   *
-   * @see [Configuring Caching](https://nextjs.org/docs/app/building-your-application/deploying#configuring-caching).
-   */
-  cacheMaxMemorySize?: number;
-  /**
-   * By default, `Next` will serve each file in the `pages` folder under a pathname matching the filename.
-   * To disable this behavior and prevent routing based set this to `true`.
-   *
-   * @default true
-   * @see [Disabling file-system routing](https://nextjs.org/docs/advanced-features/custom-server#disabling-file-system-routing)
-   */
-  useFileSystemPublicRoutes?: boolean;
-  /**
-   * @see [Configuring the build ID](https://nextjs.org/docs/app/api-reference/config/next-config-js/generateBuildId)
-   */
-  generateBuildId?: () => string | null | Promise<string | null>;
-  /** @see [Disabling ETag Configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/generateEtags) */
-  generateEtags?: boolean;
-  /** @see [Including non-page files in the pages directory](https://nextjs.org/docs/app/api-reference/config/next-config-js/pageExtensions) */
-  pageExtensions?: string[];
-  /** @see [Compression documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/compress) */
-  compress?: boolean;
-  /** @see [Disabling x-powered-by](https://nextjs.org/docs/app/api-reference/config/next-config-js/poweredByHeader) */
-  poweredByHeader?: boolean;
-  /** @see [Using the Image Component](https://nextjs.org/docs/app/api-reference/next-config-js/images) */
-  images?: ImageConfig;
-  /** Configure indicators in development environment */
-  devIndicators?: false | {
-    /**
-     * Position of the development tools indicator in the browser window.
-     * @default "bottom-left"
-     * */
-    position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-  };
-  /**
-   * Next.js exposes some options that give you some control over how the server will dispose or keep in memory built pages in development.
-   *
-   * @see [Configuring `onDemandEntries`](https://nextjs.org/docs/app/api-reference/config/next-config-js/onDemandEntries)
-   */
-  onDemandEntries?: {
-    /** period (in ms) where the server will keep pages in the buffer */
-    maxInactiveAge?: number;
-    /** number of pages that should be kept simultaneously without being disposed */
-    pagesBufferLength?: number;
-  };
-  /**
-   * A unique identifier for a deployment that will be included in each request's query string or header.
-   */
-  deploymentId?: string;
-  /**
-   * Deploy a Next.js application under a sub-path of a domain
-   *
-   * @see [Base path configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath)
-   */
-  basePath?: string;
-  /** @see [Customizing sass options](https://nextjs.org/docs/app/api-reference/next-config-js/sassOptions) */
-  sassOptions?: {
-    implementation?: string;
-    [key: string]: any;
-  };
-  /**
-   * Enable browser source map generation during the production build
-   *
-   * @see [Source Maps](https://nextjs.org/docs/advanced-features/source-maps)
-   */
-  productionBrowserSourceMaps?: boolean;
-  /**
-   * Enable {@link https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler React Compiler in Next.js}.
-   * Configuration accepts partial config object of the Compiler.
-   * If provided, the Compiler will be enabled.
-   */
-  reactCompiler?: boolean | ReactCompilerOptions;
-  /**
-   * Enable react profiling in production
-   *
-   */
-  reactProductionProfiling?: boolean;
-  /**
-   * The Next.js runtime is Strict Mode-compliant.
-   *
-   * @see [React Strict Mode](https://nextjs.org/docs/app/api-reference/config/next-config-js/reactStrictMode)
-   */
-  reactStrictMode?: boolean | null;
-  /**
-   * The maximum length of the headers that are emitted by React and added to
-   * the response.
-   *
-   * @see [React Max Headers Length](https://nextjs.org/docs/app/api-reference/config/next-config-js/reactMaxHeadersLength)
-   */
-  reactMaxHeadersLength?: number;
-  /**
-   * Next.js enables HTTP Keep-Alive by default.
-   * You may want to disable HTTP Keep-Alive for certain `fetch()` calls or globally.
-   *
-   * @see [Disabling HTTP Keep-Alive](https://nextjs.org/docs/app/api-reference/next-config-js/httpAgentOptions)
-   */
-  httpAgentOptions?: {
-    keepAlive?: boolean;
-  };
-  /**
-   * Timeout after waiting to generate static pages in seconds
-   *
-   * @default 60
-   */
-  staticPageGenerationTimeout?: number;
-  /**
-   * Add `"crossorigin"` attribute to generated `<script>` elements generated by `<Head />` or `<NextScript />` components
-   *
-   *
-   * @see [`crossorigin` attribute documentation](https://developer.mozilla.org/docs/Web/HTML/Attributes/crossorigin)
-   */
-  crossOrigin?: 'anonymous' | 'use-credentials';
-  /**
-   * Optionally enable compiler transforms
-   *
-   * @see [Supported Compiler Options](https://nextjs.org/docs/advanced-features/compiler#supported-features)
-   */
-  compiler?: {
-    reactRemoveProperties?: boolean | {
-      properties?: string[];
-    };
-    relay?: {
-      src: string;
-      artifactDirectory?: string;
-      language?: 'typescript' | 'javascript' | 'flow';
-      eagerEsModules?: boolean;
-    };
-    removeConsole?: boolean | {
-      exclude?: string[];
-    };
-    styledComponents?: boolean | StyledComponentsConfig;
-    emotion?: boolean | EmotionConfig;
-    styledJsx?: boolean | {
-      useLightningcss?: boolean;
-    };
-    /**
-     * Replaces variables in your code during compile time. Each key will be
-     * replaced with the respective values.
-     */
-    define?: Record<string, string>;
-    /**
-     * Replaces server-only (Node.js and Edge) variables in your code during compile time.
-     * Each key will be replaced with the respective values.
-     */
-    defineServer?: Record<string, string>;
-    /**
-     * A hook function that executes after production build compilation finishes,
-     * but before running post-compilation tasks such as type checking and
-     * static page generation.
-     */
-    runAfterProductionCompile?: (metadata: {
-      /**
-       * The root directory of the project
-       */
-      projectDir: string;
-      /**
-       * The build output directory (defaults to `.next`)
-       */
-      distDir: string;
-    }) => Promise<void>;
-  };
-  /**
-   * The type of build output.
-   * - `undefined`: The default build output, `.next` directory, that works with production mode `next start` or a hosting provider like Vercel
-   * - `'standalone'`: A standalone build output, `.next/standalone` directory, that only includes necessary files/dependencies. Useful for self-hosting in a Docker container.
-   * - `'export'`: An exported build output, `out` directory, that only includes static HTML/CSS/JS. Useful for self-hosting without a Node.js server.
-   * @see [Output File Tracing](https://nextjs.org/docs/advanced-features/output-file-tracing)
-   * @see [Static HTML Export](https://nextjs.org/docs/advanced-features/static-html-export)
-   */
-  output?: 'standalone' | 'export';
-  /**
-   * Automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`node_modules`). This replaces the
-   * `next-transpile-modules` package.
-   * @see [transpilePackages](https://nextjs.org/docs/advanced-features/compiler#module-transpilation)
-   */
-  transpilePackages?: string[];
-  /**
-   * Options for Turbopack. Temporarily also available as `experimental.turbo` for compatibility.
-   */
-  turbopack?: TurbopackOptions;
-  /**
-   * @deprecated Use `skipProxyUrlNormalize` instead.
-   */
-  skipMiddlewareUrlNormalize?: boolean;
-  skipProxyUrlNormalize?: boolean;
-  skipTrailingSlashRedirect?: boolean;
-  modularizeImports?: Record<string, {
-    transform: string | Record<string, string>;
-    preventFullImport?: boolean;
-    skipDefaultConversion?: boolean;
-  }>;
-  /**
-   * Logging configuration. Set to `false` to disable logging.
-   */
-  logging?: LoggingConfig | false;
-  /**
-   * Enables source maps while generating static pages.
-   * Helps with errors during the prerender phase in `next build`.
-   */
-  enablePrerenderSourceMaps?: boolean;
-  /**
-   * When enabled, in development and build, Next.js will automatically cache
-   * page-level components and functions for faster builds and rendering. This
-   * includes Partial Prerendering support.
-   *
-   * @see [Cache Components documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheComponents)
-   */
-  cacheComponents?: boolean;
-  cacheLife?: {
-    [profile: string]: {
-      stale?: number;
-      revalidate?: number;
-      expire?: number;
-    };
-  };
-  /**
-   * period (in seconds) where the server allow to serve stale cache
-   */
-  expireTime?: number;
-  /**
-   * Enable experimental features. Note that all experimental features are subject to breaking changes in the future.
-   */
-  experimental?: ExperimentalConfig;
-  /**
-   * Enables the bundling of node_modules packages (externals) for pages server-side bundles.
-   * @see https://nextjs.org/docs/pages/api-reference/next-config-js/bundlePagesRouterDependencies
-   */
-  bundlePagesRouterDependencies?: boolean;
-  /**
-   * A list of packages that should be treated as external in the server build.
-   * @see https://nextjs.org/docs/app/api-reference/next-config-js/serverExternalPackages
-   */
-  serverExternalPackages?: string[];
-  /**
-   * This is the repo root usually and only files above this
-   * directory are traced and included.
-   */
-  outputFileTracingRoot?: string;
-  /**
-   * This allows manually excluding traced files if too many
-   * are included incorrectly on a per-page basis.
-   */
-  outputFileTracingExcludes?: Record<string, string[]>;
-  /**
-   * This allows manually including traced files if some
-   * were not detected on a per-page basis.
-   */
-  outputFileTracingIncludes?: Record<string, string[]>;
-  watchOptions?: {
-    pollIntervalMs?: number;
-  };
-  /**
-   * User Agent of bots that can handle streaming metadata.
-   * Besides the default behavior, Next.js act differently on serving metadata to bots based on their capability.
-   *
-   * @default
-   * /Mediapartners-Google|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview/i
-   */
-  htmlLimitedBots?: RegExp;
-}
-interface NextConfigRuntime {
-  deploymentId?: NextConfigComplete['deploymentId'];
-  configFileName?: string;
-  env?: NextConfigComplete['env'];
-  distDir: NextConfigComplete['distDir'];
-  cacheComponents: NextConfigComplete['cacheComponents'];
-  htmlLimitedBots: NextConfigComplete['htmlLimitedBots'];
-  assetPrefix: NextConfigComplete['assetPrefix'];
-  output: NextConfigComplete['output'];
-  crossOrigin: NextConfigComplete['crossOrigin'];
-  trailingSlash: NextConfigComplete['trailingSlash'];
-  images: NextConfigComplete['images'];
-  reactMaxHeadersLength: NextConfigComplete['reactMaxHeadersLength'];
-  cacheLife: NextConfigComplete['cacheLife'];
-  basePath: NextConfigComplete['basePath'];
-  expireTime: NextConfigComplete['expireTime'];
-  generateEtags: NextConfigComplete['generateEtags'];
-  poweredByHeader: NextConfigComplete['poweredByHeader'];
-  cacheHandler: NextConfigComplete['cacheHandler'];
-  cacheHandlers: NextConfigComplete['cacheHandlers'];
-  cacheMaxMemorySize: NextConfigComplete['cacheMaxMemorySize'];
-  compress: NextConfigComplete['compress'];
-  i18n: NextConfigComplete['i18n'];
-  httpAgentOptions: NextConfigComplete['httpAgentOptions'];
-  skipProxyUrlNormalize: NextConfigComplete['skipProxyUrlNormalize'];
-  pageExtensions: NextConfigComplete['pageExtensions'];
-  useFileSystemPublicRoutes: NextConfigComplete['useFileSystemPublicRoutes'];
-  experimental: Pick<NextConfigComplete['experimental'], 'ppr' | 'taint' | 'serverActions' | 'staleTimes' | 'dynamicOnHover' | 'inlineCss' | 'authInterrupts' | 'clientTraceMetadata' | 'clientParamParsingOrigins' | 'adapterPath' | 'allowedRevalidateHeaderKeys' | 'fetchCacheKeyPrefix' | 'isrFlushToDisk' | 'optimizeCss' | 'nextScriptWorkers' | 'disableOptimizedLoading' | 'largePageDataBytes' | 'serverComponentsHmrCache' | 'caseSensitiveRoutes' | 'validateRSCRequestHeaders' | 'sri' | 'useSkewCookie' | 'preloadEntriesOnStart' | 'hideLogsAfterAbort' | 'removeUncaughtErrorAndRejectionListeners' | 'imgOptConcurrency' | 'imgOptMaxInputPixels' | 'imgOptSequentialRead' | 'imgOptSkipMetadata' | 'imgOptTimeoutInSeconds' | 'proxyClientMaxBodySize' | 'proxyTimeout' | 'testProxy' | 'runtimeServerDeploymentId'> & {};
-}
-//#endregion
-//#region node_modules/next/dist/server/web/spec-extension/request.d.ts
-/**
- * This class extends the [Web `Request` API](https://developer.mozilla.org/docs/Web/API/Request) with additional convenience methods.
- *
- * Read more: [Next.js Docs: `NextRequest`](https://nextjs.org/docs/app/api-reference/functions/next-request)
- */
-declare class NextRequest extends Request {
-  constructor(input: URL | RequestInfo, init?: RequestInit$1);
-  get cookies(): RequestCookies;
-  get nextUrl(): NextURL;
-  /**
-   * @deprecated
-   * `page` has been deprecated in favour of `URLPattern`.
-   * Read more: https://nextjs.org/docs/messages/middleware-request-page
-   */
-  get page(): void;
-  /**
-   * @deprecated
-   * `ua` has been removed in favour of \`userAgent\` function.
-   * Read more: https://nextjs.org/docs/messages/middleware-parse-user-agent
-   */
-  get ua(): void;
-  get url(): string;
-}
-interface RequestInit$1 extends globalThis.RequestInit {
-  nextConfig?: {
-    basePath?: string;
-    i18n?: I18NConfig | null;
-    trailingSlash?: boolean;
-  };
-  signal?: AbortSignal;
-  duplex?: 'half';
-}
-//#endregion
 //#region node_modules/vovk/node_modules/type-fest/source/primitive.d.ts
+
 /**
 Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
 
@@ -3922,7 +1087,8 @@ type VovkStreamAsyncIterable<T$1> = {
   onIterate: (cb: (data: T$1, i: number) => void) => () => void;
   abortController: AbortController;
 };
-type StaticMethodReturn<T$1 extends ControllerStaticMethod> = ReturnType<T$1> extends NextResponse<infer U> | Promise<NextResponse<infer U>> ? U : ReturnType<T$1> extends Response | Promise<Response> ? Awaited<ReturnType<T$1>> : ReturnType<T$1>;
+type IsNextJs = NextResponse extends Response ? true : false;
+type StaticMethodReturn<T$1 extends ControllerStaticMethod> = IsNextJs extends true ? ReturnType<T$1> extends NextResponse<infer U> | Promise<NextResponse<infer U>> ? U : ReturnType<T$1> extends Response | Promise<Response> ? Awaited<ReturnType<T$1>> : ReturnType<T$1> : ReturnType<T$1> extends Response | Promise<Response> ? Awaited<ReturnType<T$1>> : ReturnType<T$1>;
 type StaticMethodReturnPromise<T$1 extends ControllerStaticMethod> = ToPromise<StaticMethodReturn<T$1>>;
 type StaticMethodOptions<T$1 extends (req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TFetcherOptions extends Record<string, KnownAny$1>, TStreamIteration, R$1, F$1 extends VovkFetcherOptions<KnownAny$1>> = Partial<TFetcherOptions & {
   transform: (staticMethodReturn: Awaited<StaticMethodReturn<T$1>> extends JSONLinesResponder<infer U> ? VovkStreamAsyncIterable<U> : Awaited<StaticMethodReturn<T$1>>, resp: Response) => R$1;
@@ -4248,14 +1414,15 @@ type VovkController = StaticClass & VovkControllerInternal & {
  * - TParams: the expected shape of the route parameters (default: unknown)
  * @see https://vovk.dev/procedure
  */
-interface VovkRequest<TBody = unknown, TQuery$1 = unknown, TParams$1 = unknown> extends Omit<NextRequest, 'json' | 'nextUrl'> {
+interface VovkRequest<TBody = unknown, TQuery$1 = unknown, TParams$1 = unknown> extends Request {
   json: () => Promise<TBody>;
-  nextUrl: Omit<NextRequest['nextUrl'], 'searchParams'> & {
-    searchParams: Omit<NextRequest['nextUrl']['searchParams'], 'get' | 'getAll' | 'entries' | 'forEach' | 'keys' | 'values'> & {
+  nextUrl: {
+    search: string;
+    searchParams: {
       get: <KEY extends keyof TQuery$1>(key: KEY) => TQuery$1[KEY] extends readonly (infer ITEM)[] ? ITEM : TQuery$1[KEY];
       getAll: <KEY extends keyof TQuery$1>(key: KEY) => TQuery$1[KEY] extends unknown[] ? TQuery$1[KEY] : TQuery$1[KEY][];
       entries: () => IterableIterator<[keyof TQuery$1, TQuery$1[keyof TQuery$1]]>;
-      forEach: (callbackfn: (value: TQuery$1[keyof TQuery$1], key: keyof TQuery$1, searchParams: NextRequest['nextUrl']['searchParams']) => void) => void;
+      forEach: (callbackfn: (value: TQuery$1[keyof TQuery$1], key: keyof TQuery$1) => void) => void;
       keys: () => IterableIterator<keyof TQuery$1>;
       values: () => IterableIterator<TQuery$1[keyof TQuery$1]>;
     };
@@ -4693,7 +1860,7 @@ declare const $output: unique symbol;
 type $output = typeof $output;
 declare const $input: unique symbol;
 type $input = typeof $input;
-type $replace<Meta, S extends $ZodType> = Meta extends $output ? output$1<S> : Meta extends $input ? input<S> : Meta extends (infer M)[] ? $replace<M, S>[] : Meta extends ((...args: infer P) => infer R) ? (...args: { [K in keyof P]: $replace<P[K], S> }) => $replace<R, S> : Meta extends object ? { [K in keyof Meta]: $replace<Meta[K], S> } : Meta;
+type $replace<Meta, S extends $ZodType> = Meta extends $output ? output<S> : Meta extends $input ? input<S> : Meta extends (infer M)[] ? $replace<M, S>[] : Meta extends ((...args: infer P) => infer R) ? (...args: { [K in keyof P]: $replace<P[K], S> }) => $replace<R, S> : Meta extends object ? { [K in keyof Meta]: $replace<Meta[K], S> } : Meta;
 type MetadataType = object | undefined;
 declare class $ZodRegistry<Meta extends MetadataType = MetadataType, Schema extends $ZodType = $ZodType> {
   _meta: Meta;
@@ -4799,7 +1966,7 @@ interface ToJSONSchemaContext {
     defs: Record<string, BaseSchema>;
   } | undefined;
 }
-type ZodStandardSchemaWithJSON$1<T$1> = StandardSchemaWithJSONProps<input<T$1>, output$1<T$1>>;
+type ZodStandardSchemaWithJSON$1<T$1> = StandardSchemaWithJSONProps<input<T$1>, output<T$1>>;
 interface ZodStandardJSONSchemaPayload<T$1> extends BaseSchema {
   "~standard": ZodStandardSchemaWithJSON$1<T$1>;
 }
@@ -4931,7 +2098,7 @@ interface $ZodTypeInternals<out O = unknown, out I = unknown> extends _$ZodTypeI
   /** @internal The inferred input type */
   input: I;
 }
-type $ZodStandardSchema<T$1> = StandardSchemaV1.Props<input<T$1>, output$1<T$1>>;
+type $ZodStandardSchema<T$1> = StandardSchemaV1.Props<input<T$1>, output<T$1>>;
 type SomeType = {
   _zod: _$ZodTypeInternals;
 };
@@ -5300,7 +2467,7 @@ interface $ZodArrayDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
 interface $ZodArrayInternals<T$1 extends SomeType = $ZodType> extends _$ZodTypeInternals {
   def: $ZodArrayDef<T$1>;
   isst: $ZodIssueInvalidType;
-  output: output$1<T$1>[];
+  output: output<T$1>[];
   input: input<T$1>[];
 }
 interface $ZodArray<T$1 extends SomeType = $ZodType> extends $ZodType<any, any, $ZodArrayInternals<T$1>> {}
@@ -5315,7 +2482,7 @@ type OptionalInSchema = {
     optin: "optional";
   };
 };
-type $InferObjectOutput<T$1 extends $ZodLooseShape, Extra extends Record<string, unknown>> = string extends keyof T$1 ? IsAny<T$1[keyof T$1]> extends true ? Record<string, unknown> : Record<string, output$1<T$1[keyof T$1]>> : keyof (T$1 & Extra) extends never ? Record<string, never> : Prettify<{ -readonly [k in keyof T$1 as T$1[k] extends OptionalOutSchema ? never : k]: T$1[k]["_zod"]["output"] } & { -readonly [k in keyof T$1 as T$1[k] extends OptionalOutSchema ? k : never]?: T$1[k]["_zod"]["output"] } & Extra>;
+type $InferObjectOutput<T$1 extends $ZodLooseShape, Extra extends Record<string, unknown>> = string extends keyof T$1 ? IsAny<T$1[keyof T$1]> extends true ? Record<string, unknown> : Record<string, output<T$1[keyof T$1]>> : keyof (T$1 & Extra) extends never ? Record<string, never> : Prettify<{ -readonly [k in keyof T$1 as T$1[k] extends OptionalOutSchema ? never : k]: T$1[k]["_zod"]["output"] } & { -readonly [k in keyof T$1 as T$1[k] extends OptionalOutSchema ? k : never]?: T$1[k]["_zod"]["output"] } & Extra>;
 type $InferObjectInput<T$1 extends $ZodLooseShape, Extra extends Record<string, unknown>> = string extends keyof T$1 ? IsAny<T$1[keyof T$1]> extends true ? Record<string, unknown> : Record<string, input<T$1[keyof T$1]>> : keyof (T$1 & Extra) extends never ? Record<string, never> : Prettify<{ -readonly [k in keyof T$1 as T$1[k] extends OptionalInSchema ? never : k]: T$1[k]["_zod"]["input"] } & { -readonly [k in keyof T$1 as T$1[k] extends OptionalInSchema ? k : never]?: T$1[k]["_zod"]["input"] } & Extra>;
 type $ZodObjectConfig = {
   out: Record<string, unknown>;
@@ -5335,7 +2502,7 @@ type $strip = {
 };
 type $catchall<T$1 extends SomeType> = {
   out: {
-    [k: string]: output$1<T$1>;
+    [k: string]: output<T$1>;
   };
   in: {
     [k: string]: input<T$1>;
@@ -5362,13 +2529,13 @@ out Shape extends $ZodShape = $ZodShape, out Config extends $ZodObjectConfig = $
 }
 type $ZodLooseShape = Record<string, any>;
 interface $ZodObject< /** @ts-ignore Cast variance */
-out Shape extends Readonly<$ZodShape> = Readonly<$ZodShape>, out Params$2 extends $ZodObjectConfig = $ZodObjectConfig> extends $ZodType<any, any, $ZodObjectInternals<Shape, Params$2>> {}
+out Shape extends Readonly<$ZodShape> = Readonly<$ZodShape>, out Params$1 extends $ZodObjectConfig = $ZodObjectConfig> extends $ZodType<any, any, $ZodObjectInternals<Shape, Params$1>> {}
 declare const $ZodObject: $constructor<$ZodObject>;
-type $InferUnionOutput<T$1 extends SomeType> = T$1 extends any ? output$1<T$1> : never;
+type $InferUnionOutput<T$1 extends SomeType> = T$1 extends any ? output<T$1> : never;
 type $InferUnionInput<T$1 extends SomeType> = T$1 extends any ? input<T$1> : never;
-interface $ZodUnionDef<Options$1 extends readonly SomeType[] = readonly $ZodType[]> extends $ZodTypeDef {
+interface $ZodUnionDef<Options extends readonly SomeType[] = readonly $ZodType[]> extends $ZodTypeDef {
   type: "union";
-  options: Options$1;
+  options: Options;
   inclusive?: boolean;
 }
 type IsOptionalIn<T$1 extends SomeType> = T$1 extends OptionalInSchema ? true : false;
@@ -5397,7 +2564,7 @@ interface $ZodIntersectionInternals<A extends SomeType = $ZodType, B extends Som
   isst: never;
   optin: A["_zod"]["optin"] | B["_zod"]["optin"];
   optout: A["_zod"]["optout"] | B["_zod"]["optout"];
-  output: output$1<A> & output$1<B>;
+  output: output<A> & output<B>;
   input: input<A> & input<B>;
 }
 interface $ZodIntersection<A extends SomeType = $ZodType, B extends SomeType = $ZodType> extends $ZodType {
@@ -5412,9 +2579,9 @@ interface $ZodTupleDef<T$1 extends TupleItems = readonly $ZodType[], Rest$1 exte
 type $InferTupleInputType<T$1 extends TupleItems, Rest$1 extends SomeType | null> = [...TupleInputTypeWithOptionals<T$1>, ...(Rest$1 extends SomeType ? input<Rest$1>[] : [])];
 type TupleInputTypeNoOptionals<T$1 extends TupleItems> = { [k in keyof T$1]: input<T$1[k]> };
 type TupleInputTypeWithOptionals<T$1 extends TupleItems> = T$1 extends readonly [...infer Prefix extends SomeType[], infer Tail extends SomeType] ? Tail["_zod"]["optin"] extends "optional" ? [...TupleInputTypeWithOptionals<Prefix>, input<Tail>?] : TupleInputTypeNoOptionals<T$1> : [];
-type $InferTupleOutputType<T$1 extends TupleItems, Rest$1 extends SomeType | null> = [...TupleOutputTypeWithOptionals<T$1>, ...(Rest$1 extends SomeType ? output$1<Rest$1>[] : [])];
-type TupleOutputTypeNoOptionals<T$1 extends TupleItems> = { [k in keyof T$1]: output$1<T$1[k]> };
-type TupleOutputTypeWithOptionals<T$1 extends TupleItems> = T$1 extends readonly [...infer Prefix extends SomeType[], infer Tail extends SomeType] ? Tail["_zod"]["optout"] extends "optional" ? [...TupleOutputTypeWithOptionals<Prefix>, output$1<Tail>?] : TupleOutputTypeNoOptionals<T$1> : [];
+type $InferTupleOutputType<T$1 extends TupleItems, Rest$1 extends SomeType | null> = [...TupleOutputTypeWithOptionals<T$1>, ...(Rest$1 extends SomeType ? output<Rest$1>[] : [])];
+type TupleOutputTypeNoOptionals<T$1 extends TupleItems> = { [k in keyof T$1]: output<T$1[k]> };
+type TupleOutputTypeWithOptionals<T$1 extends TupleItems> = T$1 extends readonly [...infer Prefix extends SomeType[], infer Tail extends SomeType] ? Tail["_zod"]["optout"] extends "optional" ? [...TupleOutputTypeWithOptionals<Prefix>, output<Tail>?] : TupleOutputTypeNoOptionals<T$1> : [];
 interface $ZodTupleInternals<T$1 extends TupleItems = readonly $ZodType[], Rest$1 extends SomeType | null = $ZodType | null> extends _$ZodTypeInternals {
   def: $ZodTupleDef<T$1, Rest$1>;
   isst: $ZodIssueInvalidType | $ZodIssueTooBig<unknown[]> | $ZodIssueTooSmall<unknown[]>;
@@ -5433,7 +2600,7 @@ interface $ZodRecordDef<Key extends $ZodRecordKey = $ZodRecordKey, Value extends
   /** @default "strict" - errors on keys not matching keyType. "loose" passes through non-matching keys unchanged. */
   mode?: "strict" | "loose";
 }
-type $InferZodRecordOutput<Key extends $ZodRecordKey = $ZodRecordKey, Value extends SomeType = $ZodType> = Key extends $partial ? Partial<Record<output$1<Key>, output$1<Value>>> : Record<output$1<Key>, output$1<Value>>;
+type $InferZodRecordOutput<Key extends $ZodRecordKey = $ZodRecordKey, Value extends SomeType = $ZodType> = Key extends $partial ? Partial<Record<output<Key>, output<Value>>> : Record<output<Key>, output<Value>>;
 type $InferZodRecordInput<Key extends $ZodRecordKey = $ZodRecordKey, Value extends SomeType = $ZodType> = Key extends $partial ? Partial<Record<input<Key> & PropertyKey, input<Value>>> : Record<input<Key> & PropertyKey, input<Value>>;
 interface $ZodRecordInternals<Key extends $ZodRecordKey = $ZodRecordKey, Value extends SomeType = $ZodType> extends $ZodTypeInternals<$InferZodRecordOutput<Key, Value>, $InferZodRecordInput<Key, Value>> {
   def: $ZodRecordDef<Key, Value>;
@@ -5453,7 +2620,7 @@ interface $ZodMapDef<Key extends SomeType = $ZodType, Value extends SomeType = $
   keyType: Key;
   valueType: Value;
 }
-interface $ZodMapInternals<Key extends SomeType = $ZodType, Value extends SomeType = $ZodType> extends $ZodTypeInternals<Map<output$1<Key>, output$1<Value>>, Map<input<Key>, input<Value>>> {
+interface $ZodMapInternals<Key extends SomeType = $ZodType, Value extends SomeType = $ZodType> extends $ZodTypeInternals<Map<output<Key>, output<Value>>, Map<input<Key>, input<Value>>> {
   def: $ZodMapDef<Key, Value>;
   isst: $ZodIssueInvalidType | $ZodIssueInvalidKey | $ZodIssueInvalidElement<unknown>;
   optin?: "optional" | undefined;
@@ -5467,7 +2634,7 @@ interface $ZodSetDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "set";
   valueType: T$1;
 }
-interface $ZodSetInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<Set<output$1<T$1>>, Set<input<T$1>>> {
+interface $ZodSetInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<Set<output<T$1>>, Set<input<T$1>>> {
   def: $ZodSetDef<T$1>;
   isst: $ZodIssueInvalidType;
   optin?: "optional" | undefined;
@@ -5550,7 +2717,7 @@ interface $ZodOptionalDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "optional";
   innerType: T$1;
 }
-interface $ZodOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output$1<T$1> | undefined, input<T$1> | undefined> {
+interface $ZodOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1> | undefined, input<T$1> | undefined> {
   def: $ZodOptionalDef<T$1>;
   optin: "optional";
   optout: "optional";
@@ -5565,7 +2732,7 @@ declare const $ZodOptional: $constructor<$ZodOptional>;
 interface $ZodExactOptionalDef<T$1 extends SomeType = $ZodType> extends $ZodOptionalDef<T$1> {}
 interface $ZodExactOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodOptionalInternals<T$1> {
   def: $ZodExactOptionalDef<T$1>;
-  output: output$1<T$1>;
+  output: output<T$1>;
   input: input<T$1>;
 }
 interface $ZodExactOptional<T$1 extends SomeType = $ZodType> extends $ZodType {
@@ -5576,7 +2743,7 @@ interface $ZodNullableDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "nullable";
   innerType: T$1;
 }
-interface $ZodNullableInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output$1<T$1> | null, input<T$1> | null> {
+interface $ZodNullableInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1> | null, input<T$1> | null> {
   def: $ZodNullableDef<T$1>;
   optin: T$1["_zod"]["optin"];
   optout: T$1["_zod"]["optout"];
@@ -5592,9 +2759,9 @@ interface $ZodDefaultDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "default";
   innerType: T$1;
   /** The default value. May be a getter. */
-  defaultValue: NoUndefined<output$1<T$1>>;
+  defaultValue: NoUndefined<output<T$1>>;
 }
-interface $ZodDefaultInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output$1<T$1>>, input<T$1> | undefined> {
+interface $ZodDefaultInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T$1>>, input<T$1> | undefined> {
   def: $ZodDefaultDef<T$1>;
   optin: "optional";
   optout?: "optional" | undefined;
@@ -5611,7 +2778,7 @@ interface $ZodPrefaultDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   /** The default value. May be a getter. */
   defaultValue: input<T$1>;
 }
-interface $ZodPrefaultInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output$1<T$1>>, input<T$1> | undefined> {
+interface $ZodPrefaultInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T$1>>, input<T$1> | undefined> {
   def: $ZodPrefaultDef<T$1>;
   optin: "optional";
   optout?: "optional" | undefined;
@@ -5626,7 +2793,7 @@ interface $ZodNonOptionalDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDe
   type: "nonoptional";
   innerType: T$1;
 }
-interface $ZodNonOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output$1<T$1>>, NoUndefined<input<T$1>>> {
+interface $ZodNonOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T$1>>, NoUndefined<input<T$1>>> {
   def: $ZodNonOptionalDef<T$1>;
   isst: $ZodIssueInvalidType;
   values: T$1["_zod"]["values"];
@@ -5664,7 +2831,7 @@ interface $ZodCatchDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   innerType: T$1;
   catchValue: (ctx: $ZodCatchCtx) => unknown;
 }
-interface $ZodCatchInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output$1<T$1>, input<T$1>> {
+interface $ZodCatchInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1>, input<T$1>> {
   def: $ZodCatchDef<T$1>;
   optin: T$1["_zod"]["optin"];
   optout: T$1["_zod"]["optout"];
@@ -5691,11 +2858,11 @@ interface $ZodPipeDef<A extends SomeType = $ZodType, B extends SomeType = $ZodTy
   in: A;
   out: B;
   /** Only defined inside $ZodCodec instances. */
-  transform?: (value: output$1<A>, payload: ParsePayload<output$1<A>>) => MaybeAsync<input<B>>;
+  transform?: (value: output<A>, payload: ParsePayload<output<A>>) => MaybeAsync<input<B>>;
   /** Only defined inside $ZodCodec instances. */
-  reverseTransform?: (value: input<B>, payload: ParsePayload<input<B>>) => MaybeAsync<output$1<A>>;
+  reverseTransform?: (value: input<B>, payload: ParsePayload<input<B>>) => MaybeAsync<output<A>>;
 }
-interface $ZodPipeInternals<A extends SomeType = $ZodType, B extends SomeType = $ZodType> extends $ZodTypeInternals<output$1<B>, input<A>> {
+interface $ZodPipeInternals<A extends SomeType = $ZodType, B extends SomeType = $ZodType> extends $ZodTypeInternals<output<B>, input<A>> {
   def: $ZodPipeDef<A, B>;
   isst: never;
   values: A["_zod"]["values"];
@@ -5711,7 +2878,7 @@ interface $ZodReadonlyDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "readonly";
   innerType: T$1;
 }
-interface $ZodReadonlyInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<MakeReadonly<output$1<T$1>>, MakeReadonly<input<T$1>>> {
+interface $ZodReadonlyInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<MakeReadonly<output<T$1>>, MakeReadonly<input<T$1>>> {
   def: $ZodReadonlyDef<T$1>;
   optin: T$1["_zod"]["optin"];
   optout: T$1["_zod"]["optout"];
@@ -5748,10 +2915,10 @@ declare const $ZodTemplateLiteral: $constructor<$ZodTemplateLiteral>;
 type $ZodFunctionArgs = $ZodType<unknown[], unknown[]>;
 type $ZodFunctionIn = $ZodFunctionArgs;
 type $ZodFunctionOut = $ZodType;
-type $InferInnerFunctionType<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : output$1<Args>) => input<Returns>;
-type $InferInnerFunctionTypeAsync<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : output$1<Args>) => MaybeAsync<input<Returns>>;
-type $InferOuterFunctionType<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : input<Args>) => output$1<Returns>;
-type $InferOuterFunctionTypeAsync<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : input<Args>) => Promise<output$1<Returns>>;
+type $InferInnerFunctionType<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : output<Args>) => input<Returns>;
+type $InferInnerFunctionTypeAsync<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : output<Args>) => MaybeAsync<input<Returns>>;
+type $InferOuterFunctionType<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : input<Args>) => output<Returns>;
+type $InferOuterFunctionTypeAsync<Args extends $ZodFunctionIn, Returns extends $ZodFunctionOut> = (...args: $ZodFunctionIn extends Args ? never[] : input<Args>) => Promise<output<Returns>>;
 interface $ZodFunctionDef<In extends $ZodFunctionIn = $ZodFunctionIn, Out extends $ZodFunctionOut = $ZodFunctionOut> extends $ZodTypeDef {
   type: "function";
   input: In;
@@ -5778,7 +2945,7 @@ interface $ZodPromiseDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "promise";
   innerType: T$1;
 }
-interface $ZodPromiseInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<Promise<output$1<T$1>>, MaybeAsync<input<T$1>>> {
+interface $ZodPromiseInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<Promise<output<T$1>>, MaybeAsync<input<T$1>>> {
   def: $ZodPromiseDef<T$1>;
   isst: never;
 }
@@ -5790,7 +2957,7 @@ interface $ZodLazyDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "lazy";
   getter: () => T$1;
 }
-interface $ZodLazyInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output$1<T$1>, input<T$1>> {
+interface $ZodLazyInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1>, input<T$1>> {
   def: $ZodLazyDef<T$1>;
   isst: never;
   /** Auto-cached way to retrieve the inner schema */
@@ -6153,7 +3320,7 @@ type $brand<T$1 extends string | number | symbol = string | number | symbol> = {
 type $ZodBranded<T$1 extends SomeType, Brand extends string | number | symbol, Dir extends "in" | "out" | "inout" = "out"> = T$1 & (Dir extends "inout" ? {
   _zod: {
     input: input<T$1> & $brand<Brand>;
-    output: output$1<T$1> & $brand<Brand>;
+    output: output<T$1> & $brand<Brand>;
   };
 } : Dir extends "in" ? {
   _zod: {
@@ -6161,7 +3328,7 @@ type $ZodBranded<T$1 extends SomeType, Brand extends string | number | symbol, D
   };
 } : {
   _zod: {
-    output: output$1<T$1> & $brand<Brand>;
+    output: output<T$1> & $brand<Brand>;
   };
 });
 type input<T$1> = T$1 extends {
@@ -6169,7 +3336,7 @@ type input<T$1> = T$1 extends {
     input: any;
   };
 } ? T$1["_zod"]["input"] : unknown;
-type output$1<T$1> = T$1 extends {
+type output<T$1> = T$1 extends {
   _zod: {
     output: any;
   };
@@ -6271,7 +3438,7 @@ type ZodSafeParseError<T$1> = {
 };
 //#endregion
 //#region node_modules/zod/v4/classic/schemas.d.cts
-type ZodStandardSchemaWithJSON<T$1> = StandardSchemaWithJSONProps<input<T$1>, output$1<T$1>>;
+type ZodStandardSchemaWithJSON<T$1> = StandardSchemaWithJSONProps<input<T$1>, output<T$1>>;
 interface ZodType<out Output = unknown, out Input = unknown, out Internals extends $ZodTypeInternals<Output, Input> = $ZodTypeInternals<Output, Input>> extends $ZodType<Output, Input, Internals> {
   def: Internals["def"];
   type: Internals["def"]["type"];
@@ -6284,45 +3451,45 @@ interface ZodType<out Output = unknown, out Input = unknown, out Internals exten
   "~standard": ZodStandardSchemaWithJSON<this>;
   /** Converts this schema to a JSON Schema representation. */
   toJSONSchema(params?: ToJSONSchemaParams): ZodStandardJSONSchemaPayload<this>;
-  check(...checks: (CheckFn<output$1<this>> | $ZodCheck<output$1<this>>)[]): this;
-  with(...checks: (CheckFn<output$1<this>> | $ZodCheck<output$1<this>>)[]): this;
+  check(...checks: (CheckFn<output<this>> | $ZodCheck<output<this>>)[]): this;
+  with(...checks: (CheckFn<output<this>> | $ZodCheck<output<this>>)[]): this;
   clone(def?: Internals["def"], params?: {
     parent: boolean;
   }): this;
   register<R$1 extends $ZodRegistry>(registry: R$1, ...meta: this extends R$1["_schema"] ? undefined extends R$1["_meta"] ? [$replace<R$1["_meta"], this>?] : [$replace<R$1["_meta"], this>] : ["Incompatible schema"]): this;
   brand<T$1 extends PropertyKey = PropertyKey, Dir extends "in" | "out" | "inout" = "out">(value?: T$1): PropertyKey extends T$1 ? this : $ZodBranded<this, T$1, Dir>;
-  parse(data: unknown, params?: ParseContext<$ZodIssue>): output$1<this>;
-  safeParse(data: unknown, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<output$1<this>>;
-  parseAsync(data: unknown, params?: ParseContext<$ZodIssue>): Promise<output$1<this>>;
-  safeParseAsync(data: unknown, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<output$1<this>>>;
-  spa: (data: unknown, params?: ParseContext<$ZodIssue>) => Promise<ZodSafeParseResult<output$1<this>>>;
-  encode(data: output$1<this>, params?: ParseContext<$ZodIssue>): input<this>;
-  decode(data: input<this>, params?: ParseContext<$ZodIssue>): output$1<this>;
-  encodeAsync(data: output$1<this>, params?: ParseContext<$ZodIssue>): Promise<input<this>>;
-  decodeAsync(data: input<this>, params?: ParseContext<$ZodIssue>): Promise<output$1<this>>;
-  safeEncode(data: output$1<this>, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<input<this>>;
-  safeDecode(data: input<this>, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<output$1<this>>;
-  safeEncodeAsync(data: output$1<this>, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<input<this>>>;
-  safeDecodeAsync(data: input<this>, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<output$1<this>>>;
-  refine<Ch extends (arg: output$1<this>) => unknown | Promise<unknown>>(check: Ch, params?: string | $ZodCustomParams): Ch extends ((arg: any) => arg is infer R) ? this & ZodType<R$1, input<this>> : this;
-  superRefine(refinement: (arg: output$1<this>, ctx: $RefinementCtx<output$1<this>>) => void | Promise<void>): this;
-  overwrite(fn: (x: output$1<this>) => output$1<this>): this;
+  parse(data: unknown, params?: ParseContext<$ZodIssue>): output<this>;
+  safeParse(data: unknown, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<output<this>>;
+  parseAsync(data: unknown, params?: ParseContext<$ZodIssue>): Promise<output<this>>;
+  safeParseAsync(data: unknown, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<output<this>>>;
+  spa: (data: unknown, params?: ParseContext<$ZodIssue>) => Promise<ZodSafeParseResult<output<this>>>;
+  encode(data: output<this>, params?: ParseContext<$ZodIssue>): input<this>;
+  decode(data: input<this>, params?: ParseContext<$ZodIssue>): output<this>;
+  encodeAsync(data: output<this>, params?: ParseContext<$ZodIssue>): Promise<input<this>>;
+  decodeAsync(data: input<this>, params?: ParseContext<$ZodIssue>): Promise<output<this>>;
+  safeEncode(data: output<this>, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<input<this>>;
+  safeDecode(data: input<this>, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<output<this>>;
+  safeEncodeAsync(data: output<this>, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<input<this>>>;
+  safeDecodeAsync(data: input<this>, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<output<this>>>;
+  refine<Ch extends (arg: output<this>) => unknown | Promise<unknown>>(check: Ch, params?: string | $ZodCustomParams): Ch extends ((arg: any) => arg is infer R) ? this & ZodType<R$1, input<this>> : this;
+  superRefine(refinement: (arg: output<this>, ctx: $RefinementCtx<output<this>>) => void | Promise<void>): this;
+  overwrite(fn: (x: output<this>) => output<this>): this;
   optional(): ZodOptional<this>;
   exactOptional(): ZodExactOptional<this>;
   nonoptional(params?: string | $ZodNonOptionalParams): ZodNonOptional<this>;
   nullable(): ZodNullable<this>;
   nullish(): ZodOptional<ZodNullable<this>>;
-  default(def: NoUndefined<output$1<this>>): ZodDefault<this>;
-  default(def: () => NoUndefined<output$1<this>>): ZodDefault<this>;
+  default(def: NoUndefined<output<this>>): ZodDefault<this>;
+  default(def: () => NoUndefined<output<this>>): ZodDefault<this>;
   prefault(def: () => input<this>): ZodPrefault<this>;
   prefault(def: input<this>): ZodPrefault<this>;
   array(): ZodArray<this>;
   or<T$1 extends SomeType>(option: T$1): ZodUnion<[this, T$1]>;
   and<T$1 extends SomeType>(incoming: T$1): ZodIntersection<this, T$1>;
-  transform<NewOut>(transform: (arg: output$1<this>, ctx: $RefinementCtx<output$1<this>>) => NewOut | Promise<NewOut>): ZodPipe<this, ZodTransform<Awaited<NewOut>, output$1<this>>>;
-  catch(def: output$1<this>): ZodCatch<this>;
-  catch(def: (ctx: $ZodCatchCtx) => output$1<this>): ZodCatch<this>;
-  pipe<T$1 extends $ZodType<any, output$1<this>>>(target: T$1 | $ZodType<any, output$1<this>>): ZodPipe<this, T$1>;
+  transform<NewOut>(transform: (arg: output<this>, ctx: $RefinementCtx<output<this>>) => NewOut | Promise<NewOut>): ZodPipe<this, ZodTransform<Awaited<NewOut>, output<this>>>;
+  catch(def: output<this>): ZodCatch<this>;
+  catch(def: (ctx: $ZodCatchCtx) => output<this>): ZodCatch<this>;
+  pipe<T$1 extends $ZodType<any, output<this>>>(target: T$1 | $ZodType<any, output<this>>): ZodPipe<this, T$1>;
   readonly(): ZodReadonly<this>;
   /** Returns a new instance that has been registered in `z.globalRegistry` with the specified description */
   describe(description: string): this;
@@ -6491,7 +3658,7 @@ interface ZodArray<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodArrayIn
   "~standard": ZodStandardSchemaWithJSON<this>;
 }
 declare const ZodArray: $constructor<ZodArray>;
-type SafeExtendShape<Base extends $ZodShape, Ext extends $ZodLooseShape> = { [K in keyof Ext]: K extends keyof Base ? output$1<Ext[K]> extends output$1<Base[K]> ? input<Ext[K]> extends input<Base[K]> ? Ext[K] : never : never : Ext[K] };
+type SafeExtendShape<Base extends $ZodShape, Ext extends $ZodLooseShape> = { [K in keyof Ext]: K extends keyof Base ? output<Ext[K]> extends output<Base[K]> ? input<Ext[K]> extends input<Base[K]> ? Ext[K] : never : never : Ext[K] };
 interface ZodObject< /** @ts-ignore Cast variance */
 out Shape extends $ZodShape = $ZodLooseShape, out Config extends $ZodObjectConfig = $strip> extends _ZodType<$ZodObjectInternals<Shape, Config>>, $ZodObject<Shape, Config> {
   "~standard": ZodStandardSchemaWithJSON<this>;
