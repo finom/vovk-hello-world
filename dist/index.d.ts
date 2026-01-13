@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server.js";
-import { pick } from "lodash";
 
 //#region node_modules/vovk/node_modules/type-fest/source/primitive.d.ts
 
@@ -4332,4 +4331,4 @@ declare const OpenApiRPC: VovkRPCModule<typeof OpenApiController, {
   init?: RequestInit;
 }>;
 //#endregion
-export { OpenApiRPC, StreamRPC, UserRPC, pick, schema$1 as schema };
+export { OpenApiRPC, StreamRPC, UserRPC, schema$1 as schema };
