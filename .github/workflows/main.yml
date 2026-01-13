@@ -40,4 +40,4 @@ jobs:
           npm ci
 
       - name: Run tests
-        run: npm run generate && npm t
+        run: npx vovk generate && npm t
