@@ -54,7 +54,7 @@ const config = {
   bundle: {
     outputConfig: {
       origin: PROD_ORIGIN,
-      // imports: { validateOnClient: null },
+      imports: { validateOnClient: null },
       /* package: {
         dependencies: {
           lodash: "^4.17.21",
