@@ -52,7 +52,7 @@ const config = {
     // prettifyClient: true,
   },
   bundle: {
-    outputConfig: { origin: PROD_ORIGIN, imports: { validateOnClient: null } },
+    outputConfig: { origin: PROD_ORIGIN },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
       const { build } = await import("tsdown");
