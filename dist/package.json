@@ -9,7 +9,7 @@
     }
   },
   "name": "vovk-hello-world",
-  "version": "0.0.79",
+  "version": "0.0.80",
   "description": "A \"Hello World!\" app built with Next.js, Vovk.ts and Zod. For details, visit https://vovk.dev/hello-world",
   "license": "MIT",
   "repository": {
