@@ -52,9 +52,16 @@ const config = {
     // prettifyClient: true,
   },
   bundle: {
-    outputConfig: { origin: PROD_ORIGIN, imports: { validateOnClient: null }, package: { dependencies: {
-      lodash: "^4.17.21",
-    } }, reExports: { pick: "lodash" } },
+    outputConfig: {
+      origin: PROD_ORIGIN,
+      imports: { validateOnClient: null },
+      /* package: {
+        dependencies: {
+          lodash: "^4.17.21",
+        },
+      },
+      reExports: { pick: "lodash" }, */
+    },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
       const { build } = await import("tsdown");
