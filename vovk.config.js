@@ -87,10 +87,10 @@ const config = {
         },
         noExternal: [
           "vovk/**",
-          "vovk-ajv",
+          /* "vovk-ajv",
           "ajv/**",
           "ajv-errors",
-          "ajv-formats/**",
+          "ajv-formats/**", */
         ],
       });
     },
