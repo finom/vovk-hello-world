@@ -71,10 +71,8 @@ const config = {
     build: async ({ entry, outDir }) => {
       const { build } = await import("tsdown");
       await build({
-        entry: { index: entry },
-        dts: {
-          resolve: [/^(?!next($|\/))/],
-        },
+        entry,
+        dts: true,
         format: "esm",
         hash: false,
         fixedExtension: true,
@@ -90,7 +88,7 @@ const config = {
             mainFields: ["module", "main"],
           },
         },
-        noExternal: ["vovk/**"],
+        noExternal: ['!next/**'],
       });
     },
   },

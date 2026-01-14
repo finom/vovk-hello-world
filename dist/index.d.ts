@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server.js";
 
 //#region node_modules/vovk/node_modules/type-fest/source/primitive.d.ts
-
 /**
 Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
 
@@ -74,8 +73,8 @@ type LiteralUnion<LiteralType, BaseType extends Primitive$1> = LiteralType | (Ba
 //#region node_modules/vovk/node_modules/type-fest/source/package-json.d.ts
 declare namespace PackageJson {
   /**
-  A person who has been involved in creating or maintaining the package.
-  */
+  	A person who has been involved in creating or maintaining the package.
+  	*/
   type Person = string | {
     name: string;
     url?: string;
@@ -83,507 +82,430 @@ declare namespace PackageJson {
   };
   type BugsLocation = string | {
     /**
-    The URL to the package's issue tracker.
-    */
+    			The URL to the package's issue tracker.
+    			*/
     url?: string;
-
     /**
-    The email address to which issues should be reported.
-    */
+    			The email address to which issues should be reported.
+    			*/
     email?: string;
   };
   type DirectoryLocations = {
     [directoryType: string]: JsonValue | undefined;
-
     /**
-    Location for executable scripts. Sugar to generate entries in the `bin` property by walking the folder.
-    */
+    		Location for executable scripts. Sugar to generate entries in the `bin` property by walking the folder.
+    		*/
     bin?: string;
-
     /**
-    Location for Markdown files.
-    */
+    		Location for Markdown files.
+    		*/
     doc?: string;
-
     /**
-    Location for example scripts.
-    */
+    		Location for example scripts.
+    		*/
     example?: string;
-
     /**
-    Location for the bulk of the library.
-    */
+    		Location for the bulk of the library.
+    		*/
     lib?: string;
-
     /**
-    Location for man pages. Sugar to generate a `man` array by walking the folder.
-    */
+    		Location for man pages. Sugar to generate a `man` array by walking the folder.
+    		*/
     man?: string;
-
     /**
-    Location for test files.
-    */
+    		Location for test files.
+    		*/
     test?: string;
   };
   type Scripts = {
     /**
-    Run **before** the package is published (Also run on local `npm install` without any arguments).
-    */
+    		Run **before** the package is published (Also run on local `npm install` without any arguments).
+    		*/
     prepublish?: string;
-
     /**
-    Run both **before** the package is packed and published, and on local `npm install` without any arguments. This is run **after** `prepublish`, but **before** `prepublishOnly`.
-    */
+    		Run both **before** the package is packed and published, and on local `npm install` without any arguments. This is run **after** `prepublish`, but **before** `prepublishOnly`.
+    		*/
     prepare?: string;
-
     /**
-    Run **before** the package is prepared and packed, **only** on `npm publish`.
-    */
+    		Run **before** the package is prepared and packed, **only** on `npm publish`.
+    		*/
     prepublishOnly?: string;
-
     /**
-    Run **before** a tarball is packed (on `npm pack`, `npm publish`, and when installing git dependencies).
-    */
+    		Run **before** a tarball is packed (on `npm pack`, `npm publish`, and when installing git dependencies).
+    		*/
     prepack?: string;
-
     /**
-    Run **after** the tarball has been generated and moved to its final destination.
-    */
+    		Run **after** the tarball has been generated and moved to its final destination.
+    		*/
     postpack?: string;
-
     /**
-    Run **after** the package is published.
-    */
+    		Run **after** the package is published.
+    		*/
     publish?: string;
-
     /**
-    Run **after** the package is published.
-    */
+    		Run **after** the package is published.
+    		*/
     postpublish?: string;
-
     /**
-    Run **before** the package is installed.
-    */
+    		Run **before** the package is installed.
+    		*/
     preinstall?: string;
-
     /**
-    Run **after** the package is installed.
-    */
+    		Run **after** the package is installed.
+    		*/
     install?: string;
-
     /**
-    Run **after** the package is installed and after `install`.
-    */
+    		Run **after** the package is installed and after `install`.
+    		*/
     postinstall?: string;
-
     /**
-    Run **before** the package is uninstalled and before `uninstall`.
-    */
+    		Run **before** the package is uninstalled and before `uninstall`.
+    		*/
     preuninstall?: string;
-
     /**
-    Run **before** the package is uninstalled.
-    */
+    		Run **before** the package is uninstalled.
+    		*/
     uninstall?: string;
-
     /**
-    Run **after** the package is uninstalled.
-    */
+    		Run **after** the package is uninstalled.
+    		*/
     postuninstall?: string;
-
     /**
-    Run **before** bump the package version and before `version`.
-    */
+    		Run **before** bump the package version and before `version`.
+    		*/
     preversion?: string;
-
     /**
-    Run **before** bump the package version.
-    */
+    		Run **before** bump the package version.
+    		*/
     version?: string;
-
     /**
-    Run **after** bump the package version.
-    */
+    		Run **after** bump the package version.
+    		*/
     postversion?: string;
-
     /**
-    Run with the `npm test` command, before `test`.
-    */
+    		Run with the `npm test` command, before `test`.
+    		*/
     pretest?: string;
-
     /**
-    Run with the `npm test` command.
-    */
+    		Run with the `npm test` command.
+    		*/
     test?: string;
-
     /**
-    Run with the `npm test` command, after `test`.
-    */
+    		Run with the `npm test` command, after `test`.
+    		*/
     posttest?: string;
-
     /**
-    Run with the `npm stop` command, before `stop`.
-    */
+    		Run with the `npm stop` command, before `stop`.
+    		*/
     prestop?: string;
-
     /**
-    Run with the `npm stop` command.
-    */
+    		Run with the `npm stop` command.
+    		*/
     stop?: string;
-
     /**
-    Run with the `npm stop` command, after `stop`.
-    */
+    		Run with the `npm stop` command, after `stop`.
+    		*/
     poststop?: string;
-
     /**
-    Run with the `npm start` command, before `start`.
-    */
+    		Run with the `npm start` command, before `start`.
+    		*/
     prestart?: string;
-
     /**
-    Run with the `npm start` command.
-    */
+    		Run with the `npm start` command.
+    		*/
     start?: string;
-
     /**
-    Run with the `npm start` command, after `start`.
-    */
+    		Run with the `npm start` command, after `start`.
+    		*/
     poststart?: string;
-
     /**
-    Run with the `npm restart` command, before `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
-    */
+    		Run with the `npm restart` command, before `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
+    		*/
     prerestart?: string;
-
     /**
-    Run with the `npm restart` command. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
-    */
+    		Run with the `npm restart` command. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
+    		*/
     restart?: string;
-
     /**
-    Run with the `npm restart` command, after `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
-    */
+    		Run with the `npm restart` command, after `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
+    		*/
     postrestart?: string;
   } & Partial<Record<string, string>>;
-
   /**
-  Dependencies of the package. The version range is a string which has one or more space-separated descriptors. Dependencies can also be identified with a tarball or Git URL.
-  */
+  	Dependencies of the package. The version range is a string which has one or more space-separated descriptors. Dependencies can also be identified with a tarball or Git URL.
+  	*/
   type Dependency = Partial<Record<string, string>>;
-
   /**
-  Recursive map describing selective dependency version overrides supported by npm.
-  */
+  	Recursive map describing selective dependency version overrides supported by npm.
+  	*/
   type DependencyOverrides = { [packageName in string]: string | undefined | DependencyOverrides };
-
   /**
-  Specifies requirements for development environment components such as operating systems, runtimes, or package managers. Used to ensure consistent development environments across the team.
-  */
+  	Specifies requirements for development environment components such as operating systems, runtimes, or package managers. Used to ensure consistent development environments across the team.
+  	*/
   type DevEngineDependency = {
     name: string;
     version?: string;
     onFail?: 'ignore' | 'warn' | 'error' | 'download';
   };
-
   /**
-  A mapping of conditions and the paths to which they resolve.
-  */
+  	A mapping of conditions and the paths to which they resolve.
+  	*/
   type ExportConditions = {
     [condition: string]: Exports;
   };
-
   /**
-  Entry points of a module, optionally with conditions and subpath exports.
-  */
+  	Entry points of a module, optionally with conditions and subpath exports.
+  	*/
   type Exports = null | string | Array<string | ExportConditions> | ExportConditions;
-
   /**
-  Import map entries of a module, optionally with conditions and subpath imports.
-  */
+  	Import map entries of a module, optionally with conditions and subpath imports.
+  	*/
   type Imports = {
     [key: `#${string}`]: Exports;
-  };
-
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  }; // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface NonStandardEntryPoints {
     /**
-    An ECMAScript module ID that is the primary entry point to the program.
-    */
+    		An ECMAScript module ID that is the primary entry point to the program.
+    		*/
     module?: string;
-
     /**
-    A module ID with untranspiled code that is the primary entry point to the program.
-    */
+    		A module ID with untranspiled code that is the primary entry point to the program.
+    		*/
     esnext?: string | {
       [moduleName: string]: string | undefined;
       main?: string;
       browser?: string;
     };
-
     /**
-    A hint to JavaScript bundlers or component tools when packaging modules for client side use.
-    */
+    		A hint to JavaScript bundlers or component tools when packaging modules for client side use.
+    		*/
     browser?: string | Partial<Record<string, string | false>>;
-
     /**
-    Denote which files in your project are "pure" and therefore safe for Webpack to prune if unused.
-    	[Read more.](https://webpack.js.org/guides/tree-shaking/)
-    */
+    		Denote which files in your project are "pure" and therefore safe for Webpack to prune if unused.
+    
+    		[Read more.](https://webpack.js.org/guides/tree-shaking/)
+    		*/
     sideEffects?: boolean | string[];
   }
   type TypeScriptConfiguration = {
     /**
-    Location of the bundled TypeScript declaration file.
-    */
+    		Location of the bundled TypeScript declaration file.
+    		*/
     types?: string;
-
     /**
-    Version selection map of TypeScript.
-    */
+    		Version selection map of TypeScript.
+    		*/
     typesVersions?: Partial<Record<string, Partial<Record<string, string[]>>>>;
-
     /**
-    Location of the bundled TypeScript declaration file. Alias of `types`.
-    */
+    		Location of the bundled TypeScript declaration file. Alias of `types`.
+    		*/
     typings?: string;
   };
-
   /**
-  An alternative configuration for workspaces.
-  */
+  	An alternative configuration for workspaces.
+  	*/
   type WorkspaceConfig = {
     /**
-    An array of workspace pattern strings which contain the workspace packages.
-    */
+    		An array of workspace pattern strings which contain the workspace packages.
+    		*/
     packages?: WorkspacePattern[];
-
     /**
-    Designed to solve the problem of packages which break when their `node_modules` are moved to the root workspace directory - a process known as hoisting. For these packages, both within your workspace, and also some that have been installed via `node_modules`, it is important to have a mechanism for preventing the default Yarn workspace behavior. By adding workspace pattern strings here, Yarn will resume non-workspace behavior for any package which matches the defined patterns.
-    	[Supported](https://classic.yarnpkg.com/blog/2018/02/15/nohoist/) by Yarn.
-    [Not supported](https://github.com/npm/rfcs/issues/287) by npm.
-    */
+    		Designed to solve the problem of packages which break when their `node_modules` are moved to the root workspace directory - a process known as hoisting. For these packages, both within your workspace, and also some that have been installed via `node_modules`, it is important to have a mechanism for preventing the default Yarn workspace behavior. By adding workspace pattern strings here, Yarn will resume non-workspace behavior for any package which matches the defined patterns.
+    
+    		[Supported](https://classic.yarnpkg.com/blog/2018/02/15/nohoist/) by Yarn.
+    		[Not supported](https://github.com/npm/rfcs/issues/287) by npm.
+    		*/
     nohoist?: WorkspacePattern[];
   };
-
   /**
-  A workspace pattern points to a directory or group of directories which contain packages that should be included in the workspace installation process.
+  	A workspace pattern points to a directory or group of directories which contain packages that should be included in the workspace installation process.
+  
   	The patterns are handled with [minimatch](https://github.com/isaacs/minimatch).
+  
   	@example
-  `docs` → Include the docs directory and install its dependencies.
-  `packages/*` → Include all nested directories within the packages directory, like `packages/cli` and `packages/core`.
-  */
+  	`docs` → Include the docs directory and install its dependencies.
+  	`packages/*` → Include all nested directories within the packages directory, like `packages/cli` and `packages/core`.
+  	*/
   type WorkspacePattern = string;
   type YarnConfiguration = {
     /**
-    If your package only allows one version of a given dependency, and you’d like to enforce the same behavior as `yarn install --flat` on the command-line, set this to `true`.
-    	Note that if your `package.json` contains `"flat": true` and other packages depend on yours (e.g. you are building a library rather than an app), those other packages will also need `"flat": true` in their `package.json` or be installed with `yarn install --flat` on the command-line.
-    */
+    		If your package only allows one version of a given dependency, and you’d like to enforce the same behavior as `yarn install --flat` on the command-line, set this to `true`.
+    
+    		Note that if your `package.json` contains `"flat": true` and other packages depend on yours (e.g. you are building a library rather than an app), those other packages will also need `"flat": true` in their `package.json` or be installed with `yarn install --flat` on the command-line.
+    		*/
     flat?: boolean;
-
     /**
-    Selective version resolutions. Allows the definition of custom package versions inside dependencies without manual edits in the `yarn.lock` file.
-    */
+    		Selective version resolutions. Allows the definition of custom package versions inside dependencies without manual edits in the `yarn.lock` file.
+    		*/
     resolutions?: Dependency;
   };
   type JSPMConfiguration = {
     /**
-    JSPM configuration.
-    */
+    		JSPM configuration.
+    		*/
     jspm?: PackageJson;
   };
-
   /**
-  Type for [npm's `package.json` file](https://docs.npmjs.com/creating-a-package-json-file). Containing standard npm properties.
-  */
+  	Type for [npm's `package.json` file](https://docs.npmjs.com/creating-a-package-json-file). Containing standard npm properties.
+  	*/
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface PackageJsonStandard {
     /**
-    The name of the package.
-    */
+    		The name of the package.
+    		*/
     name?: string;
-
     /**
-    Package version, parseable by [`node-semver`](https://github.com/npm/node-semver).
-    */
+    		Package version, parseable by [`node-semver`](https://github.com/npm/node-semver).
+    		*/
     version?: string;
-
     /**
-    Package description, listed in `npm search`.
-    */
+    		Package description, listed in `npm search`.
+    		*/
     description?: string;
-
     /**
-    Keywords associated with package, listed in `npm search`.
-    */
+    		Keywords associated with package, listed in `npm search`.
+    		*/
     keywords?: string[];
-
     /**
-    The URL to the package's homepage.
-    */
+    		The URL to the package's homepage.
+    		*/
     homepage?: LiteralUnion<'.', string>;
-
     /**
-    The URL to the package's issue tracker and/or the email address to which issues should be reported.
-    */
+    		The URL to the package's issue tracker and/or the email address to which issues should be reported.
+    		*/
     bugs?: BugsLocation;
-
     /**
-    The license for the package.
-    */
+    		The license for the package.
+    		*/
     license?: string;
-
     /**
-    The licenses for the package.
-    */
+    		The licenses for the package.
+    		*/
     licenses?: Array<{
       type?: string;
       url?: string;
     }>;
     author?: Person;
-
     /**
-    A list of people who contributed to the package.
-    */
+    		A list of people who contributed to the package.
+    		*/
     contributors?: Person[];
-
     /**
-    A list of people who maintain the package.
-    */
+    		A list of people who maintain the package.
+    		*/
     maintainers?: Person[];
-
     /**
-    The files included in the package.
-    */
+    		The files included in the package.
+    		*/
     files?: string[];
-
     /**
-    Resolution algorithm for importing ".js" files from the package's scope.
-    	[Read more.](https://nodejs.org/api/esm.html#esm_package_json_type_field)
-    */
+    		Resolution algorithm for importing ".js" files from the package's scope.
+    
+    		[Read more.](https://nodejs.org/api/esm.html#esm_package_json_type_field)
+    		*/
     type?: 'module' | 'commonjs';
-
     /**
-    The module ID that is the primary entry point to the program.
-    */
+    		The module ID that is the primary entry point to the program.
+    		*/
     main?: string;
-
     /**
-    Subpath exports to define entry points of the package.
-    	[Read more.](https://nodejs.org/api/packages.html#subpath-exports)
-    */
+    		Subpath exports to define entry points of the package.
+    
+    		[Read more.](https://nodejs.org/api/packages.html#subpath-exports)
+    		*/
     exports?: Exports;
-
     /**
-    Subpath imports to define internal package import maps that only apply to import specifiers from within the package itself.
-    	[Read more.](https://nodejs.org/api/packages.html#subpath-imports)
-    */
+    		Subpath imports to define internal package import maps that only apply to import specifiers from within the package itself.
+    
+    		[Read more.](https://nodejs.org/api/packages.html#subpath-imports)
+    		*/
     imports?: Imports;
-
     /**
-    The executable files that should be installed into the `PATH`.
-    */
+    		The executable files that should be installed into the `PATH`.
+    		*/
     bin?: string | Partial<Record<string, string>>;
-
     /**
-    Filenames to put in place for the `man` program to find.
-    */
+    		Filenames to put in place for the `man` program to find.
+    		*/
     man?: string | string[];
-
     /**
-    Indicates the structure of the package.
-    */
+    		Indicates the structure of the package.
+    		*/
     directories?: DirectoryLocations;
-
     /**
-    Location for the code repository.
-    */
+    		Location for the code repository.
+    		*/
     repository?: string | {
       type: string;
       url: string;
-
       /**
-      Relative path to package.json if it is placed in non-root directory (for example if it is part of a monorepo).
-      [Read more.](https://github.com/npm/rfcs/blob/latest/implemented/0010-monorepo-subdirectory-declaration.md)
-      */
+      			Relative path to package.json if it is placed in non-root directory (for example if it is part of a monorepo).
+      
+      			[Read more.](https://github.com/npm/rfcs/blob/latest/implemented/0010-monorepo-subdirectory-declaration.md)
+      			*/
       directory?: string;
     };
-
     /**
-    Script commands that are run at various times in the lifecycle of the package. The key is the lifecycle event, and the value is the command to run at that point.
-    */
+    		Script commands that are run at various times in the lifecycle of the package. The key is the lifecycle event, and the value is the command to run at that point.
+    		*/
     scripts?: Scripts;
-
     /**
-    Is used to set configuration parameters used in package scripts that persist across upgrades.
-    */
+    		Is used to set configuration parameters used in package scripts that persist across upgrades.
+    		*/
     config?: JsonObject;
-
     /**
-    The dependencies of the package.
-    */
+    		The dependencies of the package.
+    		*/
     dependencies?: Dependency;
-
     /**
-    Additional tooling dependencies that are not required for the package to work. Usually test, build, or documentation tooling.
-    */
+    		Additional tooling dependencies that are not required for the package to work. Usually test, build, or documentation tooling.
+    		*/
     devDependencies?: Dependency;
-
     /**
-    Dependencies that are skipped if they fail to install.
-    */
+    		Dependencies that are skipped if they fail to install.
+    		*/
     optionalDependencies?: Dependency;
-
     /**
-    Dependencies that will usually be required by the package user directly or via another dependency.
-    */
+    		Dependencies that will usually be required by the package user directly or via another dependency.
+    		*/
     peerDependencies?: Dependency;
-
     /**
-    Indicate peer dependencies that are optional.
-    */
+    		Indicate peer dependencies that are optional.
+    		*/
     peerDependenciesMeta?: Partial<Record<string, {
       optional: true;
     }>>;
-
     /**
-    Package names that are bundled when the package is published.
-    */
+    		Package names that are bundled when the package is published.
+    		*/
     bundledDependencies?: string[];
-
     /**
-    Alias of `bundledDependencies`.
-    */
+    		Alias of `bundledDependencies`.
+    		*/
     bundleDependencies?: string[];
-
     /**
-    Overrides is used to support selective version overrides using npm, which lets you define custom package versions or ranges inside your dependencies.
-    */
+    		Overrides is used to support selective version overrides using npm, which lets you define custom package versions or ranges inside your dependencies.
+    		*/
     overrides?: DependencyOverrides;
-
     /**
-    Engines that this package runs on.
-    */
+    		Engines that this package runs on.
+    		*/
     engines?: { [EngineName in 'npm' | 'node' | string]?: string };
-
     /**
-    @deprecated
-    */
+    		@deprecated
+    		*/
     engineStrict?: boolean;
-
     /**
-    Operating systems the module runs on.
-    */
+    		Operating systems the module runs on.
+    		*/
     os?: Array<LiteralUnion<'aix' | 'darwin' | 'freebsd' | 'linux' | 'openbsd' | 'sunos' | 'win32' | '!aix' | '!darwin' | '!freebsd' | '!linux' | '!openbsd' | '!sunos' | '!win32', string>>;
-
     /**
-    CPU architectures the module runs on.
-    */
+    		CPU architectures the module runs on.
+    		*/
     cpu?: Array<LiteralUnion<'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | '!arm' | '!arm64' | '!ia32' | '!mips' | '!mipsel' | '!ppc' | '!ppc64' | '!s390' | '!s390x' | '!x32' | '!x64', string>>;
-
     /**
-    Define the runtime and package manager for developing the current project.
-    */
+    		Define the runtime and package manager for developing the current project.
+    		*/
     devEngines?: {
       os?: DevEngineDependency | DevEngineDependency[];
       cpu?: DevEngineDependency | DevEngineDependency[];
@@ -591,84 +513,82 @@ declare namespace PackageJson {
       runtime?: DevEngineDependency | DevEngineDependency[];
       packageManager?: DevEngineDependency | DevEngineDependency[];
     };
-
     /**
-    If set to `true`, a warning will be shown if package is installed locally. Useful if the package is primarily a command-line application that should be installed globally.
-    	@deprecated
-    */
+    		If set to `true`, a warning will be shown if package is installed locally. Useful if the package is primarily a command-line application that should be installed globally.
+    
+    		@deprecated
+    		*/
     preferGlobal?: boolean;
-
     /**
-    If set to `true`, then npm will refuse to publish it.
-    */
+    		If set to `true`, then npm will refuse to publish it.
+    		*/
     private?: boolean;
-
     /**
-    A set of config values that will be used at publish-time. It's especially handy to set the tag, registry or access, to ensure that a given package is not tagged with 'latest', published to the global public registry or that a scoped module is private by default.
-    */
+    		A set of config values that will be used at publish-time. It's especially handy to set the tag, registry or access, to ensure that a given package is not tagged with 'latest', published to the global public registry or that a scoped module is private by default.
+    		*/
     publishConfig?: PublishConfig;
-
     /**
-    Describes and notifies consumers of a package's monetary support information.
-    	[Read more.](https://github.com/npm/rfcs/blob/main/implemented/0017-add-funding-support.md)
-    */
+    		Describes and notifies consumers of a package's monetary support information.
+    
+    		[Read more.](https://github.com/npm/rfcs/blob/main/implemented/0017-add-funding-support.md)
+    		*/
     funding?: string | {
       /**
-      The type of funding.
-      */
+      			The type of funding.
+      			*/
       type?: LiteralUnion<'github' | 'opencollective' | 'patreon' | 'individual' | 'foundation' | 'corporation', string>;
-
       /**
-      The URL to the funding page.
-      */
+      			The URL to the funding page.
+      			*/
       url: string;
     };
-
     /**
-    Used to configure [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces) / [Yarn workspaces](https://classic.yarnpkg.com/docs/workspaces/).
-    	Workspaces allow you to manage multiple packages within the same repository in such a way that you only need to run your install command once in order to install all of them in a single pass.
-    	Please note that the top-level `private` property of `package.json` **must** be set to `true` in order to use workspaces.
-    */
+    		Used to configure [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces) / [Yarn workspaces](https://classic.yarnpkg.com/docs/workspaces/).
+    
+    		Workspaces allow you to manage multiple packages within the same repository in such a way that you only need to run your install command once in order to install all of them in a single pass.
+    
+    		Please note that the top-level `private` property of `package.json` **must** be set to `true` in order to use workspaces.
+    		*/
     workspaces?: WorkspacePattern[] | WorkspaceConfig;
   }
-
   /**
-  Type for [`package.json` file used by the Node.js runtime](https://nodejs.org/api/packages.html#nodejs-packagejson-field-definitions).
-  */
+  	Type for [`package.json` file used by the Node.js runtime](https://nodejs.org/api/packages.html#nodejs-packagejson-field-definitions).
+  	*/
   type NodeJsStandard = {
     /**
-    Defines which package manager is expected to be used when working on the current project. It can set to any of the [supported package managers](https://nodejs.org/api/corepack.html#supported-package-managers), and will ensure that your teams use the exact same package manager versions without having to install anything else than Node.js.
-    	__This field is currently experimental and needs to be opted-in; check the [Corepack](https://nodejs.org/api/corepack.html) page for details about the procedure.__
-    	@example
-    ```json
-    {
-    	"packageManager": "<package manager name>@<version>"
-    }
-    ```
-    */
+    		Defines which package manager is expected to be used when working on the current project. It can set to any of the [supported package managers](https://nodejs.org/api/corepack.html#supported-package-managers), and will ensure that your teams use the exact same package manager versions without having to install anything else than Node.js.
+    
+    		__This field is currently experimental and needs to be opted-in; check the [Corepack](https://nodejs.org/api/corepack.html) page for details about the procedure.__
+    
+    		@example
+    		```json
+    		{
+    			"packageManager": "<package manager name>@<version>"
+    		}
+    		```
+    		*/
     packageManager?: string;
   };
   type PublishConfig = {
     /**
-    Additional, less common properties from the [npm docs on `publishConfig`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#publishconfig).
-    */
+    		Additional, less common properties from the [npm docs on `publishConfig`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#publishconfig).
+    		*/
     [additionalProperties: string]: JsonValue | undefined;
-
     /**
-    When publishing scoped packages, the access level defaults to restricted. If you want your scoped package to be publicly viewable (and installable) set `--access=public`. The only valid values for access are public and restricted. Unscoped packages always have an access level of public.
-    */
+    		When publishing scoped packages, the access level defaults to restricted. If you want your scoped package to be publicly viewable (and installable) set `--access=public`. The only valid values for access are public and restricted. Unscoped packages always have an access level of public.
+    		*/
     access?: 'public' | 'restricted';
-
     /**
-    The base URL of the npm registry.
-    	Default: `'https://registry.npmjs.org/'`
-    */
+    		The base URL of the npm registry.
+    
+    		Default: `'https://registry.npmjs.org/'`
+    		*/
     registry?: string;
-
     /**
-    The tag to publish the package under.
-    	Default: `'latest'`
-    */
+    		The tag to publish the package under.
+    
+    		Default: `'latest'`
+    		*/
     tag?: string;
   };
 }
@@ -1020,17 +940,17 @@ declare abstract class Responder {
  * const { response, headers } = responder;
  * ```
  */
-declare class JSONLinesResponder<T$1> extends Responder {
+declare class JSONLinesResponder<T> extends Responder {
   private isClosed;
   private i;
   private controller?;
   private readonly encoder;
   readonly readableStream: ReadableStream | null;
   readonly headers: Record<string, string>;
-  onBeforeSend: (item: T$1, i: number) => T$1 | Promise<T$1>;
-  constructor(request?: Request | null, getResponse?: (responder: JSONLinesResponder<T$1>) => Response);
-  readonly send: (item: T$1) => Promise<void>;
-  sendLineOrError: (data: T$1 | StreamAbortMessage) => void;
+  onBeforeSend: (item: T, i: number) => T | Promise<T>;
+  constructor(request?: Request | null, getResponse?: (responder: JSONLinesResponder<T>) => Response);
+  readonly send: (item: T) => Promise<void>;
+  sendLineOrError: (data: T | StreamAbortMessage) => void;
   readonly close: () => void;
   readonly throw: (e: unknown) => void;
 }
@@ -1055,14 +975,14 @@ declare const defaultHandler: ({
 //#endregion
 //#region node_modules/vovk/dist/client/types.d.ts
 type KnownAny$1 = any;
-type OmitNullable<T$1> = { [K in keyof T$1 as T$1[K] extends null | undefined ? never : K]: T$1[K] };
+type OmitNullable<T> = { [K in keyof T as T[K] extends null | undefined ? never : K]: T[K] };
 type Empty = {};
-type StaticMethodInput<T$1 extends ((req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => KnownAny$1) & {
+type StaticMethodInput<T extends ((req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => KnownAny$1) & {
   __types?: {
     isForm: boolean;
   };
-}> = OmitNullable<(Parameters<T$1>[0] extends VovkRequest<infer TBody, infer TQuery, infer TParams> ? (TBody extends Record<KnownAny$1, KnownAny$1> ? {
-  body: T$1['__types'] extends {
+}> = OmitNullable<(Parameters<T>[0] extends VovkRequest<infer TBody, infer TQuery, infer TParams> ? (TBody extends Record<KnownAny$1, KnownAny$1> ? {
+  body: T['__types'] extends {
     isForm: true;
   } ? FormData : TBody;
 } : Empty) & (TQuery extends Record<KnownAny$1, KnownAny$1> ? {
@@ -1073,29 +993,29 @@ type StaticMethodInput<T$1 extends ((req: VovkRequest<KnownAny$1, KnownAny$1, Kn
   meta?: {
     [key: string]: KnownAny$1;
   };
-} : Empty) & (Parameters<T$1>[1] extends Record<KnownAny$1, KnownAny$1> ? {
-  params: Parameters<T$1>[1];
+} : Empty) & (Parameters<T>[1] extends Record<KnownAny$1, KnownAny$1> ? {
+  params: Parameters<T>[1];
 } : Empty)>;
-type ToPromise<T$1> = T$1 extends PromiseLike<unknown> ? T$1 : Promise<T$1>;
-type VovkStreamAsyncIterable<T$1> = {
+type ToPromise<T> = T extends PromiseLike<unknown> ? T : Promise<T>;
+type VovkStreamAsyncIterable<T> = {
   status: number;
-  asPromise: () => Promise<T$1[]>;
+  asPromise: () => Promise<T[]>;
   [Symbol.dispose](): Promise<void> | void;
   [Symbol.asyncDispose](): Promise<void> | void;
-  [Symbol.asyncIterator](): AsyncIterator<T$1>;
+  [Symbol.asyncIterator](): AsyncIterator<T>;
   abortWithoutError: () => void;
-  onIterate: (cb: (data: T$1, i: number) => void) => () => void;
+  onIterate: (cb: (data: T, i: number) => void) => () => void;
   abortController: AbortController;
 };
 type IsNextJs = NextResponse extends Response ? true : false;
-type StaticMethodReturn<T$1 extends ControllerStaticMethod> = IsNextJs extends true ? ReturnType<T$1> extends NextResponse<infer U> | Promise<NextResponse<infer U>> ? U : ReturnType<T$1> extends Response | Promise<Response> ? Awaited<ReturnType<T$1>> : ReturnType<T$1> : ReturnType<T$1> extends Response | Promise<Response> ? Awaited<ReturnType<T$1>> : ReturnType<T$1>;
-type StaticMethodReturnPromise<T$1 extends ControllerStaticMethod> = ToPromise<StaticMethodReturn<T$1>>;
-type StaticMethodOptions<T$1 extends (req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TFetcherOptions extends Record<string, KnownAny$1>, TStreamIteration, R$1, F$1 extends VovkFetcherOptions<KnownAny$1>> = Partial<TFetcherOptions & {
-  transform: (staticMethodReturn: Awaited<StaticMethodReturn<T$1>> extends JSONLinesResponder<infer U> ? VovkStreamAsyncIterable<U> : Awaited<StaticMethodReturn<T$1>>, resp: Response) => R$1;
-  fetcher: VovkFetcher<F$1>;
+type StaticMethodReturn<T extends ControllerStaticMethod> = IsNextJs extends true ? ReturnType<T> extends NextResponse<infer U> | Promise<NextResponse<infer U>> ? U : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T> : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T>;
+type StaticMethodReturnPromise<T extends ControllerStaticMethod> = ToPromise<StaticMethodReturn<T>>;
+type StaticMethodOptions<T extends (req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TFetcherOptions extends Record<string, KnownAny$1>, TStreamIteration, R, F extends VovkFetcherOptions<KnownAny$1>> = Partial<TFetcherOptions & {
+  transform: (staticMethodReturn: Awaited<StaticMethodReturn<T>> extends JSONLinesResponder<infer U> ? VovkStreamAsyncIterable<U> : Awaited<StaticMethodReturn<T>>, resp: Response) => R;
+  fetcher: VovkFetcher<F>;
 }>;
-type ClientMethodReturn<T$1 extends (req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TStreamIteration, R$1> = R$1 extends object ? Promise<Awaited<R$1>> : ReturnType<T$1> extends Promise<JSONLinesResponder<infer U>> | JSONLinesResponder<infer U> | Iterator<infer U> | AsyncIterator<infer U> ? Promise<VovkStreamAsyncIterable<U>> : StaticMethodReturnPromise<T$1>;
-type ClientMethod<T$1 extends ((req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>) & {
+type ClientMethodReturn<T extends (req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TStreamIteration, R> = R extends object ? Promise<Awaited<R>> : ReturnType<T> extends Promise<JSONLinesResponder<infer U>> | JSONLinesResponder<infer U> | Iterator<infer U> | AsyncIterator<infer U> ? Promise<VovkStreamAsyncIterable<U>> : StaticMethodReturnPromise<T>;
+type ClientMethod<T extends ((req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>) & {
   __types?: {
     body: KnownAny$1;
     query: KnownAny$1;
@@ -1104,29 +1024,29 @@ type ClientMethod<T$1 extends ((req: VovkRequest<KnownAny$1, KnownAny$1, KnownAn
     iteration: KnownAny$1;
     isForm: boolean;
   };
-}, TFetcherOptions extends Record<string, KnownAny$1>, TStreamIteration extends KnownAny$1 = unknown> = (IsEmptyObject<StaticMethodInput<T$1>> extends true ? <R$1, F$1 extends VovkFetcherOptions<KnownAny$1> = VovkFetcherOptions<TFetcherOptions>>(options?: Prettify$1<StaticMethodOptions<T$1, TFetcherOptions, TStreamIteration, R$1, F$1>>) => ClientMethodReturn<T$1, TStreamIteration, R$1> : <R$1, F$1 extends VovkFetcherOptions<KnownAny$1> = VovkFetcherOptions<TFetcherOptions>>(options: Prettify$1<StaticMethodInput<T$1> & StaticMethodOptions<T$1, TFetcherOptions, TStreamIteration, R$1, F$1>>) => ClientMethodReturn<T$1, TStreamIteration, R$1>) & {
+}, TFetcherOptions extends Record<string, KnownAny$1>, TStreamIteration extends KnownAny$1 = unknown> = (IsEmptyObject<StaticMethodInput<T>> extends true ? <R, F extends VovkFetcherOptions<KnownAny$1> = VovkFetcherOptions<TFetcherOptions>>(options?: Prettify$1<StaticMethodOptions<T, TFetcherOptions, TStreamIteration, R, F>>) => ClientMethodReturn<T, TStreamIteration, R> : <R, F extends VovkFetcherOptions<KnownAny$1> = VovkFetcherOptions<TFetcherOptions>>(options: Prettify$1<StaticMethodInput<T> & StaticMethodOptions<T, TFetcherOptions, TStreamIteration, R, F>>) => ClientMethodReturn<T, TStreamIteration, R>) & {
   isRPC: true;
   schema: VovkHandlerSchema;
   controllerSchema: VovkControllerSchema;
   segmentSchema: VovkSegmentSchema;
   fullSchema: VovkSchema;
-  getURL: IsEmptyObject<Pick<Prettify$1<StaticMethodInput<T$1>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T$1>>>>> extends true ? (urlInput?: {
+  getURL: IsEmptyObject<Pick<Prettify$1<StaticMethodInput<T>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T>>>>> extends true ? (urlInput?: {
     apiRoot?: string;
-  }) => string : (urlInput: Pick<Prettify$1<StaticMethodInput<T$1>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T$1>>>> & {
+  }) => string : (urlInput: Pick<Prettify$1<StaticMethodInput<T>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T>>>> & {
     apiRoot?: string;
   }) => string;
   apiRoot: string;
   queryKey: (key?: unknown[]) => unknown[];
-  __types: T$1['__types'];
+  __types: T['__types'];
 };
-type OmitNever<T$1> = { [K in keyof T$1 as T$1[K] extends never ? never : K]: T$1[K] };
-type VovkClientWithNever<T$1, TFetcherOptions extends {
+type OmitNever<T> = { [K in keyof T as T[K] extends never ? never : K]: T[K] };
+type VovkClientWithNever<T, TFetcherOptions extends {
   [key: string]: KnownAny$1;
-}> = { [K in keyof T$1]: T$1[K] extends ((...args: KnownAny$1) => KnownAny$1) ? ClientMethod<T$1[K], TFetcherOptions> : never };
-type VovkRPCModule<T$1, TFetcherOptions extends {
+}> = { [K in keyof T]: T[K] extends ((...args: KnownAny$1) => KnownAny$1) ? ClientMethod<T[K], TFetcherOptions> : never };
+type VovkRPCModule<T, TFetcherOptions extends {
   [key: string]: KnownAny$1;
-}> = OmitNever<VovkClientWithNever<T$1, TFetcherOptions>> & {
-  withDefaults: (newOptions?: VovkFetcherOptions<TFetcherOptions>) => VovkRPCModule<T$1, TFetcherOptions>;
+}> = OmitNever<VovkClientWithNever<T, TFetcherOptions>> & {
+  withDefaults: (newOptions?: VovkFetcherOptions<TFetcherOptions>) => VovkRPCModule<T, TFetcherOptions>;
 };
 /**
  * Fetcher function type for client requests.
@@ -1157,11 +1077,11 @@ type VovkFetcher<TFetcherOptions> = (options: {
   params?: unknown;
   meta?: unknown;
 } & TFetcherOptions) => Promise<[KnownAny$1, Response]>;
-type VovkFetcherOptions<T$1> = T$1 & {
+type VovkFetcherOptions<T> = T & {
   apiRoot?: string;
   disableClientValidation?: boolean;
-  validateOnClient?: VovkValidateOnClient<T$1> | Promise<{
-    validateOnClient: VovkValidateOnClient<T$1>;
+  validateOnClient?: VovkValidateOnClient<T> | Promise<{
+    validateOnClient: VovkValidateOnClient<T>;
   }>;
   interpretAs?: string;
   init?: RequestInit;
@@ -1275,12 +1195,12 @@ declare namespace StandardJSONSchemaV1$1 {
     readonly output: (options: StandardJSONSchemaV1$1.Options) => Record<string, unknown>;
   }
   /**
-   * The target version of the generated JSON Schema.
-   *
-   * It is *strongly recommended* that implementers support `"draft-2020-12"` and `"draft-07"`, as they are both in wide use. All other targets can be implemented on a best-effort basis. Libraries should throw if they don't support a specified target.
-   *
-   * The `"openapi-3.0"` target is intended as a standardized specifier for OpenAPI 3.0 which is a superset of JSON Schema `"draft-04"`.
-   */
+       * The target version of the generated JSON Schema.
+       *
+       * It is *strongly recommended* that implementers support `"draft-2020-12"` and `"draft-07"`, as they are both in wide use. All other targets can be implemented on a best-effort basis. Libraries should throw if they don't support a specified target.
+       *
+       * The `"openapi-3.0"` target is intended as a standardized specifier for OpenAPI 3.0 which is a superset of JSON Schema `"draft-04"`.
+       */
   type Target = "draft-2020-12" | "draft-07" | "openapi-3.0" | ({} & string);
   /** The options for the input/output methods. */
   interface Options {
@@ -1307,9 +1227,9 @@ interface CombinedSpec<Input = unknown, Output = Input> {
 }
 declare namespace CombinedSpec {
   type Target = StandardJSONSchemaV1$1.Target;
-  type InferInput<T$1 extends StandardSchemaV1$1> = StandardSchemaV1$1.InferInput<T$1>;
-  type InferOutput<T$1 extends StandardSchemaV1$1> = StandardSchemaV1$1.InferOutput<T$1>;
-  type SuccessResult<T$1> = StandardSchemaV1$1.SuccessResult<T$1>;
+  type InferInput<T extends StandardSchemaV1$1> = StandardSchemaV1$1.InferInput<T>;
+  type InferOutput<T extends StandardSchemaV1$1> = StandardSchemaV1$1.InferOutput<T>;
+  type SuccessResult<T> = StandardSchemaV1$1.SuccessResult<T>;
 }
 //#endregion
 //#region node_modules/vovk/dist/tools/types.d.ts
@@ -1414,37 +1334,37 @@ type VovkController = StaticClass & VovkControllerInternal & {
  * - TParams: the expected shape of the route parameters (default: unknown)
  * @see https://vovk.dev/procedure
  */
-interface VovkRequest<TBody = unknown, TQuery$1 = unknown, TParams$1 = unknown> extends Request {
+interface VovkRequest<TBody = unknown, TQuery = unknown, TParams = unknown> extends Request {
   json: () => Promise<TBody>;
   nextUrl: {
     search: string;
     searchParams: {
-      get: <KEY extends keyof TQuery$1>(key: KEY) => TQuery$1[KEY] extends readonly (infer ITEM)[] ? ITEM : TQuery$1[KEY];
-      getAll: <KEY extends keyof TQuery$1>(key: KEY) => TQuery$1[KEY] extends unknown[] ? TQuery$1[KEY] : TQuery$1[KEY][];
-      entries: () => IterableIterator<[keyof TQuery$1, TQuery$1[keyof TQuery$1]]>;
-      forEach: (callbackfn: (value: TQuery$1[keyof TQuery$1], key: keyof TQuery$1) => void) => void;
-      keys: () => IterableIterator<keyof TQuery$1>;
-      values: () => IterableIterator<TQuery$1[keyof TQuery$1]>;
+      get: <KEY extends keyof TQuery>(key: KEY) => TQuery[KEY] extends readonly (infer ITEM)[] ? ITEM : TQuery[KEY];
+      getAll: <KEY extends keyof TQuery>(key: KEY) => TQuery[KEY] extends unknown[] ? TQuery[KEY] : TQuery[KEY][];
+      entries: () => IterableIterator<[keyof TQuery, TQuery[keyof TQuery]]>;
+      forEach: (callbackfn: (value: TQuery[keyof TQuery], key: keyof TQuery) => void) => void;
+      keys: () => IterableIterator<keyof TQuery>;
+      values: () => IterableIterator<TQuery[keyof TQuery]>;
     };
   };
   vovk: {
     body: () => Promise<TBody>;
-    query: () => TQuery$1;
-    meta: <T$1 = Record<KnownAny, KnownAny>>(meta?: T$1 | null) => T$1;
-    form: <T$1 = TBody>() => Promise<T$1>;
-    params: () => TParams$1;
+    query: () => TQuery;
+    meta: <T = Record<KnownAny, KnownAny>>(meta?: T | null) => T;
+    form: <T = TBody>() => Promise<T>;
+    params: () => TParams;
   };
 }
-type ControllerStaticMethod<REQ extends VovkRequest = VovkRequest, TParams$1 extends {
+type ControllerStaticMethod<REQ extends VovkRequest = VovkRequest, TParams extends {
   [key: string]: string;
-} = KnownAny> = ((req: REQ, params: TParams$1) => unknown) & {
+} = KnownAny> = ((req: REQ, params: TParams) => unknown) & {
   _controller?: VovkController;
 };
-type VovkTypedMethod<T$1 extends (...args: KnownAny[]) => unknown, B = unknown, Q = unknown, P$1 = unknown, O = unknown, I = unknown, TIsForm extends boolean = false> = T$1 & {
+type VovkTypedMethod<T extends (...args: KnownAny[]) => unknown, B = unknown, Q = unknown, P = unknown, O = unknown, I = unknown, TIsForm extends boolean = false> = T & {
   __types: {
     body: B;
     query: Q;
-    params: P$1;
+    params: P;
     output: O;
     iteration: I;
     isForm: TIsForm;
@@ -1651,7 +1571,6 @@ type VovkUserConfig = {
  * The user configuration for Vovk.ts
  * @see https://vovk.dev/config
  */
-
 type VovkStrictConfig = Required<Omit<VovkUserConfig, 'exposeConfigKeys' | 'libs' | 'composedClient' | 'segmentedClient' | 'bundle'>> & {
   exposeConfigKeys: (keyof VovkStrictConfig | string)[];
   bundle: Required<Omit<NonNullable<VovkUserConfig['bundle']>, 'includeSegments' | 'excludeSegments'>> & IncludeExcludeSegments;
@@ -1664,9 +1583,9 @@ type VovkStrictConfig = Required<Omit<VovkUserConfig, 'exposeConfigKeys' | 'libs
     }>;
   };
 };
-type RequireFields<T$1, K$1 extends keyof T$1> = T$1 & Required<Pick<T$1, K$1>>;
-type IsEmptyObject<T$1> = T$1 extends object ? keyof T$1 extends never ? true : T$1 extends Partial<T$1> ? Partial<T$1> extends T$1 ? true : false : false : false;
-type Prettify$1<T$1> = { [K in keyof T$1]: T$1[K] } & {};
+type RequireFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
+type IsEmptyObject<T> = T extends object ? keyof T extends never ? true : T extends Partial<T> ? Partial<T> extends T ? true : false : false : false;
+type Prettify$1<T> = { [K in keyof T]: T[K] } & {};
 //#endregion
 //#region node_modules/zod/v4/core/json-schema.d.cts
 type _JSONSchema = boolean | JSONSchema;
@@ -1831,13 +1750,13 @@ declare namespace StandardJSONSchemaV1 {
     readonly output: (options: StandardJSONSchemaV1.Options) => Record<string, unknown>;
   }
   /** The target version of the generated JSON Schema.
-   *
-   * It is *strongly recommended* that implementers support `"draft-2020-12"` and `"draft-07"`, as they are both in wide use.
-   *
-   * The `"openapi-3.0"` target is intended as a standardized specifier for OpenAPI 3.0 which is a superset of JSON Schema `"draft-04"`.
-   *
-   * All other targets can be implemented on a best-effort basis. Libraries should throw if they don't support a specified target.
-   */
+       *
+       * It is *strongly recommended* that implementers support `"draft-2020-12"` and `"draft-07"`, as they are both in wide use.
+       *
+       * The `"openapi-3.0"` target is intended as a standardized specifier for OpenAPI 3.0 which is a superset of JSON Schema `"draft-04"`.
+       *
+       * All other targets can be implemented on a best-effort basis. Libraries should throw if they don't support a specified target.
+       */
   type Target = "draft-2020-12" | "draft-07" | "openapi-3.0" | ({} & string);
   /** The options for the input/output methods. */
   interface Options {
@@ -1883,21 +1802,21 @@ interface JSONSchemaMeta {
 interface GlobalMeta extends JSONSchemaMeta {}
 //#endregion
 //#region node_modules/zod/v4/core/to-json-schema.d.cts
-type Processor<T$1 extends $ZodType = $ZodType> = (schema: T$1, ctx: ToJSONSchemaContext, json: BaseSchema, params: ProcessParams) => void;
+type Processor<T extends $ZodType = $ZodType> = (schema: T, ctx: ToJSONSchemaContext, json: BaseSchema, params: ProcessParams) => void;
 interface JSONSchemaGeneratorParams {
   processors: Record<string, Processor>;
   /** A registry used to look up metadata for each schema. Any schema with an `id` property will be extracted as a $def.
-   *  @default globalRegistry */
+       *  @default globalRegistry */
   metadata?: $ZodRegistry<Record<string, any>>;
   /** The JSON Schema version to target.
-   * - `"draft-2020-12"` — Default. JSON Schema Draft 2020-12
-   * - `"draft-07"` — JSON Schema Draft 7
-   * - `"draft-04"` — JSON Schema Draft 4
-   * - `"openapi-3.0"` — OpenAPI 3.0 Schema Object */
+       * - `"draft-2020-12"` — Default. JSON Schema Draft 2020-12
+       * - `"draft-07"` — JSON Schema Draft 7
+       * - `"draft-04"` — JSON Schema Draft 4
+       * - `"openapi-3.0"` — OpenAPI 3.0 Schema Object */
   target?: "draft-04" | "draft-07" | "draft-2020-12" | "openapi-3.0" | ({} & string) | undefined;
   /** How to handle unrepresentable types.
-   * - `"throw"` — Default. Unrepresentable types throw an error
-   * - `"any"` — Unrepresentable types become `{}` */
+       * - `"throw"` — Default. Unrepresentable types throw an error
+       * - `"any"` — Unrepresentable types become `{}` */
   unrepresentable?: "throw" | "any";
   /** Arbitrary custom logic that can be used to modify the generated JSON Schema. */
   override?: (ctx: {
@@ -1906,8 +1825,8 @@ interface JSONSchemaGeneratorParams {
     path: (string | number)[];
   }) => void;
   /** Whether to extract the `"input"` or `"output"` type. Relevant to transforms, defaults, coerced primitives, etc.
-   * - `"output"` — Default. Convert the output schema.
-   * - `"input"` — Convert the input schema. */
+       * - `"output"` — Default. Convert the output schema.
+       * - `"input"` — Convert the input schema. */
   io?: "input" | "output";
   cycles?: "ref" | "throw";
   reused?: "ref" | "inline";
@@ -1966,38 +1885,38 @@ interface ToJSONSchemaContext {
     defs: Record<string, BaseSchema>;
   } | undefined;
 }
-type ZodStandardSchemaWithJSON$1<T$1> = StandardSchemaWithJSONProps<input<T$1>, output<T$1>>;
-interface ZodStandardJSONSchemaPayload<T$1> extends BaseSchema {
-  "~standard": ZodStandardSchemaWithJSON$1<T$1>;
+type ZodStandardSchemaWithJSON$1<T> = StandardSchemaWithJSONProps<input<T>, output<T>>;
+interface ZodStandardJSONSchemaPayload<T> extends BaseSchema {
+  "~standard": ZodStandardSchemaWithJSON$1<T>;
 }
 //#endregion
 //#region node_modules/zod/v4/core/util.d.cts
 type JWTAlgorithm = "HS256" | "HS384" | "HS512" | "RS256" | "RS384" | "RS512" | "ES256" | "ES384" | "ES512" | "PS256" | "PS384" | "PS512" | "EdDSA" | (string & {});
 type MimeTypes = "application/json" | "application/xml" | "application/x-www-form-urlencoded" | "application/javascript" | "application/pdf" | "application/zip" | "application/vnd.ms-excel" | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" | "application/msword" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document" | "application/vnd.ms-powerpoint" | "application/vnd.openxmlformats-officedocument.presentationml.presentation" | "application/octet-stream" | "application/graphql" | "text/html" | "text/plain" | "text/css" | "text/javascript" | "text/csv" | "image/png" | "image/jpeg" | "image/gif" | "image/svg+xml" | "image/webp" | "audio/mpeg" | "audio/ogg" | "audio/wav" | "audio/webm" | "video/mp4" | "video/webm" | "video/ogg" | "font/woff" | "font/woff2" | "font/ttf" | "font/otf" | "multipart/form-data" | (string & {});
-type IsAny<T$1> = 0 extends 1 & T$1 ? true : false;
-type Omit$1<T$1, K$1 extends keyof T$1> = Pick<T$1, Exclude<keyof T$1, K$1>>;
-type MakePartial<T$1, K$1 extends keyof T$1> = Omit$1<T$1, K$1> & InexactPartial<Pick<T$1, K$1>>;
-type NoUndefined<T$1> = T$1 extends undefined ? never : T$1;
-type LoosePartial<T$1 extends object> = InexactPartial<T$1> & {
+type IsAny<T> = 0 extends 1 & T ? true : false;
+type Omit$1<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+type MakePartial<T, K extends keyof T> = Omit$1<T, K> & InexactPartial<Pick<T, K>>;
+type NoUndefined<T> = T extends undefined ? never : T;
+type LoosePartial<T extends object> = InexactPartial<T> & {
   [k: string]: unknown;
 };
 type Mask<Keys extends PropertyKey> = { [K in Keys]?: true };
-type InexactPartial<T$1> = { [P in keyof T$1]?: T$1[P] | undefined };
+type InexactPartial<T> = { [P in keyof T]?: T[P] | undefined };
 type BuiltIn = (((...args: any[]) => any) | (new (...args: any[]) => any)) | {
   readonly [Symbol.toStringTag]: string;
 } | Date | Error | Generator | Promise<unknown> | RegExp;
-type MakeReadonly<T$1> = T$1 extends Map<infer K, infer V> ? ReadonlyMap<K, V> : T$1 extends Set<infer V> ? ReadonlySet<V> : T$1 extends [infer Head, ...infer Tail] ? readonly [Head, ...Tail] : T$1 extends Array<infer V> ? ReadonlyArray<V> : T$1 extends BuiltIn ? T$1 : Readonly<T$1>;
+type MakeReadonly<T> = T extends Map<infer K, infer V> ? ReadonlyMap<K, V> : T extends Set<infer V> ? ReadonlySet<V> : T extends [infer Head, ...infer Tail] ? readonly [Head, ...Tail] : T extends Array<infer V> ? ReadonlyArray<V> : T extends BuiltIn ? T : Readonly<T>;
 type SomeObject = Record<PropertyKey, any>;
-type Identity<T$1> = T$1;
-type Flatten<T$1> = Identity<{ [k in keyof T$1]: T$1[k] }>;
-type Prettify<T$1> = { [K in keyof T$1]: T$1[K] } & {};
+type Identity<T> = T;
+type Flatten<T> = Identity<{ [k in keyof T]: T[k] }>;
+type Prettify<T> = { [K in keyof T]: T[K] } & {};
 type Extend<A extends SomeObject, B extends SomeObject> = Flatten<keyof A & keyof B extends never ? A & B : { [K in keyof A as K extends keyof B ? never : K]: A[K] } & { [K in keyof B]: B[K] }>;
 type TupleItems = ReadonlyArray<SomeType>;
 type AnyFunc = (...args: any[]) => any;
-type MaybeAsync<T$1> = T$1 | Promise<T$1>;
+type MaybeAsync<T> = T | Promise<T>;
 type EnumValue = string | number;
 type EnumLike = Readonly<Record<string, EnumValue>>;
-type ToEnum<T$1 extends EnumValue> = Flatten<{ [k in T$1]: k }>;
+type ToEnum<T extends EnumValue> = Flatten<{ [k in T]: k }>;
 type Literal = string | number | bigint | boolean | null | undefined;
 type Primitive = string | number | symbol | bigint | boolean | null | undefined;
 type HasLength = {
@@ -2006,7 +1925,7 @@ type HasLength = {
 type Numeric = number | bigint | Date;
 type PropValues = Record<string, Set<Primitive>>;
 type PrimitiveSet = Set<Primitive>;
-type EmptyToNever<T$1> = keyof T$1 extends never ? never : T$1;
+type EmptyToNever<T> = keyof T extends never ? never : T;
 declare abstract class Class {
   constructor(..._args: any[]);
 }
@@ -2019,27 +1938,27 @@ declare const version: {
 };
 //#endregion
 //#region node_modules/zod/v4/core/schemas.d.cts
-interface ParseContext<T$1 extends $ZodIssueBase = never> {
+interface ParseContext<T extends $ZodIssueBase = never> {
   /** Customize error messages. */
-  readonly error?: $ZodErrorMap<T$1>;
+  readonly error?: $ZodErrorMap<T>;
   /** Include the `input` field in issue objects. Default `false`. */
   readonly reportInput?: boolean;
   /** Skip eval-based fast path. Default `false`. */
   readonly jitless?: boolean;
 }
 /** @internal */
-interface ParseContextInternal<T$1 extends $ZodIssueBase = never> extends ParseContext<T$1> {
+interface ParseContextInternal<T extends $ZodIssueBase = never> extends ParseContext<T> {
   readonly async?: boolean | undefined;
   readonly direction?: "forward" | "backward";
   readonly skipChecks?: boolean;
 }
-interface ParsePayload<T$1 = unknown> {
-  value: T$1;
+interface ParsePayload<T = unknown> {
+  value: T;
   issues: $ZodRawIssue[];
   /** A may to mark a whole payload as aborted. Used in codecs/pipes. */
   aborted?: boolean;
 }
-type CheckFn<T$1> = (input: ParsePayload<T$1>) => MaybeAsync<void>;
+type CheckFn<T> = (input: ParsePayload<T>) => MaybeAsync<void>;
 interface $ZodTypeDef {
   type: "string" | "number" | "int" | "boolean" | "bigint" | "symbol" | "null" | "undefined" | "void" | "never" | "any" | "unknown" | "date" | "object" | "record" | "file" | "array" | "tuple" | "union" | "intersection" | "map" | "set" | "enum" | "literal" | "nullable" | "optional" | "nonoptional" | "success" | "transform" | "default" | "prefault" | "catch" | "nan" | "pipe" | "readonly" | "template_literal" | "promise" | "lazy" | "function" | "custom";
   error?: $ZodErrorMap<never> | undefined;
@@ -2060,18 +1979,18 @@ interface _$ZodTypeInternals {
   /** @internal  Stores identifiers for the set of traits implemented by this schema. */
   traits: Set<string>;
   /** @internal Indicates that a schema output type should be considered optional inside objects.
-   * @default Required
-   */
+       * @default Required
+       */
   /** @internal */
   optin?: "optional" | undefined;
   /** @internal */
   optout?: "optional" | undefined;
   /** @internal The set of literal values that will pass validation. Must be an exhaustive set. Used to determine optionality in z.record().
-   *
-   * Defined on: enum, const, literal, null, undefined
-   * Passthrough: optional, nullable, branded, default, catch, pipe
-   * Todo: unions?
-   */
+       *
+       * Defined on: enum, const, literal, null, undefined
+       * Passthrough: optional, nullable, branded, default, catch, pipe
+       * Todo: unions?
+       */
   values?: PrimitiveSet | undefined;
   /** Default value bubbled up from  */
   /** @internal A set of literal discriminators used for the fast path in discriminated unions. */
@@ -2098,7 +2017,7 @@ interface $ZodTypeInternals<out O = unknown, out I = unknown> extends _$ZodTypeI
   /** @internal The inferred input type */
   input: I;
 }
-type $ZodStandardSchema<T$1> = StandardSchemaV1.Props<input<T$1>, output<T$1>>;
+type $ZodStandardSchema<T> = StandardSchemaV1.Props<input<T>, output<T>>;
 type SomeType = {
   _zod: _$ZodTypeInternals;
 };
@@ -2106,7 +2025,7 @@ interface $ZodType<O = unknown, I = unknown, Internals extends $ZodTypeInternals
   _zod: Internals;
   "~standard": $ZodStandardSchema<this>;
 }
-interface _$ZodType<T$1 extends $ZodTypeInternals = $ZodTypeInternals> extends $ZodType<T$1["output"], T$1["input"], T$1> {}
+interface _$ZodType<T extends $ZodTypeInternals = $ZodTypeInternals> extends $ZodType<T["output"], T["input"], T> {}
 declare const $ZodType: $constructor<$ZodType>;
 interface $ZodStringDef extends $ZodTypeDef {
   type: "string";
@@ -2334,20 +2253,20 @@ interface $ZodBooleanDef extends $ZodTypeDef {
   coerce?: boolean;
   checks?: $ZodCheck<boolean>[];
 }
-interface $ZodBooleanInternals<T$1 = unknown> extends $ZodTypeInternals<boolean, T$1> {
+interface $ZodBooleanInternals<T = unknown> extends $ZodTypeInternals<boolean, T> {
   pattern: RegExp;
   def: $ZodBooleanDef;
   isst: $ZodIssueInvalidType;
 }
-interface $ZodBoolean<T$1 = unknown> extends $ZodType {
-  _zod: $ZodBooleanInternals<T$1>;
+interface $ZodBoolean<T = unknown> extends $ZodType {
+  _zod: $ZodBooleanInternals<T>;
 }
 declare const $ZodBoolean: $constructor<$ZodBoolean>;
 interface $ZodBigIntDef extends $ZodTypeDef {
   type: "bigint";
   coerce?: boolean;
 }
-interface $ZodBigIntInternals<T$1 = unknown> extends $ZodTypeInternals<bigint, T$1> {
+interface $ZodBigIntInternals<T = unknown> extends $ZodTypeInternals<bigint, T> {
   pattern: RegExp;
   /** @internal Internal API, use with caution */
   def: $ZodBigIntDef;
@@ -2358,8 +2277,8 @@ interface $ZodBigIntInternals<T$1 = unknown> extends $ZodTypeInternals<bigint, T
     format: string;
   }>;
 }
-interface $ZodBigInt<T$1 = unknown> extends $ZodType {
-  _zod: $ZodBigIntInternals<T$1>;
+interface $ZodBigInt<T = unknown> extends $ZodType {
+  _zod: $ZodBigIntInternals<T>;
 }
 declare const $ZodBigInt: $constructor<$ZodBigInt>;
 interface $ZodSymbolDef extends $ZodTypeDef {
@@ -2447,7 +2366,7 @@ interface $ZodDateDef extends $ZodTypeDef {
   type: "date";
   coerce?: boolean;
 }
-interface $ZodDateInternals<T$1 = unknown> extends $ZodTypeInternals<Date, T$1> {
+interface $ZodDateInternals<T = unknown> extends $ZodTypeInternals<Date, T> {
   def: $ZodDateDef;
   isst: $ZodIssueInvalidType;
   bag: LoosePartial<{
@@ -2456,21 +2375,21 @@ interface $ZodDateInternals<T$1 = unknown> extends $ZodTypeInternals<Date, T$1> 
     format: string;
   }>;
 }
-interface $ZodDate<T$1 = unknown> extends $ZodType {
-  _zod: $ZodDateInternals<T$1>;
+interface $ZodDate<T = unknown> extends $ZodType {
+  _zod: $ZodDateInternals<T>;
 }
 declare const $ZodDate: $constructor<$ZodDate>;
-interface $ZodArrayDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodArrayDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "array";
-  element: T$1;
+  element: T;
 }
-interface $ZodArrayInternals<T$1 extends SomeType = $ZodType> extends _$ZodTypeInternals {
-  def: $ZodArrayDef<T$1>;
+interface $ZodArrayInternals<T extends SomeType = $ZodType> extends _$ZodTypeInternals {
+  def: $ZodArrayDef<T>;
   isst: $ZodIssueInvalidType;
-  output: output<T$1>[];
-  input: input<T$1>[];
+  output: output<T>[];
+  input: input<T>[];
 }
-interface $ZodArray<T$1 extends SomeType = $ZodType> extends $ZodType<any, any, $ZodArrayInternals<T$1>> {}
+interface $ZodArray<T extends SomeType = $ZodType> extends $ZodType<any, any, $ZodArrayInternals<T>> {}
 declare const $ZodArray: $constructor<$ZodArray>;
 type OptionalOutSchema = {
   _zod: {
@@ -2482,8 +2401,8 @@ type OptionalInSchema = {
     optin: "optional";
   };
 };
-type $InferObjectOutput<T$1 extends $ZodLooseShape, Extra extends Record<string, unknown>> = string extends keyof T$1 ? IsAny<T$1[keyof T$1]> extends true ? Record<string, unknown> : Record<string, output<T$1[keyof T$1]>> : keyof (T$1 & Extra) extends never ? Record<string, never> : Prettify<{ -readonly [k in keyof T$1 as T$1[k] extends OptionalOutSchema ? never : k]: T$1[k]["_zod"]["output"] } & { -readonly [k in keyof T$1 as T$1[k] extends OptionalOutSchema ? k : never]?: T$1[k]["_zod"]["output"] } & Extra>;
-type $InferObjectInput<T$1 extends $ZodLooseShape, Extra extends Record<string, unknown>> = string extends keyof T$1 ? IsAny<T$1[keyof T$1]> extends true ? Record<string, unknown> : Record<string, input<T$1[keyof T$1]>> : keyof (T$1 & Extra) extends never ? Record<string, never> : Prettify<{ -readonly [k in keyof T$1 as T$1[k] extends OptionalInSchema ? never : k]: T$1[k]["_zod"]["input"] } & { -readonly [k in keyof T$1 as T$1[k] extends OptionalInSchema ? k : never]?: T$1[k]["_zod"]["input"] } & Extra>;
+type $InferObjectOutput<T extends $ZodLooseShape, Extra extends Record<string, unknown>> = string extends keyof T ? IsAny<T[keyof T]> extends true ? Record<string, unknown> : Record<string, output<T[keyof T]>> : keyof (T & Extra) extends never ? Record<string, never> : Prettify<{ -readonly [k in keyof T as T[k] extends OptionalOutSchema ? never : k]: T[k]["_zod"]["output"] } & { -readonly [k in keyof T as T[k] extends OptionalOutSchema ? k : never]?: T[k]["_zod"]["output"] } & Extra>;
+type $InferObjectInput<T extends $ZodLooseShape, Extra extends Record<string, unknown>> = string extends keyof T ? IsAny<T[keyof T]> extends true ? Record<string, unknown> : Record<string, input<T[keyof T]>> : keyof (T & Extra) extends never ? Record<string, never> : Prettify<{ -readonly [k in keyof T as T[k] extends OptionalInSchema ? never : k]: T[k]["_zod"]["input"] } & { -readonly [k in keyof T as T[k] extends OptionalInSchema ? k : never]?: T[k]["_zod"]["input"] } & Extra>;
 type $ZodObjectConfig = {
   out: Record<string, unknown>;
   in: Record<string, unknown>;
@@ -2500,12 +2419,12 @@ type $strip = {
   out: {};
   in: {};
 };
-type $catchall<T$1 extends SomeType> = {
+type $catchall<T extends SomeType> = {
   out: {
-    [k: string]: output<T$1>;
+    [k: string]: output<T>;
   };
   in: {
-    [k: string]: input<T$1>;
+    [k: string]: input<T>;
   };
 };
 type $ZodShape = Readonly<{
@@ -2516,8 +2435,7 @@ interface $ZodObjectDef<Shape extends $ZodShape = $ZodShape> extends $ZodTypeDef
   shape: Shape;
   catchall?: $ZodType | undefined;
 }
-interface $ZodObjectInternals< /** @ts-ignore Cast variance */
-out Shape extends $ZodShape = $ZodShape, out Config extends $ZodObjectConfig = $ZodObjectConfig> extends _$ZodTypeInternals {
+interface $ZodObjectInternals< /** @ts-ignore Cast variance */out Shape extends $ZodShape = $ZodShape, out Config extends $ZodObjectConfig = $ZodObjectConfig> extends _$ZodTypeInternals {
   def: $ZodObjectDef<Shape>;
   config: Config;
   isst: $ZodIssueInvalidType | $ZodIssueUnrecognizedKeys;
@@ -2528,30 +2446,29 @@ out Shape extends $ZodShape = $ZodShape, out Config extends $ZodObjectConfig = $
   optout?: "optional" | undefined;
 }
 type $ZodLooseShape = Record<string, any>;
-interface $ZodObject< /** @ts-ignore Cast variance */
-out Shape extends Readonly<$ZodShape> = Readonly<$ZodShape>, out Params$1 extends $ZodObjectConfig = $ZodObjectConfig> extends $ZodType<any, any, $ZodObjectInternals<Shape, Params$1>> {}
+interface $ZodObject< /** @ts-ignore Cast variance */out Shape extends Readonly<$ZodShape> = Readonly<$ZodShape>, out Params$1 extends $ZodObjectConfig = $ZodObjectConfig> extends $ZodType<any, any, $ZodObjectInternals<Shape, Params$1>> {}
 declare const $ZodObject: $constructor<$ZodObject>;
-type $InferUnionOutput<T$1 extends SomeType> = T$1 extends any ? output<T$1> : never;
-type $InferUnionInput<T$1 extends SomeType> = T$1 extends any ? input<T$1> : never;
+type $InferUnionOutput<T extends SomeType> = T extends any ? output<T> : never;
+type $InferUnionInput<T extends SomeType> = T extends any ? input<T> : never;
 interface $ZodUnionDef<Options extends readonly SomeType[] = readonly $ZodType[]> extends $ZodTypeDef {
   type: "union";
   options: Options;
   inclusive?: boolean;
 }
-type IsOptionalIn<T$1 extends SomeType> = T$1 extends OptionalInSchema ? true : false;
-type IsOptionalOut<T$1 extends SomeType> = T$1 extends OptionalOutSchema ? true : false;
-interface $ZodUnionInternals<T$1 extends readonly SomeType[] = readonly $ZodType[]> extends _$ZodTypeInternals {
-  def: $ZodUnionDef<T$1>;
+type IsOptionalIn<T extends SomeType> = T extends OptionalInSchema ? true : false;
+type IsOptionalOut<T extends SomeType> = T extends OptionalOutSchema ? true : false;
+interface $ZodUnionInternals<T extends readonly SomeType[] = readonly $ZodType[]> extends _$ZodTypeInternals {
+  def: $ZodUnionDef<T>;
   isst: $ZodIssueInvalidUnion;
-  pattern: T$1[number]["_zod"]["pattern"];
-  values: T$1[number]["_zod"]["values"];
-  output: $InferUnionOutput<T$1[number]>;
-  input: $InferUnionInput<T$1[number]>;
-  optin: IsOptionalIn<T$1[number]> extends false ? "optional" | undefined : "optional";
-  optout: IsOptionalOut<T$1[number]> extends false ? "optional" | undefined : "optional";
+  pattern: T[number]["_zod"]["pattern"];
+  values: T[number]["_zod"]["values"];
+  output: $InferUnionOutput<T[number]>;
+  input: $InferUnionInput<T[number]>;
+  optin: IsOptionalIn<T[number]> extends false ? "optional" | undefined : "optional";
+  optout: IsOptionalOut<T[number]> extends false ? "optional" | undefined : "optional";
 }
-interface $ZodUnion<T$1 extends readonly SomeType[] = readonly $ZodType[]> extends $ZodType<any, any, $ZodUnionInternals<T$1>> {
-  _zod: $ZodUnionInternals<T$1>;
+interface $ZodUnion<T extends readonly SomeType[] = readonly $ZodType[]> extends $ZodType<any, any, $ZodUnionInternals<T>> {
+  _zod: $ZodUnionInternals<T>;
 }
 declare const $ZodUnion: $constructor<$ZodUnion>;
 interface $ZodIntersectionDef<Left extends SomeType = $ZodType, Right extends SomeType = $ZodType> extends $ZodTypeDef {
@@ -2571,25 +2488,25 @@ interface $ZodIntersection<A extends SomeType = $ZodType, B extends SomeType = $
   _zod: $ZodIntersectionInternals<A, B>;
 }
 declare const $ZodIntersection: $constructor<$ZodIntersection>;
-interface $ZodTupleDef<T$1 extends TupleItems = readonly $ZodType[], Rest$1 extends SomeType | null = $ZodType | null> extends $ZodTypeDef {
+interface $ZodTupleDef<T extends TupleItems = readonly $ZodType[], Rest extends SomeType | null = $ZodType | null> extends $ZodTypeDef {
   type: "tuple";
-  items: T$1;
-  rest: Rest$1;
+  items: T;
+  rest: Rest;
 }
-type $InferTupleInputType<T$1 extends TupleItems, Rest$1 extends SomeType | null> = [...TupleInputTypeWithOptionals<T$1>, ...(Rest$1 extends SomeType ? input<Rest$1>[] : [])];
-type TupleInputTypeNoOptionals<T$1 extends TupleItems> = { [k in keyof T$1]: input<T$1[k]> };
-type TupleInputTypeWithOptionals<T$1 extends TupleItems> = T$1 extends readonly [...infer Prefix extends SomeType[], infer Tail extends SomeType] ? Tail["_zod"]["optin"] extends "optional" ? [...TupleInputTypeWithOptionals<Prefix>, input<Tail>?] : TupleInputTypeNoOptionals<T$1> : [];
-type $InferTupleOutputType<T$1 extends TupleItems, Rest$1 extends SomeType | null> = [...TupleOutputTypeWithOptionals<T$1>, ...(Rest$1 extends SomeType ? output<Rest$1>[] : [])];
-type TupleOutputTypeNoOptionals<T$1 extends TupleItems> = { [k in keyof T$1]: output<T$1[k]> };
-type TupleOutputTypeWithOptionals<T$1 extends TupleItems> = T$1 extends readonly [...infer Prefix extends SomeType[], infer Tail extends SomeType] ? Tail["_zod"]["optout"] extends "optional" ? [...TupleOutputTypeWithOptionals<Prefix>, output<Tail>?] : TupleOutputTypeNoOptionals<T$1> : [];
-interface $ZodTupleInternals<T$1 extends TupleItems = readonly $ZodType[], Rest$1 extends SomeType | null = $ZodType | null> extends _$ZodTypeInternals {
-  def: $ZodTupleDef<T$1, Rest$1>;
+type $InferTupleInputType<T extends TupleItems, Rest extends SomeType | null> = [...TupleInputTypeWithOptionals<T>, ...(Rest extends SomeType ? input<Rest>[] : [])];
+type TupleInputTypeNoOptionals<T extends TupleItems> = { [k in keyof T]: input<T[k]> };
+type TupleInputTypeWithOptionals<T extends TupleItems> = T extends readonly [...infer Prefix extends SomeType[], infer Tail extends SomeType] ? Tail["_zod"]["optin"] extends "optional" ? [...TupleInputTypeWithOptionals<Prefix>, input<Tail>?] : TupleInputTypeNoOptionals<T> : [];
+type $InferTupleOutputType<T extends TupleItems, Rest extends SomeType | null> = [...TupleOutputTypeWithOptionals<T>, ...(Rest extends SomeType ? output<Rest>[] : [])];
+type TupleOutputTypeNoOptionals<T extends TupleItems> = { [k in keyof T]: output<T[k]> };
+type TupleOutputTypeWithOptionals<T extends TupleItems> = T extends readonly [...infer Prefix extends SomeType[], infer Tail extends SomeType] ? Tail["_zod"]["optout"] extends "optional" ? [...TupleOutputTypeWithOptionals<Prefix>, output<Tail>?] : TupleOutputTypeNoOptionals<T> : [];
+interface $ZodTupleInternals<T extends TupleItems = readonly $ZodType[], Rest extends SomeType | null = $ZodType | null> extends _$ZodTypeInternals {
+  def: $ZodTupleDef<T, Rest>;
   isst: $ZodIssueInvalidType | $ZodIssueTooBig<unknown[]> | $ZodIssueTooSmall<unknown[]>;
-  output: $InferTupleOutputType<T$1, Rest$1>;
-  input: $InferTupleInputType<T$1, Rest$1>;
+  output: $InferTupleOutputType<T, Rest>;
+  input: $InferTupleInputType<T, Rest>;
 }
-interface $ZodTuple<T$1 extends TupleItems = readonly $ZodType[], Rest$1 extends SomeType | null = $ZodType | null> extends $ZodType {
-  _zod: $ZodTupleInternals<T$1, Rest$1>;
+interface $ZodTuple<T extends TupleItems = readonly $ZodType[], Rest extends SomeType | null = $ZodType | null> extends $ZodType {
+  _zod: $ZodTupleInternals<T, Rest>;
 }
 declare const $ZodTuple: $constructor<$ZodTuple>;
 type $ZodRecordKey = $ZodType<string | number | symbol, unknown>;
@@ -2630,51 +2547,50 @@ interface $ZodMap<Key extends SomeType = $ZodType, Value extends SomeType = $Zod
   _zod: $ZodMapInternals<Key, Value>;
 }
 declare const $ZodMap: $constructor<$ZodMap>;
-interface $ZodSetDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodSetDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "set";
-  valueType: T$1;
+  valueType: T;
 }
-interface $ZodSetInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<Set<output<T$1>>, Set<input<T$1>>> {
-  def: $ZodSetDef<T$1>;
+interface $ZodSetInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<Set<output<T>>, Set<input<T>>> {
+  def: $ZodSetDef<T>;
   isst: $ZodIssueInvalidType;
   optin?: "optional" | undefined;
   optout?: "optional" | undefined;
 }
-interface $ZodSet<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodSetInternals<T$1>;
+interface $ZodSet<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodSetInternals<T>;
 }
 declare const $ZodSet: $constructor<$ZodSet>;
-type $InferEnumOutput<T$1 extends EnumLike> = T$1[keyof T$1] & {};
-type $InferEnumInput<T$1 extends EnumLike> = T$1[keyof T$1] & {};
-interface $ZodEnumDef<T$1 extends EnumLike = EnumLike> extends $ZodTypeDef {
+type $InferEnumOutput<T extends EnumLike> = T[keyof T] & {};
+type $InferEnumInput<T extends EnumLike> = T[keyof T] & {};
+interface $ZodEnumDef<T extends EnumLike = EnumLike> extends $ZodTypeDef {
   type: "enum";
-  entries: T$1;
+  entries: T;
 }
-interface $ZodEnumInternals< /** @ts-ignore Cast variance */
-out T$1 extends EnumLike = EnumLike> extends $ZodTypeInternals<$InferEnumOutput<T$1>, $InferEnumInput<T$1>> {
-  def: $ZodEnumDef<T$1>;
+interface $ZodEnumInternals< /** @ts-ignore Cast variance */out T extends EnumLike = EnumLike> extends $ZodTypeInternals<$InferEnumOutput<T>, $InferEnumInput<T>> {
+  def: $ZodEnumDef<T>;
   /** @deprecated Internal API, use with caution (not deprecated) */
   values: PrimitiveSet;
   /** @deprecated Internal API, use with caution (not deprecated) */
   pattern: RegExp;
   isst: $ZodIssueInvalidValue;
 }
-interface $ZodEnum<T$1 extends EnumLike = EnumLike> extends $ZodType {
-  _zod: $ZodEnumInternals<T$1>;
+interface $ZodEnum<T extends EnumLike = EnumLike> extends $ZodType {
+  _zod: $ZodEnumInternals<T>;
 }
 declare const $ZodEnum: $constructor<$ZodEnum>;
-interface $ZodLiteralDef<T$1 extends Literal> extends $ZodTypeDef {
+interface $ZodLiteralDef<T extends Literal> extends $ZodTypeDef {
   type: "literal";
-  values: T$1[];
+  values: T[];
 }
-interface $ZodLiteralInternals<T$1 extends Literal = Literal> extends $ZodTypeInternals<T$1, T$1> {
-  def: $ZodLiteralDef<T$1>;
-  values: Set<T$1>;
+interface $ZodLiteralInternals<T extends Literal = Literal> extends $ZodTypeInternals<T, T> {
+  def: $ZodLiteralDef<T>;
+  values: Set<T>;
   pattern: RegExp;
   isst: $ZodIssueInvalidValue;
 }
-interface $ZodLiteral<T$1 extends Literal = Literal> extends $ZodType {
-  _zod: $ZodLiteralInternals<T$1>;
+interface $ZodLiteral<T extends Literal = Literal> extends $ZodType {
+  _zod: $ZodLiteralInternals<T>;
 }
 declare const $ZodLiteral: $constructor<$ZodLiteral>;
 type _File = typeof globalThis extends {
@@ -2713,109 +2629,109 @@ interface $ZodTransform<O = unknown, I = unknown> extends $ZodType {
   _zod: $ZodTransformInternals<O, I>;
 }
 declare const $ZodTransform: $constructor<$ZodTransform>;
-interface $ZodOptionalDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodOptionalDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "optional";
-  innerType: T$1;
+  innerType: T;
 }
-interface $ZodOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1> | undefined, input<T$1> | undefined> {
-  def: $ZodOptionalDef<T$1>;
+interface $ZodOptionalInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<output<T> | undefined, input<T> | undefined> {
+  def: $ZodOptionalDef<T>;
   optin: "optional";
   optout: "optional";
   isst: never;
-  values: T$1["_zod"]["values"];
-  pattern: T$1["_zod"]["pattern"];
+  values: T["_zod"]["values"];
+  pattern: T["_zod"]["pattern"];
 }
-interface $ZodOptional<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodOptionalInternals<T$1>;
+interface $ZodOptional<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodOptionalInternals<T>;
 }
 declare const $ZodOptional: $constructor<$ZodOptional>;
-interface $ZodExactOptionalDef<T$1 extends SomeType = $ZodType> extends $ZodOptionalDef<T$1> {}
-interface $ZodExactOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodOptionalInternals<T$1> {
-  def: $ZodExactOptionalDef<T$1>;
-  output: output<T$1>;
-  input: input<T$1>;
+interface $ZodExactOptionalDef<T extends SomeType = $ZodType> extends $ZodOptionalDef<T> {}
+interface $ZodExactOptionalInternals<T extends SomeType = $ZodType> extends $ZodOptionalInternals<T> {
+  def: $ZodExactOptionalDef<T>;
+  output: output<T>;
+  input: input<T>;
 }
-interface $ZodExactOptional<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodExactOptionalInternals<T$1>;
+interface $ZodExactOptional<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodExactOptionalInternals<T>;
 }
 declare const $ZodExactOptional: $constructor<$ZodExactOptional>;
-interface $ZodNullableDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodNullableDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "nullable";
-  innerType: T$1;
+  innerType: T;
 }
-interface $ZodNullableInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1> | null, input<T$1> | null> {
-  def: $ZodNullableDef<T$1>;
-  optin: T$1["_zod"]["optin"];
-  optout: T$1["_zod"]["optout"];
+interface $ZodNullableInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<output<T> | null, input<T> | null> {
+  def: $ZodNullableDef<T>;
+  optin: T["_zod"]["optin"];
+  optout: T["_zod"]["optout"];
   isst: never;
-  values: T$1["_zod"]["values"];
-  pattern: T$1["_zod"]["pattern"];
+  values: T["_zod"]["values"];
+  pattern: T["_zod"]["pattern"];
 }
-interface $ZodNullable<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodNullableInternals<T$1>;
+interface $ZodNullable<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodNullableInternals<T>;
 }
 declare const $ZodNullable: $constructor<$ZodNullable>;
-interface $ZodDefaultDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodDefaultDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "default";
-  innerType: T$1;
+  innerType: T;
   /** The default value. May be a getter. */
-  defaultValue: NoUndefined<output<T$1>>;
+  defaultValue: NoUndefined<output<T>>;
 }
-interface $ZodDefaultInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T$1>>, input<T$1> | undefined> {
-  def: $ZodDefaultDef<T$1>;
+interface $ZodDefaultInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T>>, input<T> | undefined> {
+  def: $ZodDefaultDef<T>;
   optin: "optional";
   optout?: "optional" | undefined;
   isst: never;
-  values: T$1["_zod"]["values"];
+  values: T["_zod"]["values"];
 }
-interface $ZodDefault<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodDefaultInternals<T$1>;
+interface $ZodDefault<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodDefaultInternals<T>;
 }
 declare const $ZodDefault: $constructor<$ZodDefault>;
-interface $ZodPrefaultDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodPrefaultDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "prefault";
-  innerType: T$1;
+  innerType: T;
   /** The default value. May be a getter. */
-  defaultValue: input<T$1>;
+  defaultValue: input<T>;
 }
-interface $ZodPrefaultInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T$1>>, input<T$1> | undefined> {
-  def: $ZodPrefaultDef<T$1>;
+interface $ZodPrefaultInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T>>, input<T> | undefined> {
+  def: $ZodPrefaultDef<T>;
   optin: "optional";
   optout?: "optional" | undefined;
   isst: never;
-  values: T$1["_zod"]["values"];
+  values: T["_zod"]["values"];
 }
-interface $ZodPrefault<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodPrefaultInternals<T$1>;
+interface $ZodPrefault<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodPrefaultInternals<T>;
 }
 declare const $ZodPrefault: $constructor<$ZodPrefault>;
-interface $ZodNonOptionalDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodNonOptionalDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "nonoptional";
-  innerType: T$1;
+  innerType: T;
 }
-interface $ZodNonOptionalInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T$1>>, NoUndefined<input<T$1>>> {
-  def: $ZodNonOptionalDef<T$1>;
+interface $ZodNonOptionalInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<NoUndefined<output<T>>, NoUndefined<input<T>>> {
+  def: $ZodNonOptionalDef<T>;
   isst: $ZodIssueInvalidType;
-  values: T$1["_zod"]["values"];
+  values: T["_zod"]["values"];
   optin: "optional" | undefined;
   optout: "optional" | undefined;
 }
-interface $ZodNonOptional<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodNonOptionalInternals<T$1>;
+interface $ZodNonOptional<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodNonOptionalInternals<T>;
 }
 declare const $ZodNonOptional: $constructor<$ZodNonOptional>;
-interface $ZodSuccessDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodSuccessDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "success";
-  innerType: T$1;
+  innerType: T;
 }
-interface $ZodSuccessInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<boolean, input<T$1>> {
-  def: $ZodSuccessDef<T$1>;
+interface $ZodSuccessInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<boolean, input<T>> {
+  def: $ZodSuccessDef<T>;
   isst: never;
-  optin: T$1["_zod"]["optin"];
+  optin: T["_zod"]["optin"];
   optout: "optional" | undefined;
 }
-interface $ZodSuccess<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodSuccessInternals<T$1>;
+interface $ZodSuccess<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodSuccessInternals<T>;
 }
 declare const $ZodSuccess: $constructor<$ZodSuccess>;
 interface $ZodCatchCtx extends ParsePayload {
@@ -2826,20 +2742,20 @@ interface $ZodCatchCtx extends ParsePayload {
   /** @deprecated Use `ctx.value` */
   input: unknown;
 }
-interface $ZodCatchDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodCatchDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "catch";
-  innerType: T$1;
+  innerType: T;
   catchValue: (ctx: $ZodCatchCtx) => unknown;
 }
-interface $ZodCatchInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1>, input<T$1>> {
-  def: $ZodCatchDef<T$1>;
-  optin: T$1["_zod"]["optin"];
-  optout: T$1["_zod"]["optout"];
+interface $ZodCatchInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<output<T>, input<T>> {
+  def: $ZodCatchDef<T>;
+  optin: T["_zod"]["optin"];
+  optout: T["_zod"]["optout"];
   isst: never;
-  values: T$1["_zod"]["values"];
+  values: T["_zod"]["values"];
 }
-interface $ZodCatch<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodCatchInternals<T$1>;
+interface $ZodCatch<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodCatchInternals<T>;
 }
 declare const $ZodCatch: $constructor<$ZodCatch>;
 interface $ZodNaNDef extends $ZodTypeDef {
@@ -2874,20 +2790,20 @@ interface $ZodPipe<A extends SomeType = $ZodType, B extends SomeType = $ZodType>
   _zod: $ZodPipeInternals<A, B>;
 }
 declare const $ZodPipe: $constructor<$ZodPipe>;
-interface $ZodReadonlyDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodReadonlyDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "readonly";
-  innerType: T$1;
+  innerType: T;
 }
-interface $ZodReadonlyInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<MakeReadonly<output<T$1>>, MakeReadonly<input<T$1>>> {
-  def: $ZodReadonlyDef<T$1>;
-  optin: T$1["_zod"]["optin"];
-  optout: T$1["_zod"]["optout"];
+interface $ZodReadonlyInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<MakeReadonly<output<T>>, MakeReadonly<input<T>>> {
+  def: $ZodReadonlyDef<T>;
+  optin: T["_zod"]["optin"];
+  optout: T["_zod"]["optout"];
   isst: never;
-  propValues: T$1["_zod"]["propValues"];
-  values: T$1["_zod"]["values"];
+  propValues: T["_zod"]["propValues"];
+  values: T["_zod"]["values"];
 }
-interface $ZodReadonly<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodReadonlyInternals<T$1>;
+interface $ZodReadonly<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodReadonlyInternals<T>;
 }
 declare const $ZodReadonly: $constructor<$ZodReadonly>;
 interface $ZodTemplateLiteralDef extends $ZodTypeDef {
@@ -2933,42 +2849,42 @@ interface $ZodFunction<Args extends $ZodFunctionIn = $ZodFunctionIn, Returns ext
   _def: $ZodFunctionDef<Args, Returns>;
   _input: $InferInnerFunctionType<Args, Returns>;
   _output: $InferOuterFunctionType<Args, Returns>;
-  implement<F$1 extends $InferInnerFunctionType<Args, Returns>>(func: F$1): (...args: Parameters<this["_output"]>) => ReturnType<F$1> extends ReturnType<this["_output"]> ? ReturnType<F$1> : ReturnType<this["_output"]>;
-  implementAsync<F$1 extends $InferInnerFunctionTypeAsync<Args, Returns>>(func: F$1): F$1 extends $InferOuterFunctionTypeAsync<Args, Returns> ? F$1 : $InferOuterFunctionTypeAsync<Args, Returns>;
-  input<const Items extends TupleItems, const Rest$1 extends $ZodFunctionOut = $ZodFunctionOut>(args: Items, rest?: Rest$1): $ZodFunction<$ZodTuple<Items, Rest$1>, Returns>;
+  implement<F extends $InferInnerFunctionType<Args, Returns>>(func: F): (...args: Parameters<this["_output"]>) => ReturnType<F> extends ReturnType<this["_output"]> ? ReturnType<F> : ReturnType<this["_output"]>;
+  implementAsync<F extends $InferInnerFunctionTypeAsync<Args, Returns>>(func: F): F extends $InferOuterFunctionTypeAsync<Args, Returns> ? F : $InferOuterFunctionTypeAsync<Args, Returns>;
+  input<const Items extends TupleItems, const Rest extends $ZodFunctionOut = $ZodFunctionOut>(args: Items, rest?: Rest): $ZodFunction<$ZodTuple<Items, Rest>, Returns>;
   input<NewArgs extends $ZodFunctionIn>(args: NewArgs): $ZodFunction<NewArgs, Returns>;
   input(...args: any[]): $ZodFunction<any, Returns>;
   output<NewReturns extends $ZodType>(output: NewReturns): $ZodFunction<Args, NewReturns>;
 }
 declare const $ZodFunction: $constructor<$ZodFunction>;
-interface $ZodPromiseDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodPromiseDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "promise";
-  innerType: T$1;
+  innerType: T;
 }
-interface $ZodPromiseInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<Promise<output<T$1>>, MaybeAsync<input<T$1>>> {
-  def: $ZodPromiseDef<T$1>;
+interface $ZodPromiseInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<Promise<output<T>>, MaybeAsync<input<T>>> {
+  def: $ZodPromiseDef<T>;
   isst: never;
 }
-interface $ZodPromise<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodPromiseInternals<T$1>;
+interface $ZodPromise<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodPromiseInternals<T>;
 }
 declare const $ZodPromise: $constructor<$ZodPromise>;
-interface $ZodLazyDef<T$1 extends SomeType = $ZodType> extends $ZodTypeDef {
+interface $ZodLazyDef<T extends SomeType = $ZodType> extends $ZodTypeDef {
   type: "lazy";
-  getter: () => T$1;
+  getter: () => T;
 }
-interface $ZodLazyInternals<T$1 extends SomeType = $ZodType> extends $ZodTypeInternals<output<T$1>, input<T$1>> {
-  def: $ZodLazyDef<T$1>;
+interface $ZodLazyInternals<T extends SomeType = $ZodType> extends $ZodTypeInternals<output<T>, input<T>> {
+  def: $ZodLazyDef<T>;
   isst: never;
   /** Auto-cached way to retrieve the inner schema */
-  innerType: T$1;
-  pattern: T$1["_zod"]["pattern"];
-  propValues: T$1["_zod"]["propValues"];
-  optin: T$1["_zod"]["optin"];
-  optout: T$1["_zod"]["optout"];
+  innerType: T;
+  pattern: T["_zod"]["pattern"];
+  propValues: T["_zod"]["propValues"];
+  optin: T["_zod"]["optin"];
+  optout: T["_zod"]["optout"];
 }
-interface $ZodLazy<T$1 extends SomeType = $ZodType> extends $ZodType {
-  _zod: $ZodLazyInternals<T$1>;
+interface $ZodLazy<T extends SomeType = $ZodType> extends $ZodType {
+  _zod: $ZodLazyInternals<T>;
 }
 declare const $ZodLazy: $constructor<$ZodLazy>;
 interface $ZodCustomDef<O = unknown> extends $ZodTypeDef, $ZodCheckDef {
@@ -3002,15 +2918,15 @@ interface $ZodCheckDef {
   /** If provided, this check will only be executed if the function returns `true`. Defaults to `payload => z.util.isAborted(payload)`. */
   when?: ((payload: ParsePayload) => boolean) | undefined;
 }
-interface $ZodCheckInternals<T$1> {
+interface $ZodCheckInternals<T> {
   def: $ZodCheckDef;
   /** The set of issues this check might throw. */
   issc?: $ZodIssueBase;
-  check(payload: ParsePayload<T$1>): MaybeAsync<void>;
+  check(payload: ParsePayload<T>): MaybeAsync<void>;
   onattach: ((schema: $ZodType) => void)[];
 }
-interface $ZodCheck<in T$1 = never> {
-  _zod: $ZodCheckInternals<T$1>;
+interface $ZodCheck<in T = never> {
+  _zod: $ZodCheckInternals<T>;
 }
 declare const $ZodCheck: $constructor<$ZodCheck<any>>;
 interface $ZodCheckLessThanDef extends $ZodCheckDef {
@@ -3018,12 +2934,12 @@ interface $ZodCheckLessThanDef extends $ZodCheckDef {
   value: Numeric;
   inclusive: boolean;
 }
-interface $ZodCheckLessThanInternals<T$1 extends Numeric = Numeric> extends $ZodCheckInternals<T$1> {
+interface $ZodCheckLessThanInternals<T extends Numeric = Numeric> extends $ZodCheckInternals<T> {
   def: $ZodCheckLessThanDef;
-  issc: $ZodIssueTooBig<T$1>;
+  issc: $ZodIssueTooBig<T>;
 }
-interface $ZodCheckLessThan<T$1 extends Numeric = Numeric> extends $ZodCheck<T$1> {
-  _zod: $ZodCheckLessThanInternals<T$1>;
+interface $ZodCheckLessThan<T extends Numeric = Numeric> extends $ZodCheck<T> {
+  _zod: $ZodCheckLessThanInternals<T>;
 }
 declare const $ZodCheckLessThan: $constructor<$ZodCheckLessThan>;
 interface $ZodCheckGreaterThanDef extends $ZodCheckDef {
@@ -3031,24 +2947,24 @@ interface $ZodCheckGreaterThanDef extends $ZodCheckDef {
   value: Numeric;
   inclusive: boolean;
 }
-interface $ZodCheckGreaterThanInternals<T$1 extends Numeric = Numeric> extends $ZodCheckInternals<T$1> {
+interface $ZodCheckGreaterThanInternals<T extends Numeric = Numeric> extends $ZodCheckInternals<T> {
   def: $ZodCheckGreaterThanDef;
-  issc: $ZodIssueTooSmall<T$1>;
+  issc: $ZodIssueTooSmall<T>;
 }
-interface $ZodCheckGreaterThan<T$1 extends Numeric = Numeric> extends $ZodCheck<T$1> {
-  _zod: $ZodCheckGreaterThanInternals<T$1>;
+interface $ZodCheckGreaterThan<T extends Numeric = Numeric> extends $ZodCheck<T> {
+  _zod: $ZodCheckGreaterThanInternals<T>;
 }
 declare const $ZodCheckGreaterThan: $constructor<$ZodCheckGreaterThan>;
-interface $ZodCheckMultipleOfDef<T$1 extends number | bigint = number | bigint> extends $ZodCheckDef {
+interface $ZodCheckMultipleOfDef<T extends number | bigint = number | bigint> extends $ZodCheckDef {
   check: "multiple_of";
-  value: T$1;
+  value: T;
 }
-interface $ZodCheckMultipleOfInternals<T$1 extends number | bigint = number | bigint> extends $ZodCheckInternals<T$1> {
-  def: $ZodCheckMultipleOfDef<T$1>;
+interface $ZodCheckMultipleOfInternals<T extends number | bigint = number | bigint> extends $ZodCheckInternals<T> {
+  def: $ZodCheckMultipleOfDef<T>;
   issc: $ZodIssueNotMultipleOf;
 }
-interface $ZodCheckMultipleOf<T$1 extends number | bigint = number | bigint> extends $ZodCheck<T$1> {
-  _zod: $ZodCheckMultipleOfInternals<T$1>;
+interface $ZodCheckMultipleOf<T extends number | bigint = number | bigint> extends $ZodCheck<T> {
+  _zod: $ZodCheckMultipleOfInternals<T>;
 }
 declare const $ZodCheckMultipleOf: $constructor<$ZodCheckMultipleOf<number | bigint>>;
 type $ZodNumberFormats = "int32" | "uint32" | "float32" | "float64" | "safeint";
@@ -3068,36 +2984,36 @@ interface $ZodCheckMaxLengthDef extends $ZodCheckDef {
   check: "max_length";
   maximum: number;
 }
-interface $ZodCheckMaxLengthInternals<T$1 extends HasLength = HasLength> extends $ZodCheckInternals<T$1> {
+interface $ZodCheckMaxLengthInternals<T extends HasLength = HasLength> extends $ZodCheckInternals<T> {
   def: $ZodCheckMaxLengthDef;
-  issc: $ZodIssueTooBig<T$1>;
+  issc: $ZodIssueTooBig<T>;
 }
-interface $ZodCheckMaxLength<T$1 extends HasLength = HasLength> extends $ZodCheck<T$1> {
-  _zod: $ZodCheckMaxLengthInternals<T$1>;
+interface $ZodCheckMaxLength<T extends HasLength = HasLength> extends $ZodCheck<T> {
+  _zod: $ZodCheckMaxLengthInternals<T>;
 }
 declare const $ZodCheckMaxLength: $constructor<$ZodCheckMaxLength>;
 interface $ZodCheckMinLengthDef extends $ZodCheckDef {
   check: "min_length";
   minimum: number;
 }
-interface $ZodCheckMinLengthInternals<T$1 extends HasLength = HasLength> extends $ZodCheckInternals<T$1> {
+interface $ZodCheckMinLengthInternals<T extends HasLength = HasLength> extends $ZodCheckInternals<T> {
   def: $ZodCheckMinLengthDef;
-  issc: $ZodIssueTooSmall<T$1>;
+  issc: $ZodIssueTooSmall<T>;
 }
-interface $ZodCheckMinLength<T$1 extends HasLength = HasLength> extends $ZodCheck<T$1> {
-  _zod: $ZodCheckMinLengthInternals<T$1>;
+interface $ZodCheckMinLength<T extends HasLength = HasLength> extends $ZodCheck<T> {
+  _zod: $ZodCheckMinLengthInternals<T>;
 }
 declare const $ZodCheckMinLength: $constructor<$ZodCheckMinLength>;
 interface $ZodCheckLengthEqualsDef extends $ZodCheckDef {
   check: "length_equals";
   length: number;
 }
-interface $ZodCheckLengthEqualsInternals<T$1 extends HasLength = HasLength> extends $ZodCheckInternals<T$1> {
+interface $ZodCheckLengthEqualsInternals<T extends HasLength = HasLength> extends $ZodCheckInternals<T> {
   def: $ZodCheckLengthEqualsDef;
-  issc: $ZodIssueTooBig<T$1> | $ZodIssueTooSmall<T$1>;
+  issc: $ZodIssueTooBig<T> | $ZodIssueTooSmall<T>;
 }
-interface $ZodCheckLengthEquals<T$1 extends HasLength = HasLength> extends $ZodCheck<T$1> {
-  _zod: $ZodCheckLengthEqualsInternals<T$1>;
+interface $ZodCheckLengthEquals<T extends HasLength = HasLength> extends $ZodCheck<T> {
+  _zod: $ZodCheckLengthEqualsInternals<T>;
 }
 declare const $ZodCheckLengthEquals: $constructor<$ZodCheckLengthEquals>;
 type $ZodStringFormats = "email" | "url" | "emoji" | "uuid" | "guid" | "nanoid" | "cuid" | "cuid2" | "ulid" | "xid" | "ksuid" | "datetime" | "date" | "time" | "duration" | "ipv4" | "ipv6" | "cidrv4" | "cidrv6" | "base64" | "base64url" | "json_string" | "e164" | "lowercase" | "uppercase" | "regex" | "jwt" | "starts_with" | "ends_with" | "includes";
@@ -3261,43 +3177,40 @@ interface $ZodIssueCustom extends $ZodIssueBase {
   readonly input?: unknown;
 }
 type $ZodIssue = $ZodIssueInvalidType | $ZodIssueTooBig | $ZodIssueTooSmall | $ZodIssueInvalidStringFormat | $ZodIssueNotMultipleOf | $ZodIssueUnrecognizedKeys | $ZodIssueInvalidUnion | $ZodIssueInvalidKey | $ZodIssueInvalidElement | $ZodIssueInvalidValue | $ZodIssueCustom;
-type $ZodInternalIssue<T$1 extends $ZodIssueBase = $ZodIssue> = T$1 extends any ? RawIssue$1<T$1> : never;
-type RawIssue$1<T$1 extends $ZodIssueBase> = T$1 extends any ? Flatten<MakePartial<T$1, "message" | "path"> & {
-  /** The input data */
-  readonly input: unknown;
-  /** The schema or check that originated this issue. */
-  readonly inst?: $ZodType | $ZodCheck;
-  /** If `true`, Zod will continue executing checks/refinements after this issue. */
+type $ZodInternalIssue<T extends $ZodIssueBase = $ZodIssue> = T extends any ? RawIssue$1<T> : never;
+type RawIssue$1<T extends $ZodIssueBase> = T extends any ? Flatten<MakePartial<T, "message" | "path"> & {
+  /** The input data */readonly input: unknown; /** The schema or check that originated this issue. */
+  readonly inst?: $ZodType | $ZodCheck; /** If `true`, Zod will continue executing checks/refinements after this issue. */
   readonly continue?: boolean | undefined;
 } & Record<string, unknown>> : never;
-type $ZodRawIssue<T$1 extends $ZodIssueBase = $ZodIssue> = $ZodInternalIssue<T$1>;
-interface $ZodErrorMap<T$1 extends $ZodIssueBase = $ZodIssue> {
-  (issue: $ZodRawIssue<T$1>): {
+type $ZodRawIssue<T extends $ZodIssueBase = $ZodIssue> = $ZodInternalIssue<T>;
+interface $ZodErrorMap<T extends $ZodIssueBase = $ZodIssue> {
+  (issue: $ZodRawIssue<T>): {
     message: string;
   } | string | undefined | null;
 }
-interface $ZodError<T$1 = unknown> extends Error {
-  type: T$1;
+interface $ZodError<T = unknown> extends Error {
+  type: T;
   issues: $ZodIssue[];
   _zod: {
-    output: T$1;
+    output: T;
     def: $ZodIssue[];
   };
   stack?: string;
   name: string;
 }
 declare const $ZodError: $constructor<$ZodError>;
-type $ZodFlattenedError<T$1, U$1 = string> = _FlattenedError<T$1, U$1>;
-type _FlattenedError<T$1, U$1 = string> = {
-  formErrors: U$1[];
-  fieldErrors: { [P in keyof T$1]?: U$1[] };
+type $ZodFlattenedError<T, U = string> = _FlattenedError<T, U>;
+type _FlattenedError<T, U = string> = {
+  formErrors: U[];
+  fieldErrors: { [P in keyof T]?: U[] };
 };
-type _ZodFormattedError<T$1, U$1 = string> = T$1 extends [any, ...any[]] ? { [K in keyof T$1]?: $ZodFormattedError<T$1[K], U$1> } : T$1 extends any[] ? {
-  [k: number]: $ZodFormattedError<T$1[number], U$1>;
-} : T$1 extends object ? Flatten<{ [K in keyof T$1]?: $ZodFormattedError<T$1[K], U$1> }> : any;
-type $ZodFormattedError<T$1, U$1 = string> = {
-  _errors: U$1[];
-} & Flatten<_ZodFormattedError<T$1, U$1>>;
+type _ZodFormattedError<T, U = string> = T extends [any, ...any[]] ? { [K in keyof T]?: $ZodFormattedError<T[K], U> } : T extends any[] ? {
+  [k: number]: $ZodFormattedError<T[number], U>;
+} : T extends object ? Flatten<{ [K in keyof T]?: $ZodFormattedError<T[K], U> }> : any;
+type $ZodFormattedError<T, U = string> = {
+  _errors: U[];
+} & Flatten<_ZodFormattedError<T, U>>;
 //#endregion
 //#region node_modules/zod/v4/core/core.d.cts
 type ZodTrait = {
@@ -3306,56 +3219,54 @@ type ZodTrait = {
     [k: string]: any;
   };
 };
-interface $constructor<T$1 extends ZodTrait, D = T$1["_zod"]["def"]> {
-  new (def: D): T$1;
-  init(inst: T$1, def: D): asserts inst is T$1;
+interface $constructor<T extends ZodTrait, D = T["_zod"]["def"]> {
+  new (def: D): T;
+  init(inst: T, def: D): asserts inst is T;
 }
-declare function $constructor<T$1 extends ZodTrait, D = T$1["_zod"]["def"]>(name: string, initializer: (inst: T$1, def: D) => void, params?: {
+declare function $constructor<T extends ZodTrait, D = T["_zod"]["def"]>(name: string, initializer: (inst: T, def: D) => void, params?: {
   Parent?: typeof Class;
-}): $constructor<T$1, D>;
+}): $constructor<T, D>;
 declare const $brand: unique symbol;
-type $brand<T$1 extends string | number | symbol = string | number | symbol> = {
-  [$brand]: { [k in T$1]: true };
+type $brand<T extends string | number | symbol = string | number | symbol> = {
+  [$brand]: { [k in T]: true };
 };
-type $ZodBranded<T$1 extends SomeType, Brand extends string | number | symbol, Dir extends "in" | "out" | "inout" = "out"> = T$1 & (Dir extends "inout" ? {
+type $ZodBranded<T extends SomeType, Brand extends string | number | symbol, Dir extends "in" | "out" | "inout" = "out"> = T & (Dir extends "inout" ? {
   _zod: {
-    input: input<T$1> & $brand<Brand>;
-    output: output<T$1> & $brand<Brand>;
+    input: input<T> & $brand<Brand>;
+    output: output<T> & $brand<Brand>;
   };
 } : Dir extends "in" ? {
   _zod: {
-    input: input<T$1> & $brand<Brand>;
+    input: input<T> & $brand<Brand>;
   };
 } : {
   _zod: {
-    output: output<T$1> & $brand<Brand>;
+    output: output<T> & $brand<Brand>;
   };
 });
-type input<T$1> = T$1 extends {
+type input<T> = T extends {
   _zod: {
     input: any;
   };
-} ? T$1["_zod"]["input"] : unknown;
-type output<T$1> = T$1 extends {
+} ? T["_zod"]["input"] : unknown;
+type output<T> = T extends {
   _zod: {
     output: any;
   };
-} ? T$1["_zod"]["output"] : unknown;
+} ? T["_zod"]["output"] : unknown;
 //#endregion
 //#region node_modules/zod/v4/core/api.d.cts
-type Params<T$1 extends $ZodType | $ZodCheck, IssueTypes extends $ZodIssueBase, OmitKeys extends keyof T$1["_zod"]["def"] = never> = Flatten<Partial<EmptyToNever<Omit<T$1["_zod"]["def"], OmitKeys> & ([IssueTypes] extends [never] ? {} : {
-  error?: string | $ZodErrorMap<IssueTypes> | undefined;
-  /** @deprecated This parameter is deprecated. Use `error` instead. */
+type Params<T extends $ZodType | $ZodCheck, IssueTypes extends $ZodIssueBase, OmitKeys extends keyof T["_zod"]["def"] = never> = Flatten<Partial<EmptyToNever<Omit<T["_zod"]["def"], OmitKeys> & ([IssueTypes] extends [never] ? {} : {
+  error?: string | $ZodErrorMap<IssueTypes> | undefined; /** @deprecated This parameter is deprecated. Use `error` instead. */
   message?: string | undefined;
 })>>>;
-type TypeParams<T$1 extends $ZodType = $ZodType & {
+type TypeParams<T extends $ZodType = $ZodType & {
   _isst: never;
-}, AlsoOmit extends Exclude<keyof T$1["_zod"]["def"], "type" | "checks" | "error"> = never> = Params<T$1, NonNullable<T$1["_zod"]["isst"]>, "type" | "checks" | "error" | AlsoOmit>;
-type CheckParams<T$1 extends $ZodCheck = $ZodCheck,
-// & { _issc: never },
-AlsoOmit extends Exclude<keyof T$1["_zod"]["def"], "check" | "error"> = never> = Params<T$1, NonNullable<T$1["_zod"]["issc"]>, "check" | "error" | AlsoOmit>;
-type CheckStringFormatParams<T$1 extends $ZodStringFormat = $ZodStringFormat, AlsoOmit extends Exclude<keyof T$1["_zod"]["def"], "type" | "coerce" | "checks" | "error" | "check" | "format"> = never> = Params<T$1, NonNullable<T$1["_zod"]["issc"]>, "type" | "coerce" | "checks" | "error" | "check" | "format" | AlsoOmit>;
-type CheckTypeParams<T$1 extends $ZodType & $ZodCheck = $ZodType & $ZodCheck, AlsoOmit extends Exclude<keyof T$1["_zod"]["def"], "type" | "checks" | "error" | "check"> = never> = Params<T$1, NonNullable<T$1["_zod"]["isst"] | T$1["_zod"]["issc"]>, "type" | "checks" | "error" | "check" | AlsoOmit>;
+}, AlsoOmit extends Exclude<keyof T["_zod"]["def"], "type" | "checks" | "error"> = never> = Params<T, NonNullable<T["_zod"]["isst"]>, "type" | "checks" | "error" | AlsoOmit>;
+type CheckParams<T extends $ZodCheck = $ZodCheck, // & { _issc: never },
+AlsoOmit extends Exclude<keyof T["_zod"]["def"], "check" | "error"> = never> = Params<T, NonNullable<T["_zod"]["issc"]>, "check" | "error" | AlsoOmit>;
+type CheckStringFormatParams<T extends $ZodStringFormat = $ZodStringFormat, AlsoOmit extends Exclude<keyof T["_zod"]["def"], "type" | "coerce" | "checks" | "error" | "check" | "format"> = never> = Params<T, NonNullable<T["_zod"]["issc"]>, "type" | "coerce" | "checks" | "error" | "check" | "format" | AlsoOmit>;
+type CheckTypeParams<T extends $ZodType & $ZodCheck = $ZodType & $ZodCheck, AlsoOmit extends Exclude<keyof T["_zod"]["def"], "type" | "checks" | "error" | "check"> = never> = Params<T, NonNullable<T["_zod"]["isst"] | T["_zod"]["issc"]>, "type" | "checks" | "error" | "check" | AlsoOmit>;
 type $ZodCheckEmailParams = CheckStringFormatParams<$ZodEmail, "when">;
 type $ZodCheckGUIDParams = CheckStringFormatParams<$ZodGUID, "pattern" | "when">;
 type $ZodCheckUUIDParams = CheckStringFormatParams<$ZodUUID, "pattern" | "when">;
@@ -3395,26 +3306,24 @@ type $ZodCheckEndsWithParams = CheckParams<$ZodCheckEndsWith, "suffix" | "format
 type $ZodEnumParams = TypeParams<$ZodEnum, "entries">;
 type $ZodNonOptionalParams = TypeParams<$ZodNonOptional, "innerType">;
 type $ZodCustomParams = CheckTypeParams<$ZodCustom, "fn">;
-type $ZodSuperRefineIssue<T$1 extends $ZodIssueBase = $ZodIssue> = T$1 extends any ? RawIssue<T$1> : never;
-type RawIssue<T$1 extends $ZodIssueBase> = T$1 extends any ? Flatten<MakePartial<T$1, "message" | "path"> & {
-  /** The schema or check that originated this issue. */
-  readonly inst?: $ZodType | $ZodCheck;
-  /** If `true`, Zod will execute subsequent checks/refinements instead of immediately aborting */
+type $ZodSuperRefineIssue<T extends $ZodIssueBase = $ZodIssue> = T extends any ? RawIssue<T> : never;
+type RawIssue<T extends $ZodIssueBase> = T extends any ? Flatten<MakePartial<T, "message" | "path"> & {
+  /** The schema or check that originated this issue. */readonly inst?: $ZodType | $ZodCheck; /** If `true`, Zod will execute subsequent checks/refinements instead of immediately aborting */
   readonly continue?: boolean | undefined;
 } & Record<string, unknown>> : never;
-interface $RefinementCtx<T$1 = unknown> extends ParsePayload<T$1> {
+interface $RefinementCtx<T = unknown> extends ParsePayload<T> {
   addIssue(arg: string | $ZodSuperRefineIssue): void;
 }
 //#endregion
 //#region node_modules/zod/v4/classic/errors.d.cts
 /** An Error-like class used to store Zod validation issues.  */
-interface ZodError<T$1 = unknown> extends $ZodError<T$1> {
+interface ZodError<T = unknown> extends $ZodError<T> {
   /** @deprecated Use the `z.treeifyError(err)` function instead. */
-  format(): $ZodFormattedError<T$1>;
-  format<U$1>(mapper: (issue: $ZodIssue) => U$1): $ZodFormattedError<T$1, U$1>;
+  format(): $ZodFormattedError<T>;
+  format<U>(mapper: (issue: $ZodIssue) => U): $ZodFormattedError<T, U>;
   /** @deprecated Use the `z.treeifyError(err)` function instead. */
-  flatten(): $ZodFlattenedError<T$1>;
-  flatten<U$1>(mapper: (issue: $ZodIssue) => U$1): $ZodFlattenedError<T$1, U$1>;
+  flatten(): $ZodFlattenedError<T>;
+  flatten<U>(mapper: (issue: $ZodIssue) => U): $ZodFlattenedError<T, U>;
   /** @deprecated Push directly to `.issues` instead. */
   addIssue(issue: $ZodIssue): void;
   /** @deprecated Push directly to `.issues` instead. */
@@ -3425,20 +3334,20 @@ interface ZodError<T$1 = unknown> extends $ZodError<T$1> {
 declare const ZodError: $constructor<ZodError>;
 //#endregion
 //#region node_modules/zod/v4/classic/parse.d.cts
-type ZodSafeParseResult<T$1> = ZodSafeParseSuccess<T$1> | ZodSafeParseError<T$1>;
-type ZodSafeParseSuccess<T$1> = {
+type ZodSafeParseResult<T> = ZodSafeParseSuccess<T> | ZodSafeParseError<T>;
+type ZodSafeParseSuccess<T> = {
   success: true;
-  data: T$1;
+  data: T;
   error?: never;
 };
-type ZodSafeParseError<T$1> = {
+type ZodSafeParseError<T> = {
   success: false;
   data?: never;
-  error: ZodError<T$1>;
+  error: ZodError<T>;
 };
 //#endregion
 //#region node_modules/zod/v4/classic/schemas.d.cts
-type ZodStandardSchemaWithJSON<T$1> = StandardSchemaWithJSONProps<input<T$1>, output<T$1>>;
+type ZodStandardSchemaWithJSON<T> = StandardSchemaWithJSONProps<input<T>, output<T>>;
 interface ZodType<out Output = unknown, out Input = unknown, out Internals extends $ZodTypeInternals<Output, Input> = $ZodTypeInternals<Output, Input>> extends $ZodType<Output, Input, Internals> {
   def: Internals["def"];
   type: Internals["def"]["type"];
@@ -3456,8 +3365,8 @@ interface ZodType<out Output = unknown, out Input = unknown, out Internals exten
   clone(def?: Internals["def"], params?: {
     parent: boolean;
   }): this;
-  register<R$1 extends $ZodRegistry>(registry: R$1, ...meta: this extends R$1["_schema"] ? undefined extends R$1["_meta"] ? [$replace<R$1["_meta"], this>?] : [$replace<R$1["_meta"], this>] : ["Incompatible schema"]): this;
-  brand<T$1 extends PropertyKey = PropertyKey, Dir extends "in" | "out" | "inout" = "out">(value?: T$1): PropertyKey extends T$1 ? this : $ZodBranded<this, T$1, Dir>;
+  register<R extends $ZodRegistry>(registry: R, ...meta: this extends R["_schema"] ? undefined extends R["_meta"] ? [$replace<R["_meta"], this>?] : [$replace<R["_meta"], this>] : ["Incompatible schema"]): this;
+  brand<T extends PropertyKey = PropertyKey, Dir extends "in" | "out" | "inout" = "out">(value?: T): PropertyKey extends T ? this : $ZodBranded<this, T, Dir>;
   parse(data: unknown, params?: ParseContext<$ZodIssue>): output<this>;
   safeParse(data: unknown, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<output<this>>;
   parseAsync(data: unknown, params?: ParseContext<$ZodIssue>): Promise<output<this>>;
@@ -3471,7 +3380,7 @@ interface ZodType<out Output = unknown, out Input = unknown, out Internals exten
   safeDecode(data: input<this>, params?: ParseContext<$ZodIssue>): ZodSafeParseResult<output<this>>;
   safeEncodeAsync(data: output<this>, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<input<this>>>;
   safeDecodeAsync(data: input<this>, params?: ParseContext<$ZodIssue>): Promise<ZodSafeParseResult<output<this>>>;
-  refine<Ch extends (arg: output<this>) => unknown | Promise<unknown>>(check: Ch, params?: string | $ZodCustomParams): Ch extends ((arg: any) => arg is infer R) ? this & ZodType<R$1, input<this>> : this;
+  refine<Ch extends (arg: output<this>) => unknown | Promise<unknown>>(check: Ch, params?: string | $ZodCustomParams): Ch extends ((arg: any) => arg is infer R) ? this & ZodType<R, input<this>> : this;
   superRefine(refinement: (arg: output<this>, ctx: $RefinementCtx<output<this>>) => void | Promise<void>): this;
   overwrite(fn: (x: output<this>) => output<this>): this;
   optional(): ZodOptional<this>;
@@ -3484,12 +3393,12 @@ interface ZodType<out Output = unknown, out Input = unknown, out Internals exten
   prefault(def: () => input<this>): ZodPrefault<this>;
   prefault(def: input<this>): ZodPrefault<this>;
   array(): ZodArray<this>;
-  or<T$1 extends SomeType>(option: T$1): ZodUnion<[this, T$1]>;
-  and<T$1 extends SomeType>(incoming: T$1): ZodIntersection<this, T$1>;
+  or<T extends SomeType>(option: T): ZodUnion<[this, T]>;
+  and<T extends SomeType>(incoming: T): ZodIntersection<this, T>;
   transform<NewOut>(transform: (arg: output<this>, ctx: $RefinementCtx<output<this>>) => NewOut | Promise<NewOut>): ZodPipe<this, ZodTransform<Awaited<NewOut>, output<this>>>;
   catch(def: output<this>): ZodCatch<this>;
   catch(def: (ctx: $ZodCatchCtx) => output<this>): ZodCatch<this>;
-  pipe<T$1 extends $ZodType<any, output<this>>>(target: T$1 | $ZodType<any, output<this>>): ZodPipe<this, T$1>;
+  pipe<T extends $ZodType<any, output<this>>>(target: T | $ZodType<any, output<this>>): ZodPipe<this, T>;
   readonly(): ZodReadonly<this>;
   /** Returns a new instance that has been registered in `z.globalRegistry` with the specified description */
   describe(description: string): this;
@@ -3499,27 +3408,27 @@ interface ZodType<out Output = unknown, out Input = unknown, out Internals exten
   /** Returns a new instance that has been registered in `z.globalRegistry` with the specified metadata */
   meta(data: $replace<GlobalMeta, this>): this;
   /** @deprecated Try safe-parsing `undefined` (this is what `isOptional` does internally):
-   *
-   * ```ts
-   * const schema = z.string().optional();
-   * const isOptional = schema.safeParse(undefined).success; // true
-   * ```
-   */
+       *
+       * ```ts
+       * const schema = z.string().optional();
+       * const isOptional = schema.safeParse(undefined).success; // true
+       * ```
+       */
   isOptional(): boolean;
   /**
-   * @deprecated Try safe-parsing `null` (this is what `isNullable` does internally):
-   *
-   * ```ts
-   * const schema = z.string().nullable();
-   * const isNullable = schema.safeParse(null).success; // true
-   * ```
-   */
+       * @deprecated Try safe-parsing `null` (this is what `isNullable` does internally):
+       *
+       * ```ts
+       * const schema = z.string().nullable();
+       * const isNullable = schema.safeParse(null).success; // true
+       * ```
+       */
   isNullable(): boolean;
-  apply<T$1>(fn: (schema: this) => T$1): T$1;
+  apply<T>(fn: (schema: this) => T): T;
 }
 interface _ZodType<out Internals extends $ZodTypeInternals = $ZodTypeInternals> extends ZodType<any, any, Internals> {}
 declare const ZodType: $constructor<ZodType>;
-interface _ZodString<T$1 extends $ZodStringInternals<unknown> = $ZodStringInternals<unknown>> extends _ZodType<T$1> {
+interface _ZodString<T extends $ZodStringInternals<unknown> = $ZodStringInternals<unknown>> extends _ZodType<T> {
   format: string | null;
   minLength: number | null;
   maxLength: number | null;
@@ -3645,27 +3554,26 @@ interface ZodNumberFormat extends ZodNumber {
 }
 declare const ZodNumberFormat: $constructor<ZodNumberFormat>;
 interface ZodInt extends ZodNumberFormat {}
-interface _ZodBoolean<T$1 extends $ZodBooleanInternals = $ZodBooleanInternals> extends _ZodType<T$1> {}
+interface _ZodBoolean<T extends $ZodBooleanInternals = $ZodBooleanInternals> extends _ZodType<T> {}
 interface ZodBoolean extends _ZodBoolean<$ZodBooleanInternals<boolean>> {}
 declare const ZodBoolean: $constructor<ZodBoolean>;
-interface ZodArray<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodArrayInternals<T$1>>, $ZodArray<T$1> {
-  element: T$1;
+interface ZodArray<T extends SomeType = $ZodType> extends _ZodType<$ZodArrayInternals<T>>, $ZodArray<T> {
+  element: T;
   min(minLength: number, params?: string | $ZodCheckMinLengthParams): this;
   nonempty(params?: string | $ZodCheckMinLengthParams): this;
   max(maxLength: number, params?: string | $ZodCheckMaxLengthParams): this;
   length(len: number, params?: string | $ZodCheckLengthEqualsParams): this;
-  unwrap(): T$1;
+  unwrap(): T;
   "~standard": ZodStandardSchemaWithJSON<this>;
 }
 declare const ZodArray: $constructor<ZodArray>;
 type SafeExtendShape<Base extends $ZodShape, Ext extends $ZodLooseShape> = { [K in keyof Ext]: K extends keyof Base ? output<Ext[K]> extends output<Base[K]> ? input<Ext[K]> extends input<Base[K]> ? Ext[K] : never : never : Ext[K] };
-interface ZodObject< /** @ts-ignore Cast variance */
-out Shape extends $ZodShape = $ZodLooseShape, out Config extends $ZodObjectConfig = $strip> extends _ZodType<$ZodObjectInternals<Shape, Config>>, $ZodObject<Shape, Config> {
+interface ZodObject< /** @ts-ignore Cast variance */out Shape extends $ZodShape = $ZodLooseShape, out Config extends $ZodObjectConfig = $strip> extends _ZodType<$ZodObjectInternals<Shape, Config>>, $ZodObject<Shape, Config> {
   "~standard": ZodStandardSchemaWithJSON<this>;
   shape: Shape;
   keyof(): ZodEnum<ToEnum<keyof Shape & string>>;
   /** Define a schema to validate all unrecognized keys. This overrides the existing strict/loose behavior. */
-  catchall<T$1 extends SomeType>(schema: T$1): ZodObject<Shape, $catchall<T$1>>;
+  catchall<T extends SomeType>(schema: T): ZodObject<Shape, $catchall<T>>;
   /** @deprecated Use `z.looseObject()` or `.loose()` instead. */
   passthrough(): ZodObject<Shape, $loose>;
   /** Consider `z.looseObject(A.shape)` instead */
@@ -3674,79 +3582,78 @@ out Shape extends $ZodShape = $ZodLooseShape, out Config extends $ZodObjectConfi
   strict(): ZodObject<Shape, $strict>;
   /** This is the default behavior. This method call is likely unnecessary. */
   strip(): ZodObject<Shape, $strip>;
-  extend<U$1 extends $ZodLooseShape>(shape: U$1): ZodObject<Extend<Shape, U$1>, Config>;
-  safeExtend<U$1 extends $ZodLooseShape>(shape: SafeExtendShape<Shape, U$1> & Partial<Record<keyof Shape, SomeType>>): ZodObject<Extend<Shape, U$1>, Config>;
+  extend<U extends $ZodLooseShape>(shape: U): ZodObject<Extend<Shape, U>, Config>;
+  safeExtend<U extends $ZodLooseShape>(shape: SafeExtendShape<Shape, U> & Partial<Record<keyof Shape, SomeType>>): ZodObject<Extend<Shape, U>, Config>;
   /**
-   * @deprecated Use [`A.extend(B.shape)`](https://zod.dev/api?id=extend) instead.
-   */
-  merge<U$1 extends ZodObject>(other: U$1): ZodObject<Extend<Shape, U$1["shape"]>, U$1["_zod"]["config"]>;
-  pick<M$1 extends Mask<keyof Shape>>(mask: M$1 & Record<Exclude<keyof M$1, keyof Shape>, never>): ZodObject<Flatten<Pick<Shape, Extract<keyof Shape, keyof M$1>>>, Config>;
-  omit<M$1 extends Mask<keyof Shape>>(mask: M$1 & Record<Exclude<keyof M$1, keyof Shape>, never>): ZodObject<Flatten<Omit<Shape, Extract<keyof Shape, keyof M$1>>>, Config>;
+       * @deprecated Use [`A.extend(B.shape)`](https://zod.dev/api?id=extend) instead.
+       */
+  merge<U extends ZodObject>(other: U): ZodObject<Extend<Shape, U["shape"]>, U["_zod"]["config"]>;
+  pick<M extends Mask<keyof Shape>>(mask: M & Record<Exclude<keyof M, keyof Shape>, never>): ZodObject<Flatten<Pick<Shape, Extract<keyof Shape, keyof M>>>, Config>;
+  omit<M extends Mask<keyof Shape>>(mask: M & Record<Exclude<keyof M, keyof Shape>, never>): ZodObject<Flatten<Omit<Shape, Extract<keyof Shape, keyof M>>>, Config>;
   partial(): ZodObject<{ [k in keyof Shape]: ZodOptional<Shape[k]> }, Config>;
-  partial<M$1 extends Mask<keyof Shape>>(mask: M$1 & Record<Exclude<keyof M$1, keyof Shape>, never>): ZodObject<{ [k in keyof Shape]: k extends keyof M$1 ? ZodOptional<Shape[k]> : Shape[k] }, Config>;
+  partial<M extends Mask<keyof Shape>>(mask: M & Record<Exclude<keyof M, keyof Shape>, never>): ZodObject<{ [k in keyof Shape]: k extends keyof M ? ZodOptional<Shape[k]> : Shape[k] }, Config>;
   required(): ZodObject<{ [k in keyof Shape]: ZodNonOptional<Shape[k]> }, Config>;
-  required<M$1 extends Mask<keyof Shape>>(mask: M$1 & Record<Exclude<keyof M$1, keyof Shape>, never>): ZodObject<{ [k in keyof Shape]: k extends keyof M$1 ? ZodNonOptional<Shape[k]> : Shape[k] }, Config>;
+  required<M extends Mask<keyof Shape>>(mask: M & Record<Exclude<keyof M, keyof Shape>, never>): ZodObject<{ [k in keyof Shape]: k extends keyof M ? ZodNonOptional<Shape[k]> : Shape[k] }, Config>;
 }
 declare const ZodObject: $constructor<ZodObject>;
-interface ZodUnion<T$1 extends readonly SomeType[] = readonly $ZodType[]> extends _ZodType<$ZodUnionInternals<T$1>>, $ZodUnion<T$1> {
+interface ZodUnion<T extends readonly SomeType[] = readonly $ZodType[]> extends _ZodType<$ZodUnionInternals<T>>, $ZodUnion<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  options: T$1;
+  options: T;
 }
 declare const ZodUnion: $constructor<ZodUnion>;
 interface ZodIntersection<A extends SomeType = $ZodType, B extends SomeType = $ZodType> extends _ZodType<$ZodIntersectionInternals<A, B>>, $ZodIntersection<A, B> {
   "~standard": ZodStandardSchemaWithJSON<this>;
 }
 declare const ZodIntersection: $constructor<ZodIntersection>;
-interface ZodEnum< /** @ts-ignore Cast variance */
-out T$1 extends EnumLike = EnumLike> extends _ZodType<$ZodEnumInternals<T$1>>, $ZodEnum<T$1> {
+interface ZodEnum< /** @ts-ignore Cast variance */out T extends EnumLike = EnumLike> extends _ZodType<$ZodEnumInternals<T>>, $ZodEnum<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  enum: T$1;
-  options: Array<T$1[keyof T$1]>;
-  extract<const U$1 extends readonly (keyof T$1)[]>(values: U$1, params?: string | $ZodEnumParams): ZodEnum<Flatten<Pick<T$1, U$1[number]>>>;
-  exclude<const U$1 extends readonly (keyof T$1)[]>(values: U$1, params?: string | $ZodEnumParams): ZodEnum<Flatten<Omit<T$1, U$1[number]>>>;
+  enum: T;
+  options: Array<T[keyof T]>;
+  extract<const U extends readonly (keyof T)[]>(values: U, params?: string | $ZodEnumParams): ZodEnum<Flatten<Pick<T, U[number]>>>;
+  exclude<const U extends readonly (keyof T)[]>(values: U, params?: string | $ZodEnumParams): ZodEnum<Flatten<Omit<T, U[number]>>>;
 }
 declare const ZodEnum: $constructor<ZodEnum>;
 interface ZodTransform<O = unknown, I = unknown> extends _ZodType<$ZodTransformInternals<O, I>>, $ZodTransform<O, I> {
   "~standard": ZodStandardSchemaWithJSON<this>;
 }
 declare const ZodTransform: $constructor<ZodTransform>;
-interface ZodOptional<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodOptionalInternals<T$1>>, $ZodOptional<T$1> {
+interface ZodOptional<T extends SomeType = $ZodType> extends _ZodType<$ZodOptionalInternals<T>>, $ZodOptional<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
 }
 declare const ZodOptional: $constructor<ZodOptional>;
-interface ZodExactOptional<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodExactOptionalInternals<T$1>>, $ZodExactOptional<T$1> {
+interface ZodExactOptional<T extends SomeType = $ZodType> extends _ZodType<$ZodExactOptionalInternals<T>>, $ZodExactOptional<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
 }
 declare const ZodExactOptional: $constructor<ZodExactOptional>;
-interface ZodNullable<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodNullableInternals<T$1>>, $ZodNullable<T$1> {
+interface ZodNullable<T extends SomeType = $ZodType> extends _ZodType<$ZodNullableInternals<T>>, $ZodNullable<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
 }
 declare const ZodNullable: $constructor<ZodNullable>;
-interface ZodDefault<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodDefaultInternals<T$1>>, $ZodDefault<T$1> {
+interface ZodDefault<T extends SomeType = $ZodType> extends _ZodType<$ZodDefaultInternals<T>>, $ZodDefault<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
   /** @deprecated Use `.unwrap()` instead. */
-  removeDefault(): T$1;
+  removeDefault(): T;
 }
 declare const ZodDefault: $constructor<ZodDefault>;
-interface ZodPrefault<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodPrefaultInternals<T$1>>, $ZodPrefault<T$1> {
+interface ZodPrefault<T extends SomeType = $ZodType> extends _ZodType<$ZodPrefaultInternals<T>>, $ZodPrefault<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
 }
 declare const ZodPrefault: $constructor<ZodPrefault>;
-interface ZodNonOptional<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodNonOptionalInternals<T$1>>, $ZodNonOptional<T$1> {
+interface ZodNonOptional<T extends SomeType = $ZodType> extends _ZodType<$ZodNonOptionalInternals<T>>, $ZodNonOptional<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
 }
 declare const ZodNonOptional: $constructor<ZodNonOptional>;
-interface ZodCatch<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodCatchInternals<T$1>>, $ZodCatch<T$1> {
+interface ZodCatch<T extends SomeType = $ZodType> extends _ZodType<$ZodCatchInternals<T>>, $ZodCatch<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
   /** @deprecated Use `.unwrap()` instead. */
-  removeCatch(): T$1;
+  removeCatch(): T;
 }
 declare const ZodCatch: $constructor<ZodCatch>;
 interface ZodPipe<A extends SomeType = $ZodType, B extends SomeType = $ZodType> extends _ZodType<$ZodPipeInternals<A, B>>, $ZodPipe<A, B> {
@@ -3755,9 +3662,9 @@ interface ZodPipe<A extends SomeType = $ZodType, B extends SomeType = $ZodType> 
   out: B;
 }
 declare const ZodPipe: $constructor<ZodPipe>;
-interface ZodReadonly<T$1 extends SomeType = $ZodType> extends _ZodType<$ZodReadonlyInternals<T$1>>, $ZodReadonly<T$1> {
+interface ZodReadonly<T extends SomeType = $ZodType> extends _ZodType<$ZodReadonlyInternals<T>>, $ZodReadonly<T> {
   "~standard": ZodStandardSchemaWithJSON<this>;
-  unwrap(): T$1;
+  unwrap(): T;
 }
 declare const ZodReadonly: $constructor<ZodReadonly>;
 //#endregion
