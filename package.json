@@ -1,6 +1,6 @@
 {
   "name": "vovk-hello-world",
-  "version": "0.0.84",
+  "version": "0.0.85",
   "description": "A \"Hello World!\" app built with Next.js, Vovk.ts and Zod. For details, visit https://vovk.dev/hello-world",
   "scripts": {
     "dev": "vovk dev --next-dev",

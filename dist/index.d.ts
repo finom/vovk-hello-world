@@ -1,604 +1,5 @@
 import { NextResponse } from "next/server.js";
 
-//#region node_modules/vovk/node_modules/type-fest/source/primitive.d.ts
-/**
-Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
-
-@category Type
-*/
-type Primitive$1 = null | undefined | string | number | boolean | symbol | bigint;
-//#endregion
-//#region node_modules/vovk/node_modules/type-fest/source/json-value.d.ts
-/**
-Matches a JSON object.
-
-This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from. Don't use this as a direct return type as the user would have to double-cast it: `jsonObject as unknown as CustomResponse`. Instead, you could extend your CustomResponse type from it to ensure your type only uses JSON-compatible types: `interface CustomResponse extends JsonObject { … }`.
-
-@category JSON
-*/
-type JsonObject = { [Key in string]: JsonValue };
-/**
-Matches a JSON array.
-
-@category JSON
-*/
-type JsonArray = JsonValue[] | readonly JsonValue[];
-/**
-Matches any valid JSON primitive value.
-
-@category JSON
-*/
-type JsonPrimitive = string | number | boolean | null;
-/**
-Matches any valid JSON value.
-
-@see `Jsonify` if you need to transform a type to one that is assignable to `JsonValue`.
-
-@category JSON
-*/
-type JsonValue = JsonPrimitive | JsonObject | JsonArray;
-//#endregion
-//#region node_modules/vovk/node_modules/type-fest/source/literal-union.d.ts
-/**
-Allows creating a union type by combining primitive types and literal types without sacrificing auto-completion in IDEs for the literal type part of the union.
-
-Currently, when a union type of a primitive type is combined with literal types, TypeScript loses all information about the combined literals. Thus, when such type is used in an IDE with autocompletion, no suggestions are made for the declared literals.
-
-This type is a workaround for [Microsoft/TypeScript#29729](https://github.com/Microsoft/TypeScript/issues/29729). It will be removed as soon as it's not needed anymore.
-
-@example
-```
-import type {LiteralUnion} from 'type-fest';
-
-// Before
-
-type Pet = 'dog' | 'cat' | string;
-
-const petWithoutAutocomplete: Pet = '';
-// Start typing in your TypeScript-enabled IDE.
-// You **will not** get auto-completion for `dog` and `cat` literals.
-
-// After
-
-type Pet2 = LiteralUnion<'dog' | 'cat', string>;
-
-const petWithAutoComplete: Pet2 = '';
-// You **will** get auto-completion for `dog` and `cat` literals.
-```
-
-@category Type
-*/
-type LiteralUnion<LiteralType, BaseType extends Primitive$1> = LiteralType | (BaseType & Record<never, never>);
-//#endregion
-//#region node_modules/vovk/node_modules/type-fest/source/package-json.d.ts
-declare namespace PackageJson {
-  /**
-  	A person who has been involved in creating or maintaining the package.
-  	*/
-  type Person = string | {
-    name: string;
-    url?: string;
-    email?: string;
-  };
-  type BugsLocation = string | {
-    /**
-    			The URL to the package's issue tracker.
-    			*/
-    url?: string;
-    /**
-    			The email address to which issues should be reported.
-    			*/
-    email?: string;
-  };
-  type DirectoryLocations = {
-    [directoryType: string]: JsonValue | undefined;
-    /**
-    		Location for executable scripts. Sugar to generate entries in the `bin` property by walking the folder.
-    		*/
-    bin?: string;
-    /**
-    		Location for Markdown files.
-    		*/
-    doc?: string;
-    /**
-    		Location for example scripts.
-    		*/
-    example?: string;
-    /**
-    		Location for the bulk of the library.
-    		*/
-    lib?: string;
-    /**
-    		Location for man pages. Sugar to generate a `man` array by walking the folder.
-    		*/
-    man?: string;
-    /**
-    		Location for test files.
-    		*/
-    test?: string;
-  };
-  type Scripts = {
-    /**
-    		Run **before** the package is published (Also run on local `npm install` without any arguments).
-    		*/
-    prepublish?: string;
-    /**
-    		Run both **before** the package is packed and published, and on local `npm install` without any arguments. This is run **after** `prepublish`, but **before** `prepublishOnly`.
-    		*/
-    prepare?: string;
-    /**
-    		Run **before** the package is prepared and packed, **only** on `npm publish`.
-    		*/
-    prepublishOnly?: string;
-    /**
-    		Run **before** a tarball is packed (on `npm pack`, `npm publish`, and when installing git dependencies).
-    		*/
-    prepack?: string;
-    /**
-    		Run **after** the tarball has been generated and moved to its final destination.
-    		*/
-    postpack?: string;
-    /**
-    		Run **after** the package is published.
-    		*/
-    publish?: string;
-    /**
-    		Run **after** the package is published.
-    		*/
-    postpublish?: string;
-    /**
-    		Run **before** the package is installed.
-    		*/
-    preinstall?: string;
-    /**
-    		Run **after** the package is installed.
-    		*/
-    install?: string;
-    /**
-    		Run **after** the package is installed and after `install`.
-    		*/
-    postinstall?: string;
-    /**
-    		Run **before** the package is uninstalled and before `uninstall`.
-    		*/
-    preuninstall?: string;
-    /**
-    		Run **before** the package is uninstalled.
-    		*/
-    uninstall?: string;
-    /**
-    		Run **after** the package is uninstalled.
-    		*/
-    postuninstall?: string;
-    /**
-    		Run **before** bump the package version and before `version`.
-    		*/
-    preversion?: string;
-    /**
-    		Run **before** bump the package version.
-    		*/
-    version?: string;
-    /**
-    		Run **after** bump the package version.
-    		*/
-    postversion?: string;
-    /**
-    		Run with the `npm test` command, before `test`.
-    		*/
-    pretest?: string;
-    /**
-    		Run with the `npm test` command.
-    		*/
-    test?: string;
-    /**
-    		Run with the `npm test` command, after `test`.
-    		*/
-    posttest?: string;
-    /**
-    		Run with the `npm stop` command, before `stop`.
-    		*/
-    prestop?: string;
-    /**
-    		Run with the `npm stop` command.
-    		*/
-    stop?: string;
-    /**
-    		Run with the `npm stop` command, after `stop`.
-    		*/
-    poststop?: string;
-    /**
-    		Run with the `npm start` command, before `start`.
-    		*/
-    prestart?: string;
-    /**
-    		Run with the `npm start` command.
-    		*/
-    start?: string;
-    /**
-    		Run with the `npm start` command, after `start`.
-    		*/
-    poststart?: string;
-    /**
-    		Run with the `npm restart` command, before `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
-    		*/
-    prerestart?: string;
-    /**
-    		Run with the `npm restart` command. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
-    		*/
-    restart?: string;
-    /**
-    		Run with the `npm restart` command, after `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
-    		*/
-    postrestart?: string;
-  } & Partial<Record<string, string>>;
-  /**
-  	Dependencies of the package. The version range is a string which has one or more space-separated descriptors. Dependencies can also be identified with a tarball or Git URL.
-  	*/
-  type Dependency = Partial<Record<string, string>>;
-  /**
-  	Recursive map describing selective dependency version overrides supported by npm.
-  	*/
-  type DependencyOverrides = { [packageName in string]: string | undefined | DependencyOverrides };
-  /**
-  	Specifies requirements for development environment components such as operating systems, runtimes, or package managers. Used to ensure consistent development environments across the team.
-  	*/
-  type DevEngineDependency = {
-    name: string;
-    version?: string;
-    onFail?: 'ignore' | 'warn' | 'error' | 'download';
-  };
-  /**
-  	A mapping of conditions and the paths to which they resolve.
-  	*/
-  type ExportConditions = {
-    [condition: string]: Exports;
-  };
-  /**
-  	Entry points of a module, optionally with conditions and subpath exports.
-  	*/
-  type Exports = null | string | Array<string | ExportConditions> | ExportConditions;
-  /**
-  	Import map entries of a module, optionally with conditions and subpath imports.
-  	*/
-  type Imports = {
-    [key: `#${string}`]: Exports;
-  }; // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-  interface NonStandardEntryPoints {
-    /**
-    		An ECMAScript module ID that is the primary entry point to the program.
-    		*/
-    module?: string;
-    /**
-    		A module ID with untranspiled code that is the primary entry point to the program.
-    		*/
-    esnext?: string | {
-      [moduleName: string]: string | undefined;
-      main?: string;
-      browser?: string;
-    };
-    /**
-    		A hint to JavaScript bundlers or component tools when packaging modules for client side use.
-    		*/
-    browser?: string | Partial<Record<string, string | false>>;
-    /**
-    		Denote which files in your project are "pure" and therefore safe for Webpack to prune if unused.
-    
-    		[Read more.](https://webpack.js.org/guides/tree-shaking/)
-    		*/
-    sideEffects?: boolean | string[];
-  }
-  type TypeScriptConfiguration = {
-    /**
-    		Location of the bundled TypeScript declaration file.
-    		*/
-    types?: string;
-    /**
-    		Version selection map of TypeScript.
-    		*/
-    typesVersions?: Partial<Record<string, Partial<Record<string, string[]>>>>;
-    /**
-    		Location of the bundled TypeScript declaration file. Alias of `types`.
-    		*/
-    typings?: string;
-  };
-  /**
-  	An alternative configuration for workspaces.
-  	*/
-  type WorkspaceConfig = {
-    /**
-    		An array of workspace pattern strings which contain the workspace packages.
-    		*/
-    packages?: WorkspacePattern[];
-    /**
-    		Designed to solve the problem of packages which break when their `node_modules` are moved to the root workspace directory - a process known as hoisting. For these packages, both within your workspace, and also some that have been installed via `node_modules`, it is important to have a mechanism for preventing the default Yarn workspace behavior. By adding workspace pattern strings here, Yarn will resume non-workspace behavior for any package which matches the defined patterns.
-    
-    		[Supported](https://classic.yarnpkg.com/blog/2018/02/15/nohoist/) by Yarn.
-    		[Not supported](https://github.com/npm/rfcs/issues/287) by npm.
-    		*/
-    nohoist?: WorkspacePattern[];
-  };
-  /**
-  	A workspace pattern points to a directory or group of directories which contain packages that should be included in the workspace installation process.
-  
-  	The patterns are handled with [minimatch](https://github.com/isaacs/minimatch).
-  
-  	@example
-  	`docs` → Include the docs directory and install its dependencies.
-  	`packages/*` → Include all nested directories within the packages directory, like `packages/cli` and `packages/core`.
-  	*/
-  type WorkspacePattern = string;
-  type YarnConfiguration = {
-    /**
-    		If your package only allows one version of a given dependency, and you’d like to enforce the same behavior as `yarn install --flat` on the command-line, set this to `true`.
-    
-    		Note that if your `package.json` contains `"flat": true` and other packages depend on yours (e.g. you are building a library rather than an app), those other packages will also need `"flat": true` in their `package.json` or be installed with `yarn install --flat` on the command-line.
-    		*/
-    flat?: boolean;
-    /**
-    		Selective version resolutions. Allows the definition of custom package versions inside dependencies without manual edits in the `yarn.lock` file.
-    		*/
-    resolutions?: Dependency;
-  };
-  type JSPMConfiguration = {
-    /**
-    		JSPM configuration.
-    		*/
-    jspm?: PackageJson;
-  };
-  /**
-  	Type for [npm's `package.json` file](https://docs.npmjs.com/creating-a-package-json-file). Containing standard npm properties.
-  	*/
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-  interface PackageJsonStandard {
-    /**
-    		The name of the package.
-    		*/
-    name?: string;
-    /**
-    		Package version, parseable by [`node-semver`](https://github.com/npm/node-semver).
-    		*/
-    version?: string;
-    /**
-    		Package description, listed in `npm search`.
-    		*/
-    description?: string;
-    /**
-    		Keywords associated with package, listed in `npm search`.
-    		*/
-    keywords?: string[];
-    /**
-    		The URL to the package's homepage.
-    		*/
-    homepage?: LiteralUnion<'.', string>;
-    /**
-    		The URL to the package's issue tracker and/or the email address to which issues should be reported.
-    		*/
-    bugs?: BugsLocation;
-    /**
-    		The license for the package.
-    		*/
-    license?: string;
-    /**
-    		The licenses for the package.
-    		*/
-    licenses?: Array<{
-      type?: string;
-      url?: string;
-    }>;
-    author?: Person;
-    /**
-    		A list of people who contributed to the package.
-    		*/
-    contributors?: Person[];
-    /**
-    		A list of people who maintain the package.
-    		*/
-    maintainers?: Person[];
-    /**
-    		The files included in the package.
-    		*/
-    files?: string[];
-    /**
-    		Resolution algorithm for importing ".js" files from the package's scope.
-    
-    		[Read more.](https://nodejs.org/api/esm.html#esm_package_json_type_field)
-    		*/
-    type?: 'module' | 'commonjs';
-    /**
-    		The module ID that is the primary entry point to the program.
-    		*/
-    main?: string;
-    /**
-    		Subpath exports to define entry points of the package.
-    
-    		[Read more.](https://nodejs.org/api/packages.html#subpath-exports)
-    		*/
-    exports?: Exports;
-    /**
-    		Subpath imports to define internal package import maps that only apply to import specifiers from within the package itself.
-    
-    		[Read more.](https://nodejs.org/api/packages.html#subpath-imports)
-    		*/
-    imports?: Imports;
-    /**
-    		The executable files that should be installed into the `PATH`.
-    		*/
-    bin?: string | Partial<Record<string, string>>;
-    /**
-    		Filenames to put in place for the `man` program to find.
-    		*/
-    man?: string | string[];
-    /**
-    		Indicates the structure of the package.
-    		*/
-    directories?: DirectoryLocations;
-    /**
-    		Location for the code repository.
-    		*/
-    repository?: string | {
-      type: string;
-      url: string;
-      /**
-      			Relative path to package.json if it is placed in non-root directory (for example if it is part of a monorepo).
-      
-      			[Read more.](https://github.com/npm/rfcs/blob/latest/implemented/0010-monorepo-subdirectory-declaration.md)
-      			*/
-      directory?: string;
-    };
-    /**
-    		Script commands that are run at various times in the lifecycle of the package. The key is the lifecycle event, and the value is the command to run at that point.
-    		*/
-    scripts?: Scripts;
-    /**
-    		Is used to set configuration parameters used in package scripts that persist across upgrades.
-    		*/
-    config?: JsonObject;
-    /**
-    		The dependencies of the package.
-    		*/
-    dependencies?: Dependency;
-    /**
-    		Additional tooling dependencies that are not required for the package to work. Usually test, build, or documentation tooling.
-    		*/
-    devDependencies?: Dependency;
-    /**
-    		Dependencies that are skipped if they fail to install.
-    		*/
-    optionalDependencies?: Dependency;
-    /**
-    		Dependencies that will usually be required by the package user directly or via another dependency.
-    		*/
-    peerDependencies?: Dependency;
-    /**
-    		Indicate peer dependencies that are optional.
-    		*/
-    peerDependenciesMeta?: Partial<Record<string, {
-      optional: true;
-    }>>;
-    /**
-    		Package names that are bundled when the package is published.
-    		*/
-    bundledDependencies?: string[];
-    /**
-    		Alias of `bundledDependencies`.
-    		*/
-    bundleDependencies?: string[];
-    /**
-    		Overrides is used to support selective version overrides using npm, which lets you define custom package versions or ranges inside your dependencies.
-    		*/
-    overrides?: DependencyOverrides;
-    /**
-    		Engines that this package runs on.
-    		*/
-    engines?: { [EngineName in 'npm' | 'node' | string]?: string };
-    /**
-    		@deprecated
-    		*/
-    engineStrict?: boolean;
-    /**
-    		Operating systems the module runs on.
-    		*/
-    os?: Array<LiteralUnion<'aix' | 'darwin' | 'freebsd' | 'linux' | 'openbsd' | 'sunos' | 'win32' | '!aix' | '!darwin' | '!freebsd' | '!linux' | '!openbsd' | '!sunos' | '!win32', string>>;
-    /**
-    		CPU architectures the module runs on.
-    		*/
-    cpu?: Array<LiteralUnion<'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | '!arm' | '!arm64' | '!ia32' | '!mips' | '!mipsel' | '!ppc' | '!ppc64' | '!s390' | '!s390x' | '!x32' | '!x64', string>>;
-    /**
-    		Define the runtime and package manager for developing the current project.
-    		*/
-    devEngines?: {
-      os?: DevEngineDependency | DevEngineDependency[];
-      cpu?: DevEngineDependency | DevEngineDependency[];
-      libc?: DevEngineDependency | DevEngineDependency[];
-      runtime?: DevEngineDependency | DevEngineDependency[];
-      packageManager?: DevEngineDependency | DevEngineDependency[];
-    };
-    /**
-    		If set to `true`, a warning will be shown if package is installed locally. Useful if the package is primarily a command-line application that should be installed globally.
-    
-    		@deprecated
-    		*/
-    preferGlobal?: boolean;
-    /**
-    		If set to `true`, then npm will refuse to publish it.
-    		*/
-    private?: boolean;
-    /**
-    		A set of config values that will be used at publish-time. It's especially handy to set the tag, registry or access, to ensure that a given package is not tagged with 'latest', published to the global public registry or that a scoped module is private by default.
-    		*/
-    publishConfig?: PublishConfig;
-    /**
-    		Describes and notifies consumers of a package's monetary support information.
-    
-    		[Read more.](https://github.com/npm/rfcs/blob/main/implemented/0017-add-funding-support.md)
-    		*/
-    funding?: string | {
-      /**
-      			The type of funding.
-      			*/
-      type?: LiteralUnion<'github' | 'opencollective' | 'patreon' | 'individual' | 'foundation' | 'corporation', string>;
-      /**
-      			The URL to the funding page.
-      			*/
-      url: string;
-    };
-    /**
-    		Used to configure [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces) / [Yarn workspaces](https://classic.yarnpkg.com/docs/workspaces/).
-    
-    		Workspaces allow you to manage multiple packages within the same repository in such a way that you only need to run your install command once in order to install all of them in a single pass.
-    
-    		Please note that the top-level `private` property of `package.json` **must** be set to `true` in order to use workspaces.
-    		*/
-    workspaces?: WorkspacePattern[] | WorkspaceConfig;
-  }
-  /**
-  	Type for [`package.json` file used by the Node.js runtime](https://nodejs.org/api/packages.html#nodejs-packagejson-field-definitions).
-  	*/
-  type NodeJsStandard = {
-    /**
-    		Defines which package manager is expected to be used when working on the current project. It can set to any of the [supported package managers](https://nodejs.org/api/corepack.html#supported-package-managers), and will ensure that your teams use the exact same package manager versions without having to install anything else than Node.js.
-    
-    		__This field is currently experimental and needs to be opted-in; check the [Corepack](https://nodejs.org/api/corepack.html) page for details about the procedure.__
-    
-    		@example
-    		```json
-    		{
-    			"packageManager": "<package manager name>@<version>"
-    		}
-    		```
-    		*/
-    packageManager?: string;
-  };
-  type PublishConfig = {
-    /**
-    		Additional, less common properties from the [npm docs on `publishConfig`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#publishconfig).
-    		*/
-    [additionalProperties: string]: JsonValue | undefined;
-    /**
-    		When publishing scoped packages, the access level defaults to restricted. If you want your scoped package to be publicly viewable (and installable) set `--access=public`. The only valid values for access are public and restricted. Unscoped packages always have an access level of public.
-    		*/
-    access?: 'public' | 'restricted';
-    /**
-    		The base URL of the npm registry.
-    
-    		Default: `'https://registry.npmjs.org/'`
-    		*/
-    registry?: string;
-    /**
-    		The tag to publish the package under.
-    
-    		Default: `'latest'`
-    		*/
-    tag?: string;
-  };
-}
-/**
-Type for [npm's `package.json` file](https://docs.npmjs.com/creating-a-package-json-file). Also includes types for fields used by other popular projects, like TypeScript and Yarn.
-
-@category File
-*/
-type PackageJson = JsonObject & PackageJson.NodeJsStandard & PackageJson.PackageJsonStandard & PackageJson.NonStandardEntryPoints & PackageJson.TypeScriptConfiguration & PackageJson.YarnConfiguration & PackageJson.JSPMConfiguration;
-//#endregion
 //#region node_modules/openapi3-ts/dist/model/specification-extension.d.ts
 type IExtensionName = `x-${string}`;
 type IExtensionType = any;
@@ -913,192 +314,669 @@ interface SecurityRequirementObject {
   [name: string]: string[];
 }
 //#endregion
-//#region node_modules/vovk/dist/core/JSONLinesResponder.d.ts
-declare abstract class Responder {
-  response: Response;
+//#region node_modules/vovk/dist/types/package.d.ts
+/**
+ * This file is borrowed from type-fest in order to keep dependencies clean.
+ * @see https://github.com/sindresorhus/type-fest
+ */
+type Primitive$1 = null | undefined | string | number | boolean | symbol | bigint;
+type LiteralUnion<LiteralType, BaseType extends Primitive$1> = LiteralType | (BaseType & Record<never, never>);
+type JsonObject = { [Key in string]: JsonValue };
+type JsonArray = JsonValue[] | readonly JsonValue[];
+type JsonPrimitive = string | number | boolean | null;
+type JsonValue = JsonPrimitive | JsonObject | JsonArray;
+declare namespace PackageJson {
+  /**
+        A person who has been involved in creating or maintaining the package.
+        */
+  type Person = string | {
+    name: string;
+    url?: string;
+    email?: string;
+  };
+  type BugsLocation = string | {
+    /**
+                The URL to the package's issue tracker.
+                */
+    url?: string;
+    /**
+                The email address to which issues should be reported.
+                */
+    email?: string;
+  };
+  type DirectoryLocations = {
+    [directoryType: string]: JsonValue | undefined;
+    /**
+                Location for executable scripts. Sugar to generate entries in the `bin` property by walking the folder.
+                */
+    bin?: string;
+    /**
+                Location for Markdown files.
+                */
+    doc?: string;
+    /**
+                Location for example scripts.
+                */
+    example?: string;
+    /**
+                Location for the bulk of the library.
+                */
+    lib?: string;
+    /**
+                Location for man pages. Sugar to generate a `man` array by walking the folder.
+                */
+    man?: string;
+    /**
+                Location for test files.
+                */
+    test?: string;
+  };
+  type Scripts = {
+    /**
+                Run **before** the package is published (Also run on local `npm install` without any arguments).
+                */
+    prepublish?: string;
+    /**
+                Run both **before** the package is packed and published, and on local `npm install` without any arguments. This is run **after** `prepublish`, but **before** `prepublishOnly`.
+                */
+    prepare?: string;
+    /**
+                Run **before** the package is prepared and packed, **only** on `npm publish`.
+                */
+    prepublishOnly?: string;
+    /**
+                Run **before** a tarball is packed (on `npm pack`, `npm publish`, and when installing git dependencies).
+                */
+    prepack?: string;
+    /**
+                Run **after** the tarball has been generated and moved to its final destination.
+                */
+    postpack?: string;
+    /**
+                Run **after** the package is published.
+                */
+    publish?: string;
+    /**
+                Run **after** the package is published.
+                */
+    postpublish?: string;
+    /**
+                Run **before** the package is installed.
+                */
+    preinstall?: string;
+    /**
+                Run **after** the package is installed.
+                */
+    install?: string;
+    /**
+                Run **after** the package is installed and after `install`.
+                */
+    postinstall?: string;
+    /**
+                Run **before** the package is uninstalled and before `uninstall`.
+                */
+    preuninstall?: string;
+    /**
+                Run **before** the package is uninstalled.
+                */
+    uninstall?: string;
+    /**
+                Run **after** the package is uninstalled.
+                */
+    postuninstall?: string;
+    /**
+                Run **before** bump the package version and before `version`.
+                */
+    preversion?: string;
+    /**
+                Run **before** bump the package version.
+                */
+    version?: string;
+    /**
+                Run **after** bump the package version.
+                */
+    postversion?: string;
+    /**
+                Run with the `npm test` command, before `test`.
+                */
+    pretest?: string;
+    /**
+                Run with the `npm test` command.
+                */
+    test?: string;
+    /**
+                Run with the `npm test` command, after `test`.
+                */
+    posttest?: string;
+    /**
+                Run with the `npm stop` command, before `stop`.
+                */
+    prestop?: string;
+    /**
+                Run with the `npm stop` command.
+                */
+    stop?: string;
+    /**
+                Run with the `npm stop` command, after `stop`.
+                */
+    poststop?: string;
+    /**
+                Run with the `npm start` command, before `start`.
+                */
+    prestart?: string;
+    /**
+                Run with the `npm start` command.
+                */
+    start?: string;
+    /**
+                Run with the `npm start` command, after `start`.
+                */
+    poststart?: string;
+    /**
+                Run with the `npm restart` command, before `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
+                */
+    prerestart?: string;
+    /**
+                Run with the `npm restart` command. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
+                */
+    restart?: string;
+    /**
+                Run with the `npm restart` command, after `restart`. Note: `npm restart` will run the `stop` and `start` scripts if no `restart` script is provided.
+                */
+    postrestart?: string;
+  } & Partial<Record<string, string>>;
+  /**
+        Dependencies of the package. The version range is a string which has one or more space-separated descriptors. Dependencies can also be identified with a tarball or Git URL.
+        */
+  type Dependency = Partial<Record<string, string>>;
+  /**
+        Recursive map describing selective dependency version overrides supported by npm.
+        */
+  type DependencyOverrides = { [packageName in string]: string | undefined | DependencyOverrides };
+  /**
+        Specifies requirements for development environment components such as operating systems, runtimes, or package managers. Used to ensure consistent development environments across the team.
+        */
+  type DevEngineDependency = {
+    name: string;
+    version?: string;
+    onFail?: 'ignore' | 'warn' | 'error' | 'download';
+  };
+  /**
+        A mapping of conditions and the paths to which they resolve.
+        */
+  type ExportConditions = {
+    [condition: string]: Exports;
+  };
+  /**
+        Entry points of a module, optionally with conditions and subpath exports.
+        */
+  type Exports = null | string | Array<string | ExportConditions> | ExportConditions;
+  /**
+        Import map entries of a module, optionally with conditions and subpath imports.
+        */
+  type Imports = {
+    [key: `#${string}`]: Exports;
+  };
+  export interface NonStandardEntryPoints {
+    /**
+                An ECMAScript module ID that is the primary entry point to the program.
+                */
+    module?: string;
+    /**
+                A module ID with untranspiled code that is the primary entry point to the program.
+                */
+    esnext?: string | {
+      [moduleName: string]: string | undefined;
+      main?: string;
+      browser?: string;
+    };
+    /**
+                A hint to JavaScript bundlers or component tools when packaging modules for client side use.
+                */
+    browser?: string | Partial<Record<string, string | false>>;
+    /**
+                Denote which files in your project are "pure" and therefore safe for Webpack to prune if unused.
+        
+                [Read more.](https://webpack.js.org/guides/tree-shaking/)
+                */
+    sideEffects?: boolean | string[];
+  }
+  export type TypeScriptConfiguration = {
+    /**
+                Location of the bundled TypeScript declaration file.
+                */
+    types?: string;
+    /**
+                Version selection map of TypeScript.
+                */
+    typesVersions?: Partial<Record<string, Partial<Record<string, string[]>>>>;
+    /**
+                Location of the bundled TypeScript declaration file. Alias of `types`.
+                */
+    typings?: string;
+  };
+  /**
+        An alternative configuration for workspaces.
+        */
+  type WorkspaceConfig = {
+    /**
+                An array of workspace pattern strings which contain the workspace packages.
+                */
+    packages?: WorkspacePattern[];
+    /**
+                Designed to solve the problem of packages which break when their `node_modules` are moved to the root workspace directory - a process known as hoisting. For these packages, both within your workspace, and also some that have been installed via `node_modules`, it is important to have a mechanism for preventing the default Yarn workspace behavior. By adding workspace pattern strings here, Yarn will resume non-workspace behavior for any package which matches the defined patterns.
+        
+                [Supported](https://classic.yarnpkg.com/blog/2018/02/15/nohoist/) by Yarn.
+                [Not supported](https://github.com/npm/rfcs/issues/287) by npm.
+                */
+    nohoist?: WorkspacePattern[];
+  };
+  /**
+        A workspace pattern points to a directory or group of directories which contain packages that should be included in the workspace installation process.
+    
+        The patterns are handled with [minimatch](https://github.com/isaacs/minimatch).
+    
+        @example
+        `docs` → Include the docs directory and install its dependencies.
+        `packages/*` → Include all nested directories within the packages directory, like `packages/cli` and `packages/core`.
+        */
+  type WorkspacePattern = string;
+  export type YarnConfiguration = {
+    /**
+                If your package only allows one version of a given dependency, and you’d like to enforce the same behavior as `yarn install --flat` on the command-line, set this to `true`.
+        
+                Note that if your `package.json` contains `"flat": true` and other packages depend on yours (e.g. you are building a library rather than an app), those other packages will also need `"flat": true` in their `package.json` or be installed with `yarn install --flat` on the command-line.
+                */
+    flat?: boolean;
+    /**
+                Selective version resolutions. Allows the definition of custom package versions inside dependencies without manual edits in the `yarn.lock` file.
+                */
+    resolutions?: Dependency;
+  };
+  export type JSPMConfiguration = {
+    /**
+                JSPM configuration.
+                */
+    jspm?: PackageJson;
+  };
+  /**
+        Type for [npm's `package.json` file](https://docs.npmjs.com/creating-a-package-json-file). Containing standard npm properties.
+        */
+  export interface PackageJsonStandard {
+    /**
+                The name of the package.
+                */
+    name?: string;
+    /**
+                Package version, parseable by [`node-semver`](https://github.com/npm/node-semver).
+                */
+    version?: string;
+    /**
+                Package description, listed in `npm search`.
+                */
+    description?: string;
+    /**
+                Keywords associated with package, listed in `npm search`.
+                */
+    keywords?: string[];
+    /**
+                The URL to the package's homepage.
+                */
+    homepage?: LiteralUnion<'.', string>;
+    /**
+                The URL to the package's issue tracker and/or the email address to which issues should be reported.
+                */
+    bugs?: BugsLocation;
+    /**
+                The license for the package.
+                */
+    license?: string;
+    /**
+                The licenses for the package.
+                */
+    licenses?: Array<{
+      type?: string;
+      url?: string;
+    }>;
+    author?: Person;
+    /**
+                A list of people who contributed to the package.
+                */
+    contributors?: Person[];
+    /**
+                A list of people who maintain the package.
+                */
+    maintainers?: Person[];
+    /**
+                The files included in the package.
+                */
+    files?: string[];
+    /**
+                Resolution algorithm for importing ".js" files from the package's scope.
+        
+                [Read more.](https://nodejs.org/api/esm.html#esm_package_json_type_field)
+                */
+    type?: 'module' | 'commonjs';
+    /**
+                The module ID that is the primary entry point to the program.
+                */
+    main?: string;
+    /**
+                Subpath exports to define entry points of the package.
+        
+                [Read more.](https://nodejs.org/api/packages.html#subpath-exports)
+                */
+    exports?: Exports;
+    /**
+                Subpath imports to define internal package import maps that only apply to import specifiers from within the package itself.
+        
+                [Read more.](https://nodejs.org/api/packages.html#subpath-imports)
+                */
+    imports?: Imports;
+    /**
+                The executable files that should be installed into the `PATH`.
+                */
+    bin?: string | Partial<Record<string, string>>;
+    /**
+                Filenames to put in place for the `man` program to find.
+                */
+    man?: string | string[];
+    /**
+                Indicates the structure of the package.
+                */
+    directories?: DirectoryLocations;
+    /**
+                Location for the code repository.
+                */
+    repository?: string | {
+      type: string;
+      url: string;
+      /**
+                    Relative path to package.json if it is placed in non-root directory (for example if it is part of a monorepo).
+        
+                    [Read more.](https://github.com/npm/rfcs/blob/latest/implemented/0010-monorepo-subdirectory-declaration.md)
+                    */
+      directory?: string;
+    };
+    /**
+                Script commands that are run at various times in the lifecycle of the package. The key is the lifecycle event, and the value is the command to run at that point.
+                */
+    scripts?: Scripts;
+    /**
+                Is used to set configuration parameters used in package scripts that persist across upgrades.
+                */
+    config?: JsonObject;
+    /**
+                The dependencies of the package.
+                */
+    dependencies?: Dependency;
+    /**
+                Additional tooling dependencies that are not required for the package to work. Usually test, build, or documentation tooling.
+                */
+    devDependencies?: Dependency;
+    /**
+                Dependencies that are skipped if they fail to install.
+                */
+    optionalDependencies?: Dependency;
+    /**
+                Dependencies that will usually be required by the package user directly or via another dependency.
+                */
+    peerDependencies?: Dependency;
+    /**
+                Indicate peer dependencies that are optional.
+                */
+    peerDependenciesMeta?: Partial<Record<string, {
+      optional: true;
+    }>>;
+    /**
+                Package names that are bundled when the package is published.
+                */
+    bundledDependencies?: string[];
+    /**
+                Alias of `bundledDependencies`.
+                */
+    bundleDependencies?: string[];
+    /**
+                Overrides is used to support selective version overrides using npm, which lets you define custom package versions or ranges inside your dependencies.
+                */
+    overrides?: DependencyOverrides;
+    /**
+                Engines that this package runs on.
+                */
+    engines?: { [EngineName in 'npm' | 'node' | string]?: string };
+    /**
+                @deprecated
+                */
+    engineStrict?: boolean;
+    /**
+                Operating systems the module runs on.
+                */
+    os?: Array<LiteralUnion<'aix' | 'darwin' | 'freebsd' | 'linux' | 'openbsd' | 'sunos' | 'win32' | '!aix' | '!darwin' | '!freebsd' | '!linux' | '!openbsd' | '!sunos' | '!win32', string>>;
+    /**
+                CPU architectures the module runs on.
+                */
+    cpu?: Array<LiteralUnion<'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | '!arm' | '!arm64' | '!ia32' | '!mips' | '!mipsel' | '!ppc' | '!ppc64' | '!s390' | '!s390x' | '!x32' | '!x64', string>>;
+    /**
+                Define the runtime and package manager for developing the current project.
+                */
+    devEngines?: {
+      os?: DevEngineDependency | DevEngineDependency[];
+      cpu?: DevEngineDependency | DevEngineDependency[];
+      libc?: DevEngineDependency | DevEngineDependency[];
+      runtime?: DevEngineDependency | DevEngineDependency[];
+      packageManager?: DevEngineDependency | DevEngineDependency[];
+    };
+    /**
+                If set to `true`, a warning will be shown if package is installed locally. Useful if the package is primarily a command-line application that should be installed globally.
+        
+                @deprecated
+                */
+    preferGlobal?: boolean;
+    /**
+                If set to `true`, then npm will refuse to publish it.
+                */
+    private?: boolean;
+    /**
+                A set of config values that will be used at publish-time. It's especially handy to set the tag, registry or access, to ensure that a given package is not tagged with 'latest', published to the global public registry or that a scoped module is private by default.
+                */
+    publishConfig?: PublishConfig;
+    /**
+                Describes and notifies consumers of a package's monetary support information.
+        
+                [Read more.](https://github.com/npm/rfcs/blob/main/implemented/0017-add-funding-support.md)
+                */
+    funding?: string | {
+      /**
+                    The type of funding.
+                    */
+      type?: LiteralUnion<'github' | 'opencollective' | 'patreon' | 'individual' | 'foundation' | 'corporation', string>;
+      /**
+                    The URL to the funding page.
+                    */
+      url: string;
+    };
+    /**
+                Used to configure [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces) / [Yarn workspaces](https://classic.yarnpkg.com/docs/workspaces/).
+        
+                Workspaces allow you to manage multiple packages within the same repository in such a way that you only need to run your install command once in order to install all of them in a single pass.
+        
+                Please note that the top-level `private` property of `package.json` **must** be set to `true` in order to use workspaces.
+                */
+    workspaces?: WorkspacePattern[] | WorkspaceConfig;
+  }
+  /**
+        Type for [`package.json` file used by the Node.js runtime](https://nodejs.org/api/packages.html#nodejs-packagejson-field-definitions).
+        */
+  export type NodeJsStandard = {
+    /**
+                Defines which package manager is expected to be used when working on the current project. It can set to any of the [supported package managers](https://nodejs.org/api/corepack.html#supported-package-managers), and will ensure that your teams use the exact same package manager versions without having to install anything else than Node.js.
+        
+                __This field is currently experimental and needs to be opted-in; check the [Corepack](https://nodejs.org/api/corepack.html) page for details about the procedure.__
+        
+                @example
+                ```json
+                {
+                    "packageManager": "<package manager name>@<version>"
+                }
+                ```
+                */
+    packageManager?: string;
+  };
+  type PublishConfig = {
+    /**
+                Additional, less common properties from the [npm docs on `publishConfig`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#publishconfig).
+                */
+    [additionalProperties: string]: JsonValue | undefined;
+    /**
+                When publishing scoped packages, the access level defaults to restricted. If you want your scoped package to be publicly viewable (and installable) set `--access=public`. The only valid values for access are public and restricted. Unscoped packages always have an access level of public.
+                */
+    access?: 'public' | 'restricted';
+    /**
+                The base URL of the npm registry.
+        
+                Default: `'https://registry.npmjs.org/'`
+                */
+    registry?: string;
+    /**
+                The tag to publish the package under.
+        
+                Default: `'latest'`
+                */
+    tag?: string;
+  };
+  export {};
 }
 /**
- * A Responder subclass for streaming JSON Lines (JSONL) data.
- * @see https://vovk.dev/jsonlines
- * @param request The incoming Request object.
- * @param getResponse Optional function to create a custom Response object.
- * @example
- * ```ts
- * import { JSONLinesResponder } from 'vovk';
- *
- * const responder = new JSONLinesResponder<MyItemType>(request, (responder) => {
- *   return new Response(responder.readableStream, { headers: responder.headers });
- * });
- *
- * // Send items
- * responder.send({ ... });
- * // Close the stream when done
- * responder.close();
- * // Or throw an error
- * responder.throw(new Error('Something went wrong'));
- * // get the Response object, headers, etc.
- * const { response, headers } = responder;
- * ```
+Type for [npm's `package.json` file](https://docs.npmjs.com/creating-a-package-json-file). Also includes types for fields used by other popular projects, like TypeScript and Yarn.
+
+@category File
+*/
+type PackageJson = JsonObject & PackageJson.NodeJsStandard & PackageJson.PackageJsonStandard & PackageJson.NonStandardEntryPoints & PackageJson.TypeScriptConfiguration & PackageJson.YarnConfiguration & PackageJson.JSPMConfiguration;
+//#endregion
+//#region node_modules/vovk/dist/types/enums.d.ts
+/**
+ * HTTP methods enum
  */
-declare class JSONLinesResponder<T> extends Responder {
-  private isClosed;
-  private i;
-  private controller?;
-  private readonly encoder;
-  readonly readableStream: ReadableStream | null;
-  readonly headers: Record<string, string>;
-  onBeforeSend: (item: T, i: number) => T | Promise<T>;
-  constructor(request?: Request | null, getResponse?: (responder: JSONLinesResponder<T>) => Response);
-  readonly send: (item: T) => Promise<void>;
-  sendLineOrError: (data: T | StreamAbortMessage) => void;
-  readonly close: () => void;
-  readonly throw: (e: unknown) => void;
+declare enum HttpMethod {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+  HEAD = "HEAD",
+  OPTIONS = "OPTIONS",
+}
+/**
+ * IDs of the JSON Schema files that can be generated by Vovk.ts
+ */
+declare enum VovkSchemaIdEnum {
+  META = "https://vovk.dev/api/schema/v3/meta.json",
+  CONFIG = "https://vovk.dev/api/schema/v3/config.json",
+  SEGMENT = "https://vovk.dev/api/schema/v3/segment.json",
+  SCHEMA = "https://vovk.dev/api/schema/v3/schema.json",
 }
 //#endregion
-//#region node_modules/vovk/dist/client/defaultStreamHandler.d.ts
-declare const defaultStreamHandler: ({
-  response,
-  abortController
-}: {
-  response: Response;
-  abortController: AbortController;
-}) => VovkStreamAsyncIterable<unknown>;
+//#region node_modules/vovk/dist/types/utils.d.ts
+type RequireFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
+type IsEmptyObject<T> = T extends object ? keyof T extends never ? true : T extends Partial<T> ? Partial<T> extends T ? true : false : false : false;
+type Prettify$1<T> = { [K in keyof T]: T[K] } & {};
+type KnownAny = any;
+type StaticClass = Function;
 //#endregion
-//#region node_modules/vovk/dist/client/defaultHandler.d.ts
-declare const defaultHandler: ({
-  response,
-  schema
-}: {
-  response: Response;
-  schema: VovkHandlerSchema;
-}) => Promise<unknown>;
-//#endregion
-//#region node_modules/vovk/dist/client/types.d.ts
-type KnownAny$1 = any;
-type OmitNullable<T> = { [K in keyof T as T[K] extends null | undefined ? never : K]: T[K] };
-type Empty = {};
-type StaticMethodInput<T extends ((req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => KnownAny$1) & {
-  __types?: {
-    isForm: boolean;
-  };
-}> = OmitNullable<(Parameters<T>[0] extends VovkRequest<infer TBody, infer TQuery, infer TParams> ? (TBody extends Record<KnownAny$1, KnownAny$1> ? {
-  body: T['__types'] extends {
-    isForm: true;
-  } ? FormData : TBody;
-} : Empty) & (TQuery extends Record<KnownAny$1, KnownAny$1> ? {
-  query: TQuery;
-} : Empty) & (TParams extends Record<KnownAny$1, KnownAny$1> ? {
-  params: TParams;
-} : Empty) & {
-  meta?: {
-    [key: string]: KnownAny$1;
-  };
-} : Empty) & (Parameters<T>[1] extends Record<KnownAny$1, KnownAny$1> ? {
-  params: Parameters<T>[1];
-} : Empty)>;
-type ToPromise<T> = T extends PromiseLike<unknown> ? T : Promise<T>;
-type VovkStreamAsyncIterable<T> = {
-  status: number;
-  asPromise: () => Promise<T[]>;
-  [Symbol.dispose](): Promise<void> | void;
-  [Symbol.asyncDispose](): Promise<void> | void;
-  [Symbol.asyncIterator](): AsyncIterator<T>;
-  abortWithoutError: () => void;
-  onIterate: (cb: (data: T, i: number) => void) => () => void;
-  abortController: AbortController;
-};
-type IsNextJs = NextResponse extends Response ? true : false;
-type StaticMethodReturn<T extends ControllerStaticMethod> = IsNextJs extends true ? ReturnType<T> extends NextResponse<infer U> | Promise<NextResponse<infer U>> ? U : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T> : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T>;
-type StaticMethodReturnPromise<T extends ControllerStaticMethod> = ToPromise<StaticMethodReturn<T>>;
-type StaticMethodOptions<T extends (req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TFetcherOptions extends Record<string, KnownAny$1>, TStreamIteration, R, F extends VovkFetcherOptions<KnownAny$1>> = Partial<TFetcherOptions & {
-  transform: (staticMethodReturn: Awaited<StaticMethodReturn<T>> extends JSONLinesResponder<infer U> ? VovkStreamAsyncIterable<U> : Awaited<StaticMethodReturn<T>>, resp: Response) => R;
-  fetcher: VovkFetcher<F>;
-}>;
-type ClientMethodReturn<T extends (req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TStreamIteration, R> = R extends object ? Promise<Awaited<R>> : ReturnType<T> extends Promise<JSONLinesResponder<infer U>> | JSONLinesResponder<infer U> | Iterator<infer U> | AsyncIterator<infer U> ? Promise<VovkStreamAsyncIterable<U>> : StaticMethodReturnPromise<T>;
-type ClientMethod<T extends ((req: VovkRequest<KnownAny$1, KnownAny$1, KnownAny$1>, params: KnownAny$1) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>) & {
-  __types?: {
-    body: KnownAny$1;
-    query: KnownAny$1;
-    params: KnownAny$1;
-    output: KnownAny$1;
-    iteration: KnownAny$1;
-    isForm: boolean;
-  };
-}, TFetcherOptions extends Record<string, KnownAny$1>, TStreamIteration extends KnownAny$1 = unknown> = (IsEmptyObject<StaticMethodInput<T>> extends true ? <R, F extends VovkFetcherOptions<KnownAny$1> = VovkFetcherOptions<TFetcherOptions>>(options?: Prettify$1<StaticMethodOptions<T, TFetcherOptions, TStreamIteration, R, F>>) => ClientMethodReturn<T, TStreamIteration, R> : <R, F extends VovkFetcherOptions<KnownAny$1> = VovkFetcherOptions<TFetcherOptions>>(options: Prettify$1<StaticMethodInput<T> & StaticMethodOptions<T, TFetcherOptions, TStreamIteration, R, F>>) => ClientMethodReturn<T, TStreamIteration, R>) & {
-  isRPC: true;
-  schema: VovkHandlerSchema;
-  controllerSchema: VovkControllerSchema;
-  segmentSchema: VovkSegmentSchema;
-  fullSchema: VovkSchema;
-  getURL: IsEmptyObject<Pick<Prettify$1<StaticMethodInput<T>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T>>>>> extends true ? (urlInput?: {
-    apiRoot?: string;
-  }) => string : (urlInput: Pick<Prettify$1<StaticMethodInput<T>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T>>>> & {
-    apiRoot?: string;
-  }) => string;
-  apiRoot: string;
-  queryKey: (key?: unknown[]) => unknown[];
-  __types: T['__types'];
-};
-type OmitNever<T> = { [K in keyof T as T[K] extends never ? never : K]: T[K] };
-type VovkClientWithNever<T, TFetcherOptions extends {
-  [key: string]: KnownAny$1;
-}> = { [K in keyof T]: T[K] extends ((...args: KnownAny$1) => KnownAny$1) ? ClientMethod<T[K], TFetcherOptions> : never };
-type VovkRPCModule<T, TFetcherOptions extends {
-  [key: string]: KnownAny$1;
-}> = OmitNever<VovkClientWithNever<T, TFetcherOptions>> & {
-  withDefaults: (newOptions?: VovkFetcherOptions<TFetcherOptions>) => VovkRPCModule<T, TFetcherOptions>;
-};
+//#region node_modules/vovk/dist/types/json-schema.d.ts
 /**
- * Fetcher function type for client requests.
- * @see https://vovk.dev/imports
+ * Base JSON Schema type used in Vovk.ts for validation and code generation.
+ * @see https://vovk.dev/schema
  */
-type VovkFetcher<TFetcherOptions> = (options: {
+type VovkJSONSchemaBase = {
+  $schema?: 'https://json-schema.org/draft/2020-12/schema' | 'http://json-schema.org/draft-07/schema#';
+  type?: 'object' | 'array' | 'string' | 'number' | 'boolean' | 'null' | 'integer';
+  format?: string;
+  pattern?: string;
+  $ref?: string;
+  items?: VovkJSONSchemaBase;
+  enum?: KnownAny[];
+  minimum?: number;
+  maximum?: number;
+  exclusiveMinimum?: number;
+  exclusiveMaximum?: number;
+  minItems?: number;
+  maxItems?: number;
+  title?: string;
+  description?: string;
+  properties?: {
+    [key: string]: VovkJSONSchemaBase;
+  };
+  required?: string[];
+  examples?: KnownAny[];
+  $defs?: {
+    [key: string]: VovkJSONSchemaBase;
+  };
+  definitions?: {
+    [key: string]: VovkJSONSchemaBase;
+  };
+  additionalProperties?: boolean;
+  anyOf?: VovkJSONSchemaBase[];
+  oneOf?: VovkJSONSchemaBase[];
+  allOf?: VovkJSONSchemaBase[];
+  const?: KnownAny;
+  example?: KnownAny;
+  contentEncoding?: string;
+  contentMediaType?: string;
+  minLength?: number;
+  maxLength?: number;
+  [key: `x-${string}`]: KnownAny;
+};
+//#endregion
+//#region node_modules/vovk/dist/types/request.d.ts
+/**
+ * Represents a cookie object
+ */
+type VovkRequestCookie = {
   name: string;
-  httpMethod: HttpMethod;
-  getURL: (data: {
-    apiRoot: string | undefined;
-    params: unknown;
-    query: unknown;
-  }) => string;
-  validate: (inputOptions: {
-    body?: unknown;
-    query?: unknown;
-    params?: unknown;
-    meta?: unknown;
-  } & TFetcherOptions, meta: {
-    endpoint: string;
-  }) => KnownAny$1 | Promise<KnownAny$1>;
-  defaultStreamHandler: typeof defaultStreamHandler;
-  defaultHandler: typeof defaultHandler;
-  schema: VovkHandlerSchema;
-}, input: {
-  body?: unknown;
-  query?: unknown;
-  params?: unknown;
-  meta?: unknown;
-} & TFetcherOptions) => Promise<[KnownAny$1, Response]>;
-type VovkFetcherOptions<T> = T & {
-  apiRoot?: string;
-  disableClientValidation?: boolean;
-  validateOnClient?: VovkValidateOnClient<T> | Promise<{
-    validateOnClient: VovkValidateOnClient<T>;
-  }>;
-  interpretAs?: string;
-  init?: RequestInit;
+  value: string;
+  [key: string]: string;
 };
 /**
- * Client-side validation function type.
- * @see https://vovk.dev/imports
+ * The Vovk.ts request object, extending Next.js's NextRequest
+ * Accepts three generic parameters:
+ * - TBody: the expected shape of the request body (default: unknown)
+ * - TQuery: the expected shape of the query parameters (default: unknown)
+ * - TParams: the expected shape of the route parameters (default: unknown)
+ * @see https://vovk.dev/procedure
  */
-type VovkValidateOnClient<TFetcherOptions> = (input: {
-  body?: unknown;
-  query?: unknown;
-  params?: unknown;
-  meta?: unknown;
-} & TFetcherOptions, validation: Omit<Exclude<VovkHandlerSchema['validation'], undefined>, 'output' | 'iteration'>, meta: {
-  fullSchema: VovkSchema;
-  endpoint: string;
-}) => KnownAny$1 | Promise<KnownAny$1>;
+interface VovkRequest<TBody = unknown, TQuery = unknown, TParams = unknown> extends Request {
+  json: () => Promise<TBody>;
+  cookies: {
+    set: (name: string, value: string) => void;
+    get: (name: string) => VovkRequestCookie | undefined;
+    getAll: (name?: string) => VovkRequestCookie[];
+    delete: (name: string) => boolean;
+    has: (name: string) => boolean;
+    clear: () => void;
+  };
+  nextUrl: {
+    basePath: string;
+    buildId: string | undefined;
+    pathname: string;
+    search: string;
+    searchParams: {
+      get: <KEY extends keyof TQuery>(key: KEY) => TQuery[KEY] extends readonly (infer ITEM)[] ? ITEM : TQuery[KEY];
+      getAll: <KEY extends keyof TQuery>(key: KEY) => TQuery[KEY] extends unknown[] ? TQuery[KEY] : TQuery[KEY][];
+      entries: () => IterableIterator<[keyof TQuery, TQuery[keyof TQuery]]>;
+      forEach: (callbackfn: (value: TQuery[keyof TQuery], key: keyof TQuery) => void) => void;
+      keys: () => IterableIterator<keyof TQuery>;
+      values: () => IterableIterator<TQuery[keyof TQuery]>;
+    };
+  };
+  vovk: {
+    body: () => Promise<TBody>;
+    query: () => TQuery;
+    meta: <T = Record<KnownAny, KnownAny>>(meta?: T | null) => T;
+    form: <T = TBody>() => Promise<T>;
+    params: () => TParams;
+  };
+}
 //#endregion
 //#region node_modules/@standard-schema/spec/dist/index.d.ts
 /** The Standard Typed interface. This is a base type extended by other specs. */
@@ -1217,7 +1095,7 @@ declare namespace StandardJSONSchemaV1$1 {
   type InferOutput<Schema extends StandardTypedV1$1> = StandardTypedV1$1.InferOutput<Schema>;
 }
 //#endregion
-//#region node_modules/vovk/dist/validation/types.d.ts
+//#region node_modules/vovk/dist/types/validation.d.ts
 interface CombinedProps<Input = unknown, Output = Input> extends StandardSchemaV1$1.Props<Input, Output>, StandardJSONSchemaV1$1.Props<Input, Output> {}
 /**
  * An interface that combines StandardJSONSchema and StandardSchema.
@@ -1231,136 +1109,7 @@ declare namespace CombinedSpec {
   type InferOutput<T extends StandardSchemaV1$1> = StandardSchemaV1$1.InferOutput<T>;
   type SuccessResult<T> = StandardSchemaV1$1.SuccessResult<T>;
 }
-//#endregion
-//#region node_modules/vovk/dist/tools/types.d.ts
-type VovkToolOptions = {
-  hidden?: boolean;
-  name?: string;
-  title?: string;
-  description?: string;
-};
-//#endregion
-//#region node_modules/vovk/dist/types.d.ts
-type KnownAny = any;
-type StaticClass = Function;
-type VovkPackageJson = PackageJson & {
-  rs_name?: string;
-  py_name?: string;
-};
-/**
- * Schema for an individual handler, available as MyRPC.myHandler.schema and MyController.myHandler.schema
- */
-type VovkHandlerSchema = {
-  path: string;
-  httpMethod: string;
-  validation?: {
-    query?: VovkJSONSchemaBase;
-    body?: VovkJSONSchemaBase;
-    params?: VovkJSONSchemaBase;
-    output?: VovkJSONSchemaBase;
-    iteration?: VovkJSONSchemaBase;
-  };
-  operationObject?: VovkOperationObject;
-  misc?: Record<string, unknown>;
-};
-/**
- * Represents the schema of a controller
- */
-type VovkControllerSchema = {
-  rpcModuleName: string;
-  originalControllerName?: string;
-  prefix?: string;
-  forceApiJ?: string;
-  handlers: {
-    [key: string]: VovkHandlerSchema;
-  };
-};
-/**
- * Represents the schema of a segment
- */
-type VovkSegmentSchema = {
-  $schema: typeof VovkSchemaIdEnum.SEGMENT | (string & {});
-  emitSchema: boolean;
-  segmentName: string;
-  segmentType: 'segment' | 'mixin' | (string & {});
-  forceApiRoot?: string;
-  controllers: {
-    [key: string]: VovkControllerSchema;
-  };
-  meta?: {
-    openAPIObject?: Partial<Omit<OpenAPIObject, 'paths'>>;
-    package?: VovkPackageJson;
-  };
-};
-/**
- * Represents the meta schema
- */
-type VovkMetaSchema = {
-  $schema: typeof VovkSchemaIdEnum.META | (string & {});
-  config: RequireFields<Partial<VovkStrictConfig>, '$schema'>;
-  openAPIObject?: Partial<OpenAPIObject>;
-};
-/**
- * Represents the full schema of composed client or a segment in segmented client.
- * @see https://vovk.dev/schema
- */
-type VovkSchema = {
-  $schema: typeof VovkSchemaIdEnum.SCHEMA | (string & {});
-  segments: {
-    [key: string]: VovkSegmentSchema;
-  };
-  meta?: VovkMetaSchema;
-};
-type VovkControllerInternal = {
-  _segmentName: string;
-  _rpcModuleName?: VovkControllerSchema['rpcModuleName'];
-  _prefix?: VovkControllerSchema['prefix'];
-  _handlers: VovkControllerSchema['handlers'];
-  _handlersMetadata?: Record<string, {
-    staticParams?: Record<string, string>[];
-  }>;
-  _onError?: (err: Error, req: VovkRequest) => void | Promise<void>;
-  _onSuccess?: (resp: unknown, req: VovkRequest) => void | Promise<void>;
-  _onBefore?: (req: VovkRequest) => void | Promise<void>;
-};
-type VovkController = StaticClass & VovkControllerInternal & {
-  [key: string]: unknown;
-};
-/**
- * The Vovk.ts request object, extending Next.js's NextRequest
- * Accepts three generic parameters:
- * - TBody: the expected shape of the request body (default: unknown)
- * - TQuery: the expected shape of the query parameters (default: unknown)
- * - TParams: the expected shape of the route parameters (default: unknown)
- * @see https://vovk.dev/procedure
- */
-interface VovkRequest<TBody = unknown, TQuery = unknown, TParams = unknown> extends Request {
-  json: () => Promise<TBody>;
-  nextUrl: {
-    search: string;
-    searchParams: {
-      get: <KEY extends keyof TQuery>(key: KEY) => TQuery[KEY] extends readonly (infer ITEM)[] ? ITEM : TQuery[KEY];
-      getAll: <KEY extends keyof TQuery>(key: KEY) => TQuery[KEY] extends unknown[] ? TQuery[KEY] : TQuery[KEY][];
-      entries: () => IterableIterator<[keyof TQuery, TQuery[keyof TQuery]]>;
-      forEach: (callbackfn: (value: TQuery[keyof TQuery], key: keyof TQuery) => void) => void;
-      keys: () => IterableIterator<keyof TQuery>;
-      values: () => IterableIterator<TQuery[keyof TQuery]>;
-    };
-  };
-  vovk: {
-    body: () => Promise<TBody>;
-    query: () => TQuery;
-    meta: <T = Record<KnownAny, KnownAny>>(meta?: T | null) => T;
-    form: <T = TBody>() => Promise<T>;
-    params: () => TParams;
-  };
-}
-type ControllerStaticMethod<REQ extends VovkRequest = VovkRequest, TParams extends {
-  [key: string]: string;
-} = KnownAny> = ((req: REQ, params: TParams) => unknown) & {
-  _controller?: VovkController;
-};
-type VovkTypedMethod<T extends (...args: KnownAny[]) => unknown, B = unknown, Q = unknown, P = unknown, O = unknown, I = unknown, TIsForm extends boolean = false> = T & {
+type VovkTypedProcedure<T extends (...args: KnownAny[]) => unknown, B = unknown, Q = unknown, P = unknown, O = unknown, I = unknown, TIsForm extends boolean = false> = T & {
   __types: {
     body: B;
     query: Q;
@@ -1371,78 +1120,38 @@ type VovkTypedMethod<T extends (...args: KnownAny[]) => unknown, B = unknown, Q 
   };
   isRPC?: boolean;
 };
-type StreamAbortMessage = {
-  isError: true;
-  reason: KnownAny;
-};
-type VovkValidationType = 'body' | 'query' | 'params' | 'output' | 'iteration' | 'tool-input';
 /**
- * HTTP methods
+ * Client-side validation function type.
+ * @see https://vovk.dev/imports
  */
-declare enum HttpMethod {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  PATCH = "PATCH",
-  DELETE = "DELETE",
-  HEAD = "HEAD",
-  OPTIONS = "OPTIONS",
-}
-/**
- * Base JSON Schema type used in Vovk.ts for validation and code generation.
- * @see https://vovk.dev/schema
- */
-type VovkJSONSchemaBase = {
-  $schema?: 'https://json-schema.org/draft/2020-12/schema' | 'http://json-schema.org/draft-07/schema#';
-  type?: 'object' | 'array' | 'string' | 'number' | 'boolean' | 'null' | 'integer';
-  format?: string;
-  pattern?: string;
-  $ref?: string;
-  items?: VovkJSONSchemaBase;
-  enum?: KnownAny[];
-  minimum?: number;
-  maximum?: number;
-  exclusiveMinimum?: number;
-  exclusiveMaximum?: number;
-  minItems?: number;
-  maxItems?: number;
+type VovkValidateOnClient<TFetcherOptions> = (input: {
+  body?: unknown;
+  query?: unknown;
+  params?: unknown;
+  meta?: unknown;
+} & TFetcherOptions, validation: Omit<Exclude<VovkHandlerSchema['validation'], undefined>, 'output' | 'iteration'>, meta: {
+  fullSchema: VovkSchema;
+  endpoint: string;
+}) => KnownAny | Promise<KnownAny>;
+//#endregion
+//#region node_modules/vovk/dist/types/tools.d.ts
+type VovkToolOptions = {
+  hidden?: boolean;
+  name?: string;
   title?: string;
   description?: string;
-  properties?: {
-    [key: string]: VovkJSONSchemaBase;
-  };
-  required?: string[];
-  examples?: KnownAny[];
-  $defs?: {
-    [key: string]: VovkJSONSchemaBase;
-  };
-  definitions?: {
-    [key: string]: VovkJSONSchemaBase;
-  };
-  additionalProperties?: boolean;
-  anyOf?: VovkJSONSchemaBase[];
-  oneOf?: VovkJSONSchemaBase[];
-  allOf?: VovkJSONSchemaBase[];
-  const?: KnownAny;
-  example?: KnownAny;
-  contentEncoding?: string;
-  contentMediaType?: string;
-  minLength?: number;
-  maxLength?: number;
-  [key: `x-${string}`]: KnownAny;
 };
+//#endregion
+//#region node_modules/vovk/dist/types/operation.d.ts
 type VovkOperationObject = OperationObject & {
   'x-tool'?: VovkToolOptions;
 };
-/**
- * IDs of the JSON Schema files that can be generated by Vovk.ts
- */
-declare enum VovkSchemaIdEnum {
-  META = "https://vovk.dev/api/schema/v3/meta.json",
-  CONFIG = "https://vovk.dev/api/schema/v3/config.json",
-  SEGMENT = "https://vovk.dev/api/schema/v3/segment.json",
-  SCHEMA = "https://vovk.dev/api/schema/v3/schema.json",
-}
+//#endregion
+//#region node_modules/vovk/dist/types/config.d.ts
+type VovkPackageJson = PackageJson & {
+  rs_name?: string;
+  py_name?: string;
+};
 type VovkReadmeConfig = {
   banner?: string;
   installCommand?: string;
@@ -1583,9 +1292,270 @@ type VovkStrictConfig = Required<Omit<VovkUserConfig, 'exposeConfigKeys' | 'libs
     }>;
   };
 };
-type RequireFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
-type IsEmptyObject<T> = T extends object ? keyof T extends never ? true : T extends Partial<T> ? Partial<T> extends T ? true : false : false : false;
-type Prettify$1<T> = { [K in keyof T]: T[K] } & {};
+//#endregion
+//#region node_modules/vovk/dist/core/JSONLinesResponder.d.ts
+declare abstract class Responder {
+  response: Response;
+}
+/**
+ * A Responder subclass for streaming JSON Lines (JSONL) data.
+ * @see https://vovk.dev/jsonlines
+ * @param request The incoming Request object.
+ * @param getResponse Optional function to create a custom Response object.
+ * @example
+ * ```ts
+ * import { JSONLinesResponder } from 'vovk';
+ *
+ * const responder = new JSONLinesResponder<MyItemType>(request, (responder) => {
+ *   return new Response(responder.readableStream, { headers: responder.headers });
+ * });
+ *
+ * // Send items
+ * responder.send({ ... });
+ * // Close the stream when done
+ * responder.close();
+ * // Or throw an error
+ * responder.throw(new Error('Something went wrong'));
+ * // get the Response object, headers, etc.
+ * const { response, headers } = responder;
+ * ```
+ */
+declare class JSONLinesResponder<T> extends Responder {
+  private isClosed;
+  private i;
+  private controller?;
+  private readonly encoder;
+  readonly readableStream: ReadableStream | null;
+  readonly headers: Record<string, string>;
+  onBeforeSend: (item: T, i: number) => T | Promise<T>;
+  constructor(request?: Request | null, getResponse?: (responder: JSONLinesResponder<T>) => Response);
+  readonly send: (item: T) => Promise<void>;
+  sendLineOrError: (data: T | StreamAbortMessage) => void;
+  readonly close: () => void;
+  readonly throw: (e: unknown) => void;
+}
+//#endregion
+//#region node_modules/vovk/dist/types/core.d.ts
+/**
+ * Schema for an individual handler, available as MyRPC.myHandler.schema and MyController.myHandler.schema
+ */
+type VovkHandlerSchema = {
+  path: string;
+  httpMethod: string;
+  validation?: {
+    query?: VovkJSONSchemaBase;
+    body?: VovkJSONSchemaBase;
+    params?: VovkJSONSchemaBase;
+    output?: VovkJSONSchemaBase;
+    iteration?: VovkJSONSchemaBase;
+  };
+  operationObject?: VovkOperationObject;
+  misc?: Record<string, unknown>;
+};
+/**
+ * Represents the schema of a controller
+ */
+type VovkControllerSchema = {
+  rpcModuleName: string;
+  originalControllerName?: string;
+  prefix?: string;
+  forceApiRoot?: string;
+  handlers: {
+    [key: string]: VovkHandlerSchema;
+  };
+};
+/**
+ * Represents the schema of a segment
+ */
+type VovkSegmentSchema = {
+  $schema: typeof VovkSchemaIdEnum.SEGMENT | (string & {});
+  emitSchema: boolean;
+  segmentName: string;
+  segmentType: 'segment' | 'mixin' | (string & {});
+  forceApiRoot?: string;
+  controllers: {
+    [key: string]: VovkControllerSchema;
+  };
+  meta?: {
+    openAPIObject?: Partial<Omit<OpenAPIObject, 'paths'>>;
+    package?: VovkPackageJson;
+  };
+};
+/**
+ * Represents the meta schema
+ */
+type VovkMetaSchema = {
+  $schema: typeof VovkSchemaIdEnum.META | (string & {});
+  config: RequireFields<Partial<VovkStrictConfig>, '$schema'>;
+  openAPIObject?: Partial<OpenAPIObject>;
+};
+/**
+ * Represents the full schema of composed client or a segment in segmented client.
+ * @see https://vovk.dev/schema
+ */
+type VovkSchema = {
+  $schema: typeof VovkSchemaIdEnum.SCHEMA | (string & {});
+  segments: {
+    [key: string]: VovkSegmentSchema;
+  };
+  meta?: VovkMetaSchema;
+};
+type StreamAbortMessage = {
+  isError: true;
+  reason: KnownAny;
+};
+type VovkControllerInternal = {
+  _segmentName: string;
+  _rpcModuleName?: VovkControllerSchema['rpcModuleName'];
+  _prefix?: VovkControllerSchema['prefix'];
+  _handlers: VovkControllerSchema['handlers'];
+  _handlersMetadata?: Record<string, {
+    staticParams?: Record<string, string>[];
+  }>;
+  _onError?: (err: Error, req: VovkRequest) => void | Promise<void>;
+  _onSuccess?: (resp: unknown, req: VovkRequest) => void | Promise<void>;
+  _onBefore?: (req: VovkRequest) => void | Promise<void>;
+};
+type VovkController = StaticClass & VovkControllerInternal & {
+  [key: string]: unknown;
+};
+type ControllerStaticMethod<REQ extends VovkRequest = VovkRequest, TParams extends {
+  [key: string]: string;
+} = KnownAny> = ((req: REQ, params: TParams) => unknown) & {
+  _controller?: VovkController;
+};
+type VovkValidationType = 'body' | 'query' | 'params' | 'output' | 'iteration' | 'tool-input';
+//#endregion
+//#region node_modules/vovk/dist/client/defaultStreamHandler.d.ts
+declare const defaultStreamHandler: ({
+  response,
+  abortController
+}: {
+  response: Response;
+  abortController: AbortController;
+}) => VovkStreamAsyncIterable<unknown>;
+//#endregion
+//#region node_modules/vovk/dist/client/defaultHandler.d.ts
+declare const defaultHandler: ({
+  response,
+  schema
+}: {
+  response: Response;
+  schema: VovkHandlerSchema;
+}) => Promise<unknown>;
+//#endregion
+//#region node_modules/vovk/dist/types/client.d.ts
+type OmitNullable<T> = { [K in keyof T as T[K] extends null | undefined ? never : K]: T[K] };
+type Empty = {};
+type StaticMethodInput<T extends ((req: VovkRequest<KnownAny, KnownAny, KnownAny>, params: KnownAny) => KnownAny) & {
+  __types?: {
+    isForm: boolean;
+  };
+}> = OmitNullable<(Parameters<T>[0] extends VovkRequest<infer TBody, infer TQuery, infer TParams> ? (TBody extends Record<KnownAny, KnownAny> ? {
+  body: T['__types'] extends {
+    isForm: true;
+  } ? FormData : TBody;
+} : Empty) & (TQuery extends Record<KnownAny, KnownAny> ? {
+  query: TQuery;
+} : Empty) & (TParams extends Record<KnownAny, KnownAny> ? {
+  params: TParams;
+} : Empty) & {
+  meta?: {
+    [key: string]: KnownAny;
+  };
+} : Empty) & (Parameters<T>[1] extends Record<KnownAny, KnownAny> ? {
+  params: Parameters<T>[1];
+} : Empty)>;
+type ToPromise<T> = T extends PromiseLike<unknown> ? T : Promise<T>;
+type VovkStreamAsyncIterable<T> = {
+  status: number;
+  asPromise: () => Promise<T[]>;
+  [Symbol.dispose](): Promise<void> | void;
+  [Symbol.asyncDispose](): Promise<void> | void;
+  [Symbol.asyncIterator](): AsyncIterator<T>;
+  abortWithoutError: () => void;
+  onIterate: (cb: (data: T, i: number) => void) => () => void;
+  abortController: AbortController;
+};
+type IsNextJs = NextResponse extends Response ? true : false;
+type StaticMethodReturn<T extends ControllerStaticMethod> = IsNextJs extends true ? ReturnType<T> extends NextResponse<infer U> | Promise<NextResponse<infer U>> ? U : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T> : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T>;
+type StaticMethodReturnPromise<T extends ControllerStaticMethod> = ToPromise<StaticMethodReturn<T>>;
+type StaticMethodOptions<T extends (req: VovkRequest<KnownAny, KnownAny, KnownAny>, params: KnownAny) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TFetcherOptions extends Record<string, KnownAny>, TStreamIteration, R, F extends VovkFetcherOptions<KnownAny>> = Partial<TFetcherOptions & {
+  transform: (staticMethodReturn: Awaited<StaticMethodReturn<T>> extends JSONLinesResponder<infer U> ? VovkStreamAsyncIterable<U> : Awaited<StaticMethodReturn<T>>, resp: Response) => R;
+  fetcher: VovkFetcher<F>;
+}>;
+type ClientMethodReturn<T extends (req: VovkRequest<KnownAny, KnownAny, KnownAny>, params: KnownAny) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TStreamIteration, R> = R extends object ? Promise<Awaited<R>> : ReturnType<T> extends Promise<JSONLinesResponder<infer U>> | JSONLinesResponder<infer U> | Iterator<infer U> | AsyncIterator<infer U> ? Promise<VovkStreamAsyncIterable<U>> : StaticMethodReturnPromise<T>;
+type ClientMethod<T extends ((req: VovkRequest<KnownAny, KnownAny, KnownAny>, params: KnownAny) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>) & {
+  __types?: {
+    body: KnownAny;
+    query: KnownAny;
+    params: KnownAny;
+    output: KnownAny;
+    iteration: KnownAny;
+    isForm: boolean;
+  };
+}, TFetcherOptions extends Record<string, KnownAny>, TStreamIteration extends KnownAny = unknown> = (IsEmptyObject<StaticMethodInput<T>> extends true ? <R, F extends VovkFetcherOptions<KnownAny> = VovkFetcherOptions<TFetcherOptions>>(options?: Prettify$1<StaticMethodOptions<T, TFetcherOptions, TStreamIteration, R, F>>) => ClientMethodReturn<T, TStreamIteration, R> : <R, F extends VovkFetcherOptions<KnownAny> = VovkFetcherOptions<TFetcherOptions>>(options: Prettify$1<StaticMethodInput<T> & StaticMethodOptions<T, TFetcherOptions, TStreamIteration, R, F>>) => ClientMethodReturn<T, TStreamIteration, R>) & {
+  isRPC: true;
+  schema: VovkHandlerSchema;
+  controllerSchema: VovkControllerSchema;
+  segmentSchema: VovkSegmentSchema;
+  fullSchema: VovkSchema;
+  getURL: IsEmptyObject<Pick<Prettify$1<StaticMethodInput<T>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T>>>>> extends true ? (urlInput?: {
+    apiRoot?: string;
+  }) => string : (urlInput: Pick<Prettify$1<StaticMethodInput<T>>, Extract<'params' | 'query', keyof Prettify$1<StaticMethodInput<T>>>> & {
+    apiRoot?: string;
+  }) => string;
+  apiRoot: string;
+  queryKey: (key?: unknown[]) => unknown[];
+  __types: T['__types'];
+};
+type OmitNever<T> = { [K in keyof T as T[K] extends never ? never : K]: T[K] };
+type VovkClientWithNever<T, TFetcherOptions extends {
+  [key: string]: KnownAny;
+}> = { [K in keyof T]: T[K] extends ((...args: KnownAny) => KnownAny) ? ClientMethod<T[K], TFetcherOptions> : never };
+type VovkRPCModule<T, TFetcherOptions extends {
+  [key: string]: KnownAny;
+}> = OmitNever<VovkClientWithNever<T, TFetcherOptions>> & {
+  withDefaults: (newOptions?: VovkFetcherOptions<TFetcherOptions>) => VovkRPCModule<T, TFetcherOptions>;
+};
+/**
+ * Fetcher function type for client requests.
+ * @see https://vovk.dev/imports
+ */
+type VovkFetcher<TFetcherOptions> = (options: {
+  name: string;
+  httpMethod: HttpMethod;
+  getURL: (data: {
+    apiRoot: string | undefined;
+    params: unknown;
+    query: unknown;
+  }) => string;
+  validate: (inputOptions: {
+    body?: unknown;
+    query?: unknown;
+    params?: unknown;
+    meta?: unknown;
+  } & TFetcherOptions, meta: {
+    endpoint: string;
+  }) => KnownAny | Promise<KnownAny>;
+  defaultStreamHandler: typeof defaultStreamHandler;
+  defaultHandler: typeof defaultHandler;
+  schema: VovkHandlerSchema;
+}, input: {
+  body?: unknown;
+  query?: unknown;
+  params?: unknown;
+  meta?: unknown;
+} & TFetcherOptions) => Promise<[KnownAny, Response]>;
+type VovkFetcherOptions<T> = T & {
+  apiRoot?: string;
+  disableClientValidation?: boolean;
+  validateOnClient?: VovkValidateOnClient<T> | Promise<{
+    validateOnClient: VovkValidateOnClient<T>;
+  }>;
+  interpretAs?: string;
+  init?: RequestInit;
+};
 //#endregion
 //#region node_modules/zod/v4/core/json-schema.d.cts
 type _JSONSchema = boolean | JSONSchema;
@@ -3845,7 +3815,7 @@ declare class UserController {
         }>;
       }, $strip> | undefined;
       iteration: CombinedSpec<unknown, unknown> | undefined;
-      handle: VovkTypedMethod<(req: VovkRequest<{
+      handle: VovkTypedProcedure<(req: VovkRequest<{
         email: string;
         profile: {
           name: string;
@@ -3878,9 +3848,9 @@ declare class UserController {
         id: string;
         notify: "email" | "push" | "none";
       }, unknown, false>;
-      toJSONSchema: ((model: any, meta: {
+      toJSONSchema: ((model: KnownAny, meta: {
         validationType: VovkValidationType;
-      }) => any) | undefined;
+      }) => KnownAny) | undefined;
       validate: (data: unknown, model: NonNullable<ZodObject<{
         email: ZodEmail;
         profile: ZodObject<{
@@ -4004,14 +3974,14 @@ declare class StreamController {
       iteration: ZodObject<{
         message: ZodString;
       }, $strip> | undefined;
-      handle: VovkTypedMethod<() => AsyncGenerator<{
+      handle: VovkTypedProcedure<() => AsyncGenerator<{
         message: string;
       }, void, unknown>, unknown, unknown, unknown, unknown, {
         message: string;
       }, false>;
-      toJSONSchema: ((model: any, meta: {
+      toJSONSchema: ((model: KnownAny, meta: {
         validationType: VovkValidationType;
-      }) => any) | undefined;
+      }) => KnownAny) | undefined;
       validate: (data: unknown, model: NonNullable<CombinedSpec<unknown, unknown> | ZodObject<{
         message: ZodString;
       }, $strip>>, meta: {

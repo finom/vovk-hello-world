@@ -16,9 +16,9 @@ var __exportAll = (all, symbols) => {
 };
 
 //#endregion
-//#region node_modules/vovk/dist/types.js
+//#region node_modules/vovk/dist/types/enums.js
 var HttpMethod, HttpStatus, VovkSchemaIdEnum;
-var init_types = __esmMin(() => {
+var init_enums = __esmMin(() => {
 	;
 	(function(HttpMethod) {
 		HttpMethod["GET"] = "GET";
@@ -221,7 +221,7 @@ function createFetcher({ prepareRequestInit, transformResponse, onSuccess, onErr
 }
 var DEFAULT_ERROR_MESSAGE$2, fetcher;
 var init_fetcher = __esmMin(() => {
-	init_types();
+	init_enums();
 	init_HttpException();
 	DEFAULT_ERROR_MESSAGE$2 = "Unknown error at default fetcher";
 	fetcher = createFetcher();
@@ -267,9 +267,9 @@ if (typeof Symbol.asyncDispose !== "symbol") Object.defineProperty(Symbol, "asyn
 
 //#endregion
 //#region node_modules/vovk/dist/client/defaultStreamHandler.js
-init_types();
+init_enums();
 init_HttpException();
-const DEFAULT_ERROR_MESSAGE = "An unknown error at defaultStreamHandler";
+const DEFAULT_ERROR_MESSAGE = "An unknown error at the default stream handler";
 const defaultStreamHandler = ({ response, abortController }) => {
 	if (!response.ok) {
 		let cachedError = null;
