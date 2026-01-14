@@ -73,7 +73,7 @@ const config = {
       await build({
         entry: { index: entry },
         dts: {
-          resolve: true,
+          resolve: [/^(?!next($|\/))/],
         },
         format: "esm",
         hash: false,
