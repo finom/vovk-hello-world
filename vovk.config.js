@@ -55,12 +55,17 @@ const config = {
     outputConfig: {
       origin: PROD_ORIGIN,
       imports: { validateOnClient: null },
-      /* package: {
-        dependencies: {
-          lodash: "^4.17.21",
+      package: {
+        type: 'module',
+        main: './index.js',
+        types: './index.d.ts',
+        exports: {
+          '.': {
+            default: './index.js',
+            types: './index.d.ts',
+          },
         },
       },
-      reExports: { pick: "lodash" }, */
     },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
@@ -85,13 +90,7 @@ const config = {
             mainFields: ["module", "main"],
           },
         },
-        noExternal: [
-          "vovk/**",
-          /* "vovk-ajv",
-          "ajv/**",
-          "ajv-errors",
-          "ajv-formats/**", */
-        ],
+        noExternal: ["vovk/**"],
       });
     },
   },
