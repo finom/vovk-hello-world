@@ -882,6 +882,7 @@ type IsEmptyObject<T> = T extends object ? keyof T extends never ? true : T exte
 type Prettify$1<T> = { [K in keyof T]: T[K] } & {};
 type KnownAny = any;
 type StaticClass = Function;
+type IsAny$1<T> = 0 extends 1 & T ? true : false;
 //#endregion
 //#region node_modules/vovk/dist/types/json-schema.d.ts
 /**
@@ -1477,7 +1478,7 @@ type VovkStreamAsyncIterable<T> = {
   onIterate: (cb: (data: T, i: number) => void) => () => void;
   abortController: AbortController;
 };
-type IsNextJs = NextResponse extends Response ? true : false;
+type IsNextJs = NextResponse extends Response ? (IsAny$1<NextResponse> extends true ? false : true) : false;
 type StaticMethodReturn<T extends ControllerStaticMethod> = IsNextJs extends true ? ReturnType<T> extends NextResponse<infer U> | Promise<NextResponse<infer U>> ? U : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T> : ReturnType<T> extends Response | Promise<Response> ? Awaited<ReturnType<T>> : ReturnType<T>;
 type StaticMethodReturnPromise<T extends ControllerStaticMethod> = ToPromise<StaticMethodReturn<T>>;
 type StaticMethodOptions<T extends (req: VovkRequest<KnownAny, KnownAny, KnownAny>, params: KnownAny) => void | object | JSONLinesResponder<TStreamIteration> | Promise<JSONLinesResponder<TStreamIteration>>, TFetcherOptions extends Record<string, KnownAny>, TStreamIteration, R, F extends VovkFetcherOptions<KnownAny>> = Partial<TFetcherOptions & {
