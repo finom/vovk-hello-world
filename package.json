@@ -46,7 +46,7 @@
     "next": "^16.1.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "vovk": "^3.0.0-beta.130",
+    "vovk": "^3.0.0-beta.131",
     "vovk-ajv": "^0.0.0-beta.23",
     "vovk-client": "^0.0.4-beta.24",
     "zod": "^4.3.5"
@@ -64,7 +64,7 @@
     "tsdown": "^0.20.0-beta.3",
     "typescript": "^5",
     "vovk-cli": "^0.0.1-beta.86",
-    "vovk-hello-world": "^0.0.85",
+    "vovk-hello-world": "^0.0.86",
     "vovk-python": "^0.0.1-beta.13",
     "vovk-rust": "^0.0.1-beta.15"
   }
