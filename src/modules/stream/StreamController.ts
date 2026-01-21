@@ -10,6 +10,7 @@ export default class StreamController {
   })
   @get("tokens")
   static streamTokens = procedure({
+    validateEachIteration: true,
     iteration: z
       .object({
         message: z.string().meta({ description: "Message from the token" }),
