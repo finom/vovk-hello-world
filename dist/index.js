@@ -116,6 +116,13 @@ var init_HttpException = __esmMin(() => {
 });
 
 //#endregion
+//#region node_modules/vovk/dist/utils/fileNameToDisposition.js
+function fileNameToDisposition(filename) {
+	return `attachment; filename="${filename.replace(/[^\x20-\x7E]|"/g, "_")}"; filename*=UTF-8''${encodeURIComponent(filename)}`;
+}
+var init_fileNameToDisposition = __esmMin(() => {});
+
+//#endregion
 //#region node_modules/vovk/dist/client/fetcher.js
 var fetcher_exports = /* @__PURE__ */ __exportAll({
 	DEFAULT_ERROR_MESSAGE: () => DEFAULT_ERROR_MESSAGE$2,
@@ -161,17 +168,23 @@ function createFetcher({ prepareRequestInit, transformResponse, onSuccess, onErr
 					endpoint
 				});
 			}
+			const resolvedContentType = body instanceof FormData ? void 0 : body instanceof URLSearchParams ? "application/x-www-form-urlencoded" : typeof body === "string" ? "text/plain" : body instanceof Blob ? body.type || "application/octet-stream" : body instanceof ArrayBuffer || body instanceof Uint8Array ? "application/octet-stream" : "application/json";
+			const resolvedFileName = body instanceof File ? body.name : void 0;
 			requestInit = {
 				method: httpMethod,
 				...init,
 				headers: {
 					accept: "application/jsonl, application/json",
-					...body instanceof FormData ? {} : { "content-type": "application/json" },
+					...resolvedContentType ? { "content-type": resolvedContentType } : {},
+					...resolvedFileName ? { "content-disposition": fileNameToDisposition(resolvedFileName) } : {},
 					...meta ? { "x-meta": JSON.stringify(meta) } : {},
 					...init?.headers
 				}
 			};
-			if (body instanceof FormData) requestInit.body = body;
+			if (body instanceof FormData || body instanceof URLSearchParams) requestInit.body = body;
+			else if (body instanceof Blob) requestInit.body = body;
+			else if (body instanceof ArrayBuffer || body instanceof Uint8Array) requestInit.body = body;
+			else if (typeof body === "string") requestInit.body = body;
 			else if (body) requestInit.body = JSON.stringify(body);
 			const abortController = new AbortController();
 			requestInit.signal = abortController.signal;
@@ -223,6 +236,7 @@ var DEFAULT_ERROR_MESSAGE$2, fetcher;
 var init_fetcher = __esmMin(() => {
 	init_enums();
 	init_HttpException();
+	init_fileNameToDisposition();
 	DEFAULT_ERROR_MESSAGE$2 = "Unknown error at default fetcher";
 	fetcher = createFetcher();
 });
@@ -270,40 +284,13 @@ if (typeof Symbol.asyncDispose !== "symbol") Object.defineProperty(Symbol, "asyn
 init_enums();
 init_HttpException();
 const DEFAULT_ERROR_MESSAGE = "An unknown error at the default stream handler";
-const defaultStreamHandler = ({ response, abortController }) => {
-	if (!response.ok) {
-		let cachedError = null;
-		let errorParsed = false;
-		response.json().then((res) => {
-			cachedError = new HttpException(response.status, res.message ?? DEFAULT_ERROR_MESSAGE);
-		}).catch((e) => {
-			cachedError = new HttpException(response.status, e.message ?? DEFAULT_ERROR_MESSAGE, e);
-		}).finally(() => {
-			errorParsed = true;
-		});
-		const getError = async () => {
-			while (!errorParsed) await new Promise((resolve) => setTimeout(resolve, 0));
-			return cachedError ?? new HttpException(response.status, DEFAULT_ERROR_MESSAGE);
-		};
-		const errorIterator = () => ({ async next() {
-			throw await getError();
-		} });
-		const noop = () => {};
-		return {
-			status: response.status,
-			asPromise: async () => {
-				throw await getError();
-			},
-			abortController,
-			[Symbol.asyncIterator]: errorIterator,
-			[Symbol.dispose]: noop,
-			[Symbol.asyncDispose]: async () => {},
-			abortSilently: noop,
-			onIterate: () => noop
-		};
-	}
-	if (!response.body) throw new HttpException(HttpStatus.NULL, "Stream body is falsy. Check your controller code.");
-	const reader = response.body.getReader();
+/**
+* Converts a ReadableStream of JSON Lines into a VovkStreamAsyncIterable.
+* This is the core streaming logic extracted for reuse outside of HTTP contexts.
+* @see https://vovk.dev/jsonlines
+*/
+const readableStreamToAsyncIterable = ({ readableStream, abortController }) => {
+	const reader = readableStream.getReader();
 	const subscribers = /* @__PURE__ */ new Set();
 	let isAbortedWithoutError = false;
 	let streamExhausted = false;
@@ -325,7 +312,7 @@ const defaultStreamHandler = ({ response, abortController }) => {
 					done: false
 				});
 				handled = true;
-			} else if (streamExhausted || abortController.signal.aborted && isAbortedWithoutError) {
+			} else if (streamExhausted || abortController?.signal.aborted && isAbortedWithoutError) {
 				waiter.resolve({
 					value: void 0,
 					done: true
@@ -344,15 +331,39 @@ const defaultStreamHandler = ({ response, abortController }) => {
 		isAbortedWithoutError = true;
 		streamExhausted = true;
 		notifyWaiters();
-		abortController.abort(reason);
+		abortController?.abort(reason);
 		reader.cancel().catch(() => {});
 	};
 	const runPrimaryReader = async () => {
 		let buffer = "";
 		let iterationIndex = 0;
+		const processLine = (line) => {
+			let data;
+			try {
+				data = JSON.parse(line);
+			} catch {
+				return false;
+			}
+			if (data) {
+				subscribers.forEach((cb) => {
+					if (!abortController?.signal.aborted) cb(data, iterationIndex);
+				});
+				iterationIndex++;
+				if (typeof data === "object" && data !== null && "isError" in data && "reason" in data) {
+					const upcomingError = data.reason;
+					abortController?.abort(upcomingError);
+					setStreamError(typeof upcomingError === "string" ? new Error(upcomingError) : upcomingError);
+					return true;
+				} else if (!abortController?.signal.aborted) {
+					cachedItems.push(data);
+					notifyWaiters();
+				}
+			}
+			return false;
+		};
 		try {
 			while (true) {
-				if (abortController.signal.aborted && isAbortedWithoutError) break;
+				if (abortController?.signal.aborted && isAbortedWithoutError) break;
 				let value;
 				let done;
 				try {
@@ -365,36 +376,20 @@ const defaultStreamHandler = ({ response, abortController }) => {
 					setStreamError(err);
 					return;
 				}
-				const chunk = typeof value === "number" ? String.fromCharCode(value) : new TextDecoder().decode(value);
+				const chunk = typeof value === "string" ? value : typeof value === "number" ? String.fromCharCode(value) : new TextDecoder().decode(value);
 				buffer += chunk;
-				const lines = buffer.split("\n").filter(Boolean);
-				for (const line of lines) {
-					if (abortController.signal.aborted && isAbortedWithoutError) break;
-					let data;
-					try {
-						data = JSON.parse(line);
-						buffer = buffer.slice(line.length + 1);
-					} catch {
-						break;
-					}
-					if (data) {
-						subscribers.forEach((cb) => {
-							if (!abortController.signal.aborted) cb(data, iterationIndex);
-						});
-						iterationIndex++;
-						if ("isError" in data && "reason" in data) {
-							const upcomingError = data.reason;
-							abortController.abort(upcomingError);
-							setStreamError(typeof upcomingError === "string" ? new Error(upcomingError) : upcomingError);
-							return;
-						} else if (!abortController.signal.aborted) {
-							cachedItems.push(data);
-							notifyWaiters();
-						}
-					}
+				let newlineIdx;
+				while ((newlineIdx = buffer.indexOf("\n")) !== -1) {
+					if (abortController?.signal.aborted && isAbortedWithoutError) break;
+					const line = buffer.slice(0, newlineIdx);
+					buffer = buffer.slice(newlineIdx + 1);
+					if (!line) continue;
+					if (processLine(line)) return;
 				}
-				if (abortController.signal.aborted && isAbortedWithoutError) break;
+				if (abortController?.signal.aborted && isAbortedWithoutError) break;
 			}
+			const remaining = buffer.trim();
+			if (remaining) processLine(remaining);
 		} finally {
 			streamExhausted = true;
 			notifyWaiters();
@@ -408,7 +403,7 @@ const defaultStreamHandler = ({ response, abortController }) => {
 		let index = 0;
 		while (true) {
 			if (streamError && index >= errorIndex) throw streamError;
-			if (abortController.signal.aborted && isAbortedWithoutError) return;
+			if (abortController?.signal.aborted && isAbortedWithoutError) return;
 			if (index < cachedItems.length) {
 				yield cachedItems[index++];
 				continue;
@@ -419,7 +414,7 @@ const defaultStreamHandler = ({ response, abortController }) => {
 					reject(streamError);
 					return;
 				}
-				if (abortController.signal.aborted && isAbortedWithoutError) {
+				if (abortController?.signal.aborted && isAbortedWithoutError) {
 					resolve({
 						value: void 0,
 						done: true
@@ -460,22 +455,62 @@ const defaultStreamHandler = ({ response, abortController }) => {
 		isAbortedWithoutError = true;
 		streamExhausted = true;
 		notifyWaiters();
-		abortController.abort(reason);
+		abortController?.abort(reason);
 		reader.cancel().catch(() => {});
 	};
 	return {
-		status: response.status,
 		asPromise,
-		abortController,
 		[Symbol.asyncIterator]: asyncIterator,
 		[Symbol.dispose]: () => disposeStream("Stream disposed"),
 		[Symbol.asyncDispose]: async () => disposeStream("Stream async disposed"),
 		abortSilently,
 		onIterate: (cb) => {
-			if (abortController.signal.aborted) return () => {};
+			if (abortController?.signal.aborted) return () => {};
 			subscribers.add(cb);
 			return () => subscribers.delete(cb);
 		}
+	};
+};
+const defaultStreamHandler = ({ response, abortController }) => {
+	if (!response.ok) {
+		let cachedError = null;
+		let errorParsed = false;
+		response.json().then((res) => {
+			cachedError = new HttpException(response.status, res.message ?? DEFAULT_ERROR_MESSAGE);
+		}).catch((e) => {
+			cachedError = new HttpException(response.status, e.message ?? DEFAULT_ERROR_MESSAGE, e);
+		}).finally(() => {
+			errorParsed = true;
+		});
+		const getError = async () => {
+			while (!errorParsed) await new Promise((resolve) => setTimeout(resolve, 0));
+			return cachedError ?? new HttpException(response.status, DEFAULT_ERROR_MESSAGE);
+		};
+		const errorIterator = () => ({ async next() {
+			throw await getError();
+		} });
+		const noop = () => {};
+		return {
+			status: response.status,
+			asPromise: async () => {
+				throw await getError();
+			},
+			abortController,
+			[Symbol.asyncIterator]: errorIterator,
+			[Symbol.dispose]: noop,
+			[Symbol.asyncDispose]: async () => {},
+			abortSilently: noop,
+			onIterate: () => noop
+		};
+	}
+	if (!response.body) throw new HttpException(HttpStatus.NULL, "Stream body is falsy");
+	return {
+		status: response.status,
+		abortController,
+		...readableStreamToAsyncIterable({
+			readableStream: response.body,
+			abortController
+		})
 	};
 };
 
@@ -716,12 +751,17 @@ const createRPC = (givenSchema, segmentName$2, rpcModuleName, givenFetcher, opti
 		];
 		client[staticMethodName] = handler;
 	}
-	client.withDefaults = (newOptions) => {
-		return createRPC(schema$1, segmentName$2, rpcModuleName, givenFetcher, {
-			...options,
-			...newOptions
-		});
-	};
+	Object.defineProperty(client, "withDefaults", {
+		value: (newOptions) => {
+			return createRPC(schema$1, segmentName$2, rpcModuleName, givenFetcher, {
+				...options,
+				...newOptions
+			});
+		},
+		enumerable: false,
+		writable: false,
+		configurable: false
+	});
 	return client;
 };
 
