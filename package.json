@@ -38,34 +38,34 @@
     "api"
   ],
   "dependencies": {
-    "@scalar/api-reference-react": "^0.8.23",
+    "@scalar/api-reference-react": "^0.9.3",
     "@standard-schema/spec": "^1.1.0",
-    "@tanstack/react-query": "^5.90.17",
-    "ajv": "^8.17.1",
+    "@tanstack/react-query": "^5.90.21",
+    "ajv": "^8.18.0",
     "ajv-errors": "^3.0.0",
-    "next": "^16.1.2",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "vovk": "^3.0.0-beta.131",
-    "vovk-ajv": "^0.0.0-beta.23",
-    "vovk-client": "^0.0.4-beta.24",
-    "zod": "^4.3.5"
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "vovk": "^3.0.0-beta.143",
+    "vovk-ajv": "^0.0.0-beta.24",
+    "vovk-client": "^0.0.4-beta.25",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.2",
+    "eslint": "^10",
+    "eslint-config-next": "16.1.6",
     "postcss": "^8",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.2.1",
     "tsdown": "^0.20.0-beta.3",
     "typescript": "^5",
-    "vovk-cli": "^0.0.1-beta.86",
-    "vovk-hello-world": "^0.0.86",
-    "vovk-python": "^0.0.1-beta.13",
-    "vovk-rust": "^0.0.1-beta.15"
+    "vovk-cli": "^0.0.1-beta.87",
+    "vovk-hello-world": "^0.0.87",
+    "vovk-python": "^0.0.1-beta.14",
+    "vovk-rust": "^0.0.1-beta.16"
   }
 }

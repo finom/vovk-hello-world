@@ -18,8 +18,7 @@ export default class StreamController {
       .meta({
         description: "Streamed token object",
       }),
-    async *handle() {
-      yield* StreamService.streamTokens();
-    },
+  }).handle(async function* () {
+    yield* StreamService.streamTokens();
   });
 }

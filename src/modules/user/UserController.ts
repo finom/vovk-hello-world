@@ -62,11 +62,10 @@ export default class UserController {
         }),
       })
       .meta({ description: "Response object" }),
-    async handle(req, { id }) {
-      const body = await req.json();
-      const notify = req.nextUrl.searchParams.get("notify");
+  }).handle(async (req, { id }) => {
+    const body = await req.json();
+    const notify = req.nextUrl.searchParams.get("notify");
 
-      return UserService.updateUser(id, body, notify);
-    },
+    return UserService.updateUser(id, body, notify);
   });
 }
