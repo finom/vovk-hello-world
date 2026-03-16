@@ -13,122 +13,122 @@
           "validation": {
             "body": {
               "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "description": "User data object",
               "type": "object",
               "properties": {
                 "email": {
+                  "type": "string",
+                  "format": "email",
+                  "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
                   "description": "User email",
                   "examples": [
                     "john@example.com",
                     "jane@example.com"
-                  ],
-                  "type": "string",
-                  "format": "email",
-                  "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                  ]
                 },
                 "profile": {
-                  "description": "User profile object",
                   "type": "object",
                   "properties": {
                     "name": {
+                      "type": "string",
+                      "minLength": 2,
                       "description": "User full name",
                       "examples": [
                         "John Doe",
                         "Jane Smith"
-                      ],
-                      "type": "string",
-                      "minLength": 2
+                      ]
                     },
                     "age": {
+                      "type": "integer",
+                      "minimum": 16,
+                      "maximum": 120,
                       "description": "User age",
                       "examples": [
                         25,
                         30
-                      ],
-                      "type": "integer",
-                      "minimum": 16,
-                      "maximum": 120
+                      ]
                     }
                   },
                   "required": [
                     "name",
                     "age"
-                  ]
+                  ],
+                  "description": "User profile object"
                 }
               },
               "required": [
                 "email",
                 "profile"
-              ]
+              ],
+              "description": "User data object"
             },
             "query": {
               "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "description": "Query parameters",
               "type": "object",
               "properties": {
                 "notify": {
-                  "description": "Notification type",
                   "type": "string",
                   "enum": [
                     "email",
                     "push",
                     "none"
-                  ]
+                  ],
+                  "description": "Notification type"
                 }
               },
               "required": [
                 "notify"
-              ]
+              ],
+              "description": "Query parameters"
             },
             "params": {
               "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "description": "Path parameters",
               "type": "object",
               "properties": {
                 "id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
                   "description": "User ID",
                   "examples": [
                     "123e4567-e89b-12d3-a456-426614174000"
-                  ],
-                  "type": "string",
-                  "format": "uuid",
-                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                  ]
                 }
               },
               "required": [
                 "id"
-              ]
+              ],
+              "description": "Path parameters"
             },
             "output": {
               "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "description": "Response object",
               "type": "object",
               "properties": {
                 "success": {
-                  "description": "Success status",
-                  "type": "boolean"
+                  "type": "boolean",
+                  "description": "Success status"
                 },
                 "id": {
-                  "description": "User ID",
                   "type": "string",
                   "format": "uuid",
-                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                  "description": "User ID"
                 },
                 "notify": {
-                  "description": "Notification type",
                   "type": "string",
                   "enum": [
                     "email",
                     "push",
                     "none"
-                  ]
+                  ],
+                  "description": "Notification type"
                 }
               },
               "required": [
                 "success",
                 "id",
                 "notify"
-              ]
+              ],
+              "description": "Response object"
             }
           },
           "operationObject": {
@@ -149,17 +149,17 @@
           "validation": {
             "iteration": {
               "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "description": "Streamed token object",
               "type": "object",
               "properties": {
                 "message": {
-                  "description": "Message from the token",
-                  "type": "string"
+                  "type": "string",
+                  "description": "Message from the token"
                 }
               },
               "required": [
                 "message"
-              ]
+              ],
+              "description": "Streamed token object"
             }
           },
           "operationObject": {
