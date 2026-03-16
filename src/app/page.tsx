@@ -1,9 +1,9 @@
-import Demo from "@/components/Demo";
-import { headers } from "next/headers";
-import Image from "next/image";
+import { headers } from 'next/headers';
+import Image from 'next/image';
+import Demo from '@/components/Demo';
 
 export default async function Home() {
-  const isIframe = (await headers()).get("sec-fetch-dest") === "iframe";
+  const isIframe = (await headers()).get('sec-fetch-dest') === 'iframe';
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-(family-name:--font-geist-sans) max-w-full">
       <main className="flex flex-col gap-8 row-start-2 items-center justify-items-center sm:items-start">

@@ -1,13 +1,13 @@
 // @ts-check
 
-const PROD_ORIGIN = "https://hello-world.vovk.dev";
+const PROD_ORIGIN = 'https://hello-world.vovk.dev';
 // Commented lines indicate default values
 /** @type {import('vovk').VovkConfig} */
 const config = {
-  logLevel: "debug",
+  logLevel: 'debug',
   outputConfig: {
     imports: {
-      validateOnClient: "vovk-ajv",
+      validateOnClient: 'vovk-ajv',
     },
     openAPIObject: {
       info: {
@@ -15,30 +15,30 @@ const config = {
         description:
           'API for "Hello World" app hosted at https://hello-world.vovk.dev/. Source code is available on Github https://github.com/finom/vovk-hello-world. For more information about this app, visit the documentation page https://vovk.dev/hello-world.',
         license: {
-          name: "MIT",
-          url: "https://opensource.org/licenses/MIT",
+          name: 'MIT',
+          url: 'https://opensource.org/licenses/MIT',
         },
-        version: "1.0.0",
+        version: '1.0.0',
       },
       servers: [
         {
-          url: "https://hello-world.vovk.dev",
-          description: "Production",
+          url: 'https://hello-world.vovk.dev',
+          description: 'Production',
         },
         {
-          url: "http://localhost:3000",
-          description: "Localhost",
+          url: 'http://localhost:3000',
+          description: 'Localhost',
         },
       ],
     },
   },
   composedClient: {
-    fromTemplates: ["js", "py", "rs"],
+    fromTemplates: ['js', 'py', 'rs'],
     // enabled: true,
     // outDir: "./node_modules/.vovk-client",
     outputConfig: {
       origin:
-        process.env.NODE_ENV === "production"
+        process.env.NODE_ENV === 'production'
           ? null
           : `http://localhost:${process.env.PORT ?? 3000}`,
     },
@@ -69,23 +69,23 @@ const config = {
     },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
-      const { build } = await import("tsdown");
+      const { build } = await import('tsdown');
       await build({
         entry,
         dts: true,
-        format: "esm",
+        format: 'esm',
         hash: false,
         fixedExtension: true,
         clean: true,
         outDir,
-        platform: "neutral",
-        outExtensions: () => ({ js: ".js", dts: ".d.ts" }),
+        platform: 'neutral',
+        outExtensions: () => ({ js: '.js', dts: '.d.ts' }),
         outputOptions: {
           inlineDynamicImports: true,
         },
         inputOptions: {
           resolve: {
-            mainFields: ["module", "main"],
+            mainFields: ['module', 'main'],
           },
         },
         noExternal: ['!next/**'],
@@ -94,12 +94,12 @@ const config = {
   },
   clientTemplateDefs: {
     py: {
-      extends: "py",
+      extends: 'py',
       outputConfig: { origin: PROD_ORIGIN },
       // composedClient: { outDir: "./dist_python" },
     },
     rs: {
-      extends: "rs",
+      extends: 'rs',
       outputConfig: { origin: PROD_ORIGIN },
       // composedClient: { outDir: "./dist_rust" },
     },

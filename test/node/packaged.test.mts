@@ -1,28 +1,28 @@
-import assert from "node:assert/strict";
-import { describe, test } from "node:test";
-import { UserRPC, OpenApiRPC, StreamRPC } from "vovk-hello-world";
+import assert from 'node:assert/strict';
+import { describe, test } from 'node:test';
+import { OpenApiRPC, StreamRPC, UserRPC } from 'vovk-hello-world';
 
 const updateUserPayload = {
   params: {
-    id: "123e4567-e89b-12d3-a456-426614174000",
+    id: '123e4567-e89b-12d3-a456-426614174000',
   },
   body: {
-    email: "john@example.com",
+    email: 'john@example.com',
     profile: {
-      name: "John Doe",
+      name: 'John Doe',
       age: 25,
     },
   },
   query: {
-    notify: "email" as const,
+    notify: 'email' as const,
   },
 };
 
 const expectedStreamText =
-  "Vovk.ts is a RESTful back-end meta-framework with RPC, built on top of the Next.js App Router. This text is a JSONLines stream demo.";
+  'Vovk.ts is a RESTful back-end meta-framework with RPC, built on top of the Next.js App Router. This text is a JSONLines stream demo.';
 
-describe("packaged RPC integration", () => {
-  test("UserRPC.updateUser echoes the request payload", async () => {
+describe('packaged RPC integration', () => {
+  test('UserRPC.updateUser echoes the request payload', async () => {
     const response = await UserRPC.updateUser(updateUserPayload);
 
     assert.deepStrictEqual(response, {
@@ -32,15 +32,15 @@ describe("packaged RPC integration", () => {
     });
   });
 
-  test("OpenApiRPC.getSpec exposes hello-world metadata", async () => {
+  test('OpenApiRPC.getSpec exposes hello-world metadata', async () => {
     const spec = await OpenApiRPC.getSpec();
 
     assert.equal(spec.info.title, '"Hello World" app API');
-    assert.equal(spec.info.version, "1.0.0");
+    assert.equal(spec.info.version, '1.0.0');
     assert.ok(spec.paths);
   });
 
-  test("StreamRPC.streamTokens streams the demo text", async () => {
+  test('StreamRPC.streamTokens streams the demo text', async () => {
     const stream = await StreamRPC.streamTokens();
     const messages: string[] = [];
 
@@ -49,9 +49,9 @@ describe("packaged RPC integration", () => {
       process.stdout.write(item.message);
     }
 
-    process.stdout.write("\n");
+    process.stdout.write('\n');
 
     assert.ok(messages.length > 0);
-    assert.equal(messages.join("").trim(), expectedStreamText);
+    assert.equal(messages.join('').trim(), expectedStreamText);
   });
 });

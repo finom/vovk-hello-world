@@ -7,7 +7,7 @@
     "prebuild": "vovk generate",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome check",
     "test:node": "node --experimental-strip-types --test --test-concurrency=1",
     "test:python": "python3 -m pip install -q -r test/python/requirements.txt && python3 -m unittest discover -s test/python -p '*_test.py'",
     "test:rust": "RUST_BACKTRACE=full RUST_TEST_THREADS=1 cargo test --manifest-path ./test/rust/Cargo.toml --tests -- --nocapture --show-output",
@@ -52,13 +52,11 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+    "@biomejs/biome": "^2.4.7",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^10",
-    "eslint-config-next": "16.1.6",
     "postcss": "^8",
     "tailwindcss": "^4.2.1",
     "tsdown": "^0.20.0-beta.3",

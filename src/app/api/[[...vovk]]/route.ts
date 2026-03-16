@@ -1,8 +1,8 @@
-import { initSegment } from "vovk";
-import UserController from "../../../modules/user/UserController";
-import StreamController from "../../../modules/stream/StreamController";
+import { initSegment } from 'vovk';
+import StreamController from '../../../modules/stream/StreamController';
+import UserController from '../../../modules/user/UserController';
 
-export const runtime = "edge";
+export const runtime = 'edge';
 
 const controllers = {
   UserRPC: UserController,
