@@ -57,38 +57,38 @@ const config = {
       imports: { validateOnClient: null },
       package: {
         type: 'module',
-        main: './index.js',
-        types: './index.d.ts',
+        main: './index.mjs',
+        types: './index.d.mts',
         exports: {
           '.': {
-            default: './index.js',
-            types: './index.d.ts',
+            default: './index.mjs',
+            types: './index.d.mts',
           },
         },
       },
     },
     keepPrebundleDir: true,
     build: async ({ entry, outDir }) => {
-      const { build } = await import('tsdown');
+      const { build } = await import('tsup')
+
       await build({
-        entry,
-        dts: true,
-        format: 'esm',
-        hash: false,
-        fixedExtension: true,
-        clean: true,
+        entry: { index: entry },
+        format: ['esm'],
+        target: 'es2020',
         outDir,
-        platform: 'neutral',
-        outExtensions: () => ({ js: '.js', dts: '.d.ts' }),
-        outputOptions: {
-          inlineDynamicImports: true,
+        dts: true,
+        splitting: false,
+        sourcemap: true,
+        clean: true,
+        minify: false,
+        treeshake: true,
+        external: ['react'],
+        noExternal: ['vovk/**'],
+        esbuildOptions(options) {
+          options.banner = {
+            js: '// My library build',
+          }
         },
-        inputOptions: {
-          resolve: {
-            mainFields: ['module', 'main'],
-          },
-        },
-        noExternal: ['!next/**'],
       });
     },
   },
