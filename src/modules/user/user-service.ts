@@ -1,5 +1,5 @@
 import type { VovkBody, VovkOutput, VovkParams, VovkQuery } from 'vovk';
-import type UserController from './UserController';
+import type UserController from './user-controller';
 
 export default class UserService {
   static updateUser = (

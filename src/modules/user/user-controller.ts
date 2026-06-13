@@ -1,6 +1,6 @@
 import { operation, post, prefix, procedure } from 'vovk';
 import { z } from 'zod';
-import UserService from './UserService';
+import UserService from './user-service';
 
 @prefix('users')
 export default class UserController {
