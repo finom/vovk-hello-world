@@ -1,6 +1,6 @@
 import { initSegment } from 'vovk';
-import StreamController from '../../../modules/stream/StreamController';
-import UserController from '../../../modules/user/UserController';
+import StreamController from '../../../modules/stream/stream-controller';
+import UserController from '../../../modules/user/user-controller';
 
 export const runtime = 'edge';
 

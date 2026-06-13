@@ -1,5 +1,5 @@
 import type { VovkIteration } from 'vovk';
-import type StreamController from './StreamController';
+import type StreamController from './stream-controller';
 
 export default class StreamService {
   static async *streamTokens() {

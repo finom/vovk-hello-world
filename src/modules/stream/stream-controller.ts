@@ -1,6 +1,6 @@
 import { get, operation, prefix, procedure } from 'vovk';
 import { z } from 'zod';
-import StreamService from './StreamService';
+import StreamService from './stream-service';
 
 @prefix('streams')
 export default class StreamController {

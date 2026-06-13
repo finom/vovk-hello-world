@@ -1,7 +1,7 @@
 'use client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import StreamDemo from './StreamDemo';
-import UserFormDemo from './UserFormDemo';
+import StreamDemo from './stream-demo';
+import UserFormDemo from './user-form-demo';
 
 const queryClient = new QueryClient();
 

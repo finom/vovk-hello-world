@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 import Image from 'next/image';
-import Demo from '@/components/Demo';
+import Demo from '@/components/demo';
 
 export default async function Home() {
   const isIframe = (await headers()).get('sec-fetch-dest') === 'iframe';
