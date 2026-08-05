@@ -33,16 +33,16 @@ const config = {
     },
   },
   composedClient: {
-    fromTemplates: ['js', 'py', 'rs'],
+    fromTemplates: ['ts', 'py', 'rs'],
     // enabled: true,
-    // outDir: "./node_modules/.vovk-client",
+    // outDir: "./src/client",
     outputConfig: {
       origin:
         process.env.NODE_ENV === 'production'
           ? null
           : `http://localhost:${process.env.PORT ?? 3000}`,
     },
-    // prettifyClient: false,
+    // prettifyClient: true,
   },
   segmentedClient: {
     // fromTemplates: ["ts"],
