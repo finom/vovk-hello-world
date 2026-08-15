@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
-import { OpenApiRPC, StreamRPC, UserRPC } from 'vovk-client';
+import { OpenApiRPC, StreamRPC, UserRPC } from '../../src/client/index.ts';
 
 const updateUserPayload = {
   params: {
