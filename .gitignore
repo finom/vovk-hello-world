@@ -43,4 +43,3 @@ next-env.d.ts
 target
 Cargo.lock
 dist_python/dist
-config.bat
